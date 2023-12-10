@@ -1,0 +1,44 @@
+@import "config";
+@import "./components/header";
+@import "./components/footer";
+@import "./components/mailListSignUp";
+@import "./pages/home";
+
+// font-family: 'Karla', sans-serif;
+// font-family: 'Unica One', sans-serif;
+
+body {
+    font-size: 16px;
+    font-family: 'Karla', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.375;
+}
+
+img {
+    width: 100%;
+}
+
+.h1 {
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: 'Unica One', sans-serif;
+}
+
+.slideshow {
+    &__image {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.divider {
+    background-color: $secondary-color;
+    width: 100%;
+    height: 50px;
+}
+
+.page-width {
+    padding: 0 10px;
+}
