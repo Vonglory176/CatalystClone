@@ -1,0 +1,28 @@
+.header {
+    border-bottom: 5px solid $secondary-color;
+    background: black;
+
+    &__upper {
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        padding: 10px;
+        
+        & > div {
+            display: flex;
+            @include center;
+        }
+
+        .company-logo {
+            &__link {
+                width: fit-content;
+                height: fit-content;
+            }
+
+            &__image {
+                // height: auto;
+                // height: 72px;
+                width: 140px;
+            }
+        }
+    }
+}
