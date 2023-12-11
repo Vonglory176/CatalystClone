@@ -7,20 +7,24 @@
         background-size: cover;
     }
 
+    
     .main-content {
         background: url("/src/assets/Page-Background-Image.webp");
-
+        
         //slideshow
         //divider
-
+        
         .home-content-container {
             .home-content-wrapper {
+                overflow: auto;
                 background: rgba(255,255,255,0.1);
-                // .page-width {
-                //     .contentBegin {
+                box-shadow: 0 0 50px #00000080;
+                backdrop-filter: blur(10px);
 
-                //     }
-                // }
+                .page-width {
+                    padding: 0 10px;
+                    // .contentBegin {}
+                }
             }
         }
 
@@ -32,20 +36,38 @@
             &__link {
                 display: flex;
                 justify-content: center;
+                align-items: center;
+
             }
             &__button {
                 width: 95%;
                 margin-bottom: 20px;
+                transition: .2s ease-in-out;
+
+                &:hover {
+                    @include hover-highlight-shadow;
+                    transform: translateY(-5px);
+                }
             }
         }
 
         .featured-products {
             background-color: $primary-color;
+            margin-bottom: 50px;
         }
 
         .section-block {
             display: flex;
             justify-content: center;
+
+            &:hover {
+                @include hover-shadow;
+
+                .collection-card__meta {
+                    // @include text-float-transition;
+                    left: -5px !important;
+                }
+            }
 
             .grid.collection {
                 display: grid;
@@ -73,6 +95,8 @@
                         &__meta {
                             display: block;
                             position: absolute;
+                            @include text-float-transition;
+
                             bottom: 20px;
                             margin-right: 10px;
                             z-index: 2;
@@ -109,9 +133,12 @@
                     display: flex;
                     flex-direction: column;
                     text-align: center;
+                    position: relative;
                     height: 100%;
                     padding: 12.5px;
                     height: 320px;
+
+                    transition: all .15s ease-in;
 
                         &__image-container {
                             position: relative;
@@ -120,7 +147,7 @@
 
                         &__image {
                             img {
-                                position: absolute;
+                                position: absolute;                                
                                 top: 0;
                                 left: 0;
                                 right:0;
@@ -136,6 +163,27 @@
 
                         &__info {
                             padding: 10px 0; //10px 12.5px;
+                        }
+
+                        &__overlay {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;                            
+
+                            &:hover {
+                                .product-card__overlay-btn {
+                                    z-index: 100;
+                                    transform: translateY(-85%);
+                                }
+                            }
+
+                            &-btn {
+                                top: 50%;
+                                transform: translateY(-45%);
+                                transition: all .15s ease-in;
+                            }
                         }
                     }
             }
@@ -158,6 +206,12 @@
 
                 a:nth-of-type(2) {
                     margin: 0 -7vw;
+                }
+
+                img {
+                    &:hover {
+                        @include hover-highlight-shadow;
+                    }
                 }
             }
         }
