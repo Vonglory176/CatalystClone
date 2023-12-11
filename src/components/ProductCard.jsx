@@ -15,8 +15,8 @@ export default function ProductCard() {
                 <div className="product-card__name">BattleTech: Clan Invasion</div>
                 <div className="product-name__price">$49.99</div>
             </div>
-            <div className="produt-card__overlay">
-                <span className="btn product-card__overlay-btn"></span>
+            <div className="product-card__overlay">
+                <span className="btn product-card__overlay-btn">View</span>
             </div>
         </a>
     )
