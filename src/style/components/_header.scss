@@ -19,10 +19,12 @@
             }
 
             &__image {
-                // height: auto;
-                // height: 72px;
                 width: 140px;
             }
         }
+    }
+
+    i {
+        color: $primary-color;
     }
 }
