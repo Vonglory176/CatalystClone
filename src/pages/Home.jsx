@@ -1,4 +1,5 @@
 import Header from "../components/Header"
+import Slideshow from "../components/Slideshow"
 import ProductCard from "../components/ProductCard"
 import MailListSignUp from "../components/MailListSignUp"
 import Footer from "../components/Footer"
@@ -19,16 +20,17 @@ export default function Home() {
 
             <div className="page-container">
                 <main className="main-content">
-                    <div className="slideshow">
+                    <Slideshow/>
+                    {/* <div className="slideshow">
                         <img src={bannerTempImage} alt="" className="slideshow__image" />
-                    </div>
+                    </div> */}
 
                     <div className="divider"></div>
 
                     <div className="home-content-container">
                         <div className="home-content-wrapper">
                             <div className="page-width">
-                                <div className="contentBegin">
+                                {/* <div className="contentBegin"> */}
                                     
                                     <div className="getting-started">
                                         <a href="!#" className="getting-started__link">
@@ -204,7 +206,7 @@ export default function Home() {
 
                                         <MailListSignUp/>
                                     </div>
-                                </div>
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>
