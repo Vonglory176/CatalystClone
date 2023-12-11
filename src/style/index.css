@@ -345,8 +345,6 @@
   min-width: 130px;
   min-height: 48px;
   border-radius: 3px;
-  border: 1px solid #999;
-  font-family: "Unica One", sans-serif !important;
 }
 .mailListSignUp form input.button {
   display: block;
@@ -359,6 +357,8 @@
   text-transform: uppercase;
   border: none;
   border-radius: 4px;
+  border: 1px solid #999;
+  font-family: "Unica One", sans-serif !important;
 }
 
 .home-page .header {
