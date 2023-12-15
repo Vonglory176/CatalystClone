@@ -1,15 +1,36 @@
 .header {
     border-bottom: 5px solid $secondary-color;
     background: black;
+    position: sticky;
+    z-index: 100;
 
     &__upper {
-        display: grid;
-        grid-template-columns: 20% 60% 20%;
+        display: flex;
+        justify-content: space-between;
         padding: 10px;
+
+        @media (min-width:750px) {
+            padding: 20px;
+        }
         
         & > div {
             display: flex;
-            @include center;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                width: 45px;
+                height: 45px;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                color: $primary-color;
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
         }
 
         .company-logo {
@@ -24,7 +45,48 @@
         }
     }
 
-    i {
-        color: $primary-color;
+    &__sticky {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        &-dropdown {
+            &-button {
+                padding: 20px !important;
+            }
+        }
+
+        &-links {
+            display: flex;
+            // gap: 20px;
+
+            a {
+                padding: 20px 10px;
+                color: $misc-font-color;
+                text-transform: uppercase;
+                font-size: 14px;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+.offcanvas {
+    &-header {
+        background: $accent-light-color;
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        background: $primary-color;
+    }
+
+    &__universe {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
