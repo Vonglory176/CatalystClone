@@ -8,6 +8,14 @@ import bannerTempImage from "../assets/banner/Rotating_Banner_-_BT_2_of_6_Templa
 import gettingStartedBattletech from "../assets/getting-started/getting-started-battletech.webp"
 import gettingStartedShadowrun from "../assets/getting-started/getting-started-shadowrun.webp"
 
+import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
+import fpFrame2 from "../assets/featured-products/featured-product-frame-2.svg"
+import fpFrame3 from "../assets/featured-products/featured-product-frame-3.svg"
+import fpFrame4 from "../assets/featured-products/featured-product-frame-4.svg"
+
+import featuredCharacterVictor from "../assets/featured-products/featured-character-victor.webp"
+import featuredCharacterCombatMage from "../assets/featured-products/featured-character-combatMage.webp"
+
 import saleButton from "../assets/featured-products/button-collection/collection-buttons-01.webp"
 import newArrivalsButton from "../assets/featured-products/button-collection/collection-buttons-02.webp"
 import freeDownloadButton from "../assets/featured-products/button-collection/collection-buttons-03.webp"
@@ -48,11 +56,11 @@ export default function Home() {
 
                                         <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
                                             <a href="!#" className="collection-link">
-                                                {/* <img src="" alt="" className="featured-product-frame" /> */}
+                                                <img src={fpFrame1} alt="" className="featured-product-frame" />
                                             </a>
 
                                             <div className="grid collection">
-                                                {/* <a href="!#" className="collection-link"></a> */}
+                                                <a href="!#" className="collection-link"></a>
 
                                                 <div className="grid__item collection__cover">
                                                     <a href="!#" className="collection-link"></a>
@@ -75,20 +83,22 @@ export default function Home() {
                                                 </div>
                                                 {/* <div className="grid__item">
                                                     <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
+                                                </div> */}
+                                                {/* <div className="grid__item">
                                                     <ProductCard/>
-                                                </div> */}                                                    
+                                                </div>*/}
                                             </div>
                                         </section>
-
-                                        <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
                                             <a href="!#" className="collection-link">
-                                                {/* <img src="" alt="" className="featured-product-frame" /> */}
+                                                <img src={fpFrame2} alt="" className="featured-product-frame" />
                                             </a>
+                                            <div className="featured-character">
+                                                <img src={featuredCharacterVictor} alt="" />
+                                            </div>
 
                                             <div className="grid collection">
-                                                {/* <a href="!#" className="collection-link"></a> */}
+                                                <a href="!#" className="collection-link"></a>
 
                                                 <div className="grid__item collection__cover">
                                                     <a href="!#" className="collection-link"></a>
@@ -111,20 +121,19 @@ export default function Home() {
                                                 </div>
                                                 {/* <div className="grid__item">
                                                     <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div> */}                                                    
+                                                </div>                                                   */}
                                             </div>
                                         </section>
-
-                                        <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <section className="section-block right"> {/* MAKE THIS A COMPONENT !!! */}
                                             <a href="!#" className="collection-link">
-                                                {/* <img src="" alt="" className="featured-product-frame" /> */}
+                                                <img src={fpFrame3} alt="" className="featured-product-frame" />
                                             </a>
+                                            <div className="featured-character">
+                                                <img src={featuredCharacterCombatMage} alt="" />
+                                            </div>                                                  
 
                                             <div className="grid collection">
-                                                {/* <a href="!#" className="collection-link"></a> */}
+                                                <a href="!#" className="collection-link"></a>
 
                                                 <div className="grid__item collection__cover">
                                                     <a href="!#" className="collection-link"></a>
@@ -147,10 +156,7 @@ export default function Home() {
                                                 </div>
                                                 {/* <div className="grid__item">
                                                     <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div> */}                                                    
+                                                </div> */}
                                             </div>
                                         </section>
 
@@ -168,13 +174,13 @@ export default function Home() {
                                             </div>
                                         </section>
 
-                                        <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
                                             <a href="!#" className="collection-link">
-                                                {/* <img src="" alt="" className="featured-product-frame" /> */}
-                                            </a>
+                                                <img src={fpFrame4} alt="" className="featured-product-frame" />
+                                            </a>                                             
 
                                             <div className="grid collection">
-                                                {/* <a href="!#" className="collection-link"></a> */}
+                                                <a href="!#" className="collection-link"></a>
 
                                                 <div className="grid__item collection__cover">
                                                     <a href="!#" className="collection-link"></a>
@@ -197,10 +203,7 @@ export default function Home() {
                                                 </div>
                                                 {/* <div className="grid__item">
                                                     <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div> */}                                                    
+                                                </div> */}
                                             </div>
                                         </section>
 
