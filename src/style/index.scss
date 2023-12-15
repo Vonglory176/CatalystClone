@@ -1,7 +1,9 @@
-@import "bootstrap-carousel";
 @import "config";
+@import "./components/bootstrap-carousel";
+@import "./components/bootstrap-offcanvas";
 @import "./components/header";
 @import "./components/slideshow";
+@import "./components/featured-products";
 @import "./components/footer";
 @import "./components/mailListSignUp";
 @import "./pages/home";
@@ -16,6 +18,10 @@ body {
     font-weight: 400;
     color: #666;
     line-height: 1.375;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 img {
@@ -24,6 +30,11 @@ img {
 
 a {
     text-decoration: none;
+    transition: color .1s ease-in,background-color .1s ease-in;
+}
+
+i {
+    transition: color .1s ease-in,background-color .1s ease-in;
 }
 
 .h1 {
@@ -44,5 +55,41 @@ a {
     background-color: $secondary-color;
     width: 100%;
     height: 20px;
+}
+
+.btn {
+    display: inline-block;
+    width: auto;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 0px solid transparent;
+    
+    
+    
+    font-size: .8125em;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: 15px 45px;
+    transition: color .1s ease-in,background-color .1s ease-in;
+
+    background-color: $secondary-color;
+    color: $secondary-font-color;
+
+    &:not(:active):hover {
+        background-color: $secondary-hover-color;
+    }
+
+    // -moz-user-select: none;
+    // -ms-user-select: none;
+    // -webkit-user-select: none;
+    // user-select: none;
+
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+    // appearance: none;
 }
 
