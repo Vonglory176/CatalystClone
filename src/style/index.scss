@@ -1,4 +1,5 @@
 @import "config";
+
 @import "./components/bootstrap-carousel";
 @import "./components/bootstrap-offcanvas";
 @import "./components/header";
@@ -6,7 +7,9 @@
 @import "./components/featured-products";
 @import "./components/footer";
 @import "./components/mailListSignUp";
+
 @import "./pages/home";
+@import "./pages/contact";
 
 // font-family: 'Karla', sans-serif;
 // font-family: 'Unica One', sans-serif;
@@ -24,16 +27,45 @@ body {
     }
 }
 
+.page-width {
+    max-width: 1180px;
+    margin: auto;
+}
+
+.header, footer {
+    .page-width {
+        padding: 0 20px;
+    }
+}
+
+.main-content .page-width {
+    padding: 0 10px;
+    
+    @media (min-width: 750px) {
+        padding: 0 20px;        
+    }
+    // @media (min-width: 1300px) {
+    //     max-width: 1300px;
+    //     padding: 0 80px;      
+    // }
+}
+
+.content-container {
+    width: fit-content;
+    margin: auto;
+
+    // .content-wrapper {}
+}
+
 img {
     width: 100%;
 }
 
 a {
     text-decoration: none;
-    transition: color .1s ease-in,background-color .1s ease-in;
 }
 
-i {
+a, i {
     transition: color .1s ease-in,background-color .1s ease-in;
 }
 
@@ -42,6 +74,16 @@ i {
     margin: 0 0 0.625em;
     text-transform: uppercase;
     font-family: 'Unica One', sans-serif;
+}
+
+h1, h4 {
+    color: $primary-font-color;
+}
+
+h4 {
+    font-size: 1.125em;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
 }
 
 .slideshow {
