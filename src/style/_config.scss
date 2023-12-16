@@ -2,10 +2,11 @@ $primary-color: #fff;
 $secondary-color: #c2cb20;
 $secondary-hover-color: #989e19;;
 $accent-color: #030303;
-$accent-light-color: #101010;
+$accent-light-color: #262626;
 
 $primary-font-color: #222;
 $secondary-font-color: #fff;
+$third-font-color: #666;
 $misc-font-color: #fff9;
 
 * {
@@ -14,9 +15,15 @@ $misc-font-color: #fff9;
     padding: 0;
 }
 
-@mixin center {
-    justify-content: center;
-    align-items: center;
+@mixin hide-after-750 {
+    @media (min-width:750px) {
+        display: none;
+    }
+}
+@mixin hide-before-750 {
+    @media (max-width:749px) {
+        display: none;
+    }
 }
 
 @mixin hover-shadow {
