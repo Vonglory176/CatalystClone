@@ -26,195 +26,188 @@ export default function Home() {
 
             <Header/>
 
-            <div className="page-container">
-                <main className="main-content">
-                    <Slideshow/>
-                    {/* <div className="slideshow">
-                        <img src={bannerTempImage} alt="" className="slideshow__image" />
-                    </div> */}
+            <main className="main-content">
+                <Slideshow/>
 
-                    <div className="divider"></div>
+                <div className="divider"></div>
 
-                    <div className="home-content-container">
-                        <div className="home-content-wrapper">
-                            <div className="page-width">
-                                {/* <div className="contentBegin"> */}
-                                    
-                                    <div className="getting-started">
-                                        <a href="!#" className="getting-started__link">
-                                            <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/>
+                <div className="home-content-container content-container">
+                    <div className="home-content-wrapper content-wrapper">
+                        <div className="page-width">
+                                
+                                <div className="getting-started">
+                                    <a href="!#" className="getting-started__link">
+                                        <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/>
+                                    </a>
+                                    <a href="!#" className="getting-started__link">
+                                        <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/>
+                                    </a>
+                                </div>
+
+                                <div className="featured-products">
+                                    <a href="!#">
+                                        <div className="featured-product-banner"></div>
+                                    </a>
+
+                                    <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <a href="!#" className="collection-link">
+                                            <img src={fpFrame1} alt="" className="featured-product-frame" />
                                         </a>
-                                        <a href="!#" className="getting-started__link">
-                                            <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/>
+
+                                        <div className="grid collection">
+                                            <a href="!#" className="collection-link"></a>
+
+                                            <div className="grid__item collection__cover">
+                                                <a href="!#" className="collection-link"></a>
+                                                <a href="!#" className="collection-card">                                                        
+                                                    <div className="collection-card__meta">
+                                                        <p className="collection-card__title h1">Featured Products</p>
+                                                        <p className="collection-card__subtext">View all</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <a href="!#" className="collection-link">
+                                            <img src={fpFrame2} alt="" className="featured-product-frame" />
                                         </a>
-                                    </div>
+                                        <div className="featured-character">
+                                            <img src={featuredCharacterVictor} alt="" />
+                                        </div>
 
-                                    <div className="featured-products">
-                                        {/* <a href="!#">
-                                            <div className="featured-product-banner"></div>
-                                        </a> */}
+                                        <div className="grid collection">
+                                            <a href="!#" className="collection-link"></a>
 
-                                        <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
-                                            <a href="!#" className="collection-link">
-                                                <img src={fpFrame1} alt="" className="featured-product-frame" />
-                                            </a>
-
-                                            <div className="grid collection">
+                                            <div className="grid__item collection__cover">
                                                 <a href="!#" className="collection-link"></a>
-
-                                                <div className="grid__item collection__cover">
-                                                    <a href="!#" className="collection-link"></a>
-                                                    <a href="!#" className="collection-card">                                                        
-                                                        <div className="collection-card__meta">
-                                                            <p className="collection-card__title h1">Featured Products</p>
-                                                            <p className="collection-card__subtext">View all</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                {/* <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div> */}
-                                                {/* <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>*/}
-                                            </div>
-                                        </section>
-                                        <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
-                                            <a href="!#" className="collection-link">
-                                                <img src={fpFrame2} alt="" className="featured-product-frame" />
-                                            </a>
-                                            <div className="featured-character">
-                                                <img src={featuredCharacterVictor} alt="" />
+                                                <a href="!#" className="collection-card">                                                        
+                                                    <div className="collection-card__meta">
+                                                        <p className="collection-card__title h1">Featured Products</p>
+                                                        <p className="collection-card__subtext">View all</p>
+                                                    </div>
+                                                </a>
                                             </div>
 
-                                            <div className="grid collection">
-                                                <a href="!#" className="collection-link"></a>
-
-                                                <div className="grid__item collection__cover">
-                                                    <a href="!#" className="collection-link"></a>
-                                                    <a href="!#" className="collection-card">                                                        
-                                                        <div className="collection-card__meta">
-                                                            <p className="collection-card__title h1">Featured Products</p>
-                                                            <p className="collection-card__subtext">View all</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                {/* <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>                                                   */}
+                                            <div className="grid__item">
+                                                <ProductCard/>
                                             </div>
-                                        </section>
-                                        <section className="section-block right"> {/* MAKE THIS A COMPONENT !!! */}
-                                            <a href="!#" className="collection-link">
-                                                <img src={fpFrame3} alt="" className="featured-product-frame" />
-                                            </a>
-                                            <div className="featured-character">
-                                                <img src={featuredCharacterCombatMage} alt="" />
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
                                             </div>                                                  
+                                        </div>
+                                    </section>
+                                    <section className="section-block right"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <a href="!#" className="collection-link">
+                                            <img src={fpFrame3} alt="" className="featured-product-frame" />
+                                        </a>
+                                        <div className="featured-character">
+                                            <img src={featuredCharacterCombatMage} alt="" />
+                                        </div>                                                  
 
-                                            <div className="grid collection">
+                                        <div className="grid collection">
+                                            <a href="!#" className="collection-link"></a>
+
+                                            <div className="grid__item collection__cover">
                                                 <a href="!#" className="collection-link"></a>
-
-                                                <div className="grid__item collection__cover">
-                                                    <a href="!#" className="collection-link"></a>
-                                                    <a href="!#" className="collection-card">                                                        
-                                                        <div className="collection-card__meta">
-                                                            <p className="collection-card__title h1">Featured Products</p>
-                                                            <p className="collection-card__subtext">View all</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                {/* <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div> */}
-                                            </div>
-                                        </section>
-
-                                        <section className="collection-buttons-container">
-                                            <div className="collection-buttons-wrapper">
-                                                <a href="!#">
-                                                    <img src={saleButton} alt="" className="collection-button" />
-                                                </a>
-                                                <a href="!#">
-                                                    <img src={newArrivalsButton} alt="" className="collection-button" />
-                                                </a>
-                                                <a href="!#">
-                                                    <img src={freeDownloadButton} alt="" className="collection-button" />
+                                                <a href="!#" className="collection-card">                                                        
+                                                    <div className="collection-card__meta">
+                                                        <p className="collection-card__title h1">Featured Products</p>
+                                                        <p className="collection-card__subtext">View all</p>
+                                                    </div>
                                                 </a>
                                             </div>
-                                        </section>
 
-                                        <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
-                                            <a href="!#" className="collection-link">
-                                                <img src={fpFrame4} alt="" className="featured-product-frame" />
-                                            </a>                                             
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                        </div>
+                                    </section>
 
-                                            <div className="grid collection">
+                                    <section className="collection-buttons-container">
+                                        <div className="collection-buttons-wrapper">
+                                            <a href="!#">
+                                                <img src={saleButton} alt="" className="collection-button" />
+                                            </a>
+                                            <a href="!#">
+                                                <img src={newArrivalsButton} alt="" className="collection-button" />
+                                            </a>
+                                            <a href="!#">
+                                                <img src={freeDownloadButton} alt="" className="collection-button" />
+                                            </a>
+                                        </div>
+                                    </section>
+
+                                    <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
+                                        <a href="!#" className="collection-link">
+                                            <img src={fpFrame4} alt="" className="featured-product-frame" />
+                                        </a>                                             
+
+                                        <div className="grid collection">
+                                            <a href="!#" className="collection-link"></a>
+
+                                            <div className="grid__item collection__cover">
                                                 <a href="!#" className="collection-link"></a>
-
-                                                <div className="grid__item collection__cover">
-                                                    <a href="!#" className="collection-link"></a>
-                                                    <a href="!#" className="collection-card">                                                        
-                                                        <div className="collection-card__meta">
-                                                            <p className="collection-card__title h1">Featured Products</p>
-                                                            <p className="collection-card__subtext">View all</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div>
-                                                {/* <div className="grid__item">
-                                                    <ProductCard/>
-                                                </div> */}
+                                                <a href="!#" className="collection-card">                                                        
+                                                    <div className="collection-card__meta">
+                                                        <p className="collection-card__title h1">Featured Products</p>
+                                                        <p className="collection-card__subtext">View all</p>
+                                                    </div>
+                                                </a>
                                             </div>
-                                        </section>
 
-                                        <MailListSignUp/>
-                                    </div>
-                                {/* </div> */}
-                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                            <div className="grid__item">
+                                                <ProductCard/>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <MailListSignUp/>
+                                </div>
                         </div>
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
 
             <Footer/>
 
