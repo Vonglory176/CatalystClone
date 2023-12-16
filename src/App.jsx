@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
+import Login from './pages/Login'
+import Account from './pages/Account'
+import Cart from './pages/Cart'
+import Collections from './pages/Collections'
+import Contact from './pages/Contact'
+import Products from './pages/Products'
 
 function App() {
 
@@ -8,7 +14,15 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Home/>}/>
+      <Route path="/account" element={<Account/>}/>
+      <Route path="/cart" element={<Cart/>}/>
+      <Route path="/collections" element={<Collections/>}/>
+      <Route path="/contact" element={<Contact/>}/>
+      <Route path="/account/login" element={<Login/>}/>
+      <Route path="/products" element={<Products/>}/>
     </Routes>
+
+    {/* <Link to={"!#"} className={""}></Link> */}
     </>
   )
 }
@@ -16,23 +30,24 @@ function App() {
 export default App
 
 /*
-Major breakpoints at: 600px, 960px, 1280px, 1920px
 
 TODO
 -------------------
 Right now!
 ------
-Add hover animations/transitions
 
 Later!
 ------
 Clean up SCSS
+Add Featured Product Banner !
 Finish Header
-Add Header Drawer
+Make sticky header
+Make searchbar (in sidebar + other)
 Get rid of extra divs?
 Fix email styling
-Fix font styling in Product Card
-Fix Collection-Link styling in Product card
+Add images to slideshow
+Add classes to footer links
+Add random images to product sections?
 
 (General)
 Add Titles to anchors
