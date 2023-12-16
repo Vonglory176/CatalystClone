@@ -4,6 +4,7 @@
     position: sticky;
     z-index: 100;
 
+    //Main Header (Top)
     &__upper {
         display: flex;
         justify-content: space-between;
@@ -11,6 +12,21 @@
 
         @media (min-width:750px) {
             padding: 20px;
+        }
+
+        .nav-btn {
+            @include hide-after-750;
+
+            button {
+                background: #fff0;
+                border: none;
+            }
+        }
+
+        .store-btns {
+            &__search {
+                @include hide-before-750;
+            }
         }
         
         & > div {
@@ -45,10 +61,13 @@
         }
     }
 
+    //Sticky Header (Bottom)
     &__sticky {
         display: flex;
         justify-content: space-between;
         padding: 0 20px;
+
+        @include hide-before-750;
 
         &-dropdown {
             &-button {
@@ -74,7 +93,10 @@
     }
 }
 
+//Side Menu
 .offcanvas {
+    max-width: 300px;
+
     &-header {
         background: $accent-light-color;
     }
@@ -82,11 +104,72 @@
     &-body {
         display: flex;
         flex-direction: column;
+        padding: 0;
         background: $primary-color;
+        
+        & > div, & > a {
+            border-bottom: 1px solid $accent-light-color;
+        }
+        
+        button {
+            background-color: #fff0;
+            border: none;
+            cursor: pointer;
+            
+            &:hover i {
+                opacity: 0.6;
+            }
+        }
     }
 
     &__universe {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+    
+    &-link {
+        // flex: 1 0 0;
+        color: $primary-font-color;
+        font-size: 1.625em;
+        font-weight: 400;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        font-family: 'Unica One', sans-serif;
+        padding: 13px 0 13px 20px;
+        height: min-content;
+    }
+
+    &-submenu {
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        
+        background: $accent-light-color;
+        border: none !important;
+
+        &-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            padding: 20px 10px;
+        }
+    }
+
+    &-submenu-link {
+        color: $third-font-color;
+        padding: 5px 10px;
+        font-size: 17px;
+
+        &:hover {
+            color: $secondary-color;
+        }
+    }
+        
+    .show-submenu {
+        max-height: 100%;
+    }
+    .hide-submenu {
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        max-height: 0%;
     }
 }
