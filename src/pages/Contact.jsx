@@ -3,7 +3,7 @@ import Footer from "../components/Footer"
 
 export default function Contact() {
     return (
-        <div className="contact-page">
+        <div className="contact-page page">
 
             <Header/>
 
@@ -16,19 +16,22 @@ export default function Contact() {
 
                             <div className="content-block">
                                 <p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero tempora dolores doloribus aliquid facere perferendis hic nihil molestias, aut officia.</strong></p>
-                                <h4>Lorem ipsum dolor sit amet consectetur.</h4>
+                                <h4>MAILING ADDRESS (LETTERS AND USPS PACKAGES ONLY)</h4>
 
                                 <p>
-                                    Catalyst Game Labs <br/>
-                                    7108 S Pheasant Ridge Dr <br/>
-                                    Spokane, WA. 99224 <br/>
+                                    Lorem, ipsum dolor. <br/>
+                                    Lorem ipsum dolor sit. <br/>
+                                    Lorem, ipsum dolor. <br/>
                                 </p>
                             </div>
                             <div className="content-block">
                                 <form action="!#" className="contact-form">
-                                    <input required type="text" id="ContactFormName" name="contact[name]" placeholder="Name"/>
-                                    <input required type="text" id="ContactFormEmail" name="contact[email]" placeholder="Email"/>
-                                    <input required type="text" id="ContactFormNumber" name="contact[number]" placeholder="Number"/>
+                                    <div className="contact-form__input-group">
+                                        <input required type="text" id="ContactFormName" name="contact[name]" placeholder="Name"/>
+                                        <input required type="text" id="ContactFormEmail" name="contact[email]" placeholder="Email"/>
+                                    </div>
+
+                                    <input required type="text" id="ContactFormNumber" name="contact[number]" placeholder="Store order number"/>
 
                                     <label htmlFor="ContactFormReason">Reason for contacting</label>
                                     <select required id="ContactFormReason" name="contact[reason]" onchange="">
@@ -41,10 +44,10 @@ export default function Contact() {
                                         <option>Store Order Issues</option>
                                         <option>Kickstarter Issues</option>
                                         <option>Canon Character</option>
-                                        <option value="Other">other</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                     <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="Message"></textarea>
-                                    <input type="submit" class="btn" value="Send"/>
+                                    <input type="submit" id="ContactFormSubmit" className="btn" value="Send"/>
                                 </form>
                             </div>
                         </div>
