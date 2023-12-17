@@ -15,9 +15,9 @@ export default function Footer() {
                                 <li className="footer__list-item">
                                     <Link to={"/account/login"} className={""}>My Account</Link>
                                 </li>
-                                <li className="footer__list-item">
+                                {/* <li className="footer__list-item">
                                     <Link to={"/account/logout"} className={""}>Logout</Link>
-                                </li>
+                                </li> */}
                                 <li className="footer__list-item">
                                     <Link to={"/contact"} className={""}>Contact</Link>
                                 </li>
