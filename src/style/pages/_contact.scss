@@ -1,30 +1,26 @@
-.contact-page {
-    .main-content {
-        background: $primary-background-color;
+#Contact-Container {
+    p {
+        margin-bottom: 20px;
+    }
 
-        p {
-            margin-bottom: 20px;
-        }
+    h4 {
+        margin: 40px 0 1.33em 0;
+    }
 
-        h4 {
-            margin: 40px 0 1.33em 0;
-        }
+    .contact-form {
 
-        .contact-form {
-
-            @media (min-width:750px) {
-                &__input-group {
-                    display: flex;
-                    gap:10px;
-                }
+        @media (min-width:750px) {
+            &__input-group {
+                display: flex;
+                gap:10px;
             }
+        }
 
-            .btn {
-                background: $accent-light-color;
+        .btn {
+            background: $accent-light-color;
 
-                &:hover {
-                    background: $secondary-color;
-                }
+            &:hover {
+                background: $secondary-color;
             }
         }
     }
