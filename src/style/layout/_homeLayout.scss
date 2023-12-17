@@ -1,0 +1,44 @@
+.homeLayout {
+
+    .header {
+        background: url("/src/assets/blur-nav.webp");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+    
+    
+    .main-content {
+        background: url("/src/assets/Page-Background-Image.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; //This is interesting
+        padding: 0;        
+        
+        //slideshow
+        //divider
+        
+        &-container {        
+            width: fit-content;
+            margin: auto;
+        }
+        
+        &-wrapper {
+            padding: 40px 0;
+            // overflow: auto;
+            overflow: visible;
+            
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 50px #00000080;
+            backdrop-filter: blur(10px);
+            
+            .page-width {
+                @media (min-width: 1300px) {
+                    max-width: 1300px;
+                    padding: 0 80px;      
+                }
+            }
+        }            
+    }
+}
