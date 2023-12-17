@@ -11,7 +11,12 @@
 @import "./pages/home";
 @import "./pages/contact";
 @import "./pages/cart";
-@import "./pages/_login";
+@import "./pages/login";
+@import "./pages/register";
+@import "./pages/notFound";
+
+@import "./layout/homeLayout";
+@import "./layout/mainLayout";
 
 // font-family: 'Karla', sans-serif;
 // font-family: 'Unica One', sans-serif;
@@ -45,6 +50,13 @@ body {
     padding: 60px 0 80px 0;
 }
 
+.content-container {
+    // width: fit-content;
+    margin: auto;
+
+    // .content-wrapper {}
+}
+
 .page-width {
     padding: 0 10px;
     
@@ -55,13 +67,6 @@ body {
     //     max-width: 1300px;
     //     padding: 0 80px;      
     // }
-}
-
-.content-container {
-    // width: fit-content;
-    margin: auto;
-
-    // .content-wrapper {}
 }
 
 img {
