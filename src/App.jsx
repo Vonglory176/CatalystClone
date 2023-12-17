@@ -48,6 +48,10 @@ Fix email styling
 Add images to slideshow
 Add classes to footer links
 Add random images to product sections?
+Finish Contact Styling
+Make alt view for non-empty cart
+Give page names an ID?
+Add btn class to homepage-mailform
 
 (General)
 Add Titles to anchors
