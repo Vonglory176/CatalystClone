@@ -1,18 +1,62 @@
+import { useState } from "react"
+
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { Link } from "react-router-dom";
 
 export default function Login() {
+    const [passwordRecovery, setPasswordRecovery] = useState(false)
+    const togglePasswordRecovery = () => setPasswordRecovery((r) => !r);
+
+
+    let loginDiv = (
+        <form method="post" action="/account/login" id="Customer-Login" className="customerForm" onSubmit={"!#"}>
+            <h1>Login</h1>
+            <input type="text" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
+            <input type="text" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
+        
+            <p><input type="submit" className="btn" value={"Sign In"}/></p>
+
+            <a onClick={togglePasswordRecovery}>Forgot your password?</a>
+            <Link to={"account/register"}></Link>
+        </form>            
+
+        // <div id="CustomerLoginForm" className="loginForm loginForm__loginInfo">
+        // </div>
+    )
+    
+    let passwordRecoveryDiv = (
+        <form method="post" action="/account/login" id="Customer-Recover" className="customerForm" onSubmit={"!#"}>
+            <h1>Reset your password</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <input type="text" name="customer[email]" id="RecoverEmail" placeholder="Email"/>
+        
+            <p><input type="submit" className="btn" value={"Submit"}/></p>
+
+            <a onClick={togglePasswordRecovery}>Cancel</a>
+        </form>
+
+        // <div id="RecoverPasswordForm" className="loginForm loginForm__recoverPassword">
+        // </div>
+    )
+
     return (
-        <div className="login-page">
+        <div className="login-page page">
 
             <Header/>
 
             <main className="main-content">
-                <div className="divider"></div>
 
                 <div className="login-content-container content-container">
                     <div className="login-content-wrapper content-wrapper">
                         <div className="page-width">
+
+                            <div className="content-block">
+                                {/* <div class="form-success " id="ResetSuccess">We've sent you an email with a link to update your password.</div> */}
+                                {passwordRecovery? passwordRecoveryDiv : loginDiv}
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
