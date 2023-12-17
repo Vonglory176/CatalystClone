@@ -7,27 +7,108 @@ import Cart from './pages/Cart'
 import Collections from './pages/Collections'
 import Contact from './pages/Contact'
 import Products from './pages/Products'
+import NotFound from './pages/NotFound'
+import MainLayout from './layout/MainLayout'
+import SlideShowLayout from './layout/HomeLayout'
+import Register from './pages/Register'
 
 function App() {
 
-  return (
+  return ( 
     <>
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/account" element={<Account/>}/>
-      <Route path="/cart" element={<Cart/>}/>
-      <Route path="/collections" element={<Collections/>}/>
-      <Route path="/contact" element={<Contact/>}/>
-      <Route path="/account/login" element={<Login/>}/>
-      <Route path="/products" element={<Products/>}/>
-    </Routes>
+      {/* ROUTER VIDEO --> https://youtu.be/Ul3y1LXxzdU */}
+      {/* Browser for deploy, Memory for dev? */}
+      {/* Use similar to /products/:id for details page*/}
 
-    {/* <Link to={"!#"} className={""}></Link> */}
+      <Routes>
+        <Route element={<SlideShowLayout/>}>
+          <Route path="/" element={<Home/>}/>
+        </Route>
+
+        <Route element={<MainLayout/>}>
+          <Route path="/cart" element={<Cart/>}/>
+
+          <Route path="/account">
+            <Route index element={<Account/>}/>
+            <Route path="login" element={<Login/>}/>
+            {/* <Route path="logout" element={<Logout/>}/> */}
+            <Route path="register" element={<Register/>}/>
+          </Route>
+
+          <Route path="/collections" element={<Collections/>}/> 
+          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/products" element={<Products/>}/> 
+
+          <Route path="*" element={<NotFound/>}/>
+        </Route>
+      </Routes>
     </>
   )
-}
-
+}    
 export default App
+
+/* 
+    Home
+    Account / (Login Register Logout)
+    Cart
+    Collections / (All GettingStarted Battletech Shadowrun)
+    (Pages /) ? Contact
+    Products / (**Product Name**) 
+    404 Page Not Found
+*/
+
+/*  
+    <Link to={"!#"} className={""}></Link> 
+
+    "replace" attr --> Removes the current page from history, skipped when pressing back (Good for logins)
+    "reloadDocument" attr --> Click on a Link and the entire page is reloaded (Not just the changing section)
+    "state={}" --> Good for passing data from one place to another
+*/
+
+/* 
+    <NavLink // "isActive" is true when on the link
+    to="" 
+    style={({ isActive }) => {return isActive ? {color:"red"} : {}}} //NavLink is red when on its' page
+    className="" 
+    children
+    end>
+
+      {({ isActive }) => {return isActive ? "Active Home" : "Home"}} //Changes text when on its' page
+
+    </NavLink> These can take functions
+*/
+
+/*
+    STATE USE
+    
+    //First page
+    <NavLink to="/" state="Hi">Home</NavLink> 
+
+    //Second Page
+    const location = useLocation() //An object that has {hash:"" key:"" pathname:"" search:"" state:""}
+*/
+
+/*
+    useParams() --> For passing data
+    useSearchParams() --> For maintaining State in the Searchbar. 
+    (Good for keeping things like filters, where a link might be sent from one to another)
+
+    const [searchParams, setSearchParams] = useSearchParams({n: 3})
+    const number = searchParams.get("n")
+    onChange={e => setSearchParams({n: e.target.value})}
+
+*/
+
+/*
+    FOR REDIRECTS !!!
+
+    <Navigate to="/" /> For simple redirects
+
+    const navigate = useNavigate() //For more comprehensive use, better in general (Especially for Forms!)
+
+    navigate("/", {replace, state}) //Back to home
+    navigate(-1) //Same as hitting the back button
+  */
 
 /*
 
@@ -56,6 +137,10 @@ Add btn class to homepage-mailform
 (General)
 Add Titles to anchors
 Check out "lazysizes" & data-src
+Add FavIcon !!!!!!
+
+Get Captcha for Login/Register
+Get Search from Searchanise
 
 -------------------
 */
