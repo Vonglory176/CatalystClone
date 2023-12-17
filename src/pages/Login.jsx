@@ -1,7 +1,4 @@
 import { useState } from "react"
-
-import Header from "../components/Header"
-import Footer from "../components/Footer"
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -18,7 +15,7 @@ export default function Login() {
             <p><input type="submit" className="btn" value={"Sign In"}/></p>
 
             <a onClick={togglePasswordRecovery}>Forgot your password?</a>
-            <Link to={"account/register"}></Link>
+            <Link to={"/account/register"}>Create account</Link>
         </form>            
 
         // <div id="CustomerLoginForm" className="loginForm loginForm__loginInfo">
@@ -40,30 +37,13 @@ export default function Login() {
         // </div>
     )
 
-    return (
-        <div className="login-page page">
+    return (        
+        <div id="Login-Container">
+            <div className="content-block">
+                {/* <div class="form-success " id="ResetSuccess">We've sent you an email with a link to update your password.</div> */}
+                {passwordRecovery? passwordRecoveryDiv : loginDiv}
 
-            <Header/>
-
-            <main className="main-content">
-
-                <div className="login-content-container content-container">
-                    <div className="login-content-wrapper content-wrapper">
-                        <div className="page-width">
-
-                            <div className="content-block">
-                                {/* <div class="form-success " id="ResetSuccess">We've sent you an email with a link to update your password.</div> */}
-                                {passwordRecovery? passwordRecoveryDiv : loginDiv}
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </main>
-
-            <Footer/>
-
-        </div>
+            </div>
+        </div>            
     )
 }
