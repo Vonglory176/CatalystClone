@@ -3,7 +3,7 @@ import Footer from "../components/Footer"
 
 export default function Collections() {
     return (
-        <div className="collections-page">
+        <div className="collections-page page">
 
             <Header/>
 

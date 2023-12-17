@@ -22,7 +22,7 @@ import freeDownloadButton from "../assets/featured-products/button-collection/co
 
 export default function Home() {
     return (
-        <div className="home-page">
+        <div className="home-page page">
 
             <Header/>
 

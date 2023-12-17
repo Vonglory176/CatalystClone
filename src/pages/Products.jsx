@@ -3,7 +3,7 @@ import Footer from "../components/Footer"
 
 export default function Products() {
     return (
-        <div className="products-page">
+        <div className="products-page page">
 
             <Header/>
 

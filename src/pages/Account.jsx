@@ -3,7 +3,7 @@ import Footer from "../components/Footer"
 
 export default function Account() {
     return (
-        <div className="account-page">
+        <div className="account-page page">
 
             <Header/>
 
