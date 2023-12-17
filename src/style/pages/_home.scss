@@ -17,13 +17,16 @@
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed; //This is interesting
-
+        padding: 0;
+        
         
         //slideshow
         //divider
     }
     
     .home-content-container {        
+        width: fit-content;
+        
         .home-content-wrapper {
             padding: 40px 0;
             // overflow: auto;
