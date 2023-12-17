@@ -1,0 +1,44 @@
+#Login-Container {
+
+    .content-block {
+        background: $accent-lighter-color;
+        max-width: 445px; //560px;
+        padding: 30px;
+        margin: auto;
+        
+        .customerForm {
+            display: flex;
+            flex-direction: column;
+
+            //Title
+            h1 {
+                color: $secondary-font-color;
+            }
+            text-align: center;
+
+            //Inputs
+            .btn {
+                background: $primary-font-color;
+                letter-spacing: normal;
+
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+
+            //Change view links
+            a {
+                color: $secondary-color;
+                margin-bottom: 10px;
+                cursor: pointer;
+
+                &:hover {
+                    color: $secondary-hover-color;
+                }
+            }
+
+        }
+
+    }
+
+}
