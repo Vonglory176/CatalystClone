@@ -122,7 +122,7 @@ Later!
 Clean up SCSS
 Add Featured Product Banner !
 Finish Header
-Make sticky header
+Make sticky header ---> GET import {useInView} from 'react-intersection-observer'
 Make searchbar (in sidebar + other)
 Get rid of extra divs?
 Fix email styling
