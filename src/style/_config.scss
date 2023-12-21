@@ -45,6 +45,10 @@ $misc-font-color: #fff9;
     transition: all .3s linear;
 }
 
+@mixin base-color-hover-color ($basecolor, $hovercolor) {
+    
+}
+
 @function set-text-color($color) {
     @if (lightness($color) > 40%) { //If a light color is passed through, return a dark color (and vice versa)
         @return #000;
