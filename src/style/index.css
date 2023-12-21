@@ -1046,7 +1046,6 @@
 .header {
   border-bottom: 5px solid #c2cb20;
   background: #030303;
-  position: sticky;
   z-index: 100;
 }
 .header__upper {
