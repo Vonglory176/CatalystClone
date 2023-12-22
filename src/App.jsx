@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -52,8 +51,9 @@ export default App
     Account / (Login Register Logout)
     Cart
     Collections / (All GettingStarted Battletech Shadowrun)
-    (Pages /) ? Contact
     Products / (**Product Name**) 
+    pages/search-results-page?q=clan
+    pages / Contact
     404 Page Not Found
 */
 
