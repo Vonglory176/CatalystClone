@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
+import React from 'react';
 
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
 import { Link } from 'react-router-dom';
@@ -45,7 +46,9 @@ export default function Header() {
 
             <div className="header__sticky">
                 <div className="header__sticky-dropdown">
-                    <button className="header__sticky-dropdown-button btn">Universe</button>
+                    <Link to={"/collections"}>
+                        <button className="header__sticky-dropdown-button btn">Universe</button>
+                    </Link>
                 </div>
                 <div className="header__sticky-links">
                     <Link to={"/account/login"} className={"account-link"}>Account</Link>
@@ -66,7 +69,7 @@ export default function Header() {
                     <div className="offcanvas__universe">
                         <Link to={"!#"} className={"offcanvas-link"}>Universe</Link>
                         <button className="offcanvas__universe-button" onClick={toggleUniverseSubMenu}>
-                            <i class="fa-solid fa-plus fa-2x"></i>
+                            <i className="fa-solid fa-plus fa-2x"></i>
                         </button>
                     </div>
 
