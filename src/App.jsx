@@ -50,7 +50,7 @@ export default App
     Home
     Account / (Login Register Logout)
     Cart
-    Collections / (All GettingStarted Battletech Shadowrun)
+    Collections / (All GettingStarted Battletech Shadowrun Tabletop)
     Products / (**Product Name**) 
     pages/search-results-page?q=clan
     pages / Contact
