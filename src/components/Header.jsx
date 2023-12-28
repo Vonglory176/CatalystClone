@@ -1,11 +1,17 @@
+import React from 'react';
 import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
-import React from 'react';
+
+import { useSelector } from "react-redux";
 
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
 import { Link } from 'react-router-dom';
+import auth from "../store/auth-slice";
 
 export default function Header() {
+    // const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+
+    //Offcanvas/Sidebar
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const toggleShow = () => setShow((s) => !s);
@@ -52,7 +58,7 @@ export default function Header() {
                 </div>
                 <div className="header__sticky-links">
                     <Link to={"/account/login"} className={"account-link"}>Account</Link>
-                    {/* <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link> */}
+                    {/* {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>} */}
                 </div>
             </div>
 

@@ -1,13 +1,16 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux"
 
 export default function Login() {
+    // const dispatch = useDispatch()
+
     const [passwordRecovery, setPasswordRecovery] = useState(false)
     const togglePasswordRecovery = () => setPasswordRecovery((r) => !r);
 
 
     let loginDiv = (
-        <form method="post" action="/account/login" id="Customer-Login" className="customerForm" onSubmit={"!#"}>
+        <form method="post" action="/account/login" id="Customer-Login" className="customerForm" onSubmit={()=>{return}}>
             <h1>Login</h1>
             <input type="text" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
             <input type="text" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
@@ -23,7 +26,7 @@ export default function Login() {
     )
     
     let passwordRecoveryDiv = (
-        <form method="post" action="/account/login" id="Customer-Recover" className="customerForm" onSubmit={"!#"}>
+        <form method="post" action="/account/login" id="Customer-Recover" className="customerForm" onSubmit={()=>{return}}>
             <h1>Reset your password</h1>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
             <input type="text" name="customer[email]" id="RecoverEmail" placeholder="Email"/>
