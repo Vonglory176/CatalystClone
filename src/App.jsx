@@ -141,6 +141,6 @@ Add FavIcon !!!!!!
 
 Get Captcha for Login/Register
 Get Search from Searchanise
-
+Setup MongoDB/FireBase thing for products? (JS file doesn't allow easy filter/querying)
 -------------------
 */
