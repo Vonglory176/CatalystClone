@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    
     return (
         <footer className="footer">
             <div className="page-width">
@@ -13,11 +16,11 @@ export default function Footer() {
                                     <Link to={"/cart"} className={""}>Cart</Link>
                                 </li>
                                 <li className="footer__list-item">
-                                    <Link to={"/account/login"} className={""}>My Account</Link>
+                                    <Link to={"/account"} className={""}>My Account</Link>
                                 </li>
-                                {/* <li className="footer__list-item">
-                                    <Link to={"/account/logout"} className={""}>Logout</Link>
-                                </li> */}
+                                <li className="footer__list-item">
+                                    {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>}
+                                </li>
                                 <li className="footer__list-item">
                                     <Link to={"/contact"} className={""}>Contact</Link>
                                 </li>
@@ -27,7 +30,7 @@ export default function Footer() {
                     <div className="flex__item">
                         <section className="footer__section">
                             <h4 className="h1 footer__section-title">Follow Us</h4>
-                            <div className="social-icons">                                
+                            <div className="social-icons">
                                 <a href="!#">
                                     <i className="fa-brands fa-facebook-f fa-lg"></i>
                                 </a>                            

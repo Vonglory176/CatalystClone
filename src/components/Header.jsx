@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
 import { Link } from 'react-router-dom';
-import auth from "../store/auth-slice";
+// import auth from "../store/auth-slice";
 
 export default function Header() {
-    // const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
 
     //Offcanvas/Sidebar
     const [show, setShow] = useState(false);
@@ -57,8 +57,8 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className="header__sticky-links">
-                    <Link to={"/account/login"} className={"account-link"}>Account</Link>
-                    {/* {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>} */}
+                    <Link to={"/account"} className={"account-link"}>Account</Link>
+                    {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>}
                 </div>
             </div>
 
@@ -86,8 +86,8 @@ export default function Header() {
                         </div>
                     </div>
                     
-                    <Link to={"/account/login"} className={"offcanvas-link"}>Account</Link>
-                    {/* <Link to={"/account/logout"} className={"offcanvas-link"}>Log Out</Link> */}
+                    <Link to={"/account"} className={"offcanvas-link"}>Account</Link>
+                    {isLoggedIn && <Link to={"/account/logout"} className={"offcanvas-link"}>Log Out</Link>}
 
                 </Offcanvas.Body>
             </Offcanvas>
