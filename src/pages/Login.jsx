@@ -1,16 +1,26 @@
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux"
+import { authActions } from "../store/auth-slice.jsx"
 
 export default function Login() {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault() //Prevents refresh/data-sending
+        dispatch(authActions.login())
+
+        navigate("/account")
+    }
 
     const [passwordRecovery, setPasswordRecovery] = useState(false)
     const togglePasswordRecovery = () => setPasswordRecovery((r) => !r);
 
 
     let loginDiv = (
-        <form method="post" action="/account/login" id="Customer-Login" className="customerForm" onSubmit={()=>{return}}>
+        <form method="post" action="/account/login" id="Customer-Login" className="customerForm" onSubmit={handleLoginSubmit}>
             <h1>Login</h1>
             <input type="text" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
             <input type="text" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
