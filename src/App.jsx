@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound'
 import MainLayout from './layout/MainLayout'
 import SlideShowLayout from './layout/HomeLayout'
 import Register from './pages/Register'
+import Logout from './pages/Logout'
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
           <Route path="/account">
             <Route index element={<Account/>}/>
             <Route path="login" element={<Login/>}/>
-            {/* <Route path="logout" element={<Logout/>}/> */}
+            <Route path="logout" element={<Logout/>}/>
             <Route path="register" element={<Register/>}/>
           </Route>
 
@@ -48,7 +49,7 @@ export default App
 
 /* 
     Home
-    Account / (Login Register Logout)
+    Account / (Login Register Logout Addresses)
     Cart
     Collections / (All GettingStarted Battletech Shadowrun Tabletop)
     Products / (**Product Name**) 
@@ -116,6 +117,9 @@ TODO
 -------------------
 Right now!
 ------
+Figure out what to do for Database jazz
+MongoDB or Firebase, if either?
+Draw ERD to determine how things should be structured
 
 Later!
 ------
@@ -133,6 +137,7 @@ Finish Contact Styling
 Make alt view for non-empty cart
 Give page names an ID?
 Add btn class to homepage-mailform
+Add styling to Account Page
 
 (General)
 Add Titles to anchors
