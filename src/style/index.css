@@ -1695,6 +1695,10 @@
   color: #989e19;
 }
 
+#Logout-Container {
+  text-align: center;
+}
+
 #Register-Container {
   text-align: center;
   margin: auto;
