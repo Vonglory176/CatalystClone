@@ -1,16 +1,62 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
 import ProductResult from "../components/ProductResult"
 import ProductCard from "../components/ProductCard"
 
+import productList from "../data/productList"
+import { useParams } from "react-router-dom"
+
 export default function Collections() {
+
+    //For content determination
+    const {id} = useParams()
+    const [localProductList, setLocalProductList] = useState()
+
+    useEffect(() => {
+        let tempProductList = new Array
+
+        switch (id) {
+            case "battletech":
+
+                for (let i=0; i<Object.keys(productList.battletech).length; i++) {                    
+                    let p = productList.battletech[i]
+
+                    tempProductList.push(//Adding all products from BT and making them components
+                        <ProductResult
+                            key={i}
+                            productUniverse={p.universe}
+                            productLink={p.id} 
+                            productName={p.name}  
+                            productPrice={p.variants.choices[0].price} //Add code to include "From" if more than one option
+                            imageLink={p.variants.choices[0].images[0].link}
+                            imageAlt={p.variants.choices[0].images[0].alt}
+                        />                        
+                    ) 
+                }
+                setLocalProductList(tempProductList) //Outputting the new product list
+    
+                break
+                
+            case "shadowrun":
+                break
+    
+            default:
+                alert("Something went wrong!")
+                break
+            }
+    },[id])
+
+    //For changing the table view
     const [resultMode, setResultMode] = useState("grid-mode")
     const toggleResultMode = () => setResultMode((m) => m === "grid-mode"? "list-mode" : "grid-mode");
+
+
 
     return (
         <div id="Collections-Container">
 
+            {/* For the Top Banner section */}
             <div className="featured-products">
                 <a href="!#">
                     <div className="featured-product-banner"></div>
@@ -53,6 +99,7 @@ export default function Collections() {
                 </section>
             </div>
 
+            {/* For the actual search results */}
             <div className="search-results">
                 <div className="search-results-header">
                     <div className="search-results-header-found">Showing X results for "X"</div>
@@ -88,6 +135,8 @@ export default function Collections() {
                 </div>
                 <div className="search-results-sidebar"></div>
                 <div className={`search-results-main ${resultMode}`}>
+                    {localProductList}
+                    {/* 
                     <ProductResult/>
                     <ProductResult/>
                     <ProductResult/>
@@ -95,7 +144,8 @@ export default function Collections() {
                     <ProductResult/>
                     <ProductResult/>
                     <ProductResult/>
-                    <ProductResult/>
+                    <ProductResult/> 
+                    */}
                 </div>
                 <div className="search-results-pagination">
                     <button className="search-results-pagination__previous-button">o-- Previous</button>
