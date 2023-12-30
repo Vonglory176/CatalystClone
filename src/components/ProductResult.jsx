@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom"
-import clanInvasionBoxset from "../assets/featured-products/ClanInvasionBox.webp"
+// import clanInvasionBoxset from "../assets/featured-products/ClanInvasionBox.webp"
 
-export default function ProductResult() {
+export default function ProductResult({productUniverse, productLink, productName, productPrice, imageLink, imageAlt}) {
     return (
-        <Link to={"products"} className={"product-result"}>
+        <Link to={`products/${productLink}`} className={"product-result"}>
             <div className="product-result__image-container">
-                <img src={clanInvasionBoxset} alt="Clan Invasion Boxset" />
+                <img src={imageLink} alt={imageAlt} />
             </div>
             <div className="product-result__info">
-                <div className="product-result__name">BattleTech: Clan Invasion</div>
-                <div className="product-result__price">$49.99</div>
+                <div className="product-result__name">{`${productUniverse? productUniverse + ":" : ""} ${productName}`}</div>
+                <div className="product-result__price">{productPrice? `$${productPrice}` : "FREE"}</div>
             </div>
         </Link>
     )
