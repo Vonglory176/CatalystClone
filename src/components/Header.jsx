@@ -40,7 +40,7 @@ export default function Header() {
 
                 <div className="store-btns">
 
-                    <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg"></i>
+                    {/* <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg"></i> */}
 
                     <Link to={"/cart"} className={"store-btns__link"}>
                         <i className="fa-solid fa-cart-shopping store-btns__cart fa-lg"></i>
@@ -52,7 +52,7 @@ export default function Header() {
 
             <div className="header__sticky">
                 <div className="header__sticky-dropdown">
-                    <Link to={"/collections"}>
+                    <Link to={"/collections/battletech"}>
                         <button className="header__sticky-dropdown-button btn">Universe</button>
                     </Link>
                 </div>
@@ -66,8 +66,8 @@ export default function Header() {
 
             <Offcanvas show={show} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
 
-                <Offcanvas.Header closeButton>
-                    <input type="text" className="offcanvas__searchbar"/>
+                <Offcanvas.Header > {/* closeButton */}
+                    {/* <input type="text" className="offcanvas__searchbar"/> */}
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
