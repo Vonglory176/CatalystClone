@@ -35,7 +35,9 @@ function App() {
             <Route path="register" element={<Register/>}/>
           </Route>
 
-          <Route path="/collections" element={<Collections/>}/> 
+          <Route path="/collections/:id" element={<Collections/>}/>
+          <Route path="/collections/:id/products/:id" element={<Products/>}/>
+
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/products" element={<Products/>}/> 
 
@@ -121,6 +123,10 @@ Figure out what to do for Database jazz
 MongoDB or Firebase, if either?
 Draw ERD to determine how things should be structured
 
+FOCUS ON PRODUCTS
+
+Next comes page tailoring (Like background)
+
 Later!
 ------
 Clean up SCSS
@@ -138,6 +144,9 @@ Make alt view for non-empty cart
 Give page names an ID?
 Add btn class to homepage-mailform
 Add styling to Account Page
+Add code to ProductResult in collections to include "From" if more than one option
+Finish Product page styling
+Add more products to ProductList !!!!!!!!
 
 (General)
 Add Titles to anchors
