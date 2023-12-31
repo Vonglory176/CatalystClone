@@ -12,15 +12,28 @@ export default function Collections() {
     //For content determination
     const {id} = useParams()
     const [localProductList, setLocalProductList] = useState()
+    console.log(id)
 
     useEffect(() => {
         let tempProductList = new Array
-
         switch (id) {
             case "battletech":
 
-                for (let i=0; i<Object.keys(productList.battletech).length; i++) {                    
-                    let p = productList.battletech[i]
+                //Print for specific Universe
+                //Print for all Universe
+                //Print for Featured / New / Free / Sale
+                //Print for Get Started
+
+                // On Sale (X)
+                // Sold Out (X)
+                // Multiple Variants (X) (WHAT IF ONE/MAIN IS SOLD OUT?)
+                // No variants (X)
+                // Variants but one picture (X)
+                // Free
+
+                // for (let i=0; i<Object.keys(productList.id).length; i++) {} //ITERATES SPECIFIC
+                for (let i=0; i<Object.keys(productList[id]).length; i++) { //ITERATES ALL
+                    let p = productList[id][i]
 
                     tempProductList.push(//Adding all products from BT and making them components
                         <ProductResult
