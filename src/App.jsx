@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Account from './pages/Account'
@@ -11,8 +11,24 @@ import MainLayout from './layout/MainLayout'
 import SlideShowLayout from './layout/HomeLayout'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { fetchProducts } from './store/firebase-slice'
 
 function App() {
+
+  const dispatch = useDispatch()
+    const productList = useSelector(state => state.firebase.productList)
+    const status = useSelector(state => state.firebase.status)
+    const error = useSelector(state => state.firebase.error)
+    const location = useLocation()
+
+    useEffect(() => {
+        // if(status === 'idle') {
+            dispatch(fetchProducts())
+        // }
+        console.log(status)
+    }, [dispatch, location]) //status
 
   return ( 
     <>
@@ -119,13 +135,13 @@ TODO
 -------------------
 Right now!
 ------
-Figure out what to do for Database jazz
-MongoDB or Firebase, if either?
-Draw ERD to determine how things should be structured
+Load products into Featured-Containers (Just use ID's for the moment)
 
-FOCUS ON PRODUCTS
+FOCUS ON PRODUCTS - Next comes page tailoring (Like background)
+ADD SALE CODE TO PRODUCT RESULTS
+Add errors to store/products if not found?
+Finish conditional hell in products
 
-Next comes page tailoring (Like background)
 
 Later!
 ------
@@ -147,6 +163,7 @@ Add styling to Account Page
 Add code to ProductResult in collections to include "From" if more than one option
 Finish Product page styling
 Add more products to ProductList !!!!!!!!
+Add code to make product page search database faster? (Like only look in battletech, not all cats)
 
 (General)
 Add Titles to anchors
