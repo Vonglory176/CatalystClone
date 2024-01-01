@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import productList from "../data/productList"
 
 export default function Products() {
     const [currentProduct, setCurrentProduct] = useState()
+    const productList = useSelector(state => state.firebase.productList)
     const {id} = useParams()
 
-    useEffect(() => {
-        const findProductById = (productList, id) => {
-            for (let category in productList) {
-                let product = Object.values(productList[category]).find(product => product.id === id)
-                if (product) return product
-            }
-            return null
-        }
+    
+    const findProductById = () => {
+        let product = false
         
-        setCurrentProduct(findProductById(productList, id))
+        Object.keys(productList).forEach (category => {
+            if (product) return
+
+            product = Object.values(productList[category]).find(product => product.id === id)
+            console.log(product)
+        })
+        if (!product) console.log("ERROR: Could not find product information!")
+        return product
+    }
+
+    useEffect(() => {
+        if (productList) {
+            setCurrentProduct(findProductById())
+        }
 
         /* You can use the Object.values() method to convert the products object into an array, 
         then use the find() method to find the object with the specified id.
@@ -26,14 +35,18 @@ export default function Products() {
 
         If a product is found, it is returned immediately. If no product is found after checking 
         all categories, null is returned.*/
-    },[])
+    },[id, productList])
 
+
+
+    // let currentImage = currentProduct.variantsHaveImages?
+    let currentVariant
 
     return (
         <div id="Products-Container">
             <div className="products-images">
                 <div className="products-images__primary">
-                    {currentProduct && <img src={currentProduct.variants.choices[0].images[0].link} alt={currentProduct.variants.choices[0].images[0].alt} />}
+                    {/* {currentProduct && <img src={currentProduct.variants.choices[0].images[0].link} alt={currentProduct.variants.choices[0].images[0].alt} />} */}
                 </div>
                 <div className="products-images__scroller"></div>
             </div>
@@ -43,7 +56,7 @@ export default function Products() {
                     {currentProduct && ((currentProduct.universe? `${currentProduct.universe}: ` : "") + currentProduct.name)}
                 </h1>
 
-                <span>{currentProduct && `$${currentProduct.variants.choices[0].price}`}</span> {/* NEED SWAP CODE FOR VARIANTS */}
+                {/* <span>{currentProduct && `$${currentProduct.variants.choices[0].price}`}</span> NEED SWAP CODE FOR VARIANTS */}
 
                 <hr />
 
