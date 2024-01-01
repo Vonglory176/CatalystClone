@@ -16,23 +16,12 @@ export default function Collections() {
     const productList = useSelector(state => state.firebase.productList)
 
     //Print for specific Universe
-    //Print for all Universe
-    //Print for Featured / New / Free / Sale
-    //Print for Get Started
-
-    // On Sale (X)
-    // Sold Out (X)
-    // Multiple Variants (X) (WHAT IF ONE/MAIN IS SOLD OUT?)
-    // No variants (X)
-    // Variants but one picture (X)
-    // Free
-
-    // for (let i=0; i<Object.keys(productList.id).length; i++) {} //ITERATES SPECIFIC
+    //Print for All / Featured / New / Free / Sale
 
     useEffect(() => {
         let tempProductList = []
 
-        if (productList) {
+        if (productList) { //SINGULAR CATEGORY
             if (Object.keys(productList).includes(id)) {
 
                 Object.values(productList[id]).forEach(p => { //For each Product in the Category
@@ -42,7 +31,7 @@ export default function Collections() {
                     if (variant.isPrimaryVariant) {
                         const image = p.variantsHaveImages? variant.images["image1"] : p.images["image1"] //Deciding wether to use variant/product picture
                         
-                        tempProductList.push(
+                        tempProductList.push( //Creating a Product tile for the search results
                             <ProductResult
                             key={p.id}
                             productUniverse={p.universe}
@@ -56,17 +45,17 @@ export default function Collections() {
                     }
                 })
             }
-            else if (id === "all") {                
+            else if (id === "all") { //ALL CATEGORIES
                 Object.keys(productList).forEach(category => { //For each Product Category
 
-                    Object.values(productList[category]).forEach(p => { //For each Product in the Category
+                    Object.values(productList[category]).forEach(p => { //For each Product in that Category
 
                         const variant = Object.values(p.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
                         
                         if (variant.isPrimaryVariant) {
                             const image = p.variantsHaveImages? variant.images["image1"] : p.images["image1"] //Deciding wether to use variant/product picture
                             
-                            tempProductList.push(
+                            tempProductList.push( //Creating a Product tile for the search results
                                 <ProductResult
                                 key={p.id}
                                 productUniverse={p.universe}
@@ -81,7 +70,7 @@ export default function Collections() {
                     })
                 })
             }
-            else alert("Something went wrong!")
+            else alert("Something went wrong!") //SOMETHING BLEW UP
 
             setLocalProductList(tempProductList) //Outputting the new product list (Okay if empty)
         }
@@ -195,18 +184,14 @@ Filters
 "Showing X results for X"
 Buttons for table/list layout (KEPT BETWEEN PAGES)
 
-All ------------------------
-
 Universe BT/SH -----------------------
 New Arrivals + Banner
 Button to "Get Started"
 
 GettingStarted ------------------------
-
-
 BattleTech ------------------------
-
 ShadowRun ------------------------
+All ------------------------
 
 PLANS -----------------------------
 
