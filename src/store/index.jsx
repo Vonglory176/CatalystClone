@@ -5,7 +5,7 @@ import firebaseSlice from "./firebase-slice"
 const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
-        firebase: firebase-slice.reducer
+        firebase: firebaseSlice.reducer
     }
 })
 
