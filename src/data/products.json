@@ -1,0 +1,439 @@
+{
+    "products": {
+        "battletech": {
+            
+            "battletech-clan-invasion": {
+                "id": "battletech-clan-invasion",
+                "name": "Clan Invasion",
+                "universe":"Battletech",
+
+                "description": "<div className='product-description'><h2>The Children Of KerenSky Return!</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+
+                "images": {
+                    "image1": {
+                        "id": "back-cover",
+                        "name": "Back Cover",
+                        "alt": "Back of the box",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fclan-invasion%2FBoxSpread.webp?alt=media&token=e65c26ca-db3b-4a9d-9c8f-591146bbd877"
+                    },
+                    "image2": {
+                        "id":"box-spread",
+                        "name":"Box Spread",
+                        "alt":"Spread contents of the box",
+                        "link":"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fclan-invasion%2FBoxSpread.webp?alt=media&token=e65c26ca-db3b-4a9d-9c8f-591146bbd877"
+                    }
+                },
+                
+                "variantType": "Version",
+                "variantsHaveImages": true,
+
+                "variants": {
+                    "variant1": {
+                        "id": "unlimited",
+                        "name": "Unlimited",
+                        "price": 49.99,
+                        "discountedPrice": "",
+                        "images": {
+                            "image1": {
+                                "id": "unlimited-box",
+                                "name": "Unlimited Box",
+                                "alt": "The Unlimited box",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fclan-invasion%2FUnlimitedBox.webp?alt=media&token=135bd3a8-feb6-446c-b9a7-2e0e7a052e76"
+                            }
+                        },
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    },
+                    "variant2": {
+                        "id": "kickstarter",
+                        "name": "Kickstarter",
+                        "price": 49.99,
+                        "discountedPrice": "",
+                        "images": {
+                            "image1": {
+                                "id": "kickstarter-box",
+                                "name": "Kickstarter Box",
+                                "alt": "The Kickstarter box",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fclan-invasion%2FKickStarterBox.webp?alt=media&token=2d3dee8a-3f0f-46f0-8142-00837d357a5b"
+                            }
+                        },
+                        "isPrimaryVariant": false,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isFeaturedProduct": true,
+                "isGettingStarted": false
+            },
+
+            "battletech-reinforcements-clan-invasion": {
+                "id": "battletech-reinforcements-clan-invasion",
+                "name": "Reinforcements Clan Invasion",
+                "universe": "BattleTech",
+
+
+                "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!<span className='warning'><em>There are no miniatures in this product.</em></span></p></div>",
+                
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+                
+                "images": {                    
+                    "image1": {
+                        "id": "brci-boxcover",
+                        "name": "The Box",
+                        "alt": "A view of the box",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-boxcover.webp?alt=media&token=81eb1e61-838b-4894-9d6e-34210293a657"
+                    },
+                    "image2": {
+                        "id": "brci-contents1",
+                        "name": "Box Contents 1",
+                        "alt": "The contents of the box",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-contents1.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                    },
+                    "image3": {
+                        "id": "brci-contents2",
+                        "name": "Box Contents 2",
+                        "alt": "The contents of the box",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-contents2.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                    },
+                    "image4": {
+                        "id": "brci-map1",
+                        "name": "Map side 1",
+                        "alt": "One side of the battle map",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-map1.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                    },
+                    "image5": {
+                        "id":"brci-map2",
+                        "name":"Map side 2",
+                        "alt":"The other side of the map",
+                        "link":"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-map2.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                    }
+                },
+
+                "variantType": "",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "standard",
+                        "name": "Standard",
+                        "price": 39.99,
+                        "discountedPrice": 24.99,
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": true,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            },
+
+            "battletech-battlemat-alien-worlds": {
+                "id": "battletech-battlemat-alien-worlds",
+                "name": "BattleMat (Alien Worlds)",
+                "universe": "BattleTech",
+
+
+                "description": "<div className='product-description'><h1>Roll Out An Alien World!</h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+                
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+                
+                "images": {},
+
+                "variantType": "Title",
+                "variantsHaveImages": true,
+                
+                "variants": {
+                    "variant1": {
+                        "id": "lunar-base-sand-drift",
+                        "name": "Lunar Base / Sand Drift",
+                        "price": 39.99,
+                        "discountedPrice": "",
+                        "images": {                            
+                            "image1": {
+                                "id": "baw-lun-dri-mat",
+                                "name": "The Lunar Base / Sand Drift Mat",
+                                "alt": "A view of the Lunar Base / Sand Drift mat",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_mat_LUN-DRI_1024x1024.webp?alt=media&token=078fda1d-d9d3-4cbb-85d9-acaa3af0942d"
+                            },
+                            "image2": {
+                                "id": "baw-lun-dri-box",
+                                "name": "The Lunar Base / Sand Drift Box",
+                                "alt": "A view of the Lunar Base / Sand Drift box",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_LUN-DRI_1024x1024.webp?alt=media&token=ea14ce44-f5d7-45eb-b58d-e5982c8fcc3c"
+                            }
+                        },
+                        "isPrimaryVariant": false,
+                        "isSoldOut": true
+                    },                    
+                    "variant2": {
+                        "id": "fungal-crevasse-washout",
+                        "name": "Fungal Crevasse / Washout",
+                        "price": 39.99,
+                        "discountedPrice": "",
+                        "images": {                            
+                            "image1": {
+                                "id": "baw-fun-was-mat",
+                                "name": "The Fungal Crevasse / Washout Mat",
+                                "alt": "A view of the Lunar Base / Sand Drift mat",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_mat_FUN-WAS_1024x1024.webp?alt=media&token=58c0d00b-d43d-42e1-8bbc-c52b0d12b848"
+                            },
+                            "image2": {
+                                "id": "baw-fun-was-box",
+                                "name": "The Fungal Crevasse / Washout Box",
+                                "alt": "A view of the Lunar Base / Sand Drift box",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_FUN-WAS_1024x1024.webp?alt=media&token=09c57792-f4a8-47d1-b916-346d920a9b57"
+                            }
+                        },
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    },                    
+                    "variant3": {
+                        "id": "caustic-valley-mines",
+                        "name": "Caustic Valley / Mines",
+                        "price": 39.99,
+                        "discountedPrice": "",
+                        "images": {                            
+                            "image1": {
+                                "id": "baw-cau-min-mat",
+                                "name": "The Caustic Valley / Mines Mat",
+                                "alt": "A view of the Caustic Valley / Mines mat",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_mat_CAU-MIN_1024x1024.webp?alt=media&token=2ec96632-28e1-44e2-80a3-e9cc8a3f5831"
+                            },
+                            "image2": {
+                                "id": "baw-cau-min-box",
+                                "name": "The Caustic Valley / Mines Box",
+                                "alt": "A view of the Caustic Valley / Mines box",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_CAU-MIN_1024x1024.webp?alt=media&token=155d1c0d-c1a4-481a-a35a-7ebee9166b53"
+                            }
+                        },
+                        "isPrimaryVariant": false,
+                        "isSoldOut": false
+                    },                    
+                    "variant4": {
+                        "id": "crystalline-canyon-badlands",
+                        "name": "Crystalline Canyon / Badlands",
+                        "price": 39.99,
+                        "discountedPrice": "",
+                        "images": {                            
+                            "image1": {
+                                "id": "baw-cry-bad-mat",
+                                "name": "The Crystalline Canyon / Badlands Mat",
+                                "alt": "A view of the Crystalline Canyon / Badlands mat",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_mat_CRY-BAD_1024x1024.webp?alt=media&token=c6ef4832-9ed4-4f5a-b875-e56400b4096b"
+                            },
+                            "image2": {
+                                "id": "baw-cry-bad-box",
+                                "name": "The Crystalline Canyon / Badlands Box",
+                                "alt": "A view of the Crystalline Canyon / Badlands box",
+                                "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_CRY-BAD_1024x1024.webp?alt=media&token=7a80e6b2-b404-4d5a-a50b-94421124837e"
+                            }
+                        },
+                        "isPrimaryVariant": false,
+                        "isSoldOut": false
+                    }             
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            },
+
+            "battletech-anthology-vol-8-legacy": {
+                "id": "battletech-anthology-vol-8-legacy",
+                "name": "Anthology Vol. 8: Legacy",
+                "universe": "BattleTech",
+
+
+                "description": "<div className='product-description'><h1>In The 31st Century, Life is Cheap...</h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+                
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+                
+                "images": {                    
+                    "image1": {
+                        "id": "bav8l-cover",
+                        "name": "The Cover",
+                        "alt": "A view of the cover",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fanthology-vol-8-legacy%2FBattleTech.Legacy.front_cover_1024x1024.webp?alt=media&token=4ea0019c-d463-4164-8605-104ffaa7fd1a"
+                    }
+                },
+
+                "variantType": "",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "standard",
+                        "name": "Standard",
+                        "price": 4.99,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": true
+            },
+
+            "battletech-miniature-pack-game-of-armored-combat": {
+                "id": "battletech-miniature-pack-game-of-armored-combat",
+                "name": "Miniature Pack: Game Of Armored Combat",
+                "universe": "BattleTech",
+
+
+                "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+                
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+                
+                "images": {                    
+                    "image1": {
+                        "id": "bmpgoac-minis",
+                        "name": "The Miniatures",
+                        "alt": "A view of the miniatures",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fminiature-pack-game-of-armored-combat%2Fbmpgoac-minis_1024x1024.webp?alt=media&token=89209c85-c1af-4f3b-a182-2a1ed8dfa5be"
+                    }
+                },
+
+                "variantType": "",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "standard",
+                        "name": "Standard",
+                        "price": 4.99,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": true
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": true,
+                "isOnSale": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            }
+        },
+
+        "shadowrun": {
+
+            "shadowrun-sixth-world-core-rulebook-city-edition-berlin": {
+                "id": "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                "name": "Sixth World Core Rulebook: City Edition: Berlin",
+                "universe": "Shadowrun",
+
+
+                "description": "<div className='product-description'><h2>Risk is The Reward</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+
+                "images": {
+                    "image1": {
+                        "id": "sswcrceb-boxcover",
+                        "name": "Front Cover",
+                        "alt": "Front cover of the rulebook",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fshadowrun%2Fsixth-world-core-rulebook-city-edition-berlin%2FSR6BerlinEdition.webp?alt=media&token=406f9f04-20c5-46ce-a437-6d5dea362167"
+                    }
+                },
+
+                "variantType": "Format",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "book-pdf",
+                        "name": "Book (+PDF)",
+                        "price": 19.99,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    },
+                    "variant2": {
+                        "id": "pdf",
+                        "name": "PDF",
+                        "price": 19.99,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": false,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            }
+        },
+
+        "tabletop": {
+
+            "i-would-fight-the-dragon": {
+                "id": "i-would-fight-the-dragon",
+                "name": "I Would Fight The Dragon",
+                "universe": "",
+
+
+                "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+
+                "productTypes": ["type1", "type2"],
+
+                "tags": ["tag1", "tag2"],
+
+                "images": {
+                    "image1": {
+                        "id": "iwftd-boxcover",
+                        "name": "Front Cover",
+                        "alt": "Front cover of the box",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Ftabletop%2Fi-would-fight-the-dragon%2FIWFTD_1024x1024.jpg?alt=media&token=35ae6120-4a93-4370-bd60-9eb10356d945"
+                    }
+                },
+
+                "variantType": "",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "standard",
+                        "name": "Standard",
+                        "price": 11.99,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            }
+        }
+    }
+}
