@@ -1,0 +1,23 @@
+export const getProductById = (productList, id) => {
+    if (productList) {
+        let product
+
+        Object.keys(productList).forEach(category => { //For each Product Category
+
+            const foundProduct = Object.values(productList[category]).find(p => p.id === id) //Try to find a Product with the ID
+            if (foundProduct) product = foundProduct
+        })
+        
+        if (product) return product
+
+        console.log(`ERROR! Product with ID:(${id}) was not found`)
+        return null
+    }
+}
+
+// import { useSelector } from 'react-redux';
+
+// export const getProductById = (id) => {
+//   const productList = useSelector(state => state.firebase.productList);
+//   return productList ? productList[id] : null;
+// };
