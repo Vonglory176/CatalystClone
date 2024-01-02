@@ -93,6 +93,20 @@ export default function Home() {
                     </div>
                 </section>
 
+                <section className="collection-buttons-container">
+                    <div className="collection-buttons-wrapper">
+                        <a href="!#">
+                            <img src={saleButton} alt="" className="collection-button" />
+                        </a>
+                        <a href="!#">
+                            <img src={newArrivalsButton} alt="" className="collection-button" />
+                        </a>
+                        <a href="!#">
+                            <img src={freeDownloadButton} alt="" className="collection-button" />
+                        </a>
+                    </div>
+                </section>
+
                 
 
                 <MailListSignUp/>
