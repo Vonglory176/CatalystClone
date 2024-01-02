@@ -15,61 +15,94 @@ import featuredCharacterCombatMage from "../assets/featured-products/featured-ch
 import saleButton from "../assets/featured-products/button-collection/collection-buttons-01.webp"
 import newArrivalsButton from "../assets/featured-products/button-collection/collection-buttons-02.webp"
 import freeDownloadButton from "../assets/featured-products/button-collection/collection-buttons-03.webp"
+import { useSelector } from "react-redux"
+import { getProductById } from "../hooks/getProductById"
+import { Link } from "react-router-dom"
 
 export default function Home() {
+    const productList = useSelector(state => state.firebase.productList)
+    const status = useSelector(state => state.firebase.status)
+
+    /*
+        Need code for:
+
+        Collection link
+        ClassName
+        Banner Img Src/Alt
+        Collection name for collection-card__title
+        Product ID's
+
+        Have some kind of determination for stand/fea/new?
+    */
+
     return (
         <div id="Home-Container">
             
             <div className="getting-started">
-                <a href="!#" className="getting-started__link">
+                <Link to={"/collections/battletech"} className="getting-started__link">
                     <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/>
-                </a>
-                <a href="!#" className="getting-started__link">
+                </Link>
+                <Link to={"/collections/shadowrun"} className="getting-started__link">
                     <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/>
-                </a>
+                </Link>
             </div>
 
             <div className="featured-products">
-                <a href="!#">
+
+                <Link to={"/"}>
                     <div className="featured-product-banner"></div>
-                </a>
+                </Link>
 
                 <section className="section-block"> {/* MAKE THIS A COMPONENT !!! */}
-                    <a href="!#" className="collection-link">
+
+                    {/* The background banner for larger views */}
+                    <Link to={"/collections/all"} className={"collection-link"}>
                         <img src={fpFrame1} alt="" className="featured-product-frame" />
-                    </a>
+                    </Link>
+
 
                     <div className="grid collection">
-                        <a href="!#" className="collection-link"></a>
+                        <Link to={"/"} className={"collection-link"}></Link>
 
                         <div className="grid__item collection__cover">
-                            <a href="!#" className="collection-link"></a>
-                            <a href="!#" className="collection-card">                                                        
+                            {/* <Link to={"/"} className={"collection-link"}></Link> */}
+                            <Link to={"/"} className={"collection-card"}>
                                 <div className="collection-card__meta">
                                     <p className="collection-card__title h1">Featured Products</p>
                                     <p className="collection-card__subtext">View all</p>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
+                        
                     </div>
                 </section>
-                <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
+
+                
+
+                <MailListSignUp/>
+            </div>
+        </div>                        
+    )
+}
+
+{/* 
+                <section className="section-block left">
                     <a href="!#" className="collection-link">
                         <img src={fpFrame2} alt="" className="featured-product-frame" />
                     </a>
@@ -91,21 +124,21 @@ export default function Home() {
                         </div>
 
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
-                        </div>                                                  
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
+                        </div> 
                     </div>
                 </section>
 
-                <section className="section-block right"> {/* MAKE THIS A COMPONENT !!! */}
+                <section className="section-block right"> 
                     <a href="!#" className="collection-link">
                         <img src={fpFrame3} alt="" className="featured-product-frame" />
                     </a>
@@ -127,16 +160,16 @@ export default function Home() {
                         </div>
 
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
                         </div>
                     </div>
                 </section>
@@ -155,7 +188,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="section-block left"> {/* MAKE THIS A COMPONENT !!! */}
+                <section className="section-block left">
                     <a href="!#" className="collection-link">
                         <img src={fpFrame4} alt="" className="featured-product-frame" />
                     </a>                                             
@@ -174,22 +207,16 @@ export default function Home() {
                         </div>
 
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
                         </div>
                     </div>
-                </section>
-
-                <MailListSignUp/>
-            </div>
-        </div>                        
-    )
-}
+                </section> */}
