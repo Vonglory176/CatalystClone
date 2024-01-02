@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom"
-import clanInvasionBoxset from "../assets/featured-products/ClanInvasionBox.webp"
 
-export default function ProductCard() {
+export default function ProductCard({product}) {
+
+    const variant = Object.values(product.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
+    const image = product.variantsHaveImages? variant.images["image1"] : product.images["image1"] //Deciding wether to use variant/product picture
+                        
+    let productUniverse = product.universe
+    let productLink = product.id
+    let productName = product.name  
+    let productPrice = variant.price //Add code to include "From" if more than one option    
+    let imageLink = image.link
+    let imageAlt = image.alt
+
     return (
-        <Link to={"products"} className={"product-card"}>
+        <Link to={`/collections/${productUniverse}/products/${productLink}`} className={"product-card"}>
             <div className="product-card__image-container">
                 <div className="product-card__image-wrapper">
                     <div className="product-card__image">
                         {/* Padding top div? */}
-                        <img src={clanInvasionBoxset} alt="Clan Invasion Boxset" />
+                        <img src={imageLink} alt={imageAlt}/>
                     </div>
                 </div>
             </div>
             <div className="product-card__info">
-                <div className="product-card__name">BattleTech: Clan Invasion</div>
-                <div className="product-card__price">$49.99</div>
+                <div className="product-card__name">{`${productUniverse? productUniverse + ":" : ""} ${productName}`}</div>
+                <div className="product-card__price">{productPrice}</div>
             </div>
             <div className="product-card__overlay">
                 <span className="btn product-card__overlay-btn">View</span>
