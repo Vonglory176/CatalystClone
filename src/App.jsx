@@ -138,9 +138,12 @@ Right now!
 Load products into Featured-Containers (Just use ID's for the moment)
 
 FOCUS ON PRODUCTS - Next comes page tailoring (Like background)
-ADD SALE CODE TO PRODUCT RESULTS
-Add errors to store/products if not found?
+ADD SALE CODE TO PRODUCT-RESULTS / PRODUCT-CARD
+Add errors to store/products/card/result if not found?
 Finish conditional hell in products
+Can reduce Collections/ProductResult code by moving Variant determination to ProductResult
+Write logic for determining Featured/NewArrival-Section in Collections
+PUT FIREBASE CONFIG IN ENV FILE
 
 
 Later!
