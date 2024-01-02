@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom"
 // import clanInvasionBoxset from "../assets/featured-products/ClanInvasionBox.webp"
 
-export default function ProductResult({productUniverse, productLink, productName, productPrice, imageLink, imageAlt}) {
+export default function ProductResult({product}) {
+
+    const variant = Object.values(product.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
+    const image = product.variantsHaveImages? variant.images["image1"] : product.images["image1"] //Deciding wether to use variant/product picture
+                        
+    let productUniverse = product.universe
+    let productLink = product.id
+    let productName = product.name  
+    let productPrice = variant.price //Add code to include "From" if more than one option    
+    let imageLink = image.link
+    let imageAlt = image.alt
+
+    // if (variant.isPrimaryVariant) {}
+
     return (
         <Link to={`products/${productLink}`} className={"product-result"}>
             <div className="product-result__image-container">
