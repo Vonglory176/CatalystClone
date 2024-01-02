@@ -5,8 +5,8 @@ import ProductResult from "../components/ProductResult"
 import ProductCard from "../components/ProductCard"
 
 import { useParams } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchProducts } from "../store/firebase-slice"
+import { useSelector } from "react-redux"
+import { getProductById } from "../hooks/getProductById"
 
 export default function Collections() {
 
@@ -14,6 +14,7 @@ export default function Collections() {
     const {id} = useParams()
     const [localProductList, setLocalProductList] = useState()
     const productList = useSelector(state => state.firebase.productList)
+    const status = useSelector(state => state.firebase.status)
 
     //Print for specific Universe
     //Print for All / Featured / New / Free / Sale
@@ -21,52 +22,23 @@ export default function Collections() {
     useEffect(() => {
         let tempProductList = []
 
-        if (productList) { //SINGULAR CATEGORY
-            if (Object.keys(productList).includes(id)) {
+        if (productList) {
 
-                Object.values(productList[id]).forEach(p => { //For each Product in the Category
+            //SINGULAR CATEGORY
+            if (Object.keys(productList).includes(id)) { //If product.category ("battletech") is in page path
 
-                    const variant = Object.values(p.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
-                    
-                    if (variant.isPrimaryVariant) {
-                        const image = p.variantsHaveImages? variant.images["image1"] : p.images["image1"] //Deciding wether to use variant/product picture
-                        
-                        tempProductList.push( //Creating a Product tile for the search results
-                            <ProductResult
-                            key={p.id}
-                            productUniverse={p.universe}
-                            productLink={p.id} 
-                            productName={p.name}  
-                            productPrice={variant.price} //Add code to include "From" if more than one option    
-                            imageLink={image.link}
-                            imageAlt={image.alt}
-                            />
-                        )
-                    }
+                Object.values(productList[id]).forEach(p => { //For each Product in that Category
+
+                    tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
                 })
-            }
-            else if (id === "all") { //ALL CATEGORIES
+
+            }//ALL CATEGORIES           
+            else if (id === "all") { 
                 Object.keys(productList).forEach(category => { //For each Product Category
 
                     Object.values(productList[category]).forEach(p => { //For each Product in that Category
 
-                        const variant = Object.values(p.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
-                        
-                        if (variant.isPrimaryVariant) {
-                            const image = p.variantsHaveImages? variant.images["image1"] : p.images["image1"] //Deciding wether to use variant/product picture
-                            
-                            tempProductList.push( //Creating a Product tile for the search results
-                                <ProductResult
-                                key={p.id}
-                                productUniverse={p.universe}
-                                productLink={p.id} 
-                                productName={p.name}  
-                                productPrice={variant.price} //Add code to include "From" if more than one option    
-                                imageLink={image.link}
-                                imageAlt={image.alt}
-                                />
-                            )
-                        }
+                        tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
                     })
                 })
             }
@@ -79,8 +51,6 @@ export default function Collections() {
     //For changing the table view
     const [resultMode, setResultMode] = useState("grid-mode")
     const toggleResultMode = () => setResultMode((m) => m === "grid-mode"? "list-mode" : "grid-mode");
-
-
 
     return (
         <div id="Collections-Container">
@@ -110,20 +80,21 @@ export default function Collections() {
                         </div>
 
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
                         <div className="grid__item">
-                            <ProductCard/>
+                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
                         </div>
+
                     </div>
                 </section>
             </div>
