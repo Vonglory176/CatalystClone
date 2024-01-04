@@ -167,6 +167,7 @@ Add code to ProductResult in collections to include "From" if more than one opti
 Finish Product page styling
 Add more products to ProductList !!!!!!!!
 Add code to make product page search database faster? (Like only look in battletech, not all cats)
+Collect all Featured Products and random load into collection-blocks?
 
 (General)
 Add Titles to anchors
