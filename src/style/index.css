@@ -1303,7 +1303,6 @@
 }
 .featured-products .collection__cover .collection-card {
   position: relative;
-  background-image: url("/src/assets/featured-products/cicada-picture.webp");
   z-index: 1;
   display: block;
   height: 320px;
