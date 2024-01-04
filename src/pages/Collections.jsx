@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
+// import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
 import ProductResult from "../components/ProductResult"
 import ProductCard from "../components/ProductCard"
 
@@ -56,7 +56,7 @@ export default function Collections() {
         <div id="Collections-Container">
 
             {/* For the Top Banner section */}
-            <div className="featured-products">
+            {/* <div className="featured-products">
                 <a href="!#">
                     <div className="featured-product-banner"></div>
                 </a>      
@@ -97,7 +97,7 @@ export default function Collections() {
 
                     </div>
                 </section>
-            </div>
+            </div> */}
 
             {/* For the actual search results */}
             <div className="search-results">
