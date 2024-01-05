@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 
 export default function Products() {
     const [currentProduct, setCurrentProduct] = useState()
-    const productList = useSelector(state => state.firebase.productList)
+    const productList = useSelector(state => state.products.productList)
     const {id} = useParams()
 
     
@@ -24,7 +24,9 @@ export default function Products() {
     useEffect(() => {
         if (productList) {
             setCurrentProduct(findProductById())
+            console.log(currentProduct)
         }
+    },[id, productList])
 
         /* You can use the Object.values() method to convert the products object into an array, 
         then use the find() method to find the object with the specified id.
@@ -35,12 +37,28 @@ export default function Products() {
 
         If a product is found, it is returned immediately. If no product is found after checking 
         all categories, null is returned.*/
-    },[id, productList])
 
-
+    const [selectedVariant, setSelectedVariant] = useState()
+    const [variantList, setVariantList] = useState()
 
     // let currentImage = currentProduct.variantsHaveImages?
     let currentVariant
+    //Selector for variants
+    //Check for sale / free / sold-out
+
+    useEffect(()=>{
+        if (currentProduct) {
+            const variantArrayList = Object.values(currentProduct.variants)
+            console.log(variantArrayList)
+            
+            
+            let tempVariantList = []
+            for (let variant in currentProduct.variants) {
+                tempVariantList.push(<option value={currentProduct[variant]}>{currentProduct.variants.name}</option>)
+            }
+            setVariantList(tempVariantList)
+        }
+    }, [currentProduct])
 
     return (
         <div id="Products-Container">
@@ -64,8 +82,9 @@ export default function Products() {
                     <div className="products-form__variant-selector-wrapper">
                         <label htmlFor="Variant-Selector">{currentProduct && currentProduct.variants.type}</label>
                         <select name="Variant-Selector" id="Products-Form__Variant-Selector"> {/* NEED SWAP CODE FOR VARIANTS */}
-                            <option value="">Unlimited</option>
-                            <option value="">Kickstarter</option>
+                            {/* <option value="">Unlimited</option>
+                            <option value="">Kickstarter</option> */}
+                            {variantList}
                         </select>
                     </div>
                     <div className="products-form__quantity-selector-wrapper">
