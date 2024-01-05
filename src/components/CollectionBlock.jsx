@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 export default function CollectionBlock(
     {collectionClasses, collectionLink,collectionFrameSrc,collectionCoverSrc,collectionCoverTitle,productIdArray,characterImageSrcArray}) {
-    const productList = useSelector(state => state.firebase.productList)
-    const status = useSelector(state => state.firebase.status)
+    const productList = useSelector(state => state.products.productList)
+    const status = useSelector(state => state.products.status)
     const [collectionProducts, setCollectionProducts] = useState()
     
     useEffect(() => {

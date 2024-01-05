@@ -13,14 +13,14 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { fetchProducts } from './store/firebase-slice'
+import { fetchProducts } from './store/products-slice'
 
 function App() {
 
   const dispatch = useDispatch()
-    const productList = useSelector(state => state.firebase.productList)
-    const status = useSelector(state => state.firebase.status)
-    const error = useSelector(state => state.firebase.error)
+    const productList = useSelector(state => state.products.productList)
+    const status = useSelector(state => state.products.status)
+    const error = useSelector(state => state.products.error)
     const location = useLocation()
 
     useEffect(() => {
@@ -135,6 +135,7 @@ TODO
 -------------------
 Right now!
 ------
+ADD STOCK TO DATABASE PRODUCTS
 Load products into Featured-Containers (Just use ID's for the moment)
 
 FOCUS ON PRODUCTS - Next comes page tailoring (Like background)

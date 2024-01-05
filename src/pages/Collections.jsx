@@ -13,8 +13,8 @@ export default function Collections() {
     //For content determination
     const {id} = useParams()
     const [localProductList, setLocalProductList] = useState()
-    const productList = useSelector(state => state.firebase.productList)
-    const status = useSelector(state => state.firebase.status)
+    const productList = useSelector(state => state.products.productList)
+    const status = useSelector(state => state.products.status)
 
     //Print for specific Universe
     //Print for All / Featured / New / Free / Sale
