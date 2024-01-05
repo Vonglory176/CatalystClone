@@ -1,16 +1,12 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 
 export default function Account() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
-    const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate("login")
-        }
-    })
+    //If not logged in, redirect to Login page ("replace" so back button works)
+    if (!isLoggedIn) return <Navigate to="login" replace/>
 
     return (
         <div id="Account-Container">
