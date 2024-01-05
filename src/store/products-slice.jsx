@@ -2,8 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import db from '../firebase';
 
+//ACTIONS (Payloads of information that send data from your application to your store. They are the only source of information for the store.)
+
+//Fetch Products
 export const fetchProducts = createAsyncThunk(
-  'firebase/fetchProducts',
+  'products/fetchProducts',
   async ( _, thunkAPI) => {
     const productsRef = ref(db, 'products')
     const snapshot = await get(productsRef) //Getting ProductList from Firebase
@@ -14,14 +17,15 @@ export const fetchProducts = createAsyncThunk(
   }
 )
 
-const firebaseSlice = createSlice({
-  name: 'firebase',
+//SLICE / REDUCER STUFF (Reducers specify how the application's state changes in response to actions sent to the store.)
+const productsSlice = createSlice({
+  name: 'products',
   initialState: {
     productList: null,
     status: 'idle',
     error: null,
   },
-  reducers: {}, //Specifically for local State actions, not data stuff?
+  reducers: {},
   extraReducers: (builder) => { //For post action (selectData) changes
     builder
       .addCase(fetchProducts.pending, (state, action) => { // INTERESTING !!!!! // handle the state change when fetchProducts is pending
@@ -60,9 +64,9 @@ const firebaseSlice = createSlice({
 });
 
 
-export const firebaseActions = firebaseSlice.actions //For reducer use
+export const productsActions = productsSlice.actions //For reducer use
 
-export default firebaseSlice //For store-index import
+export default productsSlice //For store-index import
 // export default firebaseSlice.reducer;
 
 // export const insertData = createAsyncThunk(
