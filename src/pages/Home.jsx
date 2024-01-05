@@ -1,9 +1,7 @@
-import ProductCard from "../components/ProductCard"
+import { Link } from "react-router-dom"
+//Components
+import CollectionBlock from "../components/CollectionBlock"
 import MailListSignUp from "../components/MailListSignUp"
-
-import gettingStartedBattletech from "/src/assets/getting-started/getting-started-battletech.webp"
-import gettingStartedShadowrun from "/src/assets/getting-started/getting-started-shadowrun.webp"
-
 //Collection frames/covers
 import featuredFrame from "/src/assets/block-collection/frames/collection-frame-featured.svg"
 import featuredCover from "/src/assets/block-collection/covers/cicada-picture.webp"
@@ -13,22 +11,17 @@ import shadowrunFrame from "/src/assets/block-collection/frames/collection-frame
 import shadowrunCover from "/src/assets/block-collection/covers/cicada-picture.webp"
 import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-tabletop.svg"
 import tabletopCover from "/src/assets/block-collection/covers/cicada-picture.webp"
-
 //Collection Characters
 import characterCombatMage from "/src/assets/block-collection/characters/character-combatMage.webp"
 import characterVictor from "/src/assets/block-collection/characters/character-victor.webp"
-
+//Collection Buttons
 import saleButton from "../assets/button-collection/collection-buttons-01.webp"
 import newArrivalsButton from "../assets/button-collection/collection-buttons-02.webp"
 import freeDownloadButton from "../assets/button-collection/collection-buttons-03.webp"
-import { useSelector } from "react-redux"
-import { getProductById } from "../hooks/getProductById"
-import { Link } from "react-router-dom"
-import CollectionBlock from "../components/CollectionBlock"
+import gettingStartedBattletech from "/src/assets/getting-started/getting-started-battletech.webp"
+import gettingStartedShadowrun from "/src/assets/getting-started/getting-started-shadowrun.webp"
 
 export default function Home() {
-    const productList = useSelector(state => state.firebase.productList)
-    const status = useSelector(state => state.firebase.status)
 
     
     return (
