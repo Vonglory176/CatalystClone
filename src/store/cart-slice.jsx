@@ -2,18 +2,19 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import db from '../firebase';
 import { getProductById } from '../hooks/getProductById';
+import { useSelector } from 'react-redux';
 
 //ACTIONS (Payloads of information that send data from your application to your store. They are the only source of information for the store.)
-export const addToCart = (item) => {
+export const addItemToCart = (product) => {
     return {
-        type: "ADD_TO_CART",
-        payload: item
+        type: "cart/addToCart",
+        payload: product
     }
 }
-export const removeFromCart = (itemId) => {
+export const removeItemFromCart = (productId, variantId) => {
     return {
-        type: "REMOVE_FROM_CART",
-        payload: itemId
+        type: "cart/removeFromCart",
+        payload: [productId, variantId]
     }
 }
 
@@ -28,26 +29,38 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state,action) {
         state.cartChanged = true //For later cart/account use
-
+        console.log("HERE!")
+        
         const newItem = action.payload
+        console.log(newItem)
 
         //Checking if item is already in cart
-        const existingItem = getProductById(newItem.id)
+        const existingItem = state.cartItemList.find(item => item.productId === newItem.productId && item.variantId === newItem.variantId)
+        console.log(existingItem)
 
         if (existingItem) {
             existingItem.quantity += newItem.quantity
-            existingItem.totalPrice += newItem.price
+            // existingItem.totalPrice += newItem.price
         }
         else {
             state.cartItemList.push ({
-                id: newItem.id,
-                name: newItem.name,
-                price: newItem.price,
-                totalPrice: newItem.price,
+                productId: newItem.productId,
+                productName: newItem.productname,
+                variantId: newItem.variantId,
+                variantName: newItem.variantname,
+                // price: newItem.price,
+                // totalPrice: newItem.price,
                 quantity: newItem.quantity,
             })
         }
         state.totalQuantity += newItem.quantity
+        // console.log(state.cartItemList)
+        console.log(Array.from(state.cartItemList));
+        // or
+        console.log([...state.cartItemList]);
+        console.log(state.cartItemList.map(item => ({ ...item })));
+
+        console.log(state.totalQuantity)
     },
     removeFromCart(state,action) {
         state.cartChanged = true //For later cart/account use
@@ -64,6 +77,9 @@ const cartSlice = createSlice({
         }
         state.totalQuantity--
     },
+    changeCartItemQuantity(state,action) { //For checkout page changes
+
+    }
   },
 });
 
