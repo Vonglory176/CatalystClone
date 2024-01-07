@@ -145,6 +145,9 @@ Finish conditional hell in products
 Can reduce Collections/ProductResult code by moving Variant determination to ProductResult
 Write logic for determining Featured/NewArrival-Section in Collections
 PUT FIREBASE CONFIG IN ENV FILE
+Add ability to expand image on click
+Add Variant ID to URL
+Remove inline hover clicker for quantity number input
 
 
 Later!
