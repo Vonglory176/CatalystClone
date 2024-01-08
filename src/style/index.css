@@ -1659,7 +1659,7 @@
   background: #c2cb20;
 }
 
-#Cart-Container .cart__empty {
+#Cart-Container .cart-empty {
   padding: 120px 0;
   text-align: center;
 }
