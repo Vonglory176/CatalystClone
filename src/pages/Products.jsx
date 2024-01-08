@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { addItemToCart, cartActions } from "../store/cart-slice"
+import { cartActions } from "../store/cart-slice"
 
 export default function Products() {
     const productList = useSelector(state => state.products.productList)
@@ -99,13 +99,13 @@ export default function Products() {
 
         const productToAdd = {
             productId: currentProduct.id,
-            // productName: currentProduct.name,
             variantId: selectedVariant.id,
+            quantity: productQuantity
+            // productName: currentProduct.name,
             // variantName: selectedVariant.name,
             // variantPrice: (currentProduct.isOnSale? 
             //     selectedVariant.price : 
             //     selectedVariant.discountedPrice),
-            quantity: productQuantity
         }
 
         dispatch(cartActions.addToCart(productToAdd))
@@ -114,16 +114,11 @@ export default function Products() {
     const handleInputChange = (event) => {
         setproductQuantity(Number(event.target.value))
     }
-
-    const handleSubtractQuantity = (event) => {
-        event.preventDefault()
-
+    const handleSubtractQuantity = () => {
         setproductQuantity(prevQuantity => prevQuantity - 1)
         console.log(productQuantity)
     }
-    const handleAddQuantity = (event) => {
-        event.preventDefault()
-
+    const handleAddQuantity = () => {
         setproductQuantity(prevQuantity => prevQuantity + 1)
         console.log(productQuantity)
     }
@@ -170,9 +165,9 @@ export default function Products() {
                     <div className="products-form__quantity-selector-wrapper">
                         <label htmlFor="Quantity">Quantity</label>
                         <div id="Quantity-Selector__Input-Wrapper">
-                            <button onClick={handleSubtractQuantity}>-</button>
+                            <button type="button" onClick={handleSubtractQuantity}>-</button>
                             <input type="number" name="Quantity" onChange={handleInputChange} value={productQuantity}/>
-                            <button onClick={handleAddQuantity}>+</button>
+                            <button type="button" onClick={handleAddQuantity}>+</button>
                         </div>
                     </div>
                     {/* Check if sold out */}
