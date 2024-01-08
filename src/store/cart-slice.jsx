@@ -1,24 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import db from '../firebase';
-import { getProductById } from '../hooks/getProductById';
-import { useSelector } from 'react-redux';
 
-//ACTIONS (Payloads of information that send data from your application to your store. They are the only source of information for the store.)
-export const addItemToCart = (product) => {
-    return {
-        type: "cart/addToCart",
-        payload: product
-    }
-}
-export const removeItemFromCart = (productId, variantId) => {
-    return {
-        type: "cart/removeFromCart",
-        payload: [productId, variantId]
-    }
-}
-
-//SLICE / REDUCER STUFF (Reducers specify how the application's state changes in response to actions sent to the store.)
+//(Reducers specify how the application's state changes in response to actions sent to the store.)
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -45,21 +29,18 @@ const cartSlice = createSlice({
         else {
             state.cartItemList.push ({
                 productId: newItem.productId,
-                productName: newItem.productname,
                 variantId: newItem.variantId,
-                variantName: newItem.variantname,
+                quantity: newItem.quantity,
+                // productName: newItem.productname,
+                // variantName: newItem.variantname,
                 // price: newItem.price,
                 // totalPrice: newItem.price,
-                quantity: newItem.quantity,
             })
         }
         state.totalQuantity += newItem.quantity
-        // console.log(state.cartItemList)
-        console.log(Array.from(state.cartItemList));
-        // or
-        console.log([...state.cartItemList]);
+        
+        /*To fully read and log the data of an array within a Redux state that is managed by Redux Toolkit (and thus potentially wrapped in a Proxy due to Immer), you should convert the Proxies to plain JavaScript objects or arrays. This can be done by mapping over the array and copying each item. Here's the best method to do this:*/
         console.log(state.cartItemList.map(item => ({ ...item })));
-
         console.log(state.totalQuantity)
     },
     removeFromCart(state,action) {
@@ -79,6 +60,9 @@ const cartSlice = createSlice({
     },
     changeCartItemQuantity(state,action) { //For checkout page changes
 
+    },
+    replaceData(state,action) { //For checkout page changes
+
     }
   },
 });
@@ -87,3 +71,19 @@ const cartSlice = createSlice({
 export const cartActions = cartSlice.actions //For reducer use
 
 export default cartSlice //For store-index import
+
+//ACTIONS (Payloads of information that send data from your application to your store. They are the only source of information for the store.)
+//THESE ARE AUTOMATICALLY GENERATED WHEN USING REDUX-TOOLKIT, THERE IS NO NEED TO WRITE THEM
+//
+// export const addItemToCart = (product) => {
+//     return {
+//         type: "cart/addToCart",
+//         payload: product
+//     }
+// }
+// export const removeItemFromCart = (productId, variantId) => {
+//     return {
+//         type: "cart/removeFromCart",
+//         payload: [productId, variantId]
+//     }
+// }
