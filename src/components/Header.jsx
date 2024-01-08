@@ -18,6 +18,7 @@ export default function Header() {
     
     const [showUniverseSubMenu, setUniverseSubMenu] = useState(true)
     const toggleUniverseSubMenu = () => setUniverseSubMenu((s) => !s);
+    const cartItemQuantity = useSelector(state => state.cart.totalQuantity)
 
     return (
         <header className="header">
@@ -45,6 +46,9 @@ export default function Header() {
                     <Link to={"/cart"} className={"store-btns__link"}>
                         <i className="fa-solid fa-cart-shopping store-btns__cart fa-lg"></i>
                     </Link>
+
+                    {/* Cart has items idicator */}
+                    {cartItemQuantity? <i className="fa-solid fa-circle store-btns__cart-notification fa-xs" style={{color:"#c2ca20"}}></i> : ""}
                 </div>
             </div>
 
