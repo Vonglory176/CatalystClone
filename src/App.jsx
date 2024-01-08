@@ -148,6 +148,14 @@ PUT FIREBASE CONFIG IN ENV FILE
 Add ability to expand image on click
 Add Variant ID to URL
 Remove inline hover clicker for quantity number input
+Add general notification stuff
+The FREE part of free items only shows in collections!!
+Change location of cart indicator
+Save pricing in state, create alert when price changes via update later
+
+Figure out some kind of way to update/alert to product/cart changes on cart/checkout page
+(Always alerts initially in regard to things like stock/quantity, both on product/cart page)
+(Cart page has an "Update Cart" button)
 
 
 Later!
