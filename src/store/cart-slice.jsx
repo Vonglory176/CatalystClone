@@ -46,17 +46,18 @@ const cartSlice = createSlice({
     removeFromCart(state,action) {
         state.cartChanged = true //For later cart/account use
 
-        const id = action.payload
-        const existingItem = state.itemsList.find(item => item.id === id)
-
-        if (existingItem.quantity === 1) {
-            state.itemsList = state.itemsList.filter(item => item.id !== id)
+        const removedItem = action.payload
+        const existingItem = state.cartItemList.find(item => item.productId === removedItem.productId && item.variantId === removedItem.variantId)
+        
+        if (existingItem.quantity === 1 || removedItem.quantity === "all") {
+            state.cartItemList = state.cartItemList.filter(item => item.productId !== removedItem.productId && item.variantId !== removedItem.variantId)
         }
         else {
             existingItem.quantity--
-            existingItem.totalPrice -= existingItem.price
+            // existingItem.totalPrice -= existingItem.price
         }
         state.totalQuantity--
+        console.log(state.cartItemList.map(item => ({ ...item })));
     },
     changeCartItemQuantity(state,action) { //For checkout page changes
 
