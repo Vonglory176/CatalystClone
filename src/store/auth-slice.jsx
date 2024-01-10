@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const authSlice = createSlice({
     name: "auth",
-    initialState: {isLoggedIn: false}, //Tracking if user is logged in
+    initialState: {
+        isLoggedIn: false,
+        user: null
+    }, 
     reducers: {
         login(state) {
             state.isLoggedIn = true //Toolkit automatically makes this a copy of state, so it's not mutating the original copy
