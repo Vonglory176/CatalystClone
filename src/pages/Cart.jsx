@@ -15,10 +15,10 @@ export default function Cart() {
     const handleInputChange = (event) => {
         setproductQuantity(Number(event.target.value))
     }
-    const handleButtonAddQuantityChange = (productToChange) => {
+    const handleAddQuantityChange = (productToChange) => {
         dispatch(cartActions.addToCart(productToChange))
     }
-    const handleButtonRemoveQuantityChange = (productToChange) => {
+    const handleRemoveQuantityChange = (productToChange) => {
         dispatch(cartActions.removeFromCart(productToChange))
     }
 
@@ -52,13 +52,13 @@ export default function Cart() {
                         <div className="cart__product-name-wrapper">
                             <h4>{product.name}</h4> {/* CHANGE STYLING */}
                             {variant.name !== "standard" && variant.name}
-                            <a href="">Remove</a>
+                            <Link to={""} onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: "all"})}>Remove</Link>
                         </div>
 
                         <div id="Quantity-Selector__Input-Wrapper">
-                            <button type="button" onClick={() => handleButtonRemoveQuantityChange({productId: productId, variantId: variantId, quantity: -1})}>-</button>
+                            <button type="button" onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: -1})}>-</button>
                             <input type="number" name="Quantity" onChange={handleInputChange} value={cartItemList.find(product => product.productId === productId && product.variantId === variantId).quantity}/>
-                            <button type="button" onClick={() => handleButtonAddQuantityChange({productId: productId, variantId: variantId, quantity: 1})}>+</button>
+                            <button type="button" onClick={() => handleAddQuantityChange({productId: productId, variantId: variantId, quantity: 1})}>+</button>
                         </div>                        
                     </div>
                 )
