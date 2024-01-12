@@ -1,37 +1,27 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import { cartActions } from "../store/cart-slice"
 
 export default function Products() {
     const productList = useSelector(state => state.products.productList)
     const dispatch = useDispatch()
     const {id} = useParams()
+
+    const [searchParams, setSearchParams] = useSearchParams()
+    const searchParamVariantId = searchParams.get('variant')
     
     const [currentProduct, setCurrentProduct] = useState()
     const [variantLists, setVariantLists] = useState({
         variantList:false,
         variantListHtml:false,
     })
-    const [selectedVariant, setSelectedVarient] = useState()
+    const [selectedVariant, setSelectedVariant] = useState()
     const [productQuantity, setproductQuantity] = useState(1)
-    
-    // const findProductById = () => {
-    //     let product = false
-        
-    //     Object.keys(productList).forEach (category => {
-    //         if (product) return
 
-    //         product = Object.values(productList[category]).find(product => product.id === id)
-    //         console.log(product)
-    //     })
-    //     if (!product) console.log("ERROR: Could not find product information!")
-    //     return product
-    // }
-
-    useEffect(() => { //Getting product by ID & saving it in State
+    //Getting product by ID & saving it in State
+    useEffect(() => { 
         if (productList) {
-            // setCurrentProduct(findProductById())
             setCurrentProduct(() => {
                 let product = false
         
@@ -39,7 +29,6 @@ export default function Products() {
                     if (product) return
 
                     product = Object.values(productList[category]).find(product => product.id === id)
-
                     // console.log(product)
                 })
                 if (!product) console.log("ERROR: Could not find product information!")
@@ -58,39 +47,39 @@ export default function Products() {
 
         If a product is found, it is returned immediately. If no product is found after checking 
         all categories, null is returned.*/
-
-    // const [selectedVariant, setSelectedVariant] = useState()
     
-    // let currentImage = currentProduct.variantsHaveImages?
-    //Selector for variants
-    
-    //Creating Variant Select in HTML
+    //Creating HTML Variant Selector
     useEffect(()=>{
         if (currentProduct) {
             const variantArrayList = Object.values(currentProduct.variants)
 
             let tempVariantList = []
             for (let variant in variantArrayList) { //Converts "variant1" to "0"
+                const variantId = variantArrayList[variant].id
+                // searchParamVariantId
                 tempVariantList.push(
                 <option 
                 key={variant} 
-                value={variant}                
+                value={variantId}
+                selected={...searchParamVariantId === variantId? true : false}
                 >
                     {variantArrayList[variant].name}
                 </option>
                 )
             }
             setVariantLists({variantList:variantArrayList, variantListHtml:tempVariantList})
-            setSelectedVarient(variantArrayList[0]) //Setting default selected Variant
+
+            setSelectedVariant(searchParamVariantId? //Setting default selected Variant
+                variantArrayList.find(variant => variant.id === searchParamVariantId): //SearchParams?
+                variantArrayList[0]) //If not, use first index
         }
     }, [currentProduct])
 
     const handleSelectVariantChange = (event) => {
-        const selectedValue = event.target.value
-        console.log(selectedValue)
+        const selectedVariantId = event.target.value
+        console.log(selectedVariantId)
 
-        setSelectedVarient(variantLists.variantList[selectedValue]) //ADD ID TO URL
-        console.log(selectedVariant)
+        setSearchParams({variant:selectedVariantId})
     }
 
     const handleAddToCart = (event) => {
