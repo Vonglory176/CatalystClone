@@ -105,9 +105,9 @@ export default function Home() {
                     </div>
                 </section>
 
-                <CollectionBlock //TABLETOP COLLECTION
+                <CollectionBlock //OTHER COLLECTION
                 collectionClasses={"left"}
-                collectionLink={"/collections/tabletop"}
+                collectionLink={"/collections/other"}
                 collectionFrameSrc={tabletopFrame}
                 collectionCoverSrc={tabletopCover}
                 collectionCoverTitle={"Tabletop"}
