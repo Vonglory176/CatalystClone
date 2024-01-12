@@ -138,6 +138,7 @@ TODO
 -------------------
 Right now!
 ------
+FILTERS HAVE A DUPLICATION PROBLEM. ADD CHECKS AND A COUNTER FOR MULTIPLES
 Create search
 Create filters
 Add some reducer extension things to disable quantity buttons/input while updating
