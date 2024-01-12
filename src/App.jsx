@@ -21,14 +21,16 @@ function App() {
     const productList = useSelector(state => state.products.productList)
     const status = useSelector(state => state.products.status)
     const error = useSelector(state => state.products.error)
-    const location = useLocation()
+
+    // const location = useLocation()
+    const { pathname } = useLocation() //So refresh only occurs on path change, not changes like query
 
     useEffect(() => {
         // if(status === 'idle') {
             dispatch(fetchProducts())
         // }
         console.log(status)
-    }, [dispatch, location]) //status
+    }, [dispatch, pathname]) //location //status
 
   return ( 
     <>
@@ -108,14 +110,15 @@ export default App
 */
 
 /*
+    SEARCH STUFF
+
     useParams() --> For passing data
     useSearchParams() --> For maintaining State in the Searchbar. 
     (Good for keeping things like filters, where a link might be sent from one to another)
 
-    const [searchParams, setSearchParams] = useSearchParams({n: 3})
-    const number = searchParams.get("n")
-    onChange={e => setSearchParams({n: e.target.value})}
-
+    const [searchParams, setSearchParams] = useSearchParams({n:3}) // WORKS LIKE useState()!!!!
+    const number = searchParams.get("n") --> 3
+    <input type="number" value={number} onChange={e => setSearchParams({ n: e.target.value})
 */
 
 /*
@@ -135,23 +138,27 @@ TODO
 -------------------
 Right now!
 ------
+Create search
+Create filters
+Add some reducer extension things to disable quantity buttons/input while updating
+
 ADD STOCK TO DATABASE PRODUCTS
 Load products into Featured-Containers (Just use ID's for the moment)
-
-FOCUS ON PRODUCTS - Next comes page tailoring (Like background)
 ADD SALE CODE TO PRODUCT-RESULTS / PRODUCT-CARD
 Add errors to store/products/card/result if not found?
-Finish conditional hell in products
 Can reduce Collections/ProductResult code by moving Variant determination to ProductResult
 Write logic for determining Featured/NewArrival-Section in Collections
 PUT FIREBASE CONFIG IN ENV FILE
 Add ability to expand image on click
-Add Variant ID to URL
 Remove inline hover clicker for quantity number input
 Add general notification stuff
 The FREE part of free items only shows in collections!!
 Change location of cart indicator
 Save pricing in state, create alert when price changes via update later
+Remember to change collections background based on the collection!
+Have a Universe filter on "collection/all" page?
+Create alert for Product Filter about Tags resetting after Type change
+
 
 Figure out some kind of way to update/alert to product/cart changes on cart/checkout page
 (Always alerts initially in regard to things like stock/quantity, both on product/cart page)
