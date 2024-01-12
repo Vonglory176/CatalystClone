@@ -30,7 +30,7 @@ export default function CollectionBlock(
     //Could add code where not having a collection-cover ALSO hides component in small views?
 
     return (
-        <section className={`section-block ${collectionClasses}`}>
+        <section className={`collection-block section-block ${collectionClasses}`}>
 
             {/* The background frame for larger views */}
             <Link to={collectionLink} className={"collection-link"}>
