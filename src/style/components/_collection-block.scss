@@ -1,14 +1,14 @@
-.featured-products {
-    // margin-bottom: 50px;
+// .featured-products {
+//     // margin-bottom: 50px;
 
-    @media (max-width: 501px) {
-        background-color: $primary-color;
-    }
-    @media (min-width: 750px) {
-        margin-top: 40px;
-    }
+//     @media (max-width: 501px) {
+//         background-color: $primary-color;
+//     }
+//     @media (min-width: 750px) {
+//         margin-top: 40px;
+//     }
 
-    .section-block {
+    .collection-block {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -167,4 +167,4 @@
             }
         }                    
     }
-}
+// }
