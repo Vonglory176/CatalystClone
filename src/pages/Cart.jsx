@@ -7,7 +7,6 @@ import { cartActions } from "../store/cart-slice"
 export default function Cart() {
     const [cartItemsHtml, setCartItemsHtml] = useState()
     const productList = useSelector(state => state.products.productList)
-    const cartItemQuantity = useSelector(state => state.cart.totalQuantity)
     const cartItemList = useSelector(state => state.cart.cartItemList)
     const status = useSelector (state => state.products.status)
     const dispatch = useDispatch ()
@@ -71,11 +70,11 @@ export default function Cart() {
             //     )
             // }
         }
-    },[status, cartItemList, cartItemQuantity]) //Might be firing too soon?
+    },[status, cartItemList]) //Might be firing too soon?
 
     return (
         <div id="Cart-Container">
-            {cartItemQuantity?
+            {cartItemList.length !== 0?
 
             <form className="cart"> {/* onsubmit action method nonvalidate */}
                 {/* Country alert for purchasing from multiple */}
