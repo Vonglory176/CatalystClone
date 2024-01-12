@@ -57,8 +57,9 @@
 
     &__name {
         height: 32px;
-        // overflow: hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
 
         color: $primary-font-color;
         font-size: 12px;
