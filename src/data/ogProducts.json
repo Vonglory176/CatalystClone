@@ -1,0 +1,290 @@
+ 
+      
+
+
+{
+    "productExamples": {
+        "productExample1": {
+
+            "id":4859639595042,
+            "title":"BattleTech: ForcePacks: Inner Sphere",
+            "handle":"battletech-forcepack-inner-sphere",
+            "description":"\u003ch2\u003e\u003cstrong\u003eFight For Your Future!\u003c\/strong\u003e\u003c\/h2\u003e\n\u003cp\u003eReeling from the Clan's brutal invasion, the Inner Sphere must rally. This is a fight for your family, your freedoms, your future!\u003c\/p\u003e\n\u003cp\u003eEach Inner Sphere ForcePack includes four high-quality, fully assembled BattleMechs, four Alpha Strike cards, and four pilot cards.\u003cem\u003e\u003cbr\u003e\u003c\/em\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cb\u003eChoices:\u003c\/b\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Command Lance: \u003cem\u003eMarauder, Archer, Valkyrie, \u003c\/em\u003eand\u003cem\u003e Stinger\u003c\/em\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Battle Lance: \u003cem\u003eWarhammer, Rifleman, Phoenix Hawk, \u003c\/em\u003eand\u003cem\u003e Wasp\u003c\/em\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Direct Fire Lance: \u003cem\u003eAtlas, Marauder II, Orion, \u003c\/em\u003eand\u003cem\u003e Crusader\u003c\/em\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Heavy Lance:\u003cem\u003e Banshee, Grasshopper, Centurion, Hatchetman\u003c\/em\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Striker Lance:\u003ci\u003e Blackjack, Jenner, Panther, Wolfhound\u003c\/i\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Fire Lance:\u003ci\u003e Longbow, Stalker, Zeus, Trebuchet\u003c\/i\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003e\u003cspan mce-data-marked=\"1\"\u003eInner Sphere Heavy Battle Lance:\u003ci\u003e Nightstar, Cataphract, Axeman, Bushwacker\u003c\/i\u003e\u003c\/span\u003e\u003c\/li\u003e\n\u003cli\u003eInner Sphere Urban Lance: \u003cem\u003eVictor, Enforcer, Hunchback, \u003c\/em\u003eand\u003cem\u003e Raven\u003c\/em\u003e\n\u003c\/li\u003e\n\u003cli\u003eInner Sphere Support Lance:\u003cem\u003e Cyclops, Thug, Dragon, Spider\u003c\/em\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e",
+        
+            "published_at":"2021-11-25T23:59:01-08:00",
+            "created_at":"2021-02-13T11:06:33-08:00",
+            "vendor":"Catalyst Game Labs Store",
+            "type":"Miniatures",
+            "tags":["ForcePack"],
+            "price":2499,
+            "price_min":2499,
+            "price_max":2499,
+            "available":true,
+            "price_varies":false,
+            "compare_at_price":null,
+            "compare_at_price_min":0,
+            "compare_at_price_max":0,
+            "compare_at_price_varies":false,
+
+            "variants":[
+                {
+                    "id":39754378477602,
+                    "title":"Inner Sphere Command Lance",
+                    "option1":"Inner Sphere Command Lance",
+                    "option2":null,
+                    "option3":null,
+                    "sku":"000367",
+                    "requires_shipping":true,
+                    "taxable":true,
+        
+                    "featured_image": {
+                        "id":28404854226978,
+                        "product_id":4859639595042,
+                        "position":3,
+                        "created_at":"2021-10-28T11:32:23-07:00",
+                        "updated_at":"2021-10-28T11:32:23-07:00",
+                        "alt":null,"width":3264,
+                        "height":2448,        
+                        "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/IMG_3115_b8d74028-dbea-4895-8abb-9e86670736a4.jpg?v=1635445943",
+                        "variant_ids":[39754378477602]
+                    },
+                    "available":true,
+                    "name":"BattleTech: ForcePacks: Inner Sphere - Inner Sphere Command Lance",
+                    "public_title":"Inner Sphere Command Lance",
+                    "options":["Inner Sphere Command Lance"],
+                    "price":2499,
+                    "weight":113,
+                    "compare_at_price":null,
+                    "inventory_quantity":317,
+                    "inventory_management":"shopify",
+                    "inventory_policy":"deny",
+                    "barcode":"861603000367",
+                    "featured_media":{
+                        "alt":null,
+                        "id":20734001676322,
+                        "position":3,
+                        "preview_image":{
+                            "aspect_ratio":1.333,
+                            "height":2448,
+                            "width":3264,
+                            "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/IMG_3115_b8d74028-dbea-4895-8abb-9e86670736a4.jpg?v=1635445943"
+                        }
+                    },
+                    "requires_selling_plan":false,
+                    "selling_plan_allocations":[],
+                    "quantity_rule":{
+                        "min":1,
+                        "max":null,
+                        "increment":1
+                    }
+                },
+                {
+                    "id":39754378510370,
+                    "title":"Inner Sphere Battle Lance",
+                    "option1":"Inner Sphere Battle Lance",
+                    "option2":null,
+                    "option3":null,
+                    "sku":"000381",
+                    "requires_shipping":true,
+                    "taxable":true,
+                    "featured_image":{
+                        "id":28404869267490,
+                        "product_id":4859639595042,
+                        "position":4,
+                        "created_at":"2021-10-28T11:34:07-07:00",
+                        "updated_at":"2021-10-28T11:34:07-07:00",
+                        "alt":null,
+                        "width":2108,
+                        "height":1537,
+                        "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/BT-InnerSphereBattleLance_ForcePack_boxFRONT.jpg?v=1635446047",
+                        "variant_ids":[39754378510370]
+                    },
+                    "available":true,
+                    "name":"BattleTech: ForcePacks: Inner Sphere - Inner Sphere Battle Lance",
+                    "public_title":"Inner Sphere Battle Lance",
+                    "options":["Inner Sphere Battle Lance"],
+                    "price":2499,
+                    "weight":113,
+                    "compare_at_price":null,
+                    "inventory_quantity":1,
+                    "inventory_management":"shopify",
+                    "inventory_policy":"deny",
+                    "barcode":"861603000381",
+                    "featured_media":{
+                        "alt":null,
+                        "id":20734016847906,
+                        "position":4,
+                        "preview_image":{
+                            "aspect_ratio":1.372,
+                            "height":1537,
+                            "width":2108,
+                            "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/BT-InnerSphereBattleLance_ForcePack_boxFRONT.jpg?v=1635446047"
+                        }
+                    },
+                    "requires_selling_plan":false,
+                    "selling_plan_allocations":[],
+                    "quantity_rule":{
+                        "min":1,
+                        "max":null,
+                        "increment":1
+                    }
+                }
+            ]
+        },
+    
+        "productExample2": {
+
+            "id":4858466402338,        
+            "title":"Shadowrun: Sixth World Tarot (Arcanist Ed.)",
+            "handle":"shadowrun-sixth-world-tarot-arcanist-edition",
+            "description":"\u003cp\u003e\u003cspan data-sheets-value=\"{\u0026quot;1\u0026quot;:2,\u0026quot;2\u0026quot;:\u0026quot;The Sixth World Tarot is a stunning collection of Shadowrun art by Echo Chernik, and it now comes in a larger size! This deck gives the gorgeous art the spotlight it deserves, letting users take in the full details of these images. Whether you're using them as a game aid, art collection, or functioning tarot deck, these cards do their job beautifully!\u0026quot;}\" data-sheets-userformat='{\"2\":12861,\"3\":{\"1\":0},\"5\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"6\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"7\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"8\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"12\":0,\"15\":\"Arial\",\"16\":10}' data-mce-fragment=\"1\"\u003eThe \u003cem\u003eSixth World Tarot (Arcanist Edition)\u003c\/em\u003e is a stunning collection of \u003cem\u003eShadowrun\u003c\/em\u003e art by Echo Chernik, and it now comes in a larger size! \u003c\/span\u003e\u003c\/p\u003e\r\n\u003cp\u003eThis deck gives the gorgeous art the spotlight it deserves, letting users take in the full details of these images. Whether you're using them as a game aid, art collection, or functioning tarot deck, these cards do their job beautifully!\u003cbr\u003e\u003c\/p\u003e\r\n\u003cp\u003eThis product also comes with a FREE anthology of fiction, based on the card art. \u003c\/p\u003e",
+            "published_at":"2021-02-08T22:32:14-08:00",
+            "created_at":"2021-02-08T22:30:56-08:00",
+            "vendor":"Catalyst Game Labs",
+            "type":"SWAG",
+            "tags":[
+                "new arrival",
+                "shadowrun"
+            ],
+            "price":3999,
+            "price_min":3999,
+            "price_max":3999,
+            "available":true,
+            "price_varies":false,
+            "compare_at_price":null,
+            "compare_at_price_min":0,
+            "compare_at_price_max":0,
+            "compare_at_price_varies":false,
+            "variants":[
+                {
+                    "id":33093130223650,
+                    "title":"Default Title",
+                    "option1":"Default Title",
+                    "option2":null,
+                    "option3":null,
+                    "sku":"456652",
+                    "requires_shipping":true,
+                    "taxable":true,
+                    "featured_image":null,
+                    "available":true,
+                    "name":"Shadowrun: Sixth World Tarot (Arcanist Ed.)",
+                    "public_title":null,
+                    "options":["Default Title"],
+                    "price":3999,
+                    "weight":590,
+                    "compare_at_price":null,
+                    "inventory_quantity":1509,
+                    "inventory_management":"shopify",
+                    "inventory_policy":"deny",
+                    "barcode":"810038456652",
+                    "requires_selling_plan":false,
+                    "selling_plan_allocations":[],
+                    "quantity_rule":{
+                        "min":1,
+                        "max":null,
+                        "increment":1
+                    }
+                }
+            ],
+            "images":["\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/AwakenedTarotArcanistEditionBox3DRendercopy.png?v=1612852259",
+            "\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotFront.jpg?v=1612852259",
+            "\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotBack.jpg?v=1612852259",
+            "\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior3.jpg?v=1612852259",
+            "\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior2.jpg?v=1612852259",
+            "\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior1.jpg?v=1612852259"],
+            "featured_image":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/AwakenedTarotArcanistEditionBox3DRendercopy.png?v=1612852259",
+            "options":["Title"],
+            "media":[
+                {
+                    "alt":null,
+                    "id":8970406821922,
+                    "position":1,
+                    "preview_image":{
+                        "aspect_ratio":0.776,
+                        "height":3000,
+                        "width":2327,
+                        "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/AwakenedTarotArcanistEditionBox3DRendercopy.png?v=1612852259"
+                    },
+                    "aspect_ratio":0.776,
+                    "height":3000,
+                    "media_type":"image",
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/AwakenedTarotArcanistEditionBox3DRendercopy.png?v=1612852259",
+                    "width":2327
+                },
+                {
+                    "alt":null,
+                    "id":8970406854690,
+                    "position":2,
+                    "preview_image":{"aspect_ratio":0.497,
+                    "height":2089,
+                    "width":1038,
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotFront.jpg?v=1612852259"},
+                    "aspect_ratio":0.497,
+                    "height":2089,
+                    "media_type":"image",
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotFront.jpg?v=1612852259",
+                    "width":1038
+                },
+                {
+                    "alt":null,
+                    "id":8970406887458,
+                    "position":3,
+                    "preview_image":{"aspect_ratio":0.497,
+                    "height":2089,
+                    "width":1038,
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotBack.jpg?v=1612852259"},
+                    "aspect_ratio":0.497,
+                    "height":2089,
+                    "media_type":"image",
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotBack.jpg?v=1612852259",
+                    "width":1038
+                },
+                {
+                    "alt":null,
+                    "id":8970406920226,
+                    "position":4,
+                    "preview_image":{"aspect_ratio":0.56,
+                    "height":1983,
+                    "width":1111,
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior3.jpg?v=1612852259"},
+                    "aspect_ratio":0.56,
+                    "height":1983,
+                    "media_type":"image",
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior3.jpg?v=1612852259",
+                    "width":1111
+                },
+                {
+                    "alt":null,
+                    "id":8970406952994,
+                    "position":5,
+                    "preview_image":{"aspect_ratio":0.56,
+                    "height":1983,
+                    "width":1111,
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior2.jpg?v=1612852259"},
+                    "aspect_ratio":0.56,
+                    "height":1983,
+                    "media_type":"image",
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior2.jpg?v=1612852259",
+                    "width":1111
+                },
+                {
+                    "alt":null,
+                    "id":8970406985762,
+                    "position":6,
+                    "preview_image":{"aspect_ratio":0.56,
+                    "height":1983,
+                    "width":1111,
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior1.jpg?v=1612852259"},
+                    "aspect_ratio":0.56,
+                    "height":1983,
+                    "media_type":"image",
+                    "src":"\/\/store.catalystgamelabs.com\/cdn\/shop\/products\/TarotInterior1.jpg?v=1612852259",
+                    "width":1111
+                }
+            ],
+            "requires_selling_plan":false,
+            "selling_plan_groups":[],
+            "content":"\u003cp\u003e\u003cspan data-sheets-value=\"{\u0026quot;1\u0026quot;:2,\u0026quot;2\u0026quot;:\u0026quot;The Sixth World Tarot is a stunning collection of Shadowrun art by Echo Chernik, and it now comes in a larger size! This deck gives the gorgeous art the spotlight it deserves, letting users take in the full details of these images. Whether you're using them as a game aid, art collection, or functioning tarot deck, these cards do their job beautifully!\u0026quot;}\" data-sheets-userformat='{\"2\":12861,\"3\":{\"1\":0},\"5\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"6\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"7\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"8\":{\"1\":[{\"1\":2,\"2\":0,\"5\":[null,2,0]},{\"1\":0,\"2\":0,\"3\":3},{\"1\":1,\"2\":0,\"4\":1}]},\"12\":0,\"15\":\"Arial\",\"16\":10}' data-mce-fragment=\"1\"\u003eThe \u003cem\u003eSixth World Tarot (Arcanist Edition)\u003c\/em\u003e is a stunning collection of \u003cem\u003eShadowrun\u003c\/em\u003e art by Echo Chernik, and it now comes in a larger size! \u003c\/span\u003e\u003c\/p\u003e\r\n\u003cp\u003eThis deck gives the gorgeous art the spotlight it deserves, letting users take in the full details of these images. Whether you're using them as a game aid, art collection, or functioning tarot deck, these cards do their job beautifully!\u003cbr\u003e\u003c\/p\u003e\r\n\u003cp\u003eThis product also comes with a FREE anthology of fiction, based on the card art. \u003c\/p\u003e"
+        }
+    }
+}
