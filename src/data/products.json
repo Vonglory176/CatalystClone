@@ -9,9 +9,9 @@
 
                 "description": "<div className='product-description'><h2>The Children Of Kerensky Return!</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
 
-                "productTypes": ["type1", "type2"],
+                "type": "Box-Set",
 
-                "tags": ["tag1", "tag2"],
+                "tags": ["New Arrival"],
 
                 "images": {
                     "image1": {
@@ -80,9 +80,9 @@
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!<span className='warning'><em>There are no miniatures in this product.</em></span></p></div>",
                 
-                "productTypes": ["type1", "type2"],
+                "type": "Game Aid",
 
-                "tags": ["tag1", "tag2"],
+                "tags": [],
                 
                 "images": {                    
                     "image1": {
@@ -146,9 +146,9 @@
 
                 "description": "<div className='product-description'><h1>Roll Out An Alien World!</h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
                 
-                "productTypes": ["type1", "type2"],
+                "type": "Game Aid",
 
-                "tags": ["tag1", "tag2"],
+                "tags": ["Maps", "Neoprene"],
                 
                 "images": {},
 
@@ -257,12 +257,11 @@
                 "name": "Anthology Vol. 8: Legacy",
                 "universe": "BattleTech",
 
-
                 "description": "<div className='product-description'><h1>In The 31st Century, Life is Cheap...</h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
                 
-                "productTypes": ["type1", "type2"],
+                "type": "Fiction",
 
-                "tags": ["tag1", "tag2"],
+                "tags": ["Anthology", "Digital", "eBook", "Short-story"],
                 
                 "images": {                    
                     "image1": {
@@ -302,11 +301,11 @@
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
                 
-                "productTypes": ["type1", "type2"],
+                "type": "Miniatures",
 
-                "tags": ["tag1", "tag2"],
+                "tags": [],
                 
-                "images": {                    
+                "images": {
                     "image1": {
                         "id": "bmpgoac-minis",
                         "name": "The Miniatures",
@@ -347,9 +346,9 @@
 
                 "description": "<div className='product-description'><h2>Risk is The Reward</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
 
-                "productTypes": ["type1", "type2"],
+                "type": "Rulebook",
 
-                "tags": ["tag1", "tag2"],
+                "tags": ["Role-playing"],
 
                 "images": {
                     "image1": {
@@ -391,19 +390,18 @@
             }
         },
 
-        "tabletop": {
+        "other": {
 
             "i-would-fight-the-dragon": {
                 "id": "i-would-fight-the-dragon",
                 "name": "I Would Fight The Dragon",
-                "universe": "",
-
+                "universe": "Other",
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
 
-                "productTypes": ["type1", "type2"],
+                "type": "Tabletop",
 
-                "tags": ["tag1", "tag2"],
+                "tags": ["CBG", "Board Games"],
 
                 "images": {
                     "image1": {
