@@ -7,7 +7,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartItemList: [],
-    totalQuantity: 0,
+    // totalQuantity: 0,
     cartChanged:false,
   },
   reducers: {
@@ -37,11 +37,11 @@ const cartSlice = createSlice({
                 // totalPrice: newItem.price,
             })
         }
-        state.totalQuantity += newItem.quantity
+        // state.totalQuantity += newItem.quantity
         
         /*To fully read and log the data of an array within a Redux state that is managed by Redux Toolkit (and thus potentially wrapped in a Proxy due to Immer), you should convert the Proxies to plain JavaScript objects or arrays. This can be done by mapping over the array and copying each item. Here's the best method to do this:*/
         console.log(state.cartItemList.map(item => ({ ...item })));
-        console.log(state.totalQuantity)
+        // console.log(state.totalQuantity)
     },
     removeFromCart(state,action) {
         state.cartChanged = true //For later cart/account use
@@ -56,7 +56,8 @@ const cartSlice = createSlice({
             existingItem.quantity--
             // existingItem.totalPrice -= existingItem.price
         }
-        state.totalQuantity--
+        // state.totalQuantity--
+        // console.log("REMOVED!")
         console.log(state.cartItemList.map(item => ({ ...item })));
     },
     changeCartItemQuantity(state,action) { //For checkout page changes
