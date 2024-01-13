@@ -61,7 +61,7 @@ export default function Products() {
                 <option 
                 key={variant} 
                 value={variantId}
-                selected={...searchParamVariantId === variantId? true : false}
+                selected={searchParamVariantId === variantId? true : false} //...searchParamVariantId
                 >
                     {variantArrayList[variant].name}
                 </option>
@@ -73,7 +73,7 @@ export default function Products() {
                 variantArrayList.find(variant => variant.id === searchParamVariantId): //SearchParams?
                 variantArrayList[0]) //If not, use first index
         }
-    }, [currentProduct])
+    }, [currentProduct, searchParams])
 
     const handleSelectVariantChange = (event) => {
         const selectedVariantId = event.target.value
