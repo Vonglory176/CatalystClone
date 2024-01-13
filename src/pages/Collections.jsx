@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 // import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
 import newArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-new-arrivals.svg"
@@ -14,17 +14,49 @@ export default function Collections() {
     //For content determination
     const {id} = useParams()
     const [searchParams, setSearchParams] = useSearchParams({
+        sort_by:"name",
+        // sort_order:"",
+        page: 1,
         // universe: id,
-        types: [],
+        types:[],
         tags:[],
     })
 
-
     const productList = useSelector(state => state.products.productList)
-    const status = useSelector(state => state.products.status)
+    // const status = useSelector(state => state.products.status)
     const [localProductList, setLocalProductList] = useState()
     const [typeList, setTypeList] = useState()
     const [tagList, setTagList] = useState()
+
+    const [currentPage, setCurrentPage] = useState()
+    const [pageResults, setPageResults] = useState()
+    const [pageCount, setPageCount] = useState()
+    const resultsPerPage = 4
+
+    //Pagination
+    const handlePageChange = (direction) => {
+        const newPage = currentPage + direction
+
+        if (newPage >= 1 && newPage <= pageCount) {
+            
+            setCurrentPage(newPage)
+
+            setSearchParams(prevSearch => {
+                prevSearch.set('page', newPage)        
+                return prevSearch;
+            });
+        }
+    }
+
+    useEffect(() => {
+        if (localProductList) {
+            const page = searchParams.get('page')
+            const currentPageItems = localProductList.slice((page - 1) * resultsPerPage, page * resultsPerPage)
+
+            setCurrentPage(parseInt(searchParams.get('page')))
+            setPageResults(currentPageItems)
+        }
+    },[localProductList, searchParams.get('page')]) //searchParams.get('page')
 
     //Print for specific Universe
     //Print for All / Featured / New / Free / Sale
@@ -41,92 +73,84 @@ export default function Collections() {
 
     useEffect(() => {
         let tempProductList = []
-        let tempUniverseList = []
-        let tempTypeList = []
-        let tempTagList = []
+        let typeInstanceList = {}
+        let tagInstanceList = {}
+        
+        //Product Setup
+        const processProduct = (p) => {
+            const typeSearchParams = searchParams.get('types')
+                ? JSON.parse(searchParams.get('types'))
+                : []
+            const tagSearchParams = searchParams.get('tags')
+                ? JSON.parse(searchParams.get('tags'))
+                : []
+        
+            if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
+                if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
+                    tempProductList.push(<ProductResult key={p.id} product={p}/>)
+                }
+        
+                if (Array.isArray(p.tags)) {
+                    for (let tag of p.tags) {
+                        tagInstanceList[tag] = (tagInstanceList[tag] || 0) + 1
+                    }
+                }
+            }
+        
+            typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
+        }
+    
+        //Filter setup
+        const createFilterList = (instanceList, filterType) => {
+            return Object.entries(instanceList).map(([name, count]) => (
+                <li className="search-results__filter-li" key={name}>
+                    <input 
+                        type="checkbox"  
+                        onChange={() => handleFilterChange(filterType, name)} 
+                        name={`${name}-checkbox`} 
+                        value={name}
+                        checked={searchParams.get(filterType)?.includes(name) || false}
+                    />
+                    <label htmlFor={`${name}-checkbox`}>{`${name} (${count})`}</label>
+                </li>
+            ))
+        }
 
         if (productList) {
-            // console.log(Object.keys(productList))
-            // const productUniverses = Object.keys(productList)
-
-            //SINGULAR CATEGORY
-            if (Object.keys(productList).includes(id)) { //If product.category ("battletech") is in page path
-
-                Object.values(productList[id]).forEach(p => { //For each Product in that Category
-
-                    let tempTypeSearchParams = searchParams.get('types')
-                    ? JSON.parse(searchParams.get('types'))
-                    : []
-                    let tempTagSearchParams = searchParams.get('tags')
-                    ? JSON.parse(searchParams.get('tags'))
-                    : []
-
-                    // If there is no type filter OR type filter is matched by current product
-                    if (tempTypeSearchParams.length === 0 || tempTypeSearchParams.includes(p.type)) {
-
-                        if (tempTagSearchParams.length === 0 || (p.tags && tempTagSearchParams.some(tag => p.tags.includes(tag)))) {
-                            tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
-                        }
-
-                        //Within each product of the accepted Type, grab all tags
-                        for (let tag in p.tags) {
-                            tempTagList.push(
-                                <li>
-                                    <label htmlFor={`${p.tags[tag]}-checkbox`}>{p.tags[tag]}</label>
-                                    <input 
-                                    type="checkbox"  
-                                    onChange={() => handleFilterChange('tags', p.tags[tag])} 
-                                    name={`${p.tags[tag]}-checkbox`} 
-                                    value={p.tags[tag]}
-                                    checked={tempTagSearchParams.includes(p.tags[tag])? true : false}
-                                    >
-                                    </input>
-                                </li>
-                            )
-                        }
-                    }
-
-                    // tempUniverseList.push(
-                    //     <li>
-                    //         <label htmlFor={`${p.universe}-checkbox`}>{p.universe}</label>
-                    //         <input type="checkbox"  onChange={() => handleUniverseFilter(p.universe)} name={`${p.universe}-checkbox`} value={p.type}></input>
-                    //     </li>
-                    // )
-                    tempTypeList.push(
-                        <li>
-                            <label htmlFor={`${p.type}-checkbox`}>{p.type}</label>
-                            <input 
-                            type="checkbox"  
-                            onChange={() => handleFilterChange('types', p.type)} 
-                            name={`${p.type}-checkbox`} 
-                            value={p.type}
-                            checked={tempTypeSearchParams.includes(p.type)? true : false}
-                            >                                
-                            </input>
-                        </li>
-                    )
-                })
-
-            }//ALL CATEGORIES           
-            else if (id === "all") { 
+            //ALL CATEGORIES
+            if (id === "all") {
                 Object.keys(productList).forEach(category => { //For each Product Category
-
-                    Object.values(productList[category]).forEach(p => { //For each Product in that Category
-
-                        tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
-                    })
+                    Object.values(productList[category]).forEach(processProduct)//For each Product in that Category
                 })
             }
-            else alert("Something went wrong!") //SOMETHING BLEW UP
+            //SINGLE CATEGORY
+            else if (Object.keys(productList).includes(id)) {
+                Object.values(productList[id]).forEach(processProduct) //For each Product in the ID Category
+            }
+            //SOMETHING BLEW UP
+            else console.log("There was an error loading categories from productList!")
 
-            setLocalProductList(tempProductList) //Outputting the new product list (Okay if empty)
-            setTypeList(tempTypeList)
-            setTagList(tempTagList)
+            //Updating page count
+            const totalPages = Math.ceil(tempProductList.length / resultsPerPage)
+            setPageCount(totalPages)
+
+            const page = searchParams.get('page')
+            setCurrentPage(page)
+
+            // setLocalProductList(tempProductList)
+            // console.log("SENDING TO SORT!")
+            const sortBy = searchParams.get('sort_by')
+            handleSortResults({ target: {value: sortBy}}, tempProductList) //List is sorted & printed here
+            setTypeList(createFilterList(typeInstanceList, 'types'))
+            setTagList(createFilterList(tagInstanceList, 'tags'))
         }
-    },[id, productList, searchParams])
+    }, [id, productList, searchParams.get("tags"), searchParams.get("types")]) //searchParams.get("tags")
 
+    
     //Filter Use
     const handleFilterChange = (filterType, filterName) => {
+        console.log("FILTERING")
+
         // Get the current search parameters for the filter type
         let currentSearchParams = searchParams.get(filterType)
             ? JSON.parse(searchParams.get(filterType))
@@ -154,44 +178,51 @@ export default function Collections() {
                 return prevSearch
             })
         }
-    }
-
-    // useEffect(() => {
-    //     // Reset the tag filter whenever the type filter changes
-    //     setSearchParams(prevSearch => {
-    //         prevSearch.delete('tags')
-    //         return prevSearch
-    //     })
-    // }, [typeList, useSearchParams])
-
-
-    //Sorting Use
-    const handleSortResults = (e) => {
-        const sortBy = e.target.value
-        console.log(sortBy)
-
-        let tempProductList = [...localProductList]
-
-        switch(sortBy) {
-            case "Title: A-Z":
-                tempProductList.sort((a, b) => {
-                    if(a.props.product.name < b.props.product.name) return -1
-                    if(a.props.product.name > b.props.product.name) return 1
-                    return 0
-                })
-                break
-            case "Title: Z-A":
-                    tempProductList.sort((a, b) => {
-                        if(a.props.product.name > b.props.product.name) return -1
-                        if(a.props.product.name < b.props.product.name) return 1
-                        return 0
-                    })
-                break
-        }
-        console.log(tempProductList)
-        setLocalProductList(tempProductList)
-    }
+    }    
     
+    //Sorting Use
+    const handleSortResults = (e, listToSort) => {
+        console.log("IN SORTING!")
+        const sortBy = e.target.value
+        const [method, order] = sortBy.split(' ') // "name desc" becomes ["name", "desc"]
+    
+        let tempProductList = listToSort? [...listToSort] : [...localProductList]
+        console.log(tempProductList)
+    
+        tempProductList.sort((a, b) => {
+            let aValue, bValue
+    
+            // Determine the path to get the value
+            if (method === "price") {
+                aValue = a.props.product.variants['variant1'].price
+                bValue = b.props.product.variants['variant1'].price
+            } else { // Assume "name" if not "price"
+                aValue = a.props.product[method]
+                bValue = b.props.product[method]
+            }
+    
+            // Convert to lowercase if the values are strings for case-insensitive sorting
+            if (typeof aValue === 'string') aValue = aValue.toLowerCase()
+            if (typeof bValue === 'string') bValue = bValue.toLowerCase()
+    
+            // Determine the order of sorting
+            if (order === "desc") {
+                return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
+            } else { // Assume "asc" if not "desc"
+                return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
+            }
+        })        
+        
+        setLocalProductList(tempProductList) //Printing to HTML
+        
+        // Update the search parameters
+        setSearchParams(prevSearch => {
+            prevSearch.set('sort_by', sortBy)        
+            return prevSearch;
+        });
+        console.log("DONE SORTING!")
+    }
+
     //For changing the table view
     const [resultMode, setResultMode] = useState("grid-mode")
     const toggleResultMode = () => setResultMode((m) => m === "grid-mode"? "list-mode" : "grid-mode");
@@ -225,7 +256,7 @@ export default function Collections() {
                 </div>
 
                 <div className="search-results-header">
-                    <div className="search-results-header-found">Showing X results for "X"</div>
+                    <div className="search-results-header-found">Showing {localProductList && localProductList.length} results for "X"</div>
 
                     <div className="search-results-header-buttons">
                         <div className="search-results-header-sort">
@@ -233,11 +264,16 @@ export default function Collections() {
                                 DATE: NEW TO OLD
                                 <i className="fa-solid fa-caret-down"></i>
                             </button> */}
-                            <select name="Result-Sort-Selector" id="Search-Results__Result-Sort-Selector" onChange={handleSortResults}>
-                                <option value="Title: A-Z">Title: A-Z</option>
-                                <option value="Title: Z-A">Title: Z-A</option>
-                                <option value="Price: Low to High">Price: Low to High</option>
-                                <option value="Price: High to Low">Price: High to Low</option>
+                            <select 
+                            name="Result-Sort-Selector" 
+                            id="Search-Results__Result-Sort-Selector" 
+                            onChange={handleSortResults}
+                            value={searchParams.get('sort_by') || 'default'}
+                            >
+                                <option value="name">Title: A-Z</option>
+                                <option value="name desc">Title: Z-A</option>
+                                <option value="price">Price: Low to High</option>
+                                <option value="price desc">Price: High to Low</option>
                             </select>
                         </div>
 
@@ -264,12 +300,12 @@ export default function Collections() {
                 </div>
                 <div className="search-results-sidebar"></div>
                 <div className={`search-results-main ${resultMode}`}>
-                    {localProductList}
+                    {pageResults}
                 </div>
                 <div className="search-results-pagination">
-                    <button className="search-results-pagination__previous-button">o-- Previous</button>
-                    <span className="search-results-pagination__page-count">1 of 20</span>
-                    <button className="search-results-pagination__next-button">Next --o</button>
+                    <button className="search-results-pagination__previous-button" onClick={() => handlePageChange(-1)}>o-- Previous</button>
+                    <span className="search-results-pagination__page-count">{currentPage} of {pageCount}</span>
+                    <button className="search-results-pagination__next-button" onClick={() => handlePageChange(+1)}>Next --o</button>
                 </div>
             </div>
         </div>
@@ -302,6 +338,26 @@ Maybe make a page for base collection categories?
 Each product has Categories in desc, use that to generate filter buttons
 
 Figure out how to add filters to url
+
+// useEffect(() => {
+//     // Reset the tag filter whenever the type filter changes
+//     setSearchParams(prevSearch => {
+//         prevSearch.delete('tags')
+//         return prevSearch
+//     })
+// }, [typeList, useSearchParams])
+
+// const hasSorted = useRef(false)
+// useEffect(() => {
+//     if (localProductList && !hasSorted.current) {
+//         const sortBy = searchParams.get('sort_by')
+//         if (sortBy) {
+//             handleSortResults({ target: {value: sortBy}})
+//             hasSorted.current = true
+//         }
+//     }
+// }, [localProductList])
+
 */
 
 // const handleFilterChange = (filterType, filterName) => {
@@ -358,3 +414,99 @@ Figure out how to add filters to url
 //         return newSearchParams;
 //     });
 // }
+
+// useEffect(() => {
+//     let tempProductList = []
+//     let typeInstanceList = {}
+//     let tagInstanceList = {}
+    
+//     let tempUniverseList = []
+//     let typeSearchParams
+//     let tagSearchParams
+
+//     if (productList) {
+//         // console.log(Object.keys(productList))
+//         // const productUniverses = Object.keys(productList)
+
+//         //SINGULAR CATEGORY
+//         if (Object.keys(productList).includes(id)) { //If product.category ("battletech") is in page path
+
+//             Object.values(productList[id]).forEach(p => { //For each Product in that Category
+
+//                 typeSearchParams = searchParams.get('types')
+//                 ? JSON.parse(searchParams.get('types'))
+//                 : []
+//                 tagSearchParams = searchParams.get('tags')
+//                 ? JSON.parse(searchParams.get('tags'))
+//                 : []
+
+//                 // If there is no type filter OR type filter is matched by current product
+//                 if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
+
+//                     if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
+//                         tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
+//                     }
+
+//                     //Within each product of the accepted Type, grab all tags
+//                     for (let tag in p.tags) {
+//                         const tagName = p.tags[tag]
+//                         if (tagInstanceList[tagName]) tagInstanceList[tagName] += 1
+//                         else tagInstanceList[tagName] = 1
+//                     }
+//                 }
+//                 const typeName = p.type
+//                 if (typeInstanceList[typeName]) typeInstanceList[typeName] += 1
+//                 else typeInstanceList[typeName] = 1
+//             })
+
+//         }//ALL CATEGORIES           
+//         // else if (id === "all") { 
+//         //     Object.keys(productList).forEach(category => { //For each Product Category
+
+//         //         Object.values(productList[category]).forEach(p => { //For each Product in that Category
+
+//         //             tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
+//         //         })
+//         //     })
+//         // }
+//         else alert("Something went wrong!") //SOMETHING BLEW UP
+
+//         let tempTypeList = []
+//         let tempTagList = []
+
+//         for (let typeName in typeInstanceList) {
+//             tempTypeList.push(
+//                 <li className="search-results__filter-li">
+//                     <input 
+//                     type="checkbox"  
+//                     onChange={() => handleFilterChange('types', typeName)} 
+//                     name={`${typeName}-checkbox`} 
+//                     value={typeName}
+//                     checked={typeSearchParams.includes(typeName)? true : false}
+//                     >
+//                     </input>
+//                     <label htmlFor={`${typeName}-checkbox`}>{`${typeName} (${typeInstanceList[typeName]})`}</label>
+//                 </li>
+//             )
+//         }
+//         for (let tagName in tagInstanceList) {
+//             tempTagList.push(
+//                 <li className="search-results__filter-li">
+//                     <input 
+//                     type="checkbox"  
+//                     onChange={() => handleFilterChange('tags', tagName)} 
+//                     name={`${tagName}-checkbox`} 
+//                     value={tagName}
+//                     checked={tagSearchParams.includes(tagName)? true : false}
+//                     >
+//                     </input>
+//                     <label htmlFor={`${tagName}-checkbox`}>{`${tagName} (${tagInstanceList[tagName]})`}</label>
+//                 </li>
+//             )
+//         }
+
+//         setLocalProductList(tempProductList) //Outputting the new product list (Okay if empty)
+//         setTypeList(tempTypeList)
+//         setTagList(tempTagList)
+//     }
+// },[id, productList, searchParams])
