@@ -9,8 +9,8 @@ export const getProductById = (productList, id) => {
         })
         
         if (product) {
-            console.log("Product Found!")
-            console.log(product)
+            // console.log("Product Found!")
+            // console.log(product)
             return product
         }
 
