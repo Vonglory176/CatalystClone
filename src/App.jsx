@@ -138,10 +138,11 @@ TODO
 -------------------
 Right now!
 ------
-FILTERS HAVE A DUPLICATION PROBLEM. ADD CHECKS AND A COUNTER FOR MULTIPLES
+Learn how to preload images? Especially in places like products
+Big issue with fwd/back buttons
 Create search
-Create filters
 Add some reducer extension things to disable quantity buttons/input while updating
+Test to make sure TAG filters are working correctly
 
 ADD STOCK TO DATABASE PRODUCTS
 Load products into Featured-Containers (Just use ID's for the moment)
