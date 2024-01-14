@@ -18,9 +18,9 @@ import { fetchProducts } from './store/products-slice'
 function App() {
 
   const dispatch = useDispatch()
-    const productList = useSelector(state => state.products.productList)
+    // const productList = useSelector(state => state.products.productList)
     const status = useSelector(state => state.products.status)
-    const error = useSelector(state => state.products.error)
+    // const error = useSelector(state => state.products.error)
 
     // const location = useLocation()
     const { pathname } = useLocation() //So refresh only occurs on path change, not changes like query
@@ -138,65 +138,99 @@ TODO
 -------------------
 Right now!
 ------
+Implement lazyloading & react-progressive-image
 Learn how to preload images? Especially in places like products
-Big issue with fwd/back buttons
+Make small placeholder versions of all images
+
+Later!
+------
 Create search
 Add some reducer extension things to disable quantity buttons/input while updating
 Test to make sure TAG filters are working correctly
 
-ADD STOCK TO DATABASE PRODUCTS
-Load products into Featured-Containers (Just use ID's for the moment)
-ADD SALE CODE TO PRODUCT-RESULTS / PRODUCT-CARD
-Add errors to store/products/card/result if not found?
-Can reduce Collections/ProductResult code by moving Variant determination to ProductResult
-Write logic for determining Featured/NewArrival-Section in Collections
-PUT FIREBASE CONFIG IN ENV FILE
-Add ability to expand image on click
-Remove inline hover clicker for quantity number input
-Add general notification stuff
-The FREE part of free items only shows in collections!!
-Change location of cart indicator
-Save pricing in state, create alert when price changes via update later
-Remember to change collections background based on the collection!
-Have a Universe filter on "collection/all" page?
-Create alert for Product Filter about Tags resetting after Type change
+DATABASE ---
+Put Firebase config in ENV file !!!!!!
+Add stock numbers to products
+Add more products to ProductList
 
+FILTERS / SORT / PAGINATION ---
+Big issue with fwd/back buttons (SearchParam changes add to history)
+Make pages reset whenever filters change
+Finish styling
+
+COLLECTION-BLOCK ---
+Load products into Featured-Containers (Just use ID's for the moment)
+Write logic for determining Featured/NewArrival-Section (Still uncertain of manual or auto load)
+Collect all Featured Products and random load into collection-blocks?
+Add Collection-Link coverage to characters
+
+PRODUCT RESULT/CARD ---
+Add sale code
+Finish styling
+
+PRODUCT PAGE ---
+Add ability to expand image on click
+Add vertical image carousel
+Remove inline hover clicker for quantity number input (Also for cart/checkout)
+Add code to make product page search database faster? (Like only look in battletech, not all cats)
+Finish styling
+
+NOTIFICATIONS/ERROR HANDLING ---
+Add errors to store/products/card/result if not found?
+Add general notification stuff (Added to cart, signed-in/out etc)
+Create alert for product/price changes (Would need to be monitored in state)
+Alert for Product Filter Tags resetting after Filter Type change?
 
 Figure out some kind of way to update/alert to product/cart changes on cart/checkout page
 (Always alerts initially in regard to things like stock/quantity, both on product/cart page)
 (Cart page has an "Update Cart" button)
 
+CHECKOUT/CART ---
+Look into Shopify redirects
+Remove inline hover clicker for quantity number input (Also for products)
+Finish styling
 
-Later!
-------
-Clean up SCSS
-Add Featured Product Banner !
-Finish Header
-Make sticky header ---> GET import {useInView} from 'react-intersection-observer'
-Make searchbar (in sidebar + other)
-Get rid of extra divs?
-Fix email styling
-Add images to slideshow
-Add classes to footer links
-Add random images to product sections?
-Finish Contact Styling
-Make alt view for non-empty cart
-Give page names an ID?
-Add btn class to homepage-mailform
-Add styling to Account Page
+COLLECTIONS ---
+The FREE part of free items only shows in collections!!
+Change background/banners/styles based on the collection
+Have a Universe filter on "collection/all" page?
 Add code to ProductResult in collections to include "From" if more than one option
-Finish Product page styling
-Add more products to ProductList !!!!!!!!
-Add code to make product page search database faster? (Like only look in battletech, not all cats)
-Collect all Featured Products and random load into collection-blocks?
+Finish styling
 
-(General)
+Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
+(REMEMBER DISCORD SCREENSHOT/in coding)
+
+FEATURED PRODUCT BANNER ---
+Make it!!!
+
+HEADER ---
+Get Search from Searchanise?
+Change location of cart indicator
+Make sticky header ---> GET import {useInView} from 'react-intersection-observer'
+Make searchbar (in sidebar + other)(Searchanise??)
+
+HOME ---
+Add images to slideshow
+Add random character images to collection-blocks (Obviously collection-block also need tweaks)
+Add btn class to homepage-mailform?
+Fix email styling
+
+FOOTER ---
+Add classes to footer links
+
+CONTACT ---
+Add form functionality?
+Finish Styling
+
+ACCOUNT ---
+Add actual login/auth mechanics
+Get Captcha for Login/Register?
+Populate account details (Especially purchase history!!)
+
+GENERAL ---
+SCSS Cleanup / Standardization (Font/Headers/Buttons especially)
+HTML Cleanup
 Add Titles to anchors
-Check out "lazysizes" & data-src
 Add FavIcon !!!!!!
-
-Get Captcha for Login/Register
-Get Search from Searchanise
-Setup MongoDB/FireBase thing for products? (JS file doesn't allow easy filter/querying)
 -------------------
 */
