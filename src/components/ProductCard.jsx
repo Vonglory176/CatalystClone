@@ -1,4 +1,7 @@
+import ProgressiveImage from "react-progressive-image"
 import { Link } from "react-router-dom"
+
+import placeholderImage from "../assets/placeholder.png"
 
 export default function ProductCard({product}) {
 
@@ -18,7 +21,18 @@ export default function ProductCard({product}) {
                 <div className="product-card__image-wrapper">
                     <div className="product-card__image">
                         {/* Padding top div? */}
-                        <img src={imageLink} alt={imageAlt}/>
+
+                        <ProgressiveImage src={imageLink} placeholder={placeholderImage}>
+                            {(src, loading) =>
+                             <img 
+                             src={src} 
+                             alt={imageAlt}
+                             className={loading? "imgLoading":"imgLoaded"}
+                             />
+                            }                            
+                        </ProgressiveImage>
+
+                        {/* <img src={imageLink} alt={imageAlt}/> */}
                     </div>
                 </div>
             </div>
