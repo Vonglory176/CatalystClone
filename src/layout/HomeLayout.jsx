@@ -20,9 +20,9 @@ export default function HomeLayout() {
                     <div className="main-content-wrapper">
 
                         <div className="page-width">
-                                
-                                <Outlet/>
-                                
+
+                            <Outlet/>               
+
                         </div>
                     </div>
                 </div>
