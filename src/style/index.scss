@@ -181,3 +181,28 @@ input, textarea, select, input[type=submit] {
     // appearance: none;
 }
 
+// FOR IMAGE LOADING
+
+// IMAGE CHANGES
+.imgLoaded {
+    filter: blur(0px);
+    transition: filter 0.5s linear;
+}
+
+.imgLoading {
+    filter: blur(10px);
+    clip-path: inset(0);
+    animation: pulse 2.5s infinite;    
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(255,255,255,0);
+    }
+    50% {
+        background-color: rgba(255,255,255,0.2);
+    }
+    100% {
+        background-color: rgba(255,255,255,0);
+    }
+}
