@@ -5,7 +5,7 @@ import newArrivalsFrame from "/src/assets/block-collection/frames/collection-fra
 import ProductResult from "../components/ProductResult"
 import ProductCard from "../components/ProductCard"
 
-import { useParams, useSearchParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import CollectionBlock from "../components/CollectionBlock"
 
@@ -28,23 +28,39 @@ export default function Collections() {
     const [typeList, setTypeList] = useState()
     const [tagList, setTagList] = useState()
 
+    //For overwriting the w/filter history as opposed to adding to it
+    // const navigate = useNavigate()
+    // const location = useLocation()
+    
+    // const replaceSearchParams = (newParams) => {
+    //     const newSearch = new URLSearchParams({
+    //         ...Array.from(searchParams),
+    //         ...newParams,
+    //     }).toString();
+    
+    //     navigate(location.pathname + "?" + newSearch, { replace: true });
+    // };
+    
+    //Pagination
     const [currentPage, setCurrentPage] = useState()
     const [pageResults, setPageResults] = useState()
     const [pageCount, setPageCount] = useState()
     const resultsPerPage = 4
 
-    //Pagination
+
     const handlePageChange = (direction) => {
         const newPage = currentPage + direction
-
+    
         if (newPage >= 1 && newPage <= pageCount) {
-            
             setCurrentPage(newPage)
-
+    
+            // replaceSearchParams({
+            //     page: newPage,
+            // })
             setSearchParams(prevSearch => {
                 prevSearch.set('page', newPage)        
                 return prevSearch;
-            });
+            })
         }
     }
 
@@ -149,7 +165,6 @@ export default function Collections() {
     
     //Filter Use
     const handleFilterChange = (filterType, filterName) => {
-        console.log("FILTERING")
 
         // Get the current search parameters for the filter type
         let currentSearchParams = searchParams.get(filterType)
@@ -167,12 +182,24 @@ export default function Collections() {
     
         // Update the search parameters
         if (currentSearchParams.length > 0) {
+            // replaceSearchParams({
+            //     [filterType]: JSON.stringify(currentSearchParams),
+            // })
+
+            // if (filterType === 'types') {
+            //     replaceSearchParams({
+            //         tags: undefined,
+            //     })
+            // }
             setSearchParams(prevSearch => {
                 prevSearch.set(filterType, JSON.stringify(currentSearchParams))
                 if (filterType === 'types') prevSearch.delete('tags') // Reset the tag filter whenever the type filter changes
                 return prevSearch
             })
         } else {
+            // replaceSearchParams({
+            //     [filterType]: undefined,
+            // })
             setSearchParams(prevSearch => {
                 prevSearch.delete(filterType)
                 return prevSearch
