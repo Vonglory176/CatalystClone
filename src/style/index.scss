@@ -30,6 +30,7 @@ body {
     font-family: 'Karla', sans-serif;
     font-style: normal;
     font-weight: 400;
+    background-color: $accent-light-color;
     color: #666;
     line-height: 1.375;
     
@@ -190,7 +191,7 @@ input, textarea, select, input[type=submit] {
 }
 
 .imgLoading {
-    filter: blur(10px);
+    filter: blur(10px) !important;
     clip-path: inset(0);
     animation: pulse 2.5s infinite;    
 }
