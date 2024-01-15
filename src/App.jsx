@@ -139,7 +139,7 @@ TODO
 Right now!
 ------
 Implement lazyloading & react-progressive-image
-Learn how to preload images? Especially in places like products
+Learn how to preload images? Especially in places like products (GZIP)
 Make small placeholder versions of all images
 
 Later!
@@ -156,6 +156,7 @@ Add more products to ProductList
 FILTERS / SORT / PAGINATION ---
 Big issue with fwd/back buttons (SearchParam changes add to history)
 Make pages reset whenever filters change
+Make mobile rendition of filters
 Finish styling
 
 COLLECTION-BLOCK ---
@@ -163,6 +164,7 @@ Load products into Featured-Containers (Just use ID's for the moment)
 Write logic for determining Featured/NewArrival-Section (Still uncertain of manual or auto load)
 Collect all Featured Products and random load into collection-blocks?
 Add Collection-Link coverage to characters
+Add fade-in to characters on load
 
 PRODUCT RESULT/CARD ---
 Add sale code
@@ -195,6 +197,7 @@ The FREE part of free items only shows in collections!!
 Change background/banners/styles based on the collection
 Have a Universe filter on "collection/all" page?
 Add code to ProductResult in collections to include "From" if more than one option
+Look into issue where going from /battletech straight to /shadowrun causes issue with 'cannot split null' (Jank fix with 'reloadDocument' on header Links)
 Finish styling
 
 Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
