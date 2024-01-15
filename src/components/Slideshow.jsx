@@ -8,7 +8,7 @@ import urbanBrawl1 from "../assets/slideshow/Rotating-Banner_UrbanBrawl_1296x.we
 import urbanBrawl2 from "../assets/slideshow/Rotating-Banner_UrbanBrawl_1512x.webp"
 
 import ProgressiveImage from "react-progressive-image";
-import placeholderImage from "../assets/placeholder.png"
+import placeholderImage from "../assets/slideshow/slidePlaceholder.jpg"
 
 export default function Slideshow() {
     return (
