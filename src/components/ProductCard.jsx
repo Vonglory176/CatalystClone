@@ -38,7 +38,7 @@ export default function ProductCard({product}) {
             </div>
             <div className="product-card__info">
                 <div className="product-card__name">{`${productUniverse? productUniverse + ":" : ""} ${productName}`}</div>
-                <div className="product-card__price">{productPrice}</div>
+                <div className="product-card__price">${productPrice}</div>
             </div>
             <div className="product-card__overlay">
                 <span className="btn product-card__overlay-btn">View</span>
