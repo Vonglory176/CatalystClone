@@ -56,7 +56,7 @@ export default function Header() {
 
             <div className="header__sticky">
                 <div className="header__sticky-dropdown">
-                    <Link to={"/collections/battletech"}>
+                    <Link to={"/collections/battletech"} reloadDocument>
                         <button className="header__sticky-dropdown-button btn">Universe</button>
                     </Link>
                 </div>
@@ -85,8 +85,8 @@ export default function Header() {
 
                     <div className={`offcanvas-submenu ${showUniverseSubMenu? "hide-submenu" : "show-submenu"}`}>
                         <div className="offcanvas-submenu-container">
-                            <Link to={"/collections/battletech"} className={"offcanvas-submenu-link"}>Battletech</Link>
-                            <Link to={"/collections/shadowrun"} className={"offcanvas-submenu-link"}>Shadowrun</Link>
+                            <Link to={"/collections/battletech"} className={"offcanvas-submenu-link"} reloadDocument>Battletech</Link>
+                            <Link to={"/collections/shadowrun"} className={"offcanvas-submenu-link"} reloadDocument>Shadowrun</Link>
                         </div>
                     </div>
                     
