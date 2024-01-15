@@ -276,17 +276,11 @@ export default function Collections() {
             {/* For the actual search results */}
             <div className="search-results">
 
-                <div className="filter-test">
-                    {/* <ul className="universe-list">{universeList}</ul> */}
-                    <ul className="type-list">{typeList}</ul>
-                    <ul className="tag-list">{tagList}</ul>
-                </div>
+                <div className="search-results__header">
+                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results for "X"</div>
 
-                <div className="search-results-header">
-                    <div className="search-results-header-found">Showing {localProductList && localProductList.length} results for "X"</div>
-
-                    <div className="search-results-header-buttons">
-                        <div className="search-results-header-sort">
+                    <div className="search-results__header-buttons">
+                        <div className="search-results__header-sort">
                             {/* <button className="btn">
                                 DATE: NEW TO OLD
                                 <i className="fa-solid fa-caret-down"></i>
@@ -304,16 +298,16 @@ export default function Collections() {
                             </select>
                         </div>
 
-                        <div className="search-results-header-wrapper">
+                        <div className="search-results__header-wrapper">
 
-                            <div className="search-results-header-filter">
+                            <div className="search-results__header-filter">
                                 <button className="btn">
                                     Filters
                                     <i className="fa-solid fa-caret-down"></i>
                                 </button>
                             </div>
 
-                            <div className="search-results-header-mode">
+                            <div className="search-results__header-mode">
                                 <button className="btn" onClick={toggleResultMode}>
                                     {resultMode === "grid-mode"? 
                                         <i className="fa-solid fa-list fa-xl"></i> :
@@ -325,9 +319,17 @@ export default function Collections() {
                         </div>
                     </div>
                 </div>
-                <div className="search-results-sidebar"></div>
-                <div className={`search-results-main ${resultMode}`}>
-                    {pageResults}
+                <div className="search-results__main">
+                    <div className={`search-results__main-content ${resultMode}`}>
+                        {pageResults}
+                    </div>
+                    <div className="search-results__main-sidebar">
+                        {/* <ul className="universe-list"></ul> */}
+                        <span>Product Type</span>
+                        <ul className="type-list">{typeList}</ul>
+                        <span>Product Tags</span>
+                        <ul className="tag-list">{tagList}</ul>
+                    </div>
                 </div>
                 <div className="search-results-pagination">
                     <button className="search-results-pagination__previous-button" onClick={() => handlePageChange(-1)}>o-- Previous</button>
