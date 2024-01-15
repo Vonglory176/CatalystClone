@@ -1554,6 +1554,8 @@
 .product-result {
   display: flex;
   background: #fff;
+  color: #222;
+  font-weight: 700;
 }
 .product-result__image-container {
   display: flex;
@@ -1572,14 +1574,7 @@
 }
 .product-result__name {
   text-overflow: ellipsis;
-  color: #222;
-  font-size: 14px;
   line-height: 1.4em;
-  font-weight: 700;
-}
-.product-result__price {
-  font-size: 15px;
-  color: #222;
 }
 
 #Home-Container .getting-started {
@@ -1590,6 +1585,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (min-width: 501px) {
+  #Home-Container .getting-started__link {
+    width: 95%;
+  }
 }
 #Home-Container .getting-started__button {
   width: 95%;
@@ -1726,6 +1726,9 @@
   text-align: center;
 }
 
+#Collections-Container {
+  background-color: #262626;
+}
 @media (max-width: 749px) {
   #Collections-Container .collection-block {
     display: none;
@@ -1739,73 +1742,134 @@
   padding: 16px 5px;
   margin-bottom: 30px;
 }
-#Collections-Container .search-results-header-buttons {
+@media (min-width: 510px) {
+  #Collections-Container .search-results {
+    padding: 16px;
+  }
+}
+#Collections-Container .search-results__header-buttons {
   display: flex;
   justify-content: space-between;
   gap: 5px;
   padding: 16px 0px;
 }
 @media (min-width: 839px) {
-  #Collections-Container .search-results-header-filter {
+  #Collections-Container .search-results__header-filter {
     display: none;
   }
 }
-#Collections-Container .search-results-header-wrapper {
+#Collections-Container .search-results__header-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: right;
   gap: 5px;
 }
-#Collections-Container .search-results-header button {
+#Collections-Container .search-results__header button {
   font-size: 13px;
   letter-spacing: 0.75px;
   padding: 7px 16px;
   color: #222;
   font-weight: bold;
 }
-#Collections-Container .search-results-header button .fa-caret-down {
+#Collections-Container .search-results__header button .fa-caret-down {
   padding-left: 10px;
 }
-#Collections-Container .search-results-main {
+#Collections-Container .search-results__main {
   display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 839px) {
+  #Collections-Container .search-results__main {
+    grid-template-columns: 1fr 200px;
+  }
+}
+#Collections-Container .search-results__main-content {
+  display: grid;
+  background-color: #fff;
   border: 3px solid #030303;
 }
-#Collections-Container .search-results-main:is(.grid-mode) {
-  grid-template-columns: 1fr 1fr;
+#Collections-Container .search-results__main-content:is(.grid-mode) {
+  grid-template-columns: 1fr;
 }
-#Collections-Container .search-results-main:is(.grid-mode) .product-result {
+#Collections-Container .search-results__main-content:is(.grid-mode) .product-result {
   flex-direction: column;
   border-right: 1px solid #666;
   border-bottom: 1px solid #666;
+  margin-bottom: -1px;
+  font-size: 14px;
   height: 290px;
 }
 @media (min-width: 750px) {
-  #Collections-Container .search-results-main:is(.grid-mode) .product-result {
+  #Collections-Container .search-results__main-content:is(.grid-mode) .product-result {
     height: 390px;
   }
 }
-#Collections-Container .search-results-main:is(.grid-mode) .product-result__image-container {
+#Collections-Container .search-results__main-content:is(.grid-mode) .product-result__image-container {
   display: flex;
   align-items: center;
   height: 200px;
 }
 @media (min-width: 750px) {
-  #Collections-Container .search-results-main:is(.grid-mode) .product-result__image-container {
+  #Collections-Container .search-results__main-content:is(.grid-mode) .product-result__image-container {
     height: 300px;
   }
 }
-#Collections-Container .search-results-main:is(.grid-mode) .product-result__info {
+#Collections-Container .search-results__main-content:is(.grid-mode) .product-result__info {
   height: 30%;
   padding: 15px 5px 5px 16px;
 }
-#Collections-Container .search-results-main:is(.grid-mode) .product-result__name {
+#Collections-Container .search-results__main-content:is(.grid-mode) .product-result__name {
   max-height: 2.8em;
 }
-#Collections-Container .search-results-main:is(.list-mode) {
+@media (min-width: 450px) {
+  #Collections-Container .search-results__main-content:is(.grid-mode) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1115px) {
+  #Collections-Container .search-results__main-content:is(.grid-mode) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+#Collections-Container .search-results__main-content:is(.list-mode) {
   grid-template-columns: 1fr;
 }
-#Collections-Container .search-results-main:is(.list-mode) .product-result {
-  height: 142px;
+#Collections-Container .search-results__main-content:is(.list-mode) .product-result {
+  height: 192px;
+  padding: 25px 12px 25px 5px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+#Collections-Container .search-results__main-content:is(.list-mode) .product-result__image-container {
+  width: 142px;
+  border: 1px solid #262626;
+  margin-right: 15px;
+}
+#Collections-Container .search-results__main-sidebar {
+  max-height: 100%;
+  width: 200px;
+  margin-left: 16px;
+}
+@media (max-width: 839px) {
+  #Collections-Container .search-results__main-sidebar {
+    display: none;
+  }
+}
+#Collections-Container .search-results__main-sidebar ul {
+  border-bottom: 1px solid #fff;
+  margin-bottom: 8px;
+  list-style: none;
+}
+#Collections-Container .search-results__main-sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+#Collections-Container .search-results__main-sidebar input {
+  margin: 0;
+  width: -moz-max-content;
+  width: max-content;
 }
 #Collections-Container .search-results-pagination {
   display: grid;
@@ -1860,6 +1924,7 @@ body {
   font-family: "Karla", sans-serif;
   font-style: normal;
   font-weight: 400;
+  background-color: #262626;
   color: #666;
   line-height: 1.375;
 }
@@ -1990,7 +2055,7 @@ input, textarea, select, input[type=submit] {
 }
 
 .imgLoading {
-  filter: blur(10px);
+  filter: blur(10px) !important;
   -webkit-clip-path: inset(0);
           clip-path: inset(0);
   animation: pulse 2.5s infinite;
