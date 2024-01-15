@@ -10,6 +10,10 @@
             justify-content: center;
             align-items: center;
             
+            @media (min-width: 501px) {
+                width: 95%;
+            }
+            
         }
         &__button {
             width: 95%;
