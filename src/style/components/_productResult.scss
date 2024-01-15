@@ -19,19 +19,18 @@
         gap: 5px;
     }
     
+    color: $primary-font-color;
+    font-weight: 700;
+
     &__name {
         text-overflow: ellipsis;
-
-        color: $primary-font-color;
-        font-size: 14px;
         line-height: 1.4em;
-        font-weight: 700;
     }
 
-    &__price {
-        font-size: 15px;
-        color: $primary-font-color;
-    }
+    // &__price {
+    //     font-size: 15px;
+    //     color: $primary-font-color;
+    // }
 }
 
 @mixin product-result-grid-mode {
@@ -40,7 +39,9 @@
     
         border-right: 1px solid $third-font-color;
         border-bottom: 1px solid $third-font-color;
-    
+        margin-bottom: -1px;
+        font-size: 14px;
+        
         height: 290px;
     
         @media (min-width:750px) {
@@ -70,15 +71,25 @@
 
 @mixin product-result-list-mode {
     .product-result {
-        height: 142px;
-
+        height: 192px;
+        padding: 25px 12px 25px 5px;
+        border-bottom: 1px solid #eee;
+        
         &__image-container {
+            width: 142px;
+            border: 1px solid $accent-light-color;
+            margin-right: 15px;
         }
+        font-size: 18px;
         
         &__info {
         }
     
         &__name {
+        }
+
+        &__price {
+
         }
     }
 }
