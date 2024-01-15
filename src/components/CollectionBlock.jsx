@@ -6,6 +6,7 @@ import { Suspense, lazy, useEffect, useState } from "react";
 // import ProductCard from "./ProductCard";
 const ProductCard = lazy(() => import('./ProductCard'))
 import loadingSpinner from "../assets/loader-large.gif"
+import ProgressiveImage from "react-progressive-image";
 
 export default function CollectionBlock(
     {collectionClasses, collectionLink,collectionFrameSrc,collectionCoverSrc,collectionCoverTitle,productIdArray,characterImageSrcArray}) {
@@ -40,12 +41,37 @@ export default function CollectionBlock(
 
             {/* The background frame for larger views */}
             <Link to={collectionLink} className={"collection-link"}>
-                <img src={collectionFrameSrc} alt="" className="featured-product-frame" />
+                <ProgressiveImage
+                src={collectionFrameSrc}
+                // placeholder={placeholderImage}
+                >
+                    {(src, loading) =>
+                    <img
+                    className={"featured-product-frame " + (loading? "imgLoading":"imgLoaded")}
+                    src={src}
+                    alt={""}
+                    /> 
+                    }
+                </ProgressiveImage>
+                {/* <img src={collectionFrameSrc} alt="" className="featured-product-frame" /> */}
             </Link>
 
             {characterImageSrcArray && //If no charImages, this is excluded   
             <div className="featured-character">
-                <img src={characterImageSrcArray[0]} alt=""/>
+                <ProgressiveImage
+                src={characterImageSrcArray[0]}
+                // placeholder={placeholderImage}
+                >
+                    {(src, loading) =>
+                    <img
+                    // className={loading? "imgLoading":"imgLoaded"}
+                    src={src}
+                    alt={""}
+                    style={{display: loading? "none" : "block"}}
+                    /> 
+                    }
+                </ProgressiveImage>
+                {/* <img src={characterImageSrcArray[0]} alt=""/> */}
             </div>
             }
 

@@ -2,6 +2,11 @@ import { Link } from "react-router-dom"
 //Components
 import CollectionBlock from "../components/CollectionBlock"
 import MailListSignUp from "../components/MailListSignUp"
+//Getting Started Buttons
+import gettingStartedBattletech from "/src/assets/getting-started/getting-started-battletech.webp"
+import gettingStartedBattletechLowRes from "/src/assets/getting-started/getting-started-battletech-low-res.webp"
+import gettingStartedShadowrun from "/src/assets/getting-started/getting-started-shadowrun.webp"
+import gettingStartedShadowrunLowRes from "/src/assets/getting-started/getting-started-shadowrun-low-res.webp"
 //Collection frames/covers
 import featuredFrame from "/src/assets/block-collection/frames/collection-frame-featured.svg"
 import featuredCover from "/src/assets/block-collection/covers/cicada-picture.webp"
@@ -9,18 +14,22 @@ import battletechFrame from "/src/assets/block-collection/frames/collection-fram
 import battletechCover from "/src/assets/block-collection/covers/marauder_480x480.webp"
 import shadowrunFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun.svg"
 import shadowrunCover from "/src/assets/block-collection/covers/shadowrun_480x480.webp"
-import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-tabletop.png"
-import tabletopFramePlaceholder from "/src/assets/block-collection/frames/collection-frame-tabletop-low-res.png"
+import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-tabletop.webp"
+import tabletopFramePlaceholder from "/src/assets/block-collection/frames/collection-frame-tabletop-low-res.webp"
 import tabletopCover from "/src/assets/block-collection/covers/IWFTD_480x480.webp"
 //Collection Characters
 import characterCombatMage from "/src/assets/block-collection/characters/character-combatMage.webp"
 import characterVictor from "/src/assets/block-collection/characters/character-victor.webp"
 //Collection Buttons
 import saleButton from "../assets/button-collection/collection-buttons-01.webp"
+import saleButtonLowRes from "../assets/button-collection/collection-buttons-01-low-res.webp"
 import newArrivalsButton from "../assets/button-collection/collection-buttons-02.webp"
+import newArrivalsButtonLowRes from "../assets/button-collection/collection-buttons-02-low-res.webp"
 import freeDownloadButton from "../assets/button-collection/collection-buttons-03.webp"
-import gettingStartedBattletech from "/src/assets/getting-started/getting-started-battletech.webp"
-import gettingStartedShadowrun from "/src/assets/getting-started/getting-started-shadowrun.webp"
+import freeDownloadButtonLowRes from "../assets/button-collection/collection-buttons-03-low-res.webp"
+import ProgressiveImage from "react-progressive-image"
+import { Suspense } from "react"
+
 
 export default function Home() {
 
@@ -30,10 +39,40 @@ export default function Home() {
             
             <div className="getting-started">
                 <Link to={"/collections/battletech"} className="getting-started__link">
-                    <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/>
+                    {/* <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/> */}
+                    <ProgressiveImage
+                    src={gettingStartedBattletech}
+                    placeholder={gettingStartedBattletechLowRes}
+                    >
+                        {(src, loading) =>
+                            <img
+                            className={
+                                "getting-started__button " +
+                                (loading? "imgLoading":"imgLoaded")
+                            }
+                            src={src}
+                            alt={"Get started with Battletech"}
+                            /> 
+                        }
+                    </ProgressiveImage>
                 </Link>
                 <Link to={"/collections/shadowrun"} className="getting-started__link">
-                    <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/>
+                    {/* <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/> */}
+                    <ProgressiveImage 
+                    src={gettingStartedShadowrun}
+                    placeholder={gettingStartedShadowrunLowRes}
+                    >
+                        {(src, loading) =>
+                            <img
+                            className={
+                                "getting-started__button " +
+                                (loading? "imgLoading":"imgLoaded")
+                            }
+                            src={src}
+                            alt={"Get started with Shadowrun"}
+                            /> 
+                        }
+                    </ProgressiveImage>
                 </Link>
             </div>
 
@@ -95,13 +134,24 @@ export default function Home() {
                 <section className="collection-buttons-container">
                     <div className="collection-buttons-wrapper">
                         <Link to={"/"}>                            
-                            <img src={saleButton} alt="" className="collection-button" />
+                            <ProgressiveImage src={saleButton}>
+                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
+                            </ProgressiveImage>
+                            {/* <img className="collection-button" src={saleButton} alt="" /> */}
                         </Link>
+
                         <Link to={"/"}>                            
-                            <img src={newArrivalsButton} alt="" className="collection-button" />
+                            <ProgressiveImage src={newArrivalsButton}>
+                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
+                            </ProgressiveImage>
+                            {/* <img className="collection-button" src={newArrivalsButton} alt="" /> */}
                         </Link>
+
                         <Link to={"/"}>                            
-                            <img src={freeDownloadButton} alt="" className="collection-button" />
+                            <ProgressiveImage src={freeDownloadButton}>
+                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
+                            </ProgressiveImage>
+                            {/* <img className="collection-button" src={freeDownloadButton} alt="" /> */}
                         </Link>
                     </div>
                 </section>
