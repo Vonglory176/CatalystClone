@@ -18,6 +18,7 @@
 @import "./pages/register";
 @import "./pages/notFound";
 @import "./pages/collections";
+@import "./pages/products";
 
 @import "./layout/homeLayout";
 @import "./layout/mainLayout";
@@ -116,8 +117,12 @@ hr {
 }
 
 label {
+    display: block;
+    margin-bottom: 10px;
+
     color: $primary-font-color;
-    font-size: 1em;
+    text-transform: uppercase;
+    font-size: 17px;
     font-weight: 700;
 }
 
@@ -130,6 +135,65 @@ input, textarea, select, input[type=submit] {
 
     font-family: 'Karla', sans-serif;
     font-size: 16px;
+}
+
+.quantity-selector {
+
+    // text-align: center;
+    &__wrapper {
+        display: flex;
+        // padding-top: 13px !important;
+    }
+
+    input {
+        width: 60px;
+        text-align: center;
+        margin: 0;
+        border-left: 1px solid $third-font-color;
+        border-right: 1px solid $third-font-color;
+    }
+
+    button {
+        width: 30px;
+        // height: 50px;
+        font-size: 18px;
+        color: $third-font-color;
+        background-color: $secondary-font-color;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e7e7e7;
+            transition-duration: .08s;
+        }
+    }
+}
+
+/* For Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  
+/* For Chrome, Safari, Edge */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.product-tag {
+    display: inline-block;
+
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-size: 12px;
+
+    background-color: $secondary-color;
+    color: $primary-color;
+
+    padding: 4px 10px;
 }
 
 .slideshow {
