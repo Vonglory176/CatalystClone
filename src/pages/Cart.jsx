@@ -5,6 +5,7 @@ import { getProductById } from "../hooks/getProductById"
 import { cartActions } from "../store/cart-slice"
 
 import placeholderImage from "../assets/placeholder.png"
+import ProgressiveImage from "react-progressive-image"
 
 export default function Cart() {
     const [cartItemsHtml, setCartItemsHtml] = useState()
@@ -50,7 +51,7 @@ export default function Cart() {
                 const quantityPrice = Number((quantity * price).toFixed(2))
 
                 const productLink = `/products/${productId}${variantId !== "standard"? `?variant=${variantId}` : ""}`
-                const image = Object.values(product.variantsHaveImages? variant.images : product.images)[0]
+                const image = Object.values(product.variantsHaveImages? variant.images : product.images)[0].link
 
                 tempTotalPrice += quantityPrice
                 // Number((tempTotalPrice += quantityPrice).toFixed) //Adding to total price
