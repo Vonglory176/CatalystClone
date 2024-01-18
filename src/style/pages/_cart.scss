@@ -1,6 +1,118 @@
 #Cart-Container {
 
+    .cart-products-container {
+        background-color: $primary-color;
+        // padding: 0px 10px;
+        margin-bottom: 40px;
+    }
     
+    .cart-product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        gap: 20px;
+        
+        @media (min-width:750px) {
+            display: grid;
+            grid-template-columns: 140px 1fr 120px 200px;
+            padding: 20px;
+        }
+        
+        border-bottom: 1px solid $primary-font-color;
+
+        &__image-wrapper {
+            display: flex;
+            justify-content: center;
+
+            img {
+                width: auto;
+                height: auto;
+                max-width: 120px;
+                max-height: 120px;
+
+                @media (min-width:750px) {
+                    max-height: 180px;
+                    margin: 10px auto;
+                }
+            }
+        }
+
+        &__name-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            @media (max-width:749px) {
+                text-align: center;            
+            }
+
+            h4 {
+                margin: 0;
+            }
+            a {
+                color: $secondary-color;
+                width: min-content;
+                margin: auto;
+                
+                &:hover {
+                    color: $secondary-hover-color;
+                }
+
+                @media (min-width:750px) {
+                    margin: 0;
+                }       
+            }
+        }
+
+        .quantity-selector {
+            text-align: center;
+            
+            @media (min-width:750px) {
+                label {display: none;}
+            }
+        }
+
+        &__price {
+            font-size: 1.2em;
+            text-align: end;
+        }
+    }
+
+    .cart-inputs {
+        textarea {
+            border: 1px solid $primary-font-color
+        }
+    }    
+
+    .cart-checkout {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        &__total-price {
+            margin: 35px 0 0 0;
+            font-size: 24px;
+        }
+        &__tax-disclaimer {            
+            margin: 0 0 45px 0;
+        }
+
+        button {
+            margin-bottom: 10px;
+
+            &[name=update] {
+                background-color: $accent-color;
+
+                &:hover {
+                    background-color: $accent-color-hover;
+                }
+                &:focus {
+                    background-color: $accent-color-focus;
+                }
+            }
+        }
+
+    }
 
     .cart-empty {
         padding: 120px 0;
