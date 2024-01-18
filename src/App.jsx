@@ -239,6 +239,7 @@ Get Captcha for Login/Register?
 Populate account details (Especially purchase history!!)
 
 GENERAL ---
+Add better image placeholders
 Change quantity-input colors?
 SCSS Cleanup / Standardization (Font/Headers/Buttons especially) ((AND COLORS))
 HTML Cleanup
