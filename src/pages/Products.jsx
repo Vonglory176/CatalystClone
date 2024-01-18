@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams, useSearchParams } from "react-router-dom"
 import { cartActions } from "../store/cart-slice"
 
+import placeholderImage from "../assets/placeholder.png"
+import ProgressiveImage from "react-progressive-image"
+
 export default function Products() {
     const productList = useSelector(state => state.products.productList)
     const dispatch = useDispatch()
@@ -18,6 +21,8 @@ export default function Products() {
     })
     const [selectedVariant, setSelectedVariant] = useState()
     const [productQuantity, setproductQuantity] = useState(1)
+
+    const [imageIsExpanded, setImageIsExpanded] = useState(false)
 
     //Getting product by ID & saving it in State
     useEffect(() => { 
@@ -101,10 +106,11 @@ export default function Products() {
     }
 
     const handleInputChange = (event) => {
-        setproductQuantity(Number(event.target.value))
+        const number = Number(event.target.value)
+        if (number > 0) setproductQuantity(number)
     }
     const handleSubtractQuantity = () => {
-        setproductQuantity(prevQuantity => prevQuantity - 1)
+        if (productQuantity > 1) setproductQuantity(prevQuantity => prevQuantity - 1)
         console.log(productQuantity)
     }
     const handleAddQuantity = () => {
@@ -116,7 +122,7 @@ export default function Products() {
         <div id="Products-Container">
             <div className="products-images">
                 <div className="products-images__primary">
-                    {selectedVariant && (currentProduct.variantsHaveImages?
+                    {/* {selectedVariant && (currentProduct.variantsHaveImages?
                     <img //If yes, use Variant Image for initial
                     src={Object.values(selectedVariant.images)[0].link} 
                     alt={Object.values(selectedVariant.images)[0].alt} 
@@ -124,42 +130,75 @@ export default function Products() {
                     <img //If no, use Product Image for initial
                     src={Object.values(currentProduct.images)[0].link} 
                     alt={Object.values(currentProduct.images)[0].alt} 
-                    />)}                    
+                    />)} */}
+
+                    {selectedVariant && 
+                    <ProgressiveImage
+                    src={currentProduct.variantsHaveImages? 
+                        Object.values(selectedVariant.images)[0].link :
+                        Object.values(currentProduct.images)[0].link
+                    } 
+                    placeholder={placeholderImage}>
+                        {(src, loading) =>
+                        <img 
+                        src={src} 
+                        alt={currentProduct.variantsHaveImages? 
+                            Object.values(selectedVariant.images)[0].alt :
+                            Object.values(currentProduct.images)[0].alt
+                        }
+                        onClick={() => setImageIsExpanded(prevToggle => {return prevToggle? false : true})}
+                        className={
+                            (loading? "imgLoading ":"imgLoaded ") +
+                            (imageIsExpanded? "expanded" : "")
+                        }
+                        />
+                        }                            
+                    </ProgressiveImage>}      
                 </div>
                 <div className="products-images__scroller"></div>
             </div>
 
             <div className="products-main">
-                <h1 className="products-title">
+                <h1 className="products-main__title">
                     {currentProduct && ((currentProduct.universe? `${currentProduct.universe}: ` : "") + currentProduct.name)}
                 </h1>
                 
                 {/* Check for sale / free */}
-                {selectedVariant && <span>{selectedVariant.price !== 0? `$${selectedVariant.price}` : "FREE"}</span>}
-                {selectedVariant && currentProduct.isOnSale && <span>SALE!!!! {selectedVariant.discountedPrice}</span>}
+                {selectedVariant && <div className="products-main__price-container">
+                    {/* currentProduct.isOnSale && */<div className="product-tag">Sale</div> }
+                    <span className="products-main__price">{selectedVariant.price !== 0? `$${selectedVariant.price}` : "FREE"}</span>
+                    {/* currentProduct.isOnSale && */<span className="products-main__sale-price">SALE PRICE {selectedVariant.discountedPrice}</span>}
+                </div>}
 
                 <hr />
 
                 <form method="post" action="" id="Products-AddToCart-Form" className="products-form" onSubmit={handleAddToCart}>
 
-                    {currentProduct && currentProduct.variantType &&
-                    <div className="products-form__variant-selector-wrapper">
-                        <label htmlFor="Variant-Selector">{currentProduct.variantType}</label>
-                        <select name="Variant-Selector" id="Products-Form__Variant-Selector" onChange={handleSelectVariantChange}>
-                            {variantLists.variantListHtml}
-                        </select>
-                    </div>
-                    }
+                    <div className="products-form__input-container">
+                        {/* Variant */}
+                        {currentProduct && currentProduct.variantType &&
+                        <div className="products-form__variant-selector-wrapper">
+                            <label htmlFor="Variant-Selector">{currentProduct.variantType}</label>
+                            <select name="Variant-Selector" id="Products-Form__Variant-Selector" onChange={handleSelectVariantChange}>
+                                {variantLists.variantListHtml}
+                            </select>
+                        </div>
+                        }
 
-                    <div className="products-form__quantity-selector-wrapper">
-                        <label htmlFor="Quantity">Quantity</label>
-                        <div id="Quantity-Selector__Input-Wrapper">
-                            <button type="button" onClick={handleSubtractQuantity}>-</button>
-                            <input type="number" name="Quantity" onChange={handleInputChange} value={productQuantity}/>
-                            <button type="button" onClick={handleAddQuantity}>+</button>
+                        {/* Quantity */}
+                        <div className="products-form__quantity-selector-wrapper">
+                            <div className="quantity-selector">
+                                <label htmlFor="Quantity">Quantity</label>
+                                <div className="quantity-selector__wrapper">                            
+                                    <button type="button" onClick={handleSubtractQuantity}>-</button>
+                                    <input type="number" name="Quantity" onChange={handleInputChange} value={productQuantity}/>
+                                    <button type="button" onClick={handleAddQuantity}>+</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {/* Check if sold out */}
+
+                    {/* Add to Cart /&&/ Check if sold out */}
                     {selectedVariant && (selectedVariant.isSoldOut?
                         <input id="ContactFormSubmit" className="btn" value="Sold Out"/> : /* CAUSING ERROR */
                         <input type="submit" id="ContactFormSubmit" className="btn" value="Add to Cart"/>)
@@ -169,7 +208,8 @@ export default function Products() {
                 <hr />
 
                 {currentProduct && <div dangerouslySetInnerHTML={{ __html: currentProduct.description }} />} {/* Maybe change? */}
-
+                
+                <hr />
             </div>
         </div>
     )
