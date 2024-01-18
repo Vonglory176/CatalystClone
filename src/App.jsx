@@ -57,7 +57,8 @@ function App() {
           <Route path="/collections/:id/products/:id" element={<Products/>}/>
 
           <Route path="/contact" element={<Contact/>}/>
-          <Route path="/products" element={<Products/>}/> 
+          {/* <Route path="/products" element={<Products/>}/> Make this a category page? */}
+          <Route path="/products/:id" element={<Products/>}/>
 
           <Route path="*" element={<NotFound/>}/>
         </Route>
@@ -171,10 +172,13 @@ Add sale code
 Finish styling
 
 PRODUCT PAGE ---
-Add ability to expand image on click
+Finish ability to expand image on click
 Add vertical image carousel
 Remove inline hover clicker for quantity number input (Also for cart/checkout)
 Add code to make product page search database faster? (Like only look in battletech, not all cats)
+Make a category page at "/products"
+Add a "BACK TO X" banner for page when coming from a collection
+Add a share on social media div?
 Finish styling
 
 NOTIFICATIONS/ERROR HANDLING ---
@@ -190,6 +194,10 @@ Figure out some kind of way to update/alert to product/cart changes on cart/chec
 CHECKOUT/CART ---
 Look into Shopify redirects
 Remove inline hover clicker for quantity number input (Also for products)
+Make sure sale/discount code populates properly
+Needs more steps/checks to verify quantity/price changes
+Write code for changeItemQuantity/Input
+Add Link to product name
 Finish styling
 
 COLLECTIONS ---
@@ -231,7 +239,8 @@ Get Captcha for Login/Register?
 Populate account details (Especially purchase history!!)
 
 GENERAL ---
-SCSS Cleanup / Standardization (Font/Headers/Buttons especially)
+Change quantity-input colors?
+SCSS Cleanup / Standardization (Font/Headers/Buttons especially) ((AND COLORS))
 HTML Cleanup
 Add Titles to anchors
 Add FavIcon !!!!!!
