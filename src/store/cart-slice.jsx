@@ -7,8 +7,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartItemList: [],
-    // totalQuantity: 0,
     cartChanged:false,
+    // totalQuantity: 0,
+    // cartTotalPrice: 0
   },
   reducers: {
     addToCart(state,action) {
@@ -50,7 +51,9 @@ const cartSlice = createSlice({
         const existingItem = state.cartItemList.find(item => item.productId === removedItem.productId && item.variantId === removedItem.variantId)
         
         if (existingItem.quantity === 1 || removedItem.quantity === "all") {
-            state.cartItemList = state.cartItemList.filter(item => item.productId !== removedItem.productId && item.variantId !== removedItem.variantId)
+            state.cartItemList = state.cartItemList.filter(item => 
+                !(item.productId === removedItem.productId && item.variantId === removedItem.variantId)
+                )
         }
         else {
             existingItem.quantity--
