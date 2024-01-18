@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { getProductById } from "../hooks/getProductById"
 import { cartActions } from "../store/cart-slice"
 
+import placeholderImage from "../assets/placeholder.png"
+
 export default function Cart() {
     const [cartItemsHtml, setCartItemsHtml] = useState()
     const productList = useSelector(state => state.products.productList)
@@ -11,8 +13,10 @@ export default function Cart() {
     const status = useSelector (state => state.products.status)
     const dispatch = useDispatch ()
 
+    const [totalPrice, setTotalPrice] = useState(0)
+
     const handleInputChange = (event) => {
-        setproductQuantity(Number(event.target.value))
+        // setproductQuantity(Number(event.target.value))
     }
     const handleAddQuantityChange = (productToChange) => {
         dispatch(cartActions.addToCart(productToChange))
@@ -32,43 +36,65 @@ export default function Cart() {
             console.log(productIdList);
 
             let tempCartItemsHtml = []
+            let tempTotalPrice = 0
+
             for (let productIdPair in productIdList) {
                 const productId = productIdList[productIdPair].productId
                 const variantId = productIdList[productIdPair].variantId
+
                 const product = getProductById(productList, productId)
                 const variant = Object.values(product.variants).find(variant => variant.id === variantId)
-                const image = Object.values(product.variantsHaveImages? variant.images : product.images)[0]
                 
+                const quantity = cartItemList.find(product => product.productId === productId && product.variantId === variantId).quantity
+                const price = (product.isOnSale? variant.discountedPrice : variant.price)
+                const quantityPrice = Number((quantity * price).toFixed(2))
+
+                const productLink = `/products/${productId}${variantId !== "standard"? `?variant=${variantId}` : ""}`
+                const image = Object.values(product.variantsHaveImages? variant.images : product.images)[0]
+
+                tempTotalPrice += quantityPrice
+                // Number((tempTotalPrice += quantityPrice).toFixed) //Adding to total price
+
                 // const productToAdd = {productId: productId, variantId: variantId, quantity: 1}
-
+                // setTotalPrice(prevTotalPrice => {return Number((prevTotalPrice + quantityPrice).toFixed(2))})
+                
                 tempCartItemsHtml.push(
-                    <div className="cart__product-container">
-                        {product.variantsHaveImages? 
-                        <img src={image.link} alt={image.alt} /> :
-                        <img src={image.link} alt={image.alt} />
-                        }
-
-                        <div className="cart__product-name-wrapper">
-                            <h4>{product.name}</h4> {/* CHANGE STYLING */}
-                            {variant.name !== "standard" && variant.name}
-                            <Link to={""} onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: "all"})}>Remove</Link>
+                    <div className="cart-product">
+                        <div className="cart-product__image-wrapper">
+                            <Link to={productLink}>
+                                <ProgressiveImage src={image} placeholder={placeholderImage}>
+                                    {(src, loading) =>
+                                    <img 
+                                    src={src} 
+                                    // alt={imageAlt}
+                                    className={loading? "imgLoading":"imgLoaded"}
+                                    />
+                                    }                            
+                                </ProgressiveImage>
+                            </Link>
                         </div>
 
-                        <div id="Quantity-Selector__Input-Wrapper">
-                            <button type="button" onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: -1})}>-</button>
-                            <input type="number" name="Quantity" onChange={handleInputChange} value={cartItemList.find(product => product.productId === productId && product.variantId === variantId).quantity}/>
-                            <button type="button" onClick={() => handleAddQuantityChange({productId: productId, variantId: variantId, quantity: 1})}>+</button>
-                        </div>                        
+                        <div className="cart-product__name-wrapper">
+                            <h4>{product.name}</h4> {/* CHANGE STYLING */}
+                            {variant.name !== "standard" && <p>{variant.name}</p>}
+                            <Link to={""} onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: "all"})}>Remove</Link>
+                        </div>
+                        
+                        <div className="quantity-selector">
+                            <label htmlFor="Quantity">Quantity</label>
+                            <div className="quantity-selector__wrapper">
+                                <button type="button" onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: -1})}>-</button>
+                                <input type="number" name="Quantity" onChange={handleInputChange} value={quantity}/>
+                                <button type="button" onClick={() => handleAddQuantityChange({productId: productId, variantId: variantId, quantity: 1})}>+</button>
+                            </div>
+                        </div>
+
+                        <div className="cart-product__price">${quantityPrice}</div>
                     </div>
                 )
             }
             setCartItemsHtml(tempCartItemsHtml)
-            // for (let productId in productIdArray) {
-            //     productCardArray.push(
-            //         <div className="grid__item" key={productId}>
-            //         </div>
-            //     )
-            // }
+            setTotalPrice((tempTotalPrice).toFixed(2))
         }
     },[status, cartItemList]) //Might be firing too soon?
 
@@ -78,22 +104,23 @@ export default function Cart() {
 
             <form className="cart"> {/* onsubmit action method nonvalidate */}
                 {/* Country alert for purchasing from multiple */}
-                <div className="cart__products-container">
+                <div className="cart-products-container">
                     {cartItemsHtml}
                 </div>
-                <div className="cart__inputs-container">
-                    <div className="cart__special-instruction">
-                        <h4>Special Instructions For Seller</h4>
+                <div className="cart-inputs">
+                    <div className="cart-inputs__special-instruction">
+                        {/* <h4>Special Instructions For Seller</h4> */}
                         <label htmlFor="special-instructions">Special Instructions For Seller</label>
                         <textarea name="special-instructions" id="special-instructions" cols="30" rows="2"></textarea>
                     </div>
-                    <div className="cart__checkout-information">
-                        <h4 className="cart__total">$XXXXXXXXXX</h4> {/* CHANGE STYLING (Maybe h3/h5?) */}
+                    <div className="cart-checkout">
+                        <h4 className="cart-checkout__total-price">${totalPrice}</h4> {/* CHANGE STYLING (Maybe h3/h5?) */}
+                        <p className="cart-checkout__tax-disclaimer">Taxes and shipping calculated at checkout</p>
                         {/* wcp-cart-total */}
                         {/* additional-notes */}
                         {/* cart__taxes */}
                         <button type="submit" name="update" className="btn">Update Cart</button>
-                        <button type="submit" name="checkout" className="btn">Checkout</button>
+                        <button type="submit" name="checkout" className="btn">Check Out</button>
                     </div>
                 </div>
 
