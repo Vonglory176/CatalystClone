@@ -48,10 +48,15 @@
 
             h4 {
                 margin: 0;
+                font-size: 20px;
+                font-weight: 700;
+                text-transform: none;
+                letter-spacing: normal;
+                &:hover {color: $secondary-hover-color;}
             }
             a {
                 color: $secondary-color;
-                width: min-content;
+                width: fit-content;
                 margin: auto;
                 
                 &:hover {
@@ -66,7 +71,7 @@
 
         .quantity-selector {
             text-align: center;
-            
+
             @media (min-width:750px) {
                 label {display: none;}
             }
@@ -82,6 +87,12 @@
         textarea {
             border: 1px solid $primary-font-color
         }
+
+        @media (min-width:750px) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
     }    
 
     .cart-checkout {
@@ -89,6 +100,11 @@
         flex-direction: column;
         text-align: center;
 
+        @media (min-width:750px) {
+            text-align: end;
+            align-items: end;
+        }
+        
         &__total-price {
             margin: 35px 0 0 0;
             font-size: 24px;
@@ -96,19 +112,23 @@
         &__tax-disclaimer {            
             margin: 0 0 45px 0;
         }
-
+        
         button {
             margin-bottom: 10px;
-
+            
             &[name=update] {
                 background-color: $accent-color;
-
+                
                 &:hover {
                     background-color: $accent-color-hover;
                 }
                 &:focus {
                     background-color: $accent-color-focus;
                 }
+            }
+
+            @media (min-width:750px) {
+                width: 200px;
             }
         }
 
