@@ -9,6 +9,7 @@ import urbanBrawl2 from "../assets/slideshow/Rotating-Banner_UrbanBrawl_1512x.we
 
 import ProgressiveImage from "react-progressive-image";
 import placeholderImage from "../assets/slideshow/slidePlaceholder.jpg"
+import { Link } from "react-router-dom";
 
 export default function Slideshow() {
     return (
@@ -16,47 +17,51 @@ export default function Slideshow() {
 
       {/* TEMPLAR SLIDE */}
       <Carousel.Item>
-        <ProgressiveImage 
-        src={templarImg1}
-        srcSetData={{
-          srcSet:`
-          ${templarImg1} 540w, 
-          ${templarImg2} 720w, 
-          ${templarImg3} 900w`
-        }}
-        placeholder={placeholderImage}
-        >
-            {(src, loading, srcSetData) =>
-              <img
-              className={loading? "imgLoading":"imgLoaded"}
-              src={src}
-              srcSet={srcSetData.srcSet}
-              alt={""}
-              /> 
-            }
-        </ProgressiveImage>
+        <Link to={"/collections/battletech"}>
+          <ProgressiveImage 
+          src={templarImg1}
+          srcSetData={{
+            srcSet:`
+            ${templarImg1} 540w, 
+            ${templarImg2} 720w, 
+            ${templarImg3} 900w`
+          }}
+          placeholder={placeholderImage}
+          >
+              {(src, loading, srcSetData) =>
+                <img
+                className={loading? "imgLoading":"imgLoaded"}
+                src={src}
+                srcSet={srcSetData.srcSet}
+                alt={""}
+                /> 
+              }
+          </ProgressiveImage>
+        </Link>
       </Carousel.Item>
 
       {/* URBAN-BRAWL SLIDE */}
       <Carousel.Item>
-        <ProgressiveImage 
-        src={templarImg1}
-        srcSetData={{
-          srcSet:`
-          ${urbanBrawl1} 1296w, 
-          ${urbanBrawl2} 1512w`
-        }}
-        placeholder={placeholderImage}
-        >
-            {(src, loading, srcSetData) =>
-              <img
-              className={loading? "imgLoading":"imgLoaded"}
-              src={src}
-              srcSet={srcSetData.srcSet}
-              alt={""}
-              /> 
-            }
-        </ProgressiveImage>
+        <Link to={"/collections/shadowrun"}>        
+          <ProgressiveImage 
+          src={templarImg1}
+          srcSetData={{
+            srcSet:`
+            ${urbanBrawl1} 1296w, 
+            ${urbanBrawl2} 1512w`
+          }}
+          placeholder={placeholderImage}
+          >
+              {(src, loading, srcSetData) =>
+                <img
+                className={loading? "imgLoading":"imgLoaded"}
+                src={src}
+                srcSet={srcSetData.srcSet}
+                alt={""}
+                /> 
+              }
+          </ProgressiveImage>
+        </Link>
       </Carousel.Item>
     </Carousel>
     )
