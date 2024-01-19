@@ -45,6 +45,8 @@ export default function Cart() {
 
                 const product = getProductById(productList, productId)
                 const variant = Object.values(product.variants).find(variant => variant.id === variantId)
+
+                const productUniverse = product.universe === 'Other'? "" : product.universe
                 
                 const quantity = cartItemList.find(product => product.productId === productId && product.variantId === variantId).quantity
                 const price = (product.isOnSale? variant.discountedPrice : variant.price)
@@ -70,13 +72,13 @@ export default function Cart() {
                                     // alt={imageAlt}
                                     className={loading? "imgLoading":"imgLoaded"}
                                     />
-                                    }                            
+                                }                            
                                 </ProgressiveImage>
                             </Link>
                         </div>
 
                         <div className="cart-product__name-wrapper">
-                            <h4>{product.name}</h4> {/* CHANGE STYLING */}
+                            <Link to={productLink}><h4>{productUniverse}: {product.name}</h4></Link>
                             {variant.name !== "standard" && <p>{variant.name}</p>}
                             <Link to={""} onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: "all"})}>Remove</Link>
                         </div>
