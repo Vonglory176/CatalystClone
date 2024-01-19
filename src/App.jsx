@@ -139,20 +139,18 @@ TODO
 -------------------
 Right now!
 ------
-Implement lazyloading & react-progressive-image
-Learn how to preload images? Especially in places like products (GZIP)
-Make small placeholder versions of all images
+
 
 Later!
 ------
 Create search
 Add some reducer extension things to disable quantity buttons/input while updating
-Test to make sure TAG filters are working correctly
 
 DATABASE ---
 Put Firebase config in ENV file !!!!!!
-Add stock numbers to products
-Add more products to ProductList
+
+Add more products to ProductList ?
+Add stock numbers to products ?
 
 FILTERS / SORT / PAGINATION ---
 Big issue with fwd/back buttons (SearchParam changes add to history)
@@ -161,11 +159,10 @@ Make mobile rendition of filters
 Finish styling
 
 COLLECTION-BLOCK ---
-Load products into Featured-Containers (Just use ID's for the moment)
-Write logic for determining Featured/NewArrival-Section (Still uncertain of manual or auto load)
+
+Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
 Collect all Featured Products and random load into collection-blocks?
-Add Collection-Link coverage to characters
-Add fade-in to characters on load
+Load products into Featured-Containers? (Just use ID's for the moment)
 
 PRODUCT RESULT/CARD ---
 Add sale code
@@ -174,12 +171,12 @@ Finish styling
 PRODUCT PAGE ---
 Finish ability to expand image on click
 Add vertical image carousel
-Remove inline hover clicker for quantity number input (Also for cart/checkout)
-Add code to make product page search database faster? (Like only look in battletech, not all cats)
-Make a category page at "/products"
 Add a "BACK TO X" banner for page when coming from a collection
-Add a share on social media div?
 Finish styling
+
+Add code to make product page search database faster? (Like only look in battletech, not all cats)
+Make a category page at "/products"?
+Add a share on social media div?
 
 NOTIFICATIONS/ERROR HANDLING ---
 Add errors to store/products/card/result if not found?
@@ -193,19 +190,15 @@ Figure out some kind of way to update/alert to product/cart changes on cart/chec
 
 CHECKOUT/CART ---
 Look into Shopify redirects
-Remove inline hover clicker for quantity number input (Also for products)
-Make sure sale/discount code populates properly
 Needs more steps/checks to verify quantity/price changes
 Write code for changeItemQuantity/Input
-Add Link to product name
-Finish styling
 
 COLLECTIONS ---
 The FREE part of free items only shows in collections!!
 Change background/banners/styles based on the collection
-Have a Universe filter on "collection/all" page?
 Add code to ProductResult in collections to include "From" if more than one option
 Look into issue where going from /battletech straight to /shadowrun causes issue with 'cannot split null' (Jank fix with 'reloadDocument' on header Links)
+Have a Universe filter on "collection/all" page?
 Finish styling
 
 Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
@@ -215,16 +208,15 @@ FEATURED PRODUCT BANNER ---
 Make it!!!
 
 HEADER ---
-Get Search from Searchanise?
-Change location of cart indicator
-Make sticky header ---> GET import {useInView} from 'react-intersection-observer'
+Fix weird mobile-tablet snapping issue?
 Make searchbar (in sidebar + other)(Searchanise??)
+Make + rotate when universe cat opened?
+Make Universe button a link when focused
 
 HOME ---
-Add images to slideshow
 Add random character images to collection-blocks (Obviously collection-block also need tweaks)
 Add btn class to homepage-mailform?
-Fix email styling
+Add images to slideshow?
 
 FOOTER ---
 Add classes to footer links
@@ -239,8 +231,13 @@ Get Captcha for Login/Register?
 Populate account details (Especially purchase history!!)
 
 GENERAL ---
+Figure out how to rotate properly in mobile
+Make scrollbar hidden in MOBILE view, not just small views
+Implement lazyloading & react-progressive-image
+Learn how to preload images? Especially in places like products (GZIP)
+Make small placeholder versions of all images
 Add better image placeholders
-Change quantity-input colors?
+Add sizes to images
 SCSS Cleanup / Standardization (Font/Headers/Buttons especially) ((AND COLORS))
 HTML Cleanup
 Add Titles to anchors
