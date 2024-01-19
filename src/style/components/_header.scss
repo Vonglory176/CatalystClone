@@ -1,6 +1,7 @@
 .header {
     border-bottom: 5px solid $secondary-color;
     background: $accent-color;
+    position: relative;
     z-index: 100;
 
     //Main Header (Top)
@@ -8,12 +9,17 @@
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        z-index: 100;
+
 
         @media (min-width:750px) {
             padding: 20px;
         }
 
         .nav-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             @include hide-after-750;
 
             button {
@@ -21,33 +27,7 @@
                 border: none;
             }
         }
-
-        .store-btns {
-            &__search {
-                @include hide-before-750;
-            }
-        }
         
-        & > div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            i {
-                width: 45px;
-                height: 45px;
-                
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                color: $primary-color;
-                &:hover {
-                    color: $secondary-color;
-                }
-            }
-        }
-
         .company-logo {
             &__link {
                 width: fit-content;
@@ -59,18 +39,102 @@
             }
         }
     }
+    
+    
+    .store-btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &__search {
+            @include hide-before-750;
+        }
+
+        &__cart-link {
+            position: relative;
+            &:hover i {
+                color: $secondary-color;
+            }
+        }
+
+        &__cart-notification {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+    }
+    
+    i {
+        width: 45px;
+        height: 45px;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        color: $primary-color;
+        &:hover {
+            color: $secondary-color;
+        }
+    }
 
     //Sticky Header (Bottom)
+    &__sticky-wrapper {
+        height: 59.25px;
+        @include hide-before-750;
+    }
+
     &__sticky {
         display: flex;
         justify-content: space-between;
-        padding: 0 20px;
+        padding-right: 20px;
+        position: relative;
+        z-index: 99;
 
-        @include hide-before-750;
+        // transition: transform 0.3s ease-in-out;
 
-        &-dropdown {
-            &-button {
-                padding: 20px !important;
+        .universe-dropdown {
+            &__button {                
+                height: 100%;
+                padding: 20px;
+
+                background-color: rgb(0,0,0,0);
+                border: none;
+
+                font-size: 14px;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: $secondary-font-color;
+
+                i {
+                    display: inline-block;
+                    height: min-content;
+                    width: min-content;
+                    padding-left: 5px;
+                }
+
+                &:focus {
+                    background-color: $accent-lighter-color;
+
+                    i {
+                        transform: rotate(180deg);
+                        padding-right: 5px;
+                        padding-left: 0;
+                    }
+                }
+            }
+
+            &__content {
+                background-color: $primary-background-color;
+                padding-bottom: 20px;
+
+                h1 {
+                    margin: 0;
+                    font-size: 60px;
+                    color: #c2cb2033;
+                    font-weight: 900;
+                }
             }
         }
 
@@ -88,6 +152,19 @@
                     color: $primary-color;
                 }
             }
+        }
+
+        &.sticky {
+            width: 100%;
+
+            @media (min-width:750px) {
+                position: fixed;
+                top: 0;
+    
+                transition: all .35s cubic-bezier(.33,.59,.14,1);
+                background-color: $accent-color;
+                border-bottom: 5px solid $secondary-color;            
+            }        
         }
     }
 }
