@@ -18,8 +18,10 @@ import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-
 import tabletopFramePlaceholder from "/src/assets/block-collection/frames/collection-frame-tabletop-low-res.webp"
 import tabletopCover from "/src/assets/block-collection/covers/IWFTD_480x480.webp"
 //Collection Characters
-import characterCombatMage from "/src/assets/block-collection/characters/character-combatMage.webp"
 import characterVictor from "/src/assets/block-collection/characters/character-victor.webp"
+import characterTimberWolf from "/src/assets/block-collection/characters/character-timberWolf.webp"
+import characterCombatMage from "/src/assets/block-collection/characters/character-combatMage.webp"
+import characterStreetSamurai from "/src/assets/block-collection/characters/character-streetSamurai.webp"
 //Collection Buttons
 import saleButton from "../assets/button-collection/collection-buttons-01.webp"
 import saleButtonLowRes from "../assets/button-collection/collection-buttons-01-low-res.webp"
@@ -32,8 +34,20 @@ import { Suspense } from "react"
 
 
 export default function Home() {
-
     
+    const battletechCharacterArray = [
+        characterVictor,
+        characterTimberWolf
+    ]
+    const shadowrunCharacterArray = [
+        characterCombatMage,
+        characterStreetSamurai
+    ]
+
+    const pickRandomCharacter = (array) => {
+        return array[Math.floor(Math.random() * array.length)]
+    }
+
     return (
         <div id="Home-Container">
             
@@ -110,10 +124,9 @@ export default function Home() {
                     "battletech-battlemat-alien-worlds",
                     "battletech-miniature-pack-game-of-armored-combat",
                 ]}
-                characterImageSrcArray={[
-                    characterVictor,
-                ]}
+                characterImageSrc={pickRandomCharacter(battletechCharacterArray)}
                 />
+
                 <CollectionBlock //SHADOWRUN COLLECTION
                 collectionClasses={"right"}
                 collectionLink={"/collections/shadowrun"}
@@ -126,9 +139,7 @@ export default function Home() {
                     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
                     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
                 ]}
-                characterImageSrcArray={[
-                    characterCombatMage,
-                ]}
+                characterImageSrc={pickRandomCharacter(shadowrunCharacterArray)}
                 />
 
                 <section className="collection-buttons-container">
