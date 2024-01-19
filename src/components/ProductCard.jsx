@@ -8,7 +8,7 @@ export default function ProductCard({product}) {
     const variant = Object.values(product.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
     const image = product.variantsHaveImages? variant.images["image1"] : product.images["image1"] //Deciding wether to use variant/product picture
                         
-    let productUniverse = product.universe
+    let productUniverse = (product.universe === "Other"? "" : product.universe)
     let productLink = product.id
     let productName = product.name  
     let productPrice = variant.price //Add code to include "From" if more than one option    
