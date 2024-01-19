@@ -9,7 +9,7 @@ import loadingSpinner from "../assets/loader-large.gif"
 import ProgressiveImage from "react-progressive-image";
 
 export default function CollectionBlock(
-    {collectionClasses, collectionLink,collectionFrameSrc,collectionCoverSrc,collectionCoverTitle,productIdArray,characterImageSrcArray}) {
+    {collectionClasses, collectionLink,collectionFrameSrc,collectionCoverSrc,collectionCoverTitle,productIdArray,characterImageSrc}) {
     const productList = useSelector(state => state.products.productList)
     const status = useSelector(state => state.products.status)
     const [collectionProducts, setCollectionProducts] = useState()
@@ -43,7 +43,6 @@ export default function CollectionBlock(
             <Link to={collectionLink} className={"collection-link"}>
                 <ProgressiveImage
                 src={collectionFrameSrc}
-                // placeholder={placeholderImage}
                 >
                     {(src, loading) =>
                     <img
@@ -56,23 +55,22 @@ export default function CollectionBlock(
                 {/* <img src={collectionFrameSrc} alt="" className="featured-product-frame" /> */}
             </Link>
 
-            {characterImageSrcArray && //If no charImages, this is excluded   
-            <div className="featured-character">
-                <ProgressiveImage
-                src={characterImageSrcArray[0]}
-                // placeholder={placeholderImage}
-                >
-                    {(src, loading) =>
-                    <img
-                    // className={loading? "imgLoading":"imgLoaded"}
-                    src={src}
-                    alt={""}
-                    style={{display: loading? "none" : "block"}}
-                    /> 
-                    }
-                </ProgressiveImage>
-                {/* <img src={characterImageSrcArray[0]} alt=""/> */}
-            </div>
+            {characterImageSrc && //If no charImages, this is excluded   
+            <Link to={collectionLink} className={"collection-link"}>
+                <div className="featured-character">
+                    <ProgressiveImage
+                    src={characterImageSrc}
+                    >
+                        {(src, loading) =>
+                        <img
+                        src={src}
+                        alt={""}
+                        style={{opacity: loading? 0 : 1}}
+                        /> 
+                        }
+                    </ProgressiveImage>
+                </div>
+            </Link>
             }
 
             <div className="grid collection">
