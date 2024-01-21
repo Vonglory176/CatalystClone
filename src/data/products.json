@@ -293,6 +293,47 @@
                 "isGettingStarted": true
             },
 
+            "battletech-activity-book-vol-2": {
+                "id": "battletech-activity-book-vol-2",
+                "name": "Activity Book Vol. 2",
+                "universe": "BattleTech",
+
+                "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+                
+                "type": "SWAG",
+
+                "tags": ["E-Publication", "PayFree"],
+                
+                "images": {                    
+                    "image1": {
+                        "id": "babv2-cover",
+                        "name": "The Cover",
+                        "alt": "A view of the cover",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Factivity-book-vol-2%2FActivityBook2_1024x1024.webp?alt=media&token=dd855ccc-ebbd-4720-84d9-b5df4cdd8688"
+                    }
+                },
+
+                "variantType": "",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "standard",
+                        "name": "Standard",
+                        "price": 0,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": true,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            },
+
             "battletech-miniature-pack-game-of-armored-combat": {
                 "id": "battletech-miniature-pack-game-of-armored-combat",
                 "name": "Miniature Pack: Game Of Armored Combat",
