@@ -153,7 +153,6 @@ Add more products to ProductList ?
 Add stock numbers to products ?
 
 FILTERS / SORT / PAGINATION ---
-Big issue with fwd/back buttons (SearchParam changes add to history)
 Make pages reset whenever filters change
 Make mobile rendition of filters
 Finish styling
@@ -194,17 +193,18 @@ Needs more steps/checks to verify quantity/price changes
 Write code for changeItemQuantity/Input
 
 COLLECTIONS ---
-The FREE part of free items only shows in collections!!
-Change background/banners/styles based on the collection
-Add code to ProductResult in collections to include "From" if more than one option
+Make sure filter sidebar doesn't extend main result container
+Change banners/collection-blocks based on the collection
 Look into issue where going from /battletech straight to /shadowrun causes issue with 'cannot split null' (Jank fix with 'reloadDocument' on header Links)
 Have a Universe filter on "collection/all" page?
+Make page buttons set view to page top?
 Finish styling
 
 Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
 (REMEMBER DISCORD SCREENSHOT/in coding)
 
 FEATURED PRODUCT BANNER ---
+Continue building the FeaturedProductBanner component/file
 Make it!!!
 
 HEADER ---
@@ -212,6 +212,7 @@ Fix weird mobile-tablet snapping issue?
 Make searchbar (in sidebar + other)(Searchanise??)
 Make + rotate when universe cat opened?
 Make Universe button a link when focused
+Add link highlighting when on affiliated page
 
 HOME ---
 Add random character images to collection-blocks (Obviously collection-block also need tweaks)
