@@ -87,7 +87,7 @@ export default function Header() {
                             <button className="header__sticky-dropdown-button btn">Universe</button>
                         </Link> */}
 
-                        <button className="universe-dropdown__button dropdown-button">Universe<i class="fa-solid fa-caret-down"></i></button>
+                        <button className="universe-dropdown__button dropdown-button">Universe<i className="fa-solid fa-caret-down"></i></button>
                         {/* {isFocused && ( */}
                             <div className="universe-dropdown__content dropdown-content">
                                 <Link to={"/collections/all"}><h1>UNIVERSE</h1></Link>
@@ -128,8 +128,8 @@ export default function Header() {
 
                     <div className={`offcanvas-submenu ${showUniverseSubMenu? "hide-submenu" : "show-submenu"}`}>
                         <div className="offcanvas-submenu-container">
-                            <Link to={"/collections/battletech"} className={"offcanvas-submenu-link"} reloadDocument>Battletech</Link>
-                            <Link to={"/collections/shadowrun"} className={"offcanvas-submenu-link"} reloadDocument>Shadowrun</Link>
+                            <Link to={"/collections/battletech"} className={"offcanvas-submenu-link"}>Battletech</Link> {/* reloadDocument */}
+                            <Link to={"/collections/shadowrun"} className={"offcanvas-submenu-link"}>Shadowrun</Link>
                         </div>
                     </div>
                     
