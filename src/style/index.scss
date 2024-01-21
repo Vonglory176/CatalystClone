@@ -252,38 +252,62 @@ input[type='number']::-webkit-outer-spin-button {
 .dropdown {
     position: relative;
     display: inline-block;
-  
+
     .dropdown-button {
-      cursor: pointer;
+        cursor: pointer;
     }
-  
+
     .dropdown-content {
-      display: none;
-      position: absolute;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 101;
-      transform: translateY(-10px);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-  
-      a {
+        display: none;
+        position: absolute;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 101;
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+
+        a {
         color: $third-font-color;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
-  
+
         &:hover {
-          color: $secondary-color;
+            color: $secondary-color;
         }
-      }
+        }
     }
     &:focus-within .dropdown-content {
-      display: block;
-      transform: translateY(0);
-      opacity: 1;
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
+
+.sale-badge {
+    position: absolute;
+    z-index: 10;
+    background: $badge-color;
+    color: $secondary-font-color;
+
+    padding: 0 4px 0 8px;
+    margin: 3px 0 0 3px;
+
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 20px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -9px;
+        border-left: 9px solid $badge-color;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+    }
+}
 
 // FOR IMAGE LOADING
 
