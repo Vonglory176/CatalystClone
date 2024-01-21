@@ -15,11 +15,11 @@ export default function Collections() {
     const {id} = useParams()
     const [searchParams, setSearchParams] = useSearchParams({
         sort_by:"name",
-        // sort_order:"",
         page: 1,
+        // sort_order:"",
         // universe: id,
-        types:[],
-        tags:[],
+        // types:[],
+        // tags:[],
     })
 
     const productList = useSelector(state => state.products.productList)
@@ -29,17 +29,20 @@ export default function Collections() {
     const [tagList, setTagList] = useState()
 
     //For overwriting the w/filter history as opposed to adding to it
-    // const navigate = useNavigate()
-    // const location = useLocation()
+    const navigate = useNavigate()
+    const location = useLocation()
     
-    // const replaceSearchParams = (newParams) => {
-    //     const newSearch = new URLSearchParams({
-    //         ...Array.from(searchParams),
-    //         ...newParams,
-    //     }).toString();
+    const replaceSearchParams = (newParams) => {
+        // console.log(Array.from(searchParams.entries()));
+        console.log(newParams);
+        const newSearch = new URLSearchParams({
+            ...Object.fromEntries(searchParams),
+            ...newParams,
+        }).toString();
     
-    //     navigate(location.pathname + "?" + newSearch, { replace: true });
-    // };
+        // Use navigate to replace the current entry in the history stack
+        navigate(`${location.pathname}?${newSearch}`, { replace: true });
+    };
     
     //Pagination
     const [currentPage, setCurrentPage] = useState()
@@ -53,10 +56,7 @@ export default function Collections() {
     
         if (newPage >= 1 && newPage <= pageCount) {
             setCurrentPage(newPage)
-    
-            // replaceSearchParams({
-            //     page: newPage,
-            // })
+
             setSearchParams(prevSearch => {
                 prevSearch.set('page', newPage)        
                 return prevSearch;
@@ -74,19 +74,7 @@ export default function Collections() {
         }
     },[localProductList, searchParams.get('page')]) //searchParams.get('page')
 
-    //Print for specific Universe
-    //Print for All / Featured / New / Free / Sale
-
-    /*
-        Use id as Universe (If "all" no filter)
-        searchParams then whittle down the types/tags
-        Type calculated first
-        Tags are printed with a scanning of relevant product/type
-
-        ProductList is loaded
-        Items are iterated
-    */
-
+    //PAGE INITIALIZATION
     useEffect(() => {
         let tempProductList = []
         let typeInstanceList = {}
@@ -132,6 +120,7 @@ export default function Collections() {
             ))
         }
 
+        //Getting and printing page-contents
         if (productList) {
             //ALL CATEGORIES
             if (id === "all") {
@@ -153,23 +142,25 @@ export default function Collections() {
             const page = searchParams.get('page')
             setCurrentPage(page)
 
-            // setLocalProductList(tempProductList)
-            // console.log("SENDING TO SORT!")
+            
             const sortBy = searchParams.get('sort_by')
             handleSortResults({ target: {value: sortBy}}, tempProductList) //List is sorted & printed here
+            // setLocalProductList(tempProductList)
+
             setTypeList(createFilterList(typeInstanceList, 'types'))
             setTagList(createFilterList(tagInstanceList, 'tags'))
         }
-    }, [id, productList, searchParams.get("tags"), searchParams.get("types")]) //searchParams.get("tags")
+    }, [id, productList, searchParams.get("tags"), searchParams.get("types")]) //searchParams.get("tags"), searchParams.get("types")
 
     
     //Filter Use
     const handleFilterChange = (filterType, filterName) => {
-
         // Get the current search parameters for the filter type
         let currentSearchParams = searchParams.get(filterType)
-            ? JSON.parse(searchParams.get(filterType))
-            : []
+        console.log(currentSearchParams)
+        
+        if (currentSearchParams) currentSearchParams = JSON.parse(currentSearchParams) 
+        else currentSearchParams = []
     
         // If filterName is already in the list, remove it. Otherwise, add it.
         const index = currentSearchParams.indexOf(filterName);
@@ -180,32 +171,21 @@ export default function Collections() {
             currentSearchParams.sort()
         }
     
-        // Update the search parameters
+        // Update the search parameters  
         if (currentSearchParams.length > 0) {
-            // replaceSearchParams({
-            //     [filterType]: JSON.stringify(currentSearchParams),
-            // })
-
-            // if (filterType === 'types') {
-            //     replaceSearchParams({
-            //         tags: undefined,
-            //     })
-            // }
             setSearchParams(prevSearch => {
                 prevSearch.set(filterType, JSON.stringify(currentSearchParams))
                 if (filterType === 'types') prevSearch.delete('tags') // Reset the tag filter whenever the type filter changes
                 return prevSearch
             })
         } else {
-            // replaceSearchParams({
-            //     [filterType]: undefined,
-            // })
             setSearchParams(prevSearch => {
                 prevSearch.delete(filterType)
                 return prevSearch
             })
         }
-    }    
+    }  
+    
     
     //Sorting Use
     const handleSortResults = (e, listToSort) => {
@@ -240,13 +220,22 @@ export default function Collections() {
             }
         })        
         
-        setLocalProductList(tempProductList) //Printing to HTML
+        //Printing to HTML
+        setLocalProductList(tempProductList) 
         
+        // Prepare the new parameters
+        const newParams = {
+            ...Object.fromEntries(searchParams),
+            sort_by: sortBy,
+        };
+
         // Update the search parameters
-        setSearchParams(prevSearch => {
-            prevSearch.set('sort_by', sortBy)        
-            return prevSearch;
-        });
+        replaceSearchParams(newParams);
+
+        // setSearchParams(prevSearch => {
+        //     prevSearch.set('sort_by', sortBy)        
+        //     return prevSearch;
+        // });
         console.log("DONE SORTING!")
     }
 
