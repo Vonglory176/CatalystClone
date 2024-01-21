@@ -1921,9 +1921,6 @@
   text-align: center;
 }
 
-#Collections-Container {
-  background-color: #262626;
-}
 @media (max-width: 749px) {
   #Collections-Container .collection-block {
     display: none;
@@ -2001,6 +1998,7 @@
 #Collections-Container .search-results__main-content:is(.grid-mode) .product-result__image-container {
   display: flex;
   align-items: center;
+  padding: 5px 5px 0 5px;
   height: 200px;
 }
 @media (min-width: 750px) {
@@ -2125,7 +2123,7 @@
   background-size: cover;
 }
 .homeLayout .main-content {
-  background: url("/src/assets/Page-Background-Image.webp");
+  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fhome-page-background.webp?alt=media&token=dbe42bd8-08b6-45fc-a465-0ab9da56c102");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2155,6 +2153,25 @@
 .mainLayout .main-content {
   background: #f3f3f3;
   padding: 60px 0 80px 0;
+}
+.mainLayout .main-content.battletech-page, .mainLayout .main-content.shadowrun-page, .mainLayout .main-content.other-page, .mainLayout .main-content.all-page {
+  background-color: #363636;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+.mainLayout .main-content.battletech-page {
+  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fbattletech-page-background.webp?alt=media&token=de9f579b-b3da-4eed-8d2d-ec2d8d01e4f9");
+}
+.mainLayout .main-content.shadowrun-page {
+  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fshadowrun-page-background.webp?alt=media&token=07b0b857-758f-4959-9923-4f567ed9ac6a");
+}
+.mainLayout .main-content.other-page {
+  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fother-background.webp?alt=media&token=cc00694d-6c3f-4852-9f87-462f0623679e");
+}
+.mainLayout .main-content.all-page {
+  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fall-page-background.webp?alt=media&token=eb82a935-2dac-4b9a-a360-072edfda9475");
 }
 
 body {
@@ -2370,6 +2387,27 @@ input[type=number]::-webkit-outer-spin-button {
   display: block;
   transform: translateY(0);
   opacity: 1;
+}
+
+.sale-badge {
+  position: absolute;
+  z-index: 10;
+  background: #d2354f;
+  color: #fff;
+  padding: 0 4px 0 8px;
+  margin: 3px 0 0 3px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 20px;
+}
+.sale-badge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -9px;
+  border-left: 9px solid #d2354f;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
 
 .imgLoaded {
