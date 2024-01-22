@@ -1,7 +1,7 @@
 const checkVariantsForPriceDifferences = (variantArray) => {
     let samePrice = true
-    for (variantIndex in variantArray) { //Are there multiple prices?
-        if (variantArray[variantIndex].price !== variantPrice) {
+    for (let i in variantArray) { //Are there multiple prices?
+        if (variantArray[i].price !== variantArray[0].price) {
             samePrice = false
             break
         }
