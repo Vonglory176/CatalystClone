@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react"
 // import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
 import newArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-new-arrivals.svg"
 import ProductResult from "../components/ProductResult"
-import ProductCard from "../components/ProductCard"
 
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
@@ -58,7 +57,7 @@ export default function Collections() {
             setCurrentPage(newPage)
 
             setSearchParams(prevSearch => {
-                prevSearch.set('page', newPage)        
+                prevSearch.set('page', newPage)
                 return prevSearch;
             })
         }
@@ -173,7 +172,10 @@ export default function Collections() {
     
         // Update the search parameters  
         if (currentSearchParams.length > 0) {
+            setCurrentPage(1) //Page reset
+
             setSearchParams(prevSearch => {
+                prevSearch.set('page', 1)
                 prevSearch.set(filterType, JSON.stringify(currentSearchParams))
                 if (filterType === 'types') prevSearch.delete('tags') // Reset the tag filter whenever the type filter changes
                 return prevSearch
