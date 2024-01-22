@@ -9,7 +9,7 @@ export default function ProductResult({product}) {
     const variant = variants.find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
     const image = product.variantsHaveImages? variant.images["image1"] : product.images["image1"] //Deciding wether to use variant/product picture
                         
-    const productUniverse = product.universe
+    const productUniverse = product.universe === "Other"? "" : product.universe
     const productName = product.name
     const productLink = product.id
     
@@ -17,7 +17,7 @@ export default function ProductResult({product}) {
     const isOnSale = product.isOnSale //Is the product on sale?
     
     const variantPrice = variant.price //Add code to include "From" if more than one option
-    const variantPriceDifference = checkVariantsForPriceDifferences? "" : "From "
+    const variantPriceDifference = checkVariantsForPriceDifferences(variants)? "" : "From "
     const variantDiscountPrice = !isOnSale? 0 : variant.discountedPrice
     const variantDiscountPercentage = (((variantPrice - variantDiscountPrice) / variantPrice) * 100).toFixed(0)
 
