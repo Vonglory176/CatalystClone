@@ -1647,6 +1647,84 @@
   line-height: 1.4em;
 }
 
+.searchbar {
+  position: relative;
+}
+.searchbar:focus > .searchbar-results-container, .searchbar:focus > .searchbar-results-container::after, .searchbar:focus-within > .searchbar-results-container, .searchbar:focus-within > .searchbar-results-container::after {
+  display: block;
+}
+
+.searchbar-results-container {
+  position: absolute;
+  right: 0;
+  width: 380px;
+  max-height: 600px;
+  z-index: 102;
+  background-color: #f3f3f3;
+}
+.searchbar-results-container, .searchbar-results-container:after {
+  display: none;
+}
+.searchbar-results-container::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  right: 30px;
+  border-bottom: 13px solid #f3f3f3;
+  border-right: 9px solid transparent;
+  border-left: 9px solid transparent;
+}
+.searchbar-results-container .searchbar-results-header {
+  text-align: end;
+  font-size: 10px;
+  padding: 3px 5px;
+  background-color: #eee;
+}
+.searchbar-results-container .searchbar-product-result {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 10px;
+  min-height: 110px;
+  max-height: 130px;
+  padding: 5px 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.searchbar-results-container .searchbar-product-result:hover {
+  background-color: rgba(230, 226, 226, 0.6980392157);
+}
+.searchbar-results-container .searchbar-product-result__image-container {
+  width: 70px;
+  height: 73px;
+}
+.searchbar-results-container .searchbar-product-result__image-container img {
+  height: auto;
+  width: 100%;
+  margin: auto;
+}
+.searchbar-results-container .searchbar-product-result__name {
+  color: #c2cb20;
+  font-size: 16px;
+}
+.searchbar-results-container .searchbar-product-result__description {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  max-height: 2.8em;
+}
+.searchbar-results-container .searchbar-product-result__description, .searchbar-results-container .searchbar-product-result__description p, .searchbar-results-container .searchbar-product-result__description h1, .searchbar-results-container .searchbar-product-result__description h2, .searchbar-results-container .searchbar-product-result__description span {
+  margin: 0;
+  font-size: 16px !important;
+  color: #666;
+}
+.searchbar-results-container .searchbar-product-result__price {
+  font-size: 18px;
+  color: #222;
+}
+.searchbar-results-container .searchbar-product-result__price del {
+  font-size: 14px;
+  color: #666;
+}
+
 #Home-Container .getting-started {
   display: flex;
   flex-direction: column;
