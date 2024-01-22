@@ -24,6 +24,9 @@ Anthology
 eBook
 Short-story
 
+E-Publication
+PayFree
+
 Role-playing
 
 CBG
