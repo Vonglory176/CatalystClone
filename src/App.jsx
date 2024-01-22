@@ -139,11 +139,14 @@ TODO
 -------------------
 Right now!
 ------
+Searchbar creation
+Continue looking into the above, issues with appear/disapear
+Also need to add furl/unfurl animation and link activation on icon
 
+CREATE HOOKS FOR PRODUCT INFO STUFF. TOO MUCH REWRITING
 
 Later!
 ------
-Create search
 Add some reducer extension things to disable quantity buttons/input while updating
 
 DATABASE ---
@@ -153,9 +156,14 @@ Add more products to ProductList ?
 Add stock numbers to products ?
 
 FILTERS / SORT / PAGINATION ---
-Make pages reset whenever filters change
 Make mobile rendition of filters
+Sort filters/tags alphabetically
 Finish styling
+
+SEARCH ---
+Make searchbar (in sidebar + other)(Searchanise??)
+Include categories / pages as well as products in search? (Would need database changes)
+
 
 COLLECTION-BLOCK ---
 
@@ -198,7 +206,7 @@ Change banners/collection-blocks based on the collection
 Look into issue where going from /battletech straight to /shadowrun causes issue with 'cannot split null' (Jank fix with 'reloadDocument' on header Links)
 Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
-Finish styling
+Finish styling (Make sure prod img/info are standardized)
 
 Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
 (REMEMBER DISCORD SCREENSHOT/in coding)
@@ -209,7 +217,6 @@ Make it!!!
 
 HEADER ---
 Fix weird mobile-tablet snapping issue?
-Make searchbar (in sidebar + other)(Searchanise??)
 Make + rotate when universe cat opened?
 Make Universe button a link when focused
 Add link highlighting when on affiliated page
@@ -232,6 +239,7 @@ Get Captcha for Login/Register?
 Populate account details (Especially purchase history!!)
 
 GENERAL ---
+Finish and convert all product-image stuff to "getPrimaryProductImage" hook?
 Figure out how to rotate properly in mobile
 Make scrollbar hidden in MOBILE view, not just small views
 Implement lazyloading & react-progressive-image
