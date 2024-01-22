@@ -140,6 +140,7 @@ TODO
 Right now!
 ------
 Searchbar creation
+Weird null issue in products after multiple sequential search-product-result clicks
 Continue looking into the above, issues with appear/disapear
 Also need to add furl/unfurl animation and link activation on icon
 
