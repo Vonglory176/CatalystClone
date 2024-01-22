@@ -7,19 +7,20 @@ import { useSelector } from "react-redux";
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
+import Searchbar from './Searchbar';
 // import auth from "../store/auth-slice";
 
 export default function Header() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
 
     //Offcanvas/Sidebar
-    const [showSidebar, setShowSidebar] = useState(false);
-    const handleClose = () => setShowSidebar(false);
-    const toggleShowSidebar = () => setShowSidebar((s) => !s);
+    const [showSidebar, setShowSidebar] = useState(false)
+    const handleClose = () => setShowSidebar(false)
+    const toggleShowSidebar = () => setShowSidebar((s) => !s)
     
     //For dropdown menu in Offcanvas/Sidebar
     const [showUniverseSubMenu, setUniverseSubMenu] = useState(true)
-    const toggleUniverseSubMenu = () => setUniverseSubMenu((s) => !s);
+    const toggleUniverseSubMenu = () => setUniverseSubMenu((s) => !s)
     const cartItems = useSelector(state => state.cart.cartItemList)
 
     //Sticky-Header Observer
@@ -28,30 +29,32 @@ export default function Header() {
     })
 
     // State to store whether the viewport is wide
-    const [isWideViewport, setIsWideViewport] = useState(window.innerWidth >= 750);
+    const [isWideViewport, setIsWideViewport] = useState(window.innerWidth >= 750)
 
     // Update isWideViewport when the window is resized
     useEffect(() => {
         const handleResize = () => {
-            setIsWideViewport(window.innerWidth >= 750);
-        };
+            setIsWideViewport(window.innerWidth >= 750)
+        }
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', handleResize)
 
-        // Clean up the event listener when the component is unmounted
+        // Clean up the event listener for unmounting
         return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
     const storeButtons = ( //For easy sharing between upper/sticky
     <div className="store-btns">
 
+        {/* Searchbar stuff */}
+        <Searchbar/>
         <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg"></i>
 
+        {/* Shopping Cart Icons */}
         <Link to={"/cart"} className={"store-btns__link store-btns__cart-link"}>
             <i className="fa-solid fa-cart-shopping store-btns__cart fa-lg"></i>
-            {/* Cart-item idicator */}
             {cartItems.length > 0? <i className="fa-solid fa-circle store-btns__cart-notification fa-xs" style={{color:"#c2ca20"}}></i> : ""}
         </Link>
 
