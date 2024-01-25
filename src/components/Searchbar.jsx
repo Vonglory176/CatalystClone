@@ -87,14 +87,18 @@ export default function Searchbar() {
 
     return (
         <form onSubmit={handleSearch} className="searchbar">
-            <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => handleSearchInputChange(e)}
-            />
+            <div className="searchbar-input-container">
+                <input
+                type="text"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => handleSearchInputChange(e)}
+                />
+                <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg"></i>
+            </div>
 
             <div className="searchbar-results-container">
+                <div className="searchbar-results-arrow" style={{opacity: searchTerm? 1 : 0}}/>
                 {searchResultsHtml}
             </div>
             {/* <button type="submit">Search</button> */}
