@@ -45,20 +45,14 @@ export default function Header() {
         }
     }, [])
 
-    const storeButtons = ( //For easy sharing between upper/sticky
-    <div className="store-btns">
-
-        {/* Searchbar stuff */}
-        <Searchbar/>
-        <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg"></i>
-
-        {/* Shopping Cart Icons */}
+    //For easy sharing between upper/sticky/offcanvas
+    const searchbar = <Searchbar/>
+    const cart = (
         <Link to={"/cart"} className={"store-btns__link store-btns__cart-link"}>
             <i className="fa-solid fa-cart-shopping store-btns__cart fa-lg"></i>
             {cartItems.length > 0? <i className="fa-solid fa-circle store-btns__cart-notification fa-xs" style={{color:"#c2ca20"}}></i> : ""}
         </Link>
-
-    </div>)
+    )    
 
     return (
         <header className="header">
@@ -78,7 +72,10 @@ export default function Header() {
                     </Link>
                 </div>
 
-                {storeButtons}
+                <div className="store-btns">
+                    {searchbar}
+                    {cart}
+                </div>
 
             </div>
 
@@ -108,7 +105,12 @@ export default function Header() {
                         {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>}
                     </div>
 
-                    : storeButtons}
+                    : 
+                    
+                    <div className="store-btns">
+                        {searchbar}
+                        {cart}
+                    </div>}
 
                 </div>
             </div>
@@ -116,8 +118,9 @@ export default function Header() {
             {/* Side Nav */}
             <Offcanvas show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
 
-                <Offcanvas.Header > {/* closeButton */}
+                <Offcanvas.Header closeButton> {/*  */}
                     {/* <input type="text" className="offcanvas__searchbar"/> */}
+                    {searchbar}
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
