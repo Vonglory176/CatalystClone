@@ -7,6 +7,7 @@ import ProductResult from "../components/ProductResult"
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import CollectionBlock from "../components/CollectionBlock"
+import { Offcanvas } from "react-bootstrap"
 
 export default function Collections() {
 
@@ -98,14 +99,15 @@ export default function Collections() {
                         tagInstanceList[tag] = (tagInstanceList[tag] || 0) + 1
                     }
                 }
-            }
-        
+            }        
             typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
         }
-    
+
         //Filter setup
         const createFilterList = (instanceList, filterType) => {
-            return Object.entries(instanceList).map(([name, count]) => (
+            const sortedInstanceList = Object.entries(instanceList).sort()
+
+            return sortedInstanceList.map(([name, count]) => (
                 <li className="search-results__filter-li" key={name}>
                     <input 
                         type="checkbox"  
@@ -193,7 +195,7 @@ export default function Collections() {
     const handleSortResults = (e, listToSort) => {
         console.log("IN SORTING!")
         const sortBy = e.target.value
-        const [method, order] = sortBy.split(' ') // "name desc" becomes ["name", "desc"]
+        const [method, order] = sortBy? sortBy.split(' ') : ["name", ""] // "name desc" becomes ["name", "desc"]
     
         let tempProductList = listToSort? [...listToSort] : [...localProductList]
         console.log(tempProductList)
@@ -233,17 +235,17 @@ export default function Collections() {
 
         // Update the search parameters
         replaceSearchParams(newParams);
-
-        // setSearchParams(prevSearch => {
-        //     prevSearch.set('sort_by', sortBy)        
-        //     return prevSearch;
-        // });
         console.log("DONE SORTING!")
     }
 
     //For changing the table view
     const [resultMode, setResultMode] = useState("grid-mode")
     const toggleResultMode = () => setResultMode((m) => m === "grid-mode"? "list-mode" : "grid-mode");
+
+    //For Mobile-Filters Offcanvas/Sidebar
+    const [showSidebar, setShowSidebar] = useState(false)
+    const handleClose = () => setShowSidebar(false)
+    const toggleShowSidebar = () => setShowSidebar((s) => !s)
 
     return (
         <div id="Collections-Container">
@@ -292,9 +294,9 @@ export default function Collections() {
                         <div className="search-results__header-wrapper">
 
                             <div className="search-results__header-filter">
-                                <button className="btn">
+                                <button className="btn" onClick={toggleShowSidebar}>
                                     Filters
-                                    <i className="fa-solid fa-caret-down"></i>
+                                    {/* <i className="fa-solid fa-caret-down"></i> */}
                                 </button>
                             </div>
 
@@ -328,6 +330,24 @@ export default function Collections() {
                     <button className="search-results-pagination__next-button" onClick={() => handlePageChange(+1)}>Next --o</button>
                 </div>
             </div>
+            
+            {/* FOR MOBILE FILTERS */}
+            <Offcanvas show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
+
+                <Offcanvas.Header closeButton>
+                    <h1>Filters</h1>
+                </Offcanvas.Header>
+
+                <Offcanvas.Body>
+                    <div className="search-results__mobile-sidebar">
+                        {/* <ul className="universe-list"></ul> */}
+                        <span>Product Type</span>
+                        <ul className="type-list">{typeList}</ul>
+                        <span>Product Tags</span>
+                        <ul className="tag-list">{tagList}</ul>
+                    </div>
+                </Offcanvas.Body>
+            </Offcanvas>
         </div>
     )
 }
@@ -348,185 +368,4 @@ GettingStarted ------------------------
 BattleTech ------------------------
 ShadowRun ------------------------
 All ------------------------
-
-PLANS -----------------------------
-
-Fetch calls for products (All local)
-Notifications for successful/faliure
-
-Maybe make a page for base collection categories?
-Each product has Categories in desc, use that to generate filter buttons
-
-Figure out how to add filters to url
-
-// useEffect(() => {
-//     // Reset the tag filter whenever the type filter changes
-//     setSearchParams(prevSearch => {
-//         prevSearch.delete('tags')
-//         return prevSearch
-//     })
-// }, [typeList, useSearchParams])
-
-// const hasSorted = useRef(false)
-// useEffect(() => {
-//     if (localProductList && !hasSorted.current) {
-//         const sortBy = searchParams.get('sort_by')
-//         if (sortBy) {
-//             handleSortResults({ target: {value: sortBy}})
-//             hasSorted.current = true
-//         }
-//     }
-// }, [localProductList])
-
 */
-
-// const handleFilterChange = (filterType, filterName) => {
-//     // Handle filter-types
-//     let typeSearchParams = searchParams.get('types')
-//         ? JSON.parse(searchParams.get('types'))
-//         : [];
-//     let tagSearchParams = searchParams.get('tags')
-//         ? JSON.parse(searchParams.get('tags'))
-//         : [];
-
-//     // Updating the changed filter
-//     const updateFilter = () => {
-//         let tempSearchParams = searchParams.get(filterType)
-//         ? JSON.parse(searchParams.get(filterType))
-//         : [];
-
-//         //If already in, REMOVE
-//         if (tempSearchParams.includes(filterName)) {
-//             let index = tempSearchParams.indexOf(filterName);
-//             tempSearchParams.splice(index,1);
-//         }
-//         //Else ADD
-//         else {
-//             tempSearchParams.push(filterName);
-//             tempSearchParams.sort();
-//         }
-//         return tempSearchParams
-//     }
-
-//     switch(filterType) {
-//         case 'types':
-//             typeSearchParams = updateFilter()
-//             break
-
-//         case 'tags': 
-//             tagSearchParams = updateFilter()
-//             break
-//     }
-
-//     // Removing fat and pushing new searchParams
-//     setSearchParams(prevSearch => {
-//         const newSearchParams = {...prevSearch};
-//         if (tagSearchParams.length > 0) {
-//             newSearchParams.tags = JSON.stringify(tagSearchParams);
-//         } else {
-//             delete newSearchParams.tags;
-//         }
-//         if (typeSearchParams.length > 0) {
-//             newSearchParams.types = JSON.stringify(typeSearchParams);
-//         } else {
-//             delete newSearchParams.types;
-//         }
-//         return newSearchParams;
-//     });
-// }
-
-// useEffect(() => {
-//     let tempProductList = []
-//     let typeInstanceList = {}
-//     let tagInstanceList = {}
-    
-//     let tempUniverseList = []
-//     let typeSearchParams
-//     let tagSearchParams
-
-//     if (productList) {
-//         // console.log(Object.keys(productList))
-//         // const productUniverses = Object.keys(productList)
-
-//         //SINGULAR CATEGORY
-//         if (Object.keys(productList).includes(id)) { //If product.category ("battletech") is in page path
-
-//             Object.values(productList[id]).forEach(p => { //For each Product in that Category
-
-//                 typeSearchParams = searchParams.get('types')
-//                 ? JSON.parse(searchParams.get('types'))
-//                 : []
-//                 tagSearchParams = searchParams.get('tags')
-//                 ? JSON.parse(searchParams.get('tags'))
-//                 : []
-
-//                 // If there is no type filter OR type filter is matched by current product
-//                 if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
-
-//                     if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
-//                         tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
-//                     }
-
-//                     //Within each product of the accepted Type, grab all tags
-//                     for (let tag in p.tags) {
-//                         const tagName = p.tags[tag]
-//                         if (tagInstanceList[tagName]) tagInstanceList[tagName] += 1
-//                         else tagInstanceList[tagName] = 1
-//                     }
-//                 }
-//                 const typeName = p.type
-//                 if (typeInstanceList[typeName]) typeInstanceList[typeName] += 1
-//                 else typeInstanceList[typeName] = 1
-//             })
-
-//         }//ALL CATEGORIES           
-//         // else if (id === "all") { 
-//         //     Object.keys(productList).forEach(category => { //For each Product Category
-
-//         //         Object.values(productList[category]).forEach(p => { //For each Product in that Category
-
-//         //             tempProductList.push(<ProductResult key={p.id} product={p}/>) //Create a ProductResult
-//         //         })
-//         //     })
-//         // }
-//         else alert("Something went wrong!") //SOMETHING BLEW UP
-
-//         let tempTypeList = []
-//         let tempTagList = []
-
-//         for (let typeName in typeInstanceList) {
-//             tempTypeList.push(
-//                 <li className="search-results__filter-li">
-//                     <input 
-//                     type="checkbox"  
-//                     onChange={() => handleFilterChange('types', typeName)} 
-//                     name={`${typeName}-checkbox`} 
-//                     value={typeName}
-//                     checked={typeSearchParams.includes(typeName)? true : false}
-//                     >
-//                     </input>
-//                     <label htmlFor={`${typeName}-checkbox`}>{`${typeName} (${typeInstanceList[typeName]})`}</label>
-//                 </li>
-//             )
-//         }
-//         for (let tagName in tagInstanceList) {
-//             tempTagList.push(
-//                 <li className="search-results__filter-li">
-//                     <input 
-//                     type="checkbox"  
-//                     onChange={() => handleFilterChange('tags', tagName)} 
-//                     name={`${tagName}-checkbox`} 
-//                     value={tagName}
-//                     checked={tagSearchParams.includes(tagName)? true : false}
-//                     >
-//                     </input>
-//                     <label htmlFor={`${tagName}-checkbox`}>{`${tagName} (${tagInstanceList[tagName]})`}</label>
-//                 </li>
-//             )
-//         }
-
-//         setLocalProductList(tempProductList) //Outputting the new product list (Okay if empty)
-//         setTypeList(tempTypeList)
-//         setTagList(tempTagList)
-//     }
-// },[id, productList, searchParams])
