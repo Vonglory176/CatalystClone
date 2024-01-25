@@ -140,37 +140,29 @@ TODO
 Right now!
 ------
 Searchbar creation
-Weird null issue in products after multiple sequential search-product-result clicks
-Continue looking into the above, issues with appear/disapear
-Also need to add furl/unfurl animation and link activation on icon
-
-CREATE HOOKS FOR PRODUCT INFO STUFF. TOO MUCH REWRITING
+MODIFY COLLECTIONS PAGE TO ACCEPT "search-results" CODE (Just use search in place of collection?)
 
 Later!
 ------
+CREATE HOOKS FOR PRODUCT INFO STUFF. TOO MUCH REWRITING
 Add some reducer extension things to disable quantity buttons/input while updating
 
 DATABASE ---
 Put Firebase config in ENV file !!!!!!
 
-Add more products to ProductList ?
-Add stock numbers to products ?
+    Add more products to ProductList ?
+    Add stock numbers to products ?
 
 FILTERS / SORT / PAGINATION ---
-Make mobile rendition of filters
-Sort filters/tags alphabetically
+Make mobile rendition of filters (ALSO ADD BUBBLE TO NOTIFY FILTERS ARE ON)
+Bug where clicking current link on non-first page changes current-page to NaN
 Finish styling
 
 SEARCH ---
-Make searchbar (in sidebar + other)(Searchanise??)
+Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
+Add Aria capability
+
 Include categories / pages as well as products in search? (Would need database changes)
-
-
-COLLECTION-BLOCK ---
-
-Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
-Collect all Featured Products and random load into collection-blocks?
-Load products into Featured-Containers? (Just use ID's for the moment)
 
 PRODUCT RESULT/CARD ---
 Add sale code
@@ -179,12 +171,49 @@ Finish styling
 PRODUCT PAGE ---
 Finish ability to expand image on click
 Add vertical image carousel
-Add a "BACK TO X" banner for page when coming from a collection
 Finish styling
 
+Add a "BACK TO X" banner for page when coming from a collection?
 Add code to make product page search database faster? (Like only look in battletech, not all cats)
 Make a category page at "/products"?
 Add a share on social media div?
+
+CHECKOUT/CART ---
+Look into Shopify redirects
+Write code for changeItemQuantity/Input
+
+Needs more steps/checks to verify quantity/price changes?
+
+COLLECTIONS ---
+Make sure filter sidebar doesn't extend main result container
+Change banners/collection-blocks based on the collection
+Finish styling (Make sure prod img/info are standardized)
+
+Have a Universe filter on "collection/all" page?
+Make page buttons set view to page top?
+
+Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
+(REMEMBER DISCORD SCREENSHOT/in coding)
+
+FEATURED PRODUCT BANNER ---
+Continue building the FeaturedProductBanner component/file
+Make it!!!
+
+HEADER ---
+Fix weird mobile-tablet snapping issue? (Use transition delay maybe, worked for search)
+Fix sidebar links
+Make + rotate when universe cat opened?
+Make Universe button a link when focused
+Add link highlighting when on affiliated page
+
+CONTACT ---
+Add form functionality?
+Finish Styling
+
+ACCOUNT ---
+Add actual login/auth mechanics
+Get Captcha for Login/Register?
+Populate account details (Especially purchase history!!)
 
 NOTIFICATIONS/ERROR HANDLING ---
 Add errors to store/products/card/result if not found?
@@ -195,49 +224,6 @@ Alert for Product Filter Tags resetting after Filter Type change?
 Figure out some kind of way to update/alert to product/cart changes on cart/checkout page
 (Always alerts initially in regard to things like stock/quantity, both on product/cart page)
 (Cart page has an "Update Cart" button)
-
-CHECKOUT/CART ---
-Look into Shopify redirects
-Needs more steps/checks to verify quantity/price changes
-Write code for changeItemQuantity/Input
-
-COLLECTIONS ---
-Make sure filter sidebar doesn't extend main result container
-Change banners/collection-blocks based on the collection
-Look into issue where going from /battletech straight to /shadowrun causes issue with 'cannot split null' (Jank fix with 'reloadDocument' on header Links)
-Have a Universe filter on "collection/all" page?
-Make page buttons set view to page top?
-Finish styling (Make sure prod img/info are standardized)
-
-Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
-(REMEMBER DISCORD SCREENSHOT/in coding)
-
-FEATURED PRODUCT BANNER ---
-Continue building the FeaturedProductBanner component/file
-Make it!!!
-
-HEADER ---
-Fix weird mobile-tablet snapping issue?
-Make + rotate when universe cat opened?
-Make Universe button a link when focused
-Add link highlighting when on affiliated page
-
-HOME ---
-Add random character images to collection-blocks (Obviously collection-block also need tweaks)
-Add btn class to homepage-mailform?
-Add images to slideshow?
-
-FOOTER ---
-Add classes to footer links
-
-CONTACT ---
-Add form functionality?
-Finish Styling
-
-ACCOUNT ---
-Add actual login/auth mechanics
-Get Captcha for Login/Register?
-Populate account details (Especially purchase history!!)
 
 GENERAL ---
 Finish and convert all product-image stuff to "getPrimaryProductImage" hook?
@@ -252,5 +238,19 @@ SCSS Cleanup / Standardization (Font/Headers/Buttons especially) ((AND COLORS))
 HTML Cleanup
 Add Titles to anchors
 Add FavIcon !!!!!!
+
+OPTIONAL ------------------------------------
+
+COLLECTION-BLOCK ---
+Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
+Collect all Featured Products and random load into collection-blocks?
+Load products into Featured-Containers? (Just use ID's for the moment)
+
+HOME ---
+Add btn class to homepage-mailform?
+Add images to slideshow?
+
+FOOTER ---
+Add classes to footer links?
 -------------------
 */
