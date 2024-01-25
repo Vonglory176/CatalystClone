@@ -39,7 +39,7 @@ export default function Products() {
                 if (!product) console.log("ERROR: Could not find product information!")
                 return product
             })
-                    console.log(currentProduct)
+            console.log(currentProduct)
         }
     },[id, productList])
 
@@ -111,30 +111,22 @@ export default function Products() {
     }
     const handleSubtractQuantity = () => {
         if (productQuantity > 1) setproductQuantity(prevQuantity => prevQuantity - 1)
-        console.log(productQuantity)
+        // console.log(productQuantity)
     }
     const handleAddQuantity = () => {
         setproductQuantity(prevQuantity => prevQuantity + 1)
-        console.log(productQuantity)
+        // console.log(productQuantity)
     }
 
     return (
         <div id="Products-Container">
             <div className="products-images">
                 <div className="products-images__primary">
-                    {/* {selectedVariant && (currentProduct.variantsHaveImages?
-                    <img //If yes, use Variant Image for initial
-                    src={Object.values(selectedVariant.images)[0].link} 
-                    alt={Object.values(selectedVariant.images)[0].alt} 
-                    /> :
-                    <img //If no, use Product Image for initial
-                    src={Object.values(currentProduct.images)[0].link} 
-                    alt={Object.values(currentProduct.images)[0].alt} 
-                    />)} */}
 
                     {selectedVariant && 
                     <ProgressiveImage
-                    src={currentProduct.variantsHaveImages? 
+                    src={
+                        currentProduct.variantsHaveImages? 
                         Object.values(selectedVariant.images)[0].link :
                         Object.values(currentProduct.images)[0].link
                     } 
@@ -153,7 +145,8 @@ export default function Products() {
                         }
                         />
                         }                            
-                    </ProgressiveImage>}      
+                    </ProgressiveImage>}
+
                 </div>
                 <div className="products-images__scroller"></div>
             </div>
