@@ -97,6 +97,12 @@
         background-color: $border-list-color;
     }
 
+    .searchbar-results-empty {
+        display: block;
+        text-align: center;
+        padding: 30px;
+    }
+
     .searchbar-product-result {
         display: grid;
         grid-template-columns: 70px 1fr;
