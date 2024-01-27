@@ -110,9 +110,10 @@ export default function Collections() {
             return sortedInstanceList.map(([name, count]) => (
                 <li className="search-results__filter-li" key={name}>
                     <input 
-                        type="checkbox"  
-                        onChange={() => handleFilterChange(filterType, name)} 
-                        name={`${name}-checkbox`} 
+                        type="checkbox"
+                        onChange={() => handleFilterChange(filterType, name)}
+                        id={`${name}-checkbox`}
+                        name={`${name}-checkbox`}
                         value={name}
                         checked={searchParams.get(filterType)?.includes(name) || false}
                     />
@@ -270,7 +271,7 @@ export default function Collections() {
             <div className="search-results">
 
                 <div className="search-results__header">
-                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results for "X"</div>
+                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results for "{id}"</div>
 
                     <div className="search-results__header-buttons">
                         <div className="search-results__header-sort">
@@ -296,7 +297,7 @@ export default function Collections() {
                             <div className="search-results__header-filter">
                                 <button className="btn" onClick={toggleShowSidebar}>
                                     Filters
-                                    {/* <i className="fa-solid fa-caret-down"></i> */}
+                                    <i className="fa-solid fa-caret-down"></i>
                                 </button>
                             </div>
 
@@ -318,10 +319,13 @@ export default function Collections() {
                     </div>
                     <div className="search-results__main-sidebar">
                         {/* <ul className="universe-list"></ul> */}
-                        <span>Product Type</span>
-                        <ul className="type-list">{typeList}</ul>
-                        <span>Product Tags</span>
-                        <ul className="tag-list">{tagList}</ul>
+                        <h1>Product Filters</h1>
+                        <div className="search-results__main-sidebar__filter-wrapper">
+                            <span>Product Type</span>
+                            <ul className="type-list">{typeList}</ul>
+                            <span>Product Tags</span>
+                            <ul className="tag-list">{tagList}</ul>
+                        </div>
                     </div>
                 </div>
                 <div className="search-results-pagination">
@@ -329,25 +333,25 @@ export default function Collections() {
                     <span className="search-results-pagination__page-count">{currentPage} of {pageCount}</span>
                     <button className="search-results-pagination__next-button" onClick={() => handlePageChange(+1)}>Next --o</button>
                 </div>
-            </div>
-            
-            {/* FOR MOBILE FILTERS */}
-            <Offcanvas show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
 
-                <Offcanvas.Header closeButton>
-                    <h1>Filters</h1>
-                </Offcanvas.Header>
+                {/* FOR MOBILE FILTERS */}
+                <Offcanvas className="offcanvas-filters" show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
 
-                <Offcanvas.Body>
-                    <div className="search-results__mobile-sidebar">
-                        {/* <ul className="universe-list"></ul> */}
-                        <span>Product Type</span>
-                        <ul className="type-list">{typeList}</ul>
-                        <span>Product Tags</span>
-                        <ul className="tag-list">{tagList}</ul>
-                    </div>
-                </Offcanvas.Body>
-            </Offcanvas>
+                    <Offcanvas.Header closeButton>
+                        <h1>Product Filters</h1>
+                    </Offcanvas.Header>
+
+                    <Offcanvas.Body>
+                        <div className="search-results__mobile-sidebar">
+                            {/* <ul className="universe-list"></ul> */}
+                            <span>Product Type</span>
+                            <ul className="type-list">{typeList}</ul>
+                            <span>Product Tags</span>
+                            <ul className="tag-list">{tagList}</ul>
+                        </div>
+                    </Offcanvas.Body>
+                </Offcanvas>
+            </div>            
         </div>
     )
 }
