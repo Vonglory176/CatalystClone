@@ -155,7 +155,7 @@ Put Firebase config in ENV file !!!!!!
 
 FILTERS / SORT / PAGINATION ---
 Make mobile rendition of filters (ALSO ADD BUBBLE TO NOTIFY FILTERS ARE ON)
-Bug where clicking current link on non-first page changes current-page to NaN
+Bug where clicking current link on non-first page changes current-page to NaN (Have a default of "if NaN change to 1"?)
 Finish styling
 
 SEARCH ---
@@ -185,7 +185,8 @@ Write code for changeItemQuantity/Input
 Needs more steps/checks to verify quantity/price changes?
 
 COLLECTIONS ---
-Make sure filter sidebar doesn't extend main result container
+Scrollbar pop in/out bug when selecting filters
+Fix header button wrapping
 Change banners/collection-blocks based on the collection
 Finish styling (Make sure prod img/info are standardized)
 
