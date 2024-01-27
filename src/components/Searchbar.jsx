@@ -54,25 +54,22 @@ export default function Searchbar() {
         // let tempSearchResultContainerHtml
 
         if (searchResults) {
-            //Get first three results/items
-            for (let i = 0; i < 3 && i < searchResults.length; i++) {
-                const product = searchResults[i].item
-                tempSearchResultsHtml.push(ProductSearchbarResult(product))
-            }
+            //Rewrite this to be product specific
+            if (searchResults.length > 0) {
+
+                //Get first three results/items
+                for (let i = 0; i < 3 && i < searchResults.length; i++) {
+                    const product = searchResults[i].item
+                    tempSearchResultsHtml.push(ProductSearchbarResult(product))
+                }
                 //Adding the "Products" header if products were found
                 if (tempSearchResultsHtml.length > 0) tempSearchResultsHtml.unshift(
                 <div className="searchbar-results-header">Products</div>
                 )
-            
-            // searchResults
-            //Print length/link to the rest
+            }
 
-            // tempSearchResultContainerHtml = (
-                // <div className="searchbar-results-container">
-                //     {tempSearchResultsHtml}
-                // </div>
-            // )
-
+            //No results message
+            else if (searchTerm) tempSearchResultsHtml.push(<span className="searchbar-results-empty">Sorry, nothing was found for "<strong>{searchTerm}</strong>".</span>)
         }
 
         setSearchResultsHtml(tempSearchResultsHtml)
