@@ -116,7 +116,7 @@ export default function Header() {
             </div>
 
             {/* Side Nav */}
-            <Offcanvas show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
+            <Offcanvas className="offcanvas-nav" show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
 
                 <Offcanvas.Header closeButton> {/*  */}
                     {/* <input type="text" className="offcanvas__searchbar"/> */}
