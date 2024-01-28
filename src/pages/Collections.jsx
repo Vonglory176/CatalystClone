@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react"
 
 // import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
-import newArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-new-arrivals.svg"
+import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-battletech-new-arrivals.svg"
+import shadowrunNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun-new-arrivals.svg"
 import ProductResult from "../components/ProductResult"
 
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import CollectionBlock from "../components/CollectionBlock"
 import { Offcanvas } from "react-bootstrap"
+import FeaturedProductBanner from "../components/FeaturedProductBanner"
 
 export default function Collections() {
 
@@ -63,6 +65,9 @@ export default function Collections() {
             })
         }
     }
+
+    //Counting filters
+    const [filterNumber, setFilterNumber] = useState(0)
 
     useEffect(() => {
         if (localProductList) {
@@ -137,22 +142,25 @@ export default function Collections() {
             //SOMETHING BLEW UP
             else console.log("There was an error loading categories from productList!")
 
-            //Updating page count
+            //Pagination setup
             const totalPages = Math.ceil(tempProductList.length / resultsPerPage)
             setPageCount(totalPages)
 
-            const page = searchParams.get('page')
-            setCurrentPage(page)
+            //Filter setup
+            setTypeList(createFilterList(typeInstanceList, 'types'))
+            setTagList(createFilterList(tagInstanceList, 'tags'))
 
-            
+            //Filter count for mobile indicator
+            const tags = searchParams.get('tags') ? JSON.parse(searchParams.get('tags')) : []
+            const types = searchParams.get('types') ? JSON.parse(searchParams.get('types')) : []
+            setFilterNumber(tags.length + types.length)
+
+            //Result sorting/printing
             const sortBy = searchParams.get('sort_by')
             handleSortResults({ target: {value: sortBy}}, tempProductList) //List is sorted & printed here
             // setLocalProductList(tempProductList)
-
-            setTypeList(createFilterList(typeInstanceList, 'types'))
-            setTagList(createFilterList(tagInstanceList, 'tags'))
         }
-    }, [id, productList, searchParams.get("tags"), searchParams.get("types")]) //searchParams.get("tags"), searchParams.get("types")
+    }, [id, productList, searchParams]) //searchParams.get("tags"), searchParams.get("types")
 
     
     //Filter Use
@@ -229,9 +237,12 @@ export default function Collections() {
         setLocalProductList(tempProductList) 
         
         // Prepare the new parameters
+        const page = parseInt(searchParams.get('page')) //Reset page if needed
+
         const newParams = {
             ...Object.fromEntries(searchParams),
-            sort_by: sortBy,
+            sort_by: sortBy? sortBy : "name",
+            page: page? page : 1
         };
 
         // Update the search parameters
@@ -251,21 +262,27 @@ export default function Collections() {
     return (
         <div id="Collections-Container">
 
-            <CollectionBlock //NEW ARRIVALS COLLECTION
-            collectionClasses={""}
-            collectionLink={"/collections/all"} //CHANGE TO HAVE FILTER
-            collectionFrameSrc={newArrivalsFrame}
-            collectionCoverSrc={""}
-            collectionCoverTitle={"Featured Products"}
-            productIdArray={[
-                "battletech-clan-invasion",
-                "battletech-reinforcements-clan-invasion",
-                "battletech-battlemat-alien-worlds",
-                "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                "i-would-fight-the-dragon",
-            ]}
-            characterImageSrcArray={""}
-            />
+            {(id === "battletech" || id === "shadowrun") && 
+            <div className="featured-product-wrapper">
+                 <FeaturedProductBanner collectionId={id}/>
+
+                <CollectionBlock //NEW ARRIVALS COLLECTION
+                collectionClasses={""}
+                collectionLink={`/collections/${id}`} //CHANGE TO HAVE FILTER
+                collectionFrameSrc={id === "battletech"? battletechNewArrivalsFrame : shadowrunNewArrivalsFrame}
+                collectionCoverSrc={""}
+                collectionCoverTitle={""}
+                productIdArray={[
+                    "battletech-clan-invasion",
+                    "battletech-reinforcements-clan-invasion",
+                    "battletech-battlemat-alien-worlds",
+                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                    "i-would-fight-the-dragon",
+                ]}
+                characterImageSrcArray={""}
+                />
+            </div>
+            }
 
             {/* For the actual search results */}
             <div className="search-results">
@@ -297,7 +314,8 @@ export default function Collections() {
                             <div className="search-results__header-filter">
                                 <button className="btn" onClick={toggleShowSidebar}>
                                     Filters
-                                    <i className="fa-solid fa-caret-down"></i>
+                                    {/* <i className="fa-solid fa-caret-down"></i> */}
+                                    <span className={`filter-indicator ${filterNumber > 0? "" :"display-none"}`}>{filterNumber}</span>
                                 </button>
                             </div>
 
@@ -335,7 +353,7 @@ export default function Collections() {
                 </div>
 
                 {/* FOR MOBILE FILTERS */}
-                <Offcanvas className="offcanvas-filters" show={showSidebar} onHide={handleClose} backdrop={true}> {/*scroll={true}*/}
+                <Offcanvas className="offcanvas-filters" show={showSidebar} onHide={handleClose} backdrop={true} scroll={true}> {/*scroll={true}*/}
 
                     <Offcanvas.Header closeButton>
                         <h1>Product Filters</h1>
