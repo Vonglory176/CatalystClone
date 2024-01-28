@@ -4,7 +4,7 @@ import { Outlet, useParams } from "react-router-dom";
 
 export default function MainLayout() {
     const {id} = useParams()
-    console.log(id)
+    // console.log(id)
 
     const pageTheme = (
     id === "battletech"? "battletech-page" :
