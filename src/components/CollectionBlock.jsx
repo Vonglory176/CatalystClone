@@ -40,7 +40,7 @@ export default function CollectionBlock(
         <section className={`collection-block section-block ${collectionClasses}`}>
 
             {/* The background frame for larger views */}
-            <Link to={collectionLink} className={"collection-link"}>
+            <Link to={collectionLink} className={"collection-link"} style={{pointerEvents: collectionLink? "normal" : "none"}}>
                 <ProgressiveImage
                 src={collectionFrameSrc}
                 >
