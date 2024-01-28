@@ -31,6 +31,7 @@ import freeDownloadButton from "../assets/button-collection/collection-buttons-0
 import freeDownloadButtonLowRes from "../assets/button-collection/collection-buttons-03-low-res.webp"
 import ProgressiveImage from "react-progressive-image"
 import { Suspense } from "react"
+import FeaturedProductBanner from "../components/FeaturedProductBanner"
 
 
 export default function Home() {
@@ -91,26 +92,27 @@ export default function Home() {
             </div>
 
             <div className="featured-products">
+                
+                <div className="featured-product-wrapper">
+                    {/* <Link to={"/"}></Link> */}
+                    <FeaturedProductBanner collectionId={"battletech"}/>
 
-                <Link to={"/"}>
-                    <div className="featured-product-banner"></div>
-                </Link>
-
-                <CollectionBlock //FEATURED COLLECTION
-                collectionClasses={""}
-                collectionLink={"/collections/all"} //CHANGE TO HAVE FEATURED FILTER
-                collectionFrameSrc={featuredFrame}
-                collectionCoverSrc={featuredCover}
-                collectionCoverTitle={"Featured Products"}
-                productIdArray={[
-                    "battletech-clan-invasion",
-                    "battletech-reinforcements-clan-invasion",
-                    "battletech-battlemat-alien-worlds",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "i-would-fight-the-dragon",
-                ]}
-                characterImageSrcArray={""}
-                />
+                    <CollectionBlock //FEATURED COLLECTION
+                    collectionClasses={""}
+                    collectionLink={"/collections/all"} //CHANGE TO HAVE FEATURED FILTER
+                    collectionFrameSrc={featuredFrame}
+                    collectionCoverSrc={featuredCover}
+                    collectionCoverTitle={"Featured Products"}
+                    productIdArray={[
+                        "battletech-clan-invasion",
+                        "battletech-reinforcements-clan-invasion",
+                        "battletech-battlemat-alien-worlds",
+                        "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                        "i-would-fight-the-dragon",
+                    ]}
+                    characterImageSrcArray={""}
+                    />
+                </div>
 
                 <CollectionBlock //BATTLETECH COLLECTION
                 collectionClasses={"left"}
