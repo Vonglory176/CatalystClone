@@ -5,6 +5,7 @@
 @import "./components/searchbar";
 @import "./components/header";
 @import "./components/slideshow";
+@import "./components/featured-product-banner";
 @import "./components/collection-block";
 @import "./components/footer";
 @import "./components/mailListSignUp";
@@ -395,6 +396,8 @@ input[type='number']::-webkit-outer-spin-button {
         max-height: 0%;
     }
 }
+
+.display-none {display: none !important;}
 
 // FOR IMAGE LOADING
 
