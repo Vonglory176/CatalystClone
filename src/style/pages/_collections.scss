@@ -5,7 +5,7 @@
         @media (max-width:749px) {
             display: none;
         }
-    }
+    }    
     
     .search-results {
         background: rgba(255, 255, 255, 0.5);
@@ -33,11 +33,34 @@
                 width: max-content;
                 padding: 4px 16px 4px 8px;
                 margin: 0;
+                cursor: pointer;
             }
 
             &-filter {
+                position: relative;
+
                 @media (min-width:839px) {
                     display: none;
+                }
+
+                .filter-indicator {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 100%;
+
+                    background-color: $badge-color;
+                    color: $secondary-font-color;
+                    font-size: 10px;
+                    letter-spacing: 0;
+                    line-height: 0;
                 }
             }
             
@@ -45,7 +68,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: right;
-                gap:5px;
+                gap:8px;
             }
 
             button {
