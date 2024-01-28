@@ -154,9 +154,9 @@ Put Firebase config in ENV file !!!!!!
     Add stock numbers to products ?
 
 FILTERS / SORT / PAGINATION ---
-Make mobile rendition of filters (ALSO ADD BUBBLE TO NOTIFY FILTERS ARE ON)
-Bug where clicking current link on non-first page changes current-page to NaN (Have a default of "if NaN change to 1"?)
 Finish styling
+
+Add clear filter button?
 
 SEARCH ---
 Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
@@ -185,9 +185,9 @@ Write code for changeItemQuantity/Input
 Needs more steps/checks to verify quantity/price changes?
 
 COLLECTIONS ---
-Scrollbar pop in/out bug when selecting filters
 Fix header button wrapping
 Change banners/collection-blocks based on the collection
+BUG: Scrollbar pop in/out bug when selecting filters
 Finish styling (Make sure prod img/info are standardized)
 
 Have a Universe filter on "collection/all" page?
@@ -197,15 +197,15 @@ Continue to look into cleaning/breaking up code (Also remember Pagination/Filter
 (REMEMBER DISCORD SCREENSHOT/in coding)
 
 FEATURED PRODUCT BANNER ---
-Continue building the FeaturedProductBanner component/file
-Make it!!!
+Add link stuff
 
 HEADER ---
-Fix weird mobile-tablet snapping issue? (Use transition delay maybe, worked for search)
 Fix sidebar links
-Make + rotate when universe cat opened?
 Make Universe button a link when focused
 Add link highlighting when on affiliated page
+
+Fix weird mobile-tablet snapping issue? (Use transition delay maybe, worked for search)
+Make + rotate when universe cat opened?
 
 CONTACT ---
 Add form functionality?
@@ -252,6 +252,7 @@ Add btn class to homepage-mailform?
 Add images to slideshow?
 
 FOOTER ---
+Fix icon link spacing?
 Add classes to footer links?
 -------------------
 */
