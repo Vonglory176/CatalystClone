@@ -2,43 +2,49 @@ import ProgressiveImage from "react-progressive-image"
 import { Link } from "react-router-dom"
 
 import placeholderImage from "../assets/placeholder.png"
+import getPrimaryProductImage from "../hooks/getPrimaryProductImage"
+import getProductUniverse from "../hooks/getProductUniverse"
 
 export default function ProductCard({product}) {
 
     const variant = Object.values(product.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
-    const image = product.variantsHaveImages? variant.images["image1"] : product.images["image1"] //Deciding wether to use variant/product picture
+    const productImage = getPrimaryProductImage(product) //Deciding wether to use variant/product picture
                         
-    let productUniverse = (product.universe === "Other"? "" : product.universe)
-    let productLink = product.id
-    let productName = product.name  
-    let productPrice = variant.price //Add code to include "From" if more than one option    
-    let imageLink = image.link
-    let imageAlt = image.alt
+    const productLink = product.id
+    const productUniverse = getProductUniverse(product)
+    const productName = product.name
+    const productPrice = variant.price
+    const productHasMoreThanOneVariant = product.variantType? true : false
 
     return (
-        <Link to={`/collections/${productUniverse}/products/${productLink}`} className={"product-card"}>
+        <Link to={`/collections/${product.universe}/products/${productLink}`} className={"product-card"}>
             <div className="product-card__image-container">
                 <div className="product-card__image-wrapper">
                     <div className="product-card__image">
                         {/* Padding top div? */}
 
-                        <ProgressiveImage src={imageLink} placeholder={placeholderImage}>
+                        <ProgressiveImage src={productImage.link} placeholder={placeholderImage}>
                             {(src, loading) =>
                              <img 
                              src={src} 
-                             alt={imageAlt}
+                             alt={productImage.alt}
                              className={loading? "imgLoading":"imgLoaded"}
                              />
                             }                            
                         </ProgressiveImage>
-
-                        {/* <img src={imageLink} alt={imageAlt}/> */}
                     </div>
                 </div>
             </div>
             <div className="product-card__info">
-                <div className="product-card__name">{`${productUniverse? productUniverse + ":" : ""} ${productName}`}</div>
-                <div className="product-card__price">${productPrice}</div>
+                <div className="product-card__name">
+                    {`${productUniverse} ${productName}`}
+                </div>
+                <div className="product-card__price">
+                    {/* {product.isOnSale && <div className="product-tag">Sale</div>} */}
+                    {productHasMoreThanOneVariant && "From " /*Adds "From" if more than one option*/}
+                    ${productPrice}
+                    {product.isOnSale && <span className="products-card__price-sale">${variant.discountedPrice}</span>}
+                </div>
             </div>
             <div className="product-card__overlay">
                 <span className="btn product-card__overlay-btn">View</span>

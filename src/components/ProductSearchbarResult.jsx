@@ -3,11 +3,13 @@ import placeholderImage from "../assets/placeholder.png"
 import getPrimaryProductImage from "../hooks/getPrimaryProductImage";
 import checkVariantsForPriceDifferences from "../hooks/checkVariantsForPriceDifferences";
 import ProgressiveImage from "react-progressive-image";
+import getProductUniverse from "../hooks/getProductUniverse";
 
 export default function ProductSearchbarResult(product) {
+
     const productLink = product.id
     const productName = product.name
-    const productUniverse = product.universe === "Other"? "" : product.universe
+    const productUniverse = getProductUniverse(product)
     const productDescription = product.description
 
     const image = getPrimaryProductImage(product)
@@ -49,7 +51,7 @@ export default function ProductSearchbarResult(product) {
             </div>
             <div className="searchbar-product-result__info-container">
                 <div className="searchbar-product-result__name">
-                    {`${productUniverse? productUniverse + ":" : ""} ${productName}`}
+                    {`${productUniverse} ${productName}`}
                 </div>
                 <div className="searchbar-product-result__description" dangerouslySetInnerHTML={{ __html: productDescription }} />
                 {/* <div className="searchbar-product-result__description">
