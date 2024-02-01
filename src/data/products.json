@@ -5,7 +5,7 @@
             "battletech-clan-invasion": {
                 "id": "battletech-clan-invasion",
                 "name": "Clan Invasion",
-                "universe":"Battletech",
+                "universe":"battletech",
 
                 "description": "<div className='product-description'><h2>The Children Of Kerensky Return!</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
 
@@ -18,7 +18,7 @@
                         "id": "back-cover",
                         "name": "Back Cover",
                         "alt": "Back of the box",
-                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fclan-invasion%2FBoxSpread.webp?alt=media&token=e65c26ca-db3b-4a9d-9c8f-591146bbd877"
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fclan-invasion%2FBackCover.webp?alt=media&token=5bc5bee5-4363-4416-b07b-c9353bf79d1d"
                     },
                     "image2": {
                         "id":"box-spread",
@@ -75,7 +75,7 @@
             "battletech-reinforcements-clan-invasion": {
                 "id": "battletech-reinforcements-clan-invasion",
                 "name": "Reinforcements Clan Invasion",
-                "universe": "BattleTech",
+                "universe": "battletech",
 
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!<span className='warning'><em>There are no miniatures in this product.</em></span></p></div>",
@@ -95,7 +95,7 @@
                         "id": "brci-contents1",
                         "name": "Box Contents 1",
                         "alt": "The contents of the box",
-                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-contents1.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-contents1.webp?alt=media&token=21d6bac0-624c-4ba0-bcf6-9912191f419f"
                     },
                     "image3": {
                         "id": "brci-contents2",
@@ -107,13 +107,13 @@
                         "id": "brci-map1",
                         "name": "Map side 1",
                         "alt": "One side of the battle map",
-                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-map1.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-map1.webp?alt=media&token=0d94999f-be6c-4f68-9304-ed6287b5af5c"
                     },
                     "image5": {
                         "id":"brci-map2",
                         "name":"Map side 2",
                         "alt":"The other side of the map",
-                        "link":"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-map2.webp?alt=media&token=18dd2adb-ceb2-4b46-945f-f32bd3045987"
+                        "link":"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattletech-reinforcements-clan-invasion%2Fbrci-map2.webp?alt=media&token=8f0326c4-7280-4589-9315-372199a5688d"
                     }
                 },
 
@@ -141,7 +141,7 @@
             "battletech-battlemat-alien-worlds": {
                 "id": "battletech-battlemat-alien-worlds",
                 "name": "BattleMat (Alien Worlds)",
-                "universe": "BattleTech",
+                "universe": "battletech",
 
 
                 "description": "<div className='product-description'><h1>Roll Out An Alien World!</h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
@@ -255,7 +255,7 @@
             "battletech-anthology-vol-8-legacy": {
                 "id": "battletech-anthology-vol-8-legacy",
                 "name": "Anthology Vol. 8: Legacy",
-                "universe": "BattleTech",
+                "universe": "battletech",
 
                 "description": "<div className='product-description'><h1>In The 31st Century, Life is Cheap...</h1><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
                 
@@ -296,7 +296,7 @@
             "battletech-activity-book-vol-2": {
                 "id": "battletech-activity-book-vol-2",
                 "name": "Activity Book Vol. 2",
-                "universe": "BattleTech",
+                "universe": "battletech",
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
                 
@@ -337,7 +337,7 @@
             "battletech-miniature-pack-game-of-armored-combat": {
                 "id": "battletech-miniature-pack-game-of-armored-combat",
                 "name": "Miniature Pack: Game Of Armored Combat",
-                "universe": "BattleTech",
+                "universe": "battletech",
 
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
@@ -382,7 +382,7 @@
             "shadowrun-sixth-world-core-rulebook-city-edition-berlin": {
                 "id": "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
                 "name": "Sixth World Core Rulebook: City Edition: Berlin",
-                "universe": "Shadowrun",
+                "universe": "shadowrun",
 
 
                 "description": "<div className='product-description'><h2>Risk is The Reward</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
@@ -436,7 +436,7 @@
             "i-would-fight-the-dragon": {
                 "id": "i-would-fight-the-dragon",
                 "name": "I Would Fight The Dragon",
-                "universe": "Other",
+                "universe": "other",
 
                 "description": "<div className='product-description'><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
 
