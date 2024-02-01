@@ -144,19 +144,7 @@ MODIFY COLLECTIONS PAGE TO ACCEPT "search-results" CODE (Just use search in plac
 
 Later!
 ------
-CREATE HOOKS FOR PRODUCT INFO STUFF. TOO MUCH REWRITING
 Add some reducer extension things to disable quantity buttons/input while updating
-
-DATABASE ---
-Put Firebase config in ENV file !!!!!!
-
-    Add more products to ProductList ?
-    Add stock numbers to products ?
-
-FILTERS / SORT / PAGINATION ---
-Finish styling
-
-Add clear filter button?
 
 SEARCH ---
 Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
@@ -164,15 +152,12 @@ Add Aria capability
 
 Include categories / pages as well as products in search? (Would need database changes)
 
-PRODUCT RESULT/CARD ---
-Add sale code
-Finish styling
-
 PRODUCT PAGE ---
-Finish ability to expand image on click
-Add vertical image carousel
-Finish styling
+Weird bug with product image slide changing (In "BATTLETECH: REINFORCEMENTS CLAN INVASION")
+Maybe add default size to pictures (General picture style changes)
+Finish styling (Image container min/max + popin on orientation change)
 
+Disable scrollbar on image gallery fullscreen?
 Add a "BACK TO X" banner for page when coming from a collection?
 Add code to make product page search database faster? (Like only look in battletech, not all cats)
 Make a category page at "/products"?
@@ -195,21 +180,6 @@ Make page buttons set view to page top?
 
 Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
 (REMEMBER DISCORD SCREENSHOT/in coding)
-
-FEATURED PRODUCT BANNER ---
-Add link stuff
-
-HEADER ---
-Fix sidebar links
-Make Universe button a link when focused
-Add link highlighting when on affiliated page
-
-Fix weird mobile-tablet snapping issue? (Use transition delay maybe, worked for search)
-Make + rotate when universe cat opened?
-
-CONTACT ---
-Add form functionality?
-Finish Styling
 
 ACCOUNT ---
 Add actual login/auth mechanics
@@ -240,7 +210,36 @@ HTML Cleanup
 Add Titles to anchors
 Add FavIcon !!!!!!
 
-OPTIONAL ------------------------------------
+OPTIONAL & LESS-IMPORTANT ------------------------------------
+
+FEATURED PRODUCT BANNER ---
+Add link stuff
+
+PRODUCT CARD ---
+Issue with text overflow
+Add sale signifier
+Finish styling
+
+FILTERS / SORT / PAGINATION ---
+Finish styling
+Add clear filter button?
+
+DATABASE ---
+Add hasVariants?
+Add more products to ProductList ?
+Add stock numbers to products ?
+
+HEADER ---
+Fix sidebar links
+Make Universe button a link when focused
+Add link highlighting when on affiliated page
+
+Fix weird mobile-tablet snapping issue? (Use transition delay maybe, worked for search)
+Make + rotate when universe cat opened?
+
+CONTACT ---
+Add form functionality?
+Finish Styling
 
 COLLECTION-BLOCK ---
 Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
