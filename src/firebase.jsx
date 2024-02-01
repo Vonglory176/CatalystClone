@@ -8,13 +8,13 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDFP57S5UbjkIIu5LsLiuXg8zOnYez_tnY",
-    authDomain: "catalystclonedb.firebaseapp.com",
-    projectId: "catalystclonedb",
-    storageBucket: "catalystclonedb.appspot.com",
-    messagingSenderId: "329411819610",
-    appId: "1:329411819610:web:fb63c9e5020cdca64dc063",
-    measurementId: "G-ZCV28QEM3Z"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // INITIALIZE FIREBASE
@@ -23,3 +23,11 @@ const analytics = getAnalytics(app);
 const db = getDatabase();
 
 export default db;
+
+// apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+// authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+// projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+// storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+// messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+// appId: process.env.REACT_APP_FIREBASE_APP_ID,
+// measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
