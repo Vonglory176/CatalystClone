@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename={"/CatalystClone"}> {/**/}
+        <BrowserRouter basename={`${import.meta.env.VITE_PUBLIC_URL}`}> {/*"/CatalystClone"*/}
           <App/>
         </BrowserRouter>
       </PersistGate>
