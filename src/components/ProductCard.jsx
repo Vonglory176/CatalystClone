@@ -4,20 +4,30 @@ import { Link } from "react-router-dom"
 import placeholderImage from "../assets/placeholder.png"
 import getPrimaryProductImage from "../hooks/getPrimaryProductImage"
 import getProductUniverse from "../hooks/getProductUniverse"
+import checkVariantsForPriceDifferences from "../hooks/checkVariantsForPriceDifferences"
 
 export default function ProductCard({product}) {
 
-    const variant = Object.values(product.variants).find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
+    const variants = Object.values(product.variants)
+    const variant = variants.find(variant => variant.isPrimaryVariant) //Finding the Variant marked as primary
     const productImage = getPrimaryProductImage(product) //Deciding wether to use variant/product picture
                         
     const productLink = product.id
     const productUniverse = getProductUniverse(product)
     const productName = product.name
     const productPrice = variant.price
-    const productHasMoreThanOneVariant = product.variantType? true : false
+
+    const isOnSale = product.isOnSale
+    const isFree = product.isFree
+
+    const variantPrice = variant.price //Add code to include "From" if more than one option
+    const variantDiscountPrice = !isOnSale? 0 : variant.discountedPrice
+    const variantDiscountPercentage = (((variantPrice - variantDiscountPrice) / variantPrice) * 100).toFixed(0)
 
     return (
         <Link to={`/collections/${product.universe}/products/${productLink}`} className={"product-card"}>
+            {isOnSale && !isFree && <div className="sale-badge badge">{variantDiscountPercentage}% off</div>}
+
             <div className="product-card__image-container">
                 <div className="product-card__image-wrapper">
                     <div className="product-card__image">
@@ -41,7 +51,7 @@ export default function ProductCard({product}) {
                 </div>
                 <div className="product-card__price">
                     {/* {product.isOnSale && <div className="product-tag">Sale</div>} */}
-                    {productHasMoreThanOneVariant && "From " /*Adds "From" if more than one option*/}
+                    {checkVariantsForPriceDifferences(variants)? "" : "From " /*Adds "From" if more than one option*/}
                     ${productPrice}
                     {product.isOnSale && <span className="products-card__price-sale">${variant.discountedPrice}</span>}
                 </div>
