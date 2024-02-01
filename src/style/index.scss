@@ -1,5 +1,6 @@
 @import "config";
 
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
 @import "./components/bootstrap-carousel";
 @import "./components/bootstrap-offcanvas";
 @import "./components/searchbar";
@@ -188,10 +189,13 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 .product-tag {
-    display: inline-block;
+    // display: inline-block;
+    display: flex;
+    align-items: center;
 
     font-weight: 700;
     letter-spacing: 0.6px;
+    line-height: 1;
     text-transform: uppercase;
     font-size: 12px;
 
@@ -199,6 +203,7 @@ input[type='number']::-webkit-outer-spin-button {
     color: $primary-color;
 
     padding: 4px 10px;
+    height: min-content;
 }
 
 .slideshow {
@@ -236,6 +241,14 @@ input[type='number']::-webkit-outer-spin-button {
 
     background-color: $secondary-color;
     color: $secondary-font-color;
+
+    &.sold-out {
+        background-color: $sold-out-color;
+        &:hover {
+            color: #757575;
+            background-color: $sold-out-hover-color !important;
+        }
+    }
 
     &:not(:active):hover {
         background-color: $secondary-hover-color;
