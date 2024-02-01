@@ -407,7 +407,7 @@
                     "variant1": {
                         "id": "book-pdf",
                         "name": "Book (+PDF)",
-                        "price": 19.99,
+                        "price": 49.99,
                         "discountedPrice": "",
                         "images": {},
                         "isPrimaryVariant": true,
