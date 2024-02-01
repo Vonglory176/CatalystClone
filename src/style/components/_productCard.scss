@@ -72,8 +72,19 @@
     }
 
     &__price {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 5px;
+
         font-size: .875em;
         color: $third-font-color;
+
+        direction: initial;
+
+        .products-card__price-sale {
+            text-decoration: line-through;
+        }
     }
 
     &:hover {
