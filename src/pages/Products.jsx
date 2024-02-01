@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useSearchParams } from "react-router-dom"
 import { cartActions } from "../store/cart-slice"
+import ReactImageGallery from "react-image-gallery"
 
 import placeholderImage from "../assets/placeholder.png"
 import ProgressiveImage from "react-progressive-image"
+import useViewportWidth from "../hooks/useViewportWidth"
 
 export default function Products() {
     const productList = useSelector(state => state.products.productList)
@@ -20,9 +22,10 @@ export default function Products() {
         variantListHtml:false,
     })
     const [selectedVariant, setSelectedVariant] = useState()
+    const [productImages, setProductImages] = useState()
     const [productQuantity, setproductQuantity] = useState(1)
 
-    const [imageIsExpanded, setImageIsExpanded] = useState(false)
+    // const [imageIsExpanded, setImageIsExpanded] = useState(false)
 
     //Getting product by ID & saving it in State
     useEffect(() => { 
@@ -34,7 +37,6 @@ export default function Products() {
                     if (product) return
 
                     product = Object.values(productList[category]).find(product => product.id === id)
-                    // console.log(product)
                 })
                 if (!product) console.log("ERROR: Could not find product information!")
                 return product
@@ -74,15 +76,49 @@ export default function Products() {
             }
             setVariantLists({variantList:variantArrayList, variantListHtml:tempVariantList})
 
-            setSelectedVariant(searchParamVariantId? //Setting default selected Variant
+            const tempSelectedVariant = searchParamVariantId? //Setting default selected Variant
                 variantArrayList.find(variant => variant.id === searchParamVariantId): //SearchParams?
-                variantArrayList[0]) //If not, use first index
+                variantArrayList[0] //If not, use first index
+            setSelectedVariant(tempSelectedVariant)
+
+            
+            let tempVariantImages = []
+            if (currentProduct.variantType && currentProduct.variantsHaveImages) { //NEEDS BETTER VARIANT CHECK
+                tempVariantImages = Object.values(tempSelectedVariant.images).map(image => {
+                    return {
+                        original:image.link,
+                        originalAlt:image.alt,
+                        thumbnail:image.link,
+                        thumbnailAlt:image.alt,
+                    }
+                })
+            }
+
+            let tempProductImages = []
+            if (currentProduct.images) {
+                tempProductImages = Object.values(currentProduct.images).map(image => {
+                    return {
+                        original:image.link,
+                        originalAlt:image.alt,
+                        thumbnail:image.link,
+                        thumbnailAlt:image.alt,
+                    }
+                })
+            }
+
+            console.log("HERE")
+            
+
+            let tempCombinedProductImages = [...tempVariantImages, ...tempProductImages]
+            console.log(tempCombinedProductImages)
+            setProductImages(tempCombinedProductImages)
         }
     }, [currentProduct, searchParams])
 
     const handleSelectVariantChange = (event) => {
         const selectedVariantId = event.target.value
         console.log(selectedVariantId)
+        console.log("HERE !!!")
 
         setSearchParams({variant:selectedVariantId})
     }
@@ -118,49 +154,33 @@ export default function Products() {
         // console.log(productQuantity)
     }
 
+    const viewportWidth = useViewportWidth()
+
     return (
         <div id="Products-Container">
-            <div className="products-images">
-                <div className="products-images__primary">
+            {productImages && <ReactImageGallery 
+            items={productImages} 
+            showPlayButton={false}
+            showNav={productImages.length > 1? true : false}
+            showThumbnails={productImages.length > 1? true : false}
+            thumbnailPosition={viewportWidth < 750 ? "bottom" : "left"} //USE TO CHANGE FROM BOTTOM TO SIDE
+            useBrowserFullscreen={false}
+            //onErrorImageURL: String, default undefined
 
-                    {selectedVariant && 
-                    <ProgressiveImage
-                    src={
-                        currentProduct.variantsHaveImages? 
-                        Object.values(selectedVariant.images)[0].link :
-                        Object.values(currentProduct.images)[0].link
-                    } 
-                    placeholder={placeholderImage}>
-                        {(src, loading) =>
-                        <img 
-                        src={src} 
-                        alt={currentProduct.variantsHaveImages? 
-                            Object.values(selectedVariant.images)[0].alt :
-                            Object.values(currentProduct.images)[0].alt
-                        }
-                        onClick={() => setImageIsExpanded(prevToggle => {return prevToggle? false : true})}
-                        className={
-                            (loading? "imgLoading ":"imgLoaded ") +
-                            (imageIsExpanded? "expanded" : "")
-                        }
-                        />
-                        }                            
-                    </ProgressiveImage>}
-
-                </div>
-                <div className="products-images__scroller"></div>
-            </div>
+            // onClick={() => setImageIsExpanded(prevToggle => {return prevToggle? false : true})}
+            // className={imageIsExpanded? "expanded" : ""}
+            />}            
 
             <div className="products-main">
                 <h1 className="products-main__title">
-                    {currentProduct && ((currentProduct.universe? `${currentProduct.universe}: ` : "") + currentProduct.name)}
+                    {currentProduct && ((currentProduct.universe !== "Other"? `${currentProduct.universe}: ` : "") + currentProduct.name)}
                 </h1>
                 
                 {/* Check for sale / free */}
                 {selectedVariant && <div className="products-main__price-container">
-                    {/* currentProduct.isOnSale && */<div className="product-tag">Sale</div> }
+                    {currentProduct.isOnSale && <div className="product-tag">Sale</div> }
                     <span className="products-main__price">{selectedVariant.price !== 0? `$${selectedVariant.price}` : "FREE"}</span>
-                    {/* currentProduct.isOnSale && */<span className="products-main__sale-price">SALE PRICE {selectedVariant.discountedPrice}</span>}
+                    {currentProduct.isOnSale && <span className="products-main__price-container__sale-price">${selectedVariant.discountedPrice}</span>}
                 </div>}
 
                 <hr />
@@ -193,7 +213,7 @@ export default function Products() {
 
                     {/* Add to Cart /&&/ Check if sold out */}
                     {selectedVariant && (selectedVariant.isSoldOut?
-                        <input id="ContactFormSubmit" className="btn" value="Sold Out"/> : /* CAUSING ERROR */
+                        <input type="button" id="ContactFormSubmit" className="btn sold-out" value="Sold Out"/> : /* CAUSING ERROR */
                         <input type="submit" id="ContactFormSubmit" className="btn" value="Add to Cart"/>)
                     }
                 </form>
@@ -207,3 +227,34 @@ export default function Products() {
         </div>
     )
 }
+
+{/* <div className="products-images">
+                <div className="products-images__primary">
+
+                    {selectedVariant && 
+                    <ProgressiveImage
+                    src={
+                        currentProduct.variantsHaveImages? 
+                        Object.values(selectedVariant.images)[0].link :
+                        Object.values(currentProduct.images)[0].link
+                    } 
+                    placeholder={placeholderImage}>
+                        {(src, loading) =>
+                        <img 
+                        src={src} 
+                        alt={currentProduct.variantsHaveImages? 
+                            Object.values(selectedVariant.images)[0].alt :
+                            Object.values(currentProduct.images)[0].alt
+                        }
+                        onClick={() => setImageIsExpanded(prevToggle => {return prevToggle? false : true})}
+                        className={
+                            (loading? "imgLoading ":"imgLoaded ") +
+                            (imageIsExpanded? "expanded" : "")
+                        }
+                        />
+                        }                            
+                    </ProgressiveImage>}
+
+                </div>
+                <div className="products-images__scroller"></div>
+            </div> */}
