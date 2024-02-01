@@ -5,6 +5,8 @@
     position: relative;
     padding: 12.5px;
 
+    direction: initial;
+
     @media (max-width:749px) {
         height: 320px;
     }
@@ -79,8 +81,6 @@
 
         font-size: .875em;
         color: $third-font-color;
-
-        direction: initial;
 
         .products-card__price-sale {
             text-decoration: line-through;
