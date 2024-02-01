@@ -2063,6 +2063,7 @@
   text-align: center;
   position: relative;
   padding: 12.5px;
+  direction: initial;
   transition: color 0.1s ease-in, background-color 0.1s ease-in;
 }
 @media (max-width: 749px) {
@@ -2139,7 +2140,6 @@
   gap: 5px;
   font-size: 0.875em;
   color: #666;
-  direction: initial;
 }
 .product-card__price .products-card__price-sale {
   text-decoration: line-through;
