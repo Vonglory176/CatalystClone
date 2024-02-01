@@ -1,41 +1,144 @@
 #Products-Container {
-    .products-images {
-        &__primary {
-            display: flex;
-            justify-content: center;
-            margin: 0 20px;
+    @media (min-width:750px) {
+        display: grid;
+        grid-template-columns: 1fr 40%;        
+    }
 
+    // .products-images {
+        // &__primary {
+        //     display: flex;
+        //     justify-content: center;
+        //     margin: 0 20px;
+
+            // img {
+            //     height: auto;
+            //     width: auto;
+            //     max-width: 100%;
+            //     max-height: 480px;
+
+                // cursor: zoom-in;
+                // transition: transform 0.25s ease;
+            // }
+
+            // img.expanded {
+            //     transform: scale(2);
+            //     cursor: zoom-out;
+            // }
+    //     }
+    // }
+
+    .image-gallery {
+        margin: 10px 20px;
+
+        &.fullscreen-modal {
+            z-index: 1000;
+            margin: 0;
+            padding: 20px;
+
+            // .image-gallery-slide-wrapper, .image-gallery-thumbnails {
+            //     display: flex;
+            //     align-items: center;
+            //     justify-content: center;
+            //     height: 100vh;
+            // }
+
+            // .image-gallery-slide-wrapper {margin-left: 110px;}
+
+        }
+
+        &-slide-wrapper {
+            margin-bottom: 20px;
+            
             img {
                 height: auto;
                 width: auto;
                 max-width: 100%;
                 max-height: 480px;
 
-                cursor: zoom-in;
-                transition: transform 0.25s ease;
+                // cursor: zoom-in;
+                // transition: transform 0.25s ease;
             }
 
-            img.expanded {
-                transform: scale(2);
-                cursor: zoom-out;
+            // img.expanded {
+            //     transform: scale(2);
+            //     cursor: zoom-out;
+            // }
+        }
+        
+        &-slide {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            min-height: 371px;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        button:focus {
+            outline: 0px solid $secondary-color;
+            border: 4px solid transparent;
+        }
+
+        &-icon:hover {color: $secondary-color;}
+
+        &-right-nav, &-left-nav {
+            @media (min-width: 768px) {
+                svg {
+                    width: 36px !important;
+                    height: 72px !important;
+                }
             }
         }
+
+        &-thumbnails {
+            // max-height: 400px;
+            z-index: 5;
+
+            // @media (min-width:750px) { 
+            //     height: 400px !important;
+            // }
+
+            cursor: default;
+            button:hover { cursor: pointer;}
+        }
+
+        &-thumbnail {
+            height: 120px;            
+            &:hover, &.active {border-color: $secondary-color !important;}
+
+            span {
+                display: inline;
+            }
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                height: auto;
+            }
+        }        
     }
 
     .products-main {
         padding: 0 10px;
 
         &__title {
-            text-align: center;
             margin-bottom: 8px;
+            @media (max-width:749px) {       
+                text-align: center;
+            }
         }
-
+        
         &__price-container {
             display: flex;
-            justify-content: center;
+            @media (max-width:750px) {
+                justify-content: center;
+            }
+            align-items: center;
             gap:10px;
 
             font-size: 20px;
+
+            &__sale-price {text-decoration: line-through;}
         }
     }
 
@@ -48,6 +151,13 @@
         }
 
         &__variant-selector-wrapper {width: 100%;}
+
+        select {margin-bottom: 0;}
+
+        .btn {
+            margin-top: 20px;
+            width: 100%;
+        }
 
         #ContactFormSubmit {
             margin-bottom: 30px;
