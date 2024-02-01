@@ -153,6 +153,7 @@ Add Aria capability
 Include categories / pages as well as products in search? (Would need database changes)
 
 PRODUCT PAGE ---
+Equalize Image & Desc when no thumbnail gallery
 Weird bug with product image slide changing (In "BATTLETECH: REINFORCEMENTS CLAN INVASION")
 Maybe add default size to pictures (General picture style changes)
 Finish styling (Image container min/max + popin on orientation change)
@@ -173,6 +174,7 @@ COLLECTIONS ---
 Fix header button wrapping
 Change banners/collection-blocks based on the collection
 BUG: Scrollbar pop in/out bug when selecting filters
+Set fixed sizes to image/info
 Finish styling (Make sure prod img/info are standardized)
 
 Have a Universe filter on "collection/all" page?
