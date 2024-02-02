@@ -52,7 +52,7 @@ export default function ProductCard({product}) {
                 <div className="product-card__price">
                     {/* {product.isOnSale && <div className="product-tag">Sale</div>} */}
                     {checkVariantsForPriceDifferences(variants)? "" : "From " /*Adds "From" if more than one option*/}
-                    ${productPrice}
+                    {isFree? "FREE!" : `$${productPrice}`} 
                     {product.isOnSale && <span className="products-card__price-sale">${variant.discountedPrice}</span>}
                 </div>
             </div>
