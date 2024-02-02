@@ -5,7 +5,7 @@ import { Offcanvas } from 'react-bootstrap';
 import { useSelector } from "react-redux";
 
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import Searchbar from './Searchbar';
 // import auth from "../store/auth-slice";
@@ -90,10 +90,10 @@ export default function Header() {
                         <button className="universe-dropdown__button dropdown-button">Universe<i className="fa-solid fa-caret-down"></i></button>
                         {/* {isFocused && ( */}
                             <div className="universe-dropdown__content dropdown-content">
-                                <Link to={"/collections/all"}><h1>UNIVERSE</h1></Link>
-                                <Link to={"/collections/battletech"}>Battletech</Link>
-                                <Link to={"/collections/shadowrun"}>Shadowrun</Link>
-                                <Link to={"/collections/other"}>Other</Link>
+                                <NavLink to={"/collections/all"}><h1>UNIVERSE</h1></NavLink>
+                                <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}}>Battletech</NavLink>
+                                <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}}>Shadowrun</NavLink>
+                                <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}}>Other</NavLink>
                             </div>
                         {/* )} */}
                     </div>
