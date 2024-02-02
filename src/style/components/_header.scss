@@ -126,6 +126,14 @@
                 }
             }
 
+            .active-link {
+                font-weight: 700;
+                color: $primary-font-color;
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+
             &__content {
                 background-color: $primary-background-color;
                 padding-bottom: 20px;
@@ -221,5 +229,13 @@
     .offcanvas__universe {
         display: grid;
         grid-template-columns: 1fr 1fr;
+
+        // .active-link {
+        //     font-weight: 700;
+        //     color: $primary-font-color;
+        //     &:hover {
+        //         color: $secondary-color;
+        //     }
+        // }
     }
 }
