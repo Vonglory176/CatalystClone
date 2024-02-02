@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { getProductById } from "../hooks/getProductById";
 import { Suspense, lazy, useEffect, useState } from "react";
 
-// import ProductCard from "./ProductCard";
-const ProductCard = lazy(() => import('./ProductCard'))
+import ProductCard from "./ProductCard";
+// const ProductCard = lazy(() => import('./ProductCard'))
 import loadingSpinner from "../assets/loader-large.gif"
 import ProgressiveImage from "react-progressive-image";
 
@@ -21,10 +21,10 @@ export default function CollectionBlock(
             for (let productId in productIdArray) {
                 productCardArray.push(
                     <div className="grid__item" key={productId}>
-                        <Suspense fallback={<img src={loadingSpinner}></img>}>
+                        {/* <Suspense fallback={<img src={loadingSpinner}></img>}> */}
                             {/* Lazy Loaded */}
                             <ProductCard product={getProductById(productList,productIdArray[productId])}/> 
-                        </Suspense>
+                        {/* </Suspense> */}
                     </div>
                 )
             }
