@@ -5,11 +5,12 @@ import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/coll
 import shadowrunNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun-new-arrivals.svg"
 import ProductResult from "../components/ProductResult"
 
-import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { Link, NavLink, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import CollectionBlock from "../components/CollectionBlock"
 import { Offcanvas } from "react-bootstrap"
 import FeaturedProductBanner from "../components/FeaturedProductBanner"
+import loadingSpinner from "../assets/loader-large.gif"
 
 export default function Collections() {
 
@@ -23,6 +24,8 @@ export default function Collections() {
         // types:[],
         // tags:[],
     })
+
+    const [currentCategory, setCurrentCategory] = useState("all-products")
 
     const productList = useSelector(state => state.products.productList)
     // const status = useSelector(state => state.products.status)
@@ -85,27 +88,33 @@ export default function Collections() {
         let typeInstanceList = {}
         let tagInstanceList = {}
         
+        const categorySearchParams = searchParams.get('categories')? searchParams.get('categories'): "all-products"
+        setCurrentCategory(categorySearchParams)
+
+        const typeSearchParams = searchParams.get('types')? JSON.parse(searchParams.get('types')): []
+        const tagSearchParams = searchParams.get('tags')? JSON.parse(searchParams.get('tags')): []
+
         //Product Setup
         const processProduct = (p) => {
-            const typeSearchParams = searchParams.get('types')
-                ? JSON.parse(searchParams.get('types'))
-                : []
-            const tagSearchParams = searchParams.get('tags')
-                ? JSON.parse(searchParams.get('tags'))
-                : []
-        
-            if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
-                if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
-                    tempProductList.push(<ProductResult key={p.id} product={p}/>)
-                }
-        
-                if (Array.isArray(p.tags)) {
-                    for (let tag of p.tags) {
-                        tagInstanceList[tag] = (tagInstanceList[tag] || 0) + 1
+            if (
+                categorySearchParams === "all-products" || 
+                (categorySearchParams === "on-sale" && p.isOnSale) ||
+                (categorySearchParams === "getting-started" && p.isGettingStarted) ||
+                (categorySearchParams === "free-downloads" && p.isFree)
+            ) {
+                if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
+                    if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
+                        tempProductList.push(<ProductResult key={p.id} product={p}/>)
                     }
-                }
-            }        
-            typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
+            
+                    if (Array.isArray(p.tags)) {
+                        for (let tag of p.tags) {
+                            tagInstanceList[tag] = (tagInstanceList[tag] || 0) + 1
+                        }
+                    }
+                }        
+                typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
+            }
         }
 
         //Filter setup
@@ -129,15 +138,15 @@ export default function Collections() {
 
         //Getting and printing page-contents
         if (productList) {
-            //ALL CATEGORIES
+            //ALL UNIVERSE
             if (id === "all") {
-                Object.keys(productList).forEach(category => { //For each Product Category
-                    Object.values(productList[category]).forEach(processProduct)//For each Product in that Category
+                Object.keys(productList).forEach(universe => { //For each Product Universe
+                    Object.values(productList[universe]).forEach(processProduct)//For each Product in that Universe
                 })
             }
-            //SINGLE CATEGORY
+            //SINGLE UNIVERSE
             else if (Object.keys(productList).includes(id)) {
-                Object.values(productList[id]).forEach(processProduct) //For each Product in the ID Category
+                Object.values(productList[id]).forEach(processProduct) //For each Product in the ID Universe
             }
             //SOMETHING BLEW UP
             else console.log("There was an error loading categories from productList!")
@@ -264,21 +273,31 @@ export default function Collections() {
 
             {(id === "battletech" || id === "shadowrun") && 
             <div className="featured-product-wrapper">
-                 <FeaturedProductBanner collectionId={id}/>
+                <FeaturedProductBanner collectionId={id}/>
 
                 <CollectionBlock //NEW ARRIVALS COLLECTION
                 collectionClasses={""}
-                collectionLink={`/collections/${id}`} //CHANGE TO HAVE FILTER
+                collectionLink={""} //CHANGE TO HAVE FILTER
                 collectionFrameSrc={id === "battletech"? battletechNewArrivalsFrame : shadowrunNewArrivalsFrame}
                 collectionCoverSrc={""}
                 collectionCoverTitle={""}
-                productIdArray={[
+                productIdArray={id === "battletech"? 
+                [
                     "battletech-clan-invasion",
                     "battletech-reinforcements-clan-invasion",
                     "battletech-battlemat-alien-worlds",
+                    "battletech-activity-book-vol-2",
+                    "battletech-miniature-pack-game-of-armored-combat",
+                ] :
+
+                [
                     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "i-would-fight-the-dragon",
-                ]}
+                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                ]
+            }
                 characterImageSrcArray={""}
                 />
             </div>
@@ -288,7 +307,7 @@ export default function Collections() {
             <div className="search-results">
 
                 <div className="search-results__header">
-                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results for "{id}"</div>
+                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results for "{`${id !== "all"? id + " " : ""}${currentCategory}`}"</div>
 
                     <div className="search-results__header-buttons">
                         <div className="search-results__header-sort">
@@ -333,16 +352,54 @@ export default function Collections() {
                 </div>
                 <div className="search-results__main">
                     <div className={`search-results__main-content ${resultMode}`}>
-                        {pageResults}
+                        {pageResults && pageResults.length > 0? 
+                            pageResults :
+                            <div className="no-results">
+                                {localProductList && localProductList.length === 0? 
+                                <h1>No products to display</h1> :
+                                <img src={loadingSpinner} alt="" />
+                                }
+                            </div>
+                        }
                     </div>
                     <div className="search-results__main-sidebar">
                         {/* <ul className="universe-list"></ul> */}
                         <h1>Product Filters</h1>
                         <div className="search-results__main-sidebar__filter-wrapper">
-                            <span>Product Type</span>
-                            <ul className="type-list">{typeList}</ul>
-                            <span>Product Tags</span>
-                            <ul className="tag-list">{tagList}</ul>
+                            {/* <span>Product Category</span> */}
+                            <div className="category-links">
+                                <NavLink 
+                                to={{pathname:`/collections/${id}`, search: "?categories=all-products"}} 
+                                className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
+                                >
+                                    All Products
+                                </NavLink>
+
+                                <NavLink
+                                to={{pathname:`/collections/${id}`, search: "?categories=getting-started"}}
+                                className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
+                                >
+                                    Getting Started
+                                </NavLink>
+
+                                <NavLink
+                                to={{pathname:`/collections/${id}`, search: "?categories=on-sale"}}
+                                className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
+                                >
+                                    On Sale
+                                </NavLink>
+
+                                <NavLink
+                                to={{pathname:`/collections/${id}`, search: "?categories=free-downloads"}}
+                                className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
+                                >
+                                    Free Downloads
+                                </NavLink>
+                            </div>
+                            {typeList && typeList.length > 0 && <span>Product Type</span>}
+                            {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
+                            {tagList && tagList.length > 0 && <span>Product Tags</span>}
+                            {tagList && tagList.length > 0 &&  <ul className="tag-list">{tagList}</ul>}
                         </div>
                     </div>
                 </div>
@@ -362,10 +419,39 @@ export default function Collections() {
                     <Offcanvas.Body>
                         <div className="search-results__mobile-sidebar">
                             {/* <ul className="universe-list"></ul> */}
-                            <span>Product Type</span>
-                            <ul className="type-list">{typeList}</ul>
-                            <span>Product Tags</span>
-                            <ul className="tag-list">{tagList}</ul>
+                            <div className="category-links">
+                                <NavLink 
+                                to={{pathname:`/collections/${id}`, search: "?categories=all-products"}} 
+                                className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
+                                >
+                                    All Products
+                                </NavLink>
+
+                                <NavLink
+                                to={{pathname:`/collections/${id}`, search: "?categories=getting-started"}}
+                                className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
+                                >
+                                    Getting Started
+                                </NavLink>
+
+                                <NavLink
+                                to={{pathname:`/collections/${id}`, search: "?categories=on-sale"}}
+                                className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
+                                >
+                                    On Sale
+                                </NavLink>
+
+                                <NavLink
+                                to={{pathname:`/collections/${id}`, search: "?categories=free-downloads"}}
+                                className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
+                                >
+                                    Free Downloads
+                                </NavLink>
+                            </div>
+                            {typeList && typeList.length > 0 && <span>Product Type</span>}
+                            {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
+                            {tagList && tagList.length > 0 && <span>Product Tags</span>}
+                            {tagList && tagList.length > 0 && <ul className="tag-list">{tagList}</ul>}
                         </div>
                     </Offcanvas.Body>
                 </Offcanvas>
