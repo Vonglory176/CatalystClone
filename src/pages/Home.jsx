@@ -53,7 +53,7 @@ export default function Home() {
         <div id="Home-Container">
             
             <div className="getting-started">
-                <Link to={"/collections/battletech"} className="getting-started__link">
+                <Link to={"/collections/battletech?categories=getting-started"} className="getting-started__link">
                     {/* <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/> */}
                     <ProgressiveImage
                     src={gettingStartedBattletech}
@@ -71,7 +71,7 @@ export default function Home() {
                         }
                     </ProgressiveImage>
                 </Link>
-                <Link to={"/collections/shadowrun"} className="getting-started__link">
+                <Link to={"/collections/shadowrun?categories=getting-started"} className="getting-started__link">
                     {/* <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/> */}
                     <ProgressiveImage 
                     src={gettingStartedShadowrun}
@@ -146,7 +146,7 @@ export default function Home() {
 
                 <section className="collection-buttons-container">
                     <div className="collection-buttons-wrapper">
-                        <Link to={"/"}>                            
+                        <Link to={"/collections/all?categories=on-sale"}>                            
                             <ProgressiveImage src={saleButton}>
                                 {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
                             </ProgressiveImage>
@@ -160,7 +160,7 @@ export default function Home() {
                             {/* <img className="collection-button" src={newArrivalsButton} alt="" /> */}
                         </Link>
 
-                        <Link to={"/"}>                            
+                        <Link to={"/collections/all?categories=free-downloads"}>                            
                             <ProgressiveImage src={freeDownloadButton}>
                                 {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
                             </ProgressiveImage>
