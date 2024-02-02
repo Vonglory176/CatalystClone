@@ -154,7 +154,6 @@ Include categories / pages as well as products in search? (Would need database c
 
 PRODUCT PAGE ---
 Equalize Image & Desc when no thumbnail gallery
-Weird bug with product image slide changing (In "BATTLETECH: REINFORCEMENTS CLAN INVASION")
 Maybe add default size to pictures (General picture style changes)
 Finish styling (Image container min/max + popin on orientation change)
 
@@ -170,10 +169,22 @@ Write code for changeItemQuantity/Input
 
 Needs more steps/checks to verify quantity/price changes?
 
+COLLECTION-BLOCK ---
+Grab X newest products for New-Arrivals
+Grab X featured products for Featured-Products
+
+Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
+Load products into Featured-Containers? (Just use ID's for the moment)
+
 COLLECTIONS ---
+BUG: Scrollbar pop in/out bug when selecting filters?
+BUG: Lag with selectors (Maybe in products too?)
+BUG: Clicking the same header-nav (or category-filter) link while already on the page adds to history
+
+Make mobile filters / component out of "category-links"
+Make filters for sale, new arrival and free
 Fix header button wrapping
 Change banners/collection-blocks based on the collection
-BUG: Scrollbar pop in/out bug when selecting filters
 Set fixed sizes to image/info
 Finish styling (Make sure prod img/info are standardized)
 
@@ -182,6 +193,12 @@ Make page buttons set view to page top?
 
 Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
 (REMEMBER DISCORD SCREENSHOT/in coding)
+
+HOME ---
+ADD LINKS TO COLLECTION BUTTONS
+
+Add btn class to homepage-mailform?
+Add images to slideshow?
 
 ACCOUNT ---
 Add actual login/auth mechanics
@@ -232,7 +249,7 @@ Add more products to ProductList ?
 Add stock numbers to products ?
 
 HEADER ---
-Fix sidebar links
+Fix sidebar links (ADD ACTIVE LINK TRAITS TO OFFCANVAS UNIVERSE)
 Make Universe button a link when focused
 Add link highlighting when on affiliated page
 
@@ -242,15 +259,6 @@ Make + rotate when universe cat opened?
 CONTACT ---
 Add form functionality?
 Finish Styling
-
-COLLECTION-BLOCK ---
-Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
-Collect all Featured Products and random load into collection-blocks?
-Load products into Featured-Containers? (Just use ID's for the moment)
-
-HOME ---
-Add btn class to homepage-mailform?
-Add images to slideshow?
 
 FOOTER ---
 Fix icon link spacing?
