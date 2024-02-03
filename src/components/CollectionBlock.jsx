@@ -56,7 +56,7 @@ export default function CollectionBlock(
             </Link>
 
             {characterImageSrc && //If no charImages, this is excluded   
-            <Link to={collectionLink} className={"collection-link"}>
+            <Link to={collectionLink} className={"collection-link"} style={{pointerEvents: collectionLink? "normal" : "none"}}>
                 <div className="featured-character">
                     <ProgressiveImage
                     src={characterImageSrc}
