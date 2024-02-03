@@ -68,6 +68,7 @@
                 "isFree": false,
                 "isSoldOut": false,
                 "isOnSale": false,
+                "isNewArrival": false,
                 "isFeaturedProduct": true,
                 "isGettingStarted": false
             },
@@ -134,6 +135,7 @@
                 "isFree": false,
                 "isSoldOut": false,
                 "isOnSale": true,
+                "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
             },
@@ -248,6 +250,7 @@
                 "isFree": false,
                 "isSoldOut": false,
                 "isOnSale": false,
+                "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
             },
@@ -289,6 +292,7 @@
                 "isFree": false,
                 "isSoldOut": false,
                 "isOnSale": false,
+                "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": true
             },
@@ -330,6 +334,7 @@
                 "isFree": true,
                 "isSoldOut": false,
                 "isOnSale": false,
+                "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
             },
@@ -372,6 +377,50 @@
                 "isFree": false,
                 "isSoldOut": true,
                 "isOnSale": false,
+                "isNewArrival": false,
+                "isFeaturedProduct": false,
+                "isGettingStarted": false
+            },
+
+            "battletech-rifleman-premium-miniature": {
+                "id": "battletech-rifleman-premium-miniature",
+                "name": "Rifleman (Premium Miniature)",
+                "universe": "battletech",
+
+
+                "description": "<div className='product-description'><h2>Guardian of the Inner Sphere</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum, incidunt voluptatem repellat id possimus assumenda provident rem dignissimos illo labore distinctio obcaecati culpa modi fuga iste. Quo ea perspiciatis minima!</p></div>",
+                
+                "type": "Miniatures",
+
+                "tags": ["Premium", "BattleTech", "Miniatures"],
+                
+                "images": {
+                    "image1": {
+                        "id": "brpm-mini",
+                        "name": "The Miniature",
+                        "alt": "A view of the miniature",
+                        "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Frifleman-premium-miniature%2FRifleman_1_1024x1024.webp?alt=media&token=ded06ff5-d796-4de6-ba3e-b6ac252df20a"
+                    }
+                },
+
+                "variantType": "",
+                "variantsHaveImages": false,
+
+                "variants": {
+                    "variant1": {
+                        "id": "standard",
+                        "name": "Standard",
+                        "price": 14.99,
+                        "discountedPrice": "",
+                        "images": {},
+                        "isPrimaryVariant": true,
+                        "isSoldOut": false
+                    }
+                },
+                "isFree": false,
+                "isSoldOut": false,
+                "isOnSale": false,
+                "isNewArrival": true,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
             }
@@ -426,6 +475,7 @@
                 "isFree": false,
                 "isSoldOut": false,
                 "isOnSale": false,
+                "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
             }
@@ -470,6 +520,7 @@
                 "isFree": false,
                 "isSoldOut": false,
                 "isOnSale": false,
+                "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
             }
