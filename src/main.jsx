@@ -8,13 +8,12 @@ import store, { persistor } from './store/index.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <HashRouter> {/*basename={`${import.meta.env.VITE_PUBLIC_URL}`} "/CatalystClone"*/}
-          <App/>
-        </HashRouter>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode></React.StrictMode>,
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <HashRouter> {/*basename={`${import.meta.env.VITE_PUBLIC_URL}`} "/CatalystClone"*/}
+        <App/>
+      </HashRouter>
+    </PersistGate>
+  </Provider>,
 )
