@@ -8,10 +8,12 @@
 @import "./components/slideshow";
 @import "./components/featured-product-banner";
 @import "./components/collection-block";
-@import "./components/footer";
 @import "./components/mailListSignUp";
 @import "./components/productCard";
 @import "./components/productResult";
+@import "./components/productFilters";
+@import "./components/pagination";
+@import "./components/footer";
 
 @import "./pages/home";
 @import "./pages/contact";
@@ -37,6 +39,8 @@ body {
     background-color: $accent-light-color;
     color: #666;
     line-height: 1.375;
+
+    min-width: 320px;
     
     // MAKE MOBILE SPECIFIC
     @media (max-width: 749px) {
