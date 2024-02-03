@@ -101,12 +101,16 @@
             background-color: $primary-color;
             border: 3px solid $accent-color;
             // @media (min-width:839px) {}
+
+            min-height: 296px; //290px;
+            @media (min-width: 750px) {
+                min-height: 396px;
+            }
             
             &:is(.grid-mode) {
-                min-height: 290px;
                 @include product-result-grid-mode;             
                 grid-template-columns: 1fr;
-
+                
                 @media (min-width: 450px) {
                     grid-template-columns: 1fr 1fr;                    
                 }
@@ -115,7 +119,7 @@
                 }
             }
             &:is(.list-mode) {
-                min-height: 384px;
+                // min-height: 384px;
                 @include product-result-list-mode;
                 grid-template-columns: 1fr;
             }
@@ -156,78 +160,6 @@
                 border-bottom: 1px solid $primary-color;
             }
 
-            span {
-                color: $primary-color;
-                
-                &:nth-of-type(1) {
-                    display: block;
-                    border-top: 1px solid $primary-color;
-                    padding-top: 8px;
-                }
-            }
-
-
-            .category-links {                
-                // border-bottom: 1px solid $primary-color;
-                padding: 0 5px 8px 0;
-                
-                a {
-                    display: block;
-                    padding: 5px 10px;
-                    color: $primary-font-color;
-                    text-align: left;
-                    
-                    &.active-link {
-                        background-color: $secondary-hover-color;
-                        color: $secondary-font-color;
-                        
-                        &:hover {
-                            color: $misc-font-color;
-                        }
-                    }
-
-                    &:not(:last-child) {
-                        margin-bottom: 5px;
-                    }
-                }
-            }
-            
-            ul {
-                // background-color: white;
-                margin-bottom: 8px;
-                list-style: none;
-                
-                &:not(:last-of-type) {border-bottom: 1px solid $primary-color;}
-            }
-
-            li {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                margin-bottom: 8px;
-
-                
-                label {
-                    margin: 0;
-                    cursor: pointer;
-                }
-            }
-
-            input {
-                margin: 0;
-                width: max-content;
-            }
-
-        }        
-
-        &-pagination {
-            display: grid;
-            grid-template-columns: 90px 50px 90px;
-            justify-content: center;
-            gap: 16px;
-
-            text-align: center;
-            padding: 16px 0 0 0;
         }
     }    
 }
