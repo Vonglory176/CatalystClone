@@ -81,17 +81,45 @@
     }
 
     //Sticky Header (Bottom)
-    &__sticky-wrapper {
+    &__lower-wrapper {
         height: 59.25px;
         @include hide-before-750;
     }
 
-    &__sticky {
+    &__lower {
         display: flex;
         justify-content: space-between;
         padding-right: 20px;
-        position: relative;
+        // position: relative;
         z-index: 99;
+
+        &-links {
+            display: flex;
+            // gap: 20px;
+    
+            a {
+                padding: 20px 10px;
+                color: $misc-font-color;
+                text-transform: uppercase;
+                font-size: 14px;
+    
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    
+        &.isSticky {
+            @media (min-width:750px) {   
+                position: fixed;
+                top: 0;
+                width: 100%; 
+    
+                transition: all .35s cubic-bezier(.33,.59,.14,1);
+                background-color: $accent-color;
+                border-bottom: 5px solid $secondary-color;            
+            }
+        }        
 
         // transition: transform 0.3s ease-in-out;
 
@@ -109,15 +137,15 @@
                 color: $secondary-font-color;
 
                 i {
+                    color: $primary-color;
                     display: inline-block;
                     height: min-content;
                     width: min-content;
                     padding-left: 5px;
                 }
-
+                
                 &:focus {
                     background-color: $accent-lighter-color;
-
                     i {
                         transform: rotate(180deg);
                         padding-right: 5px;
@@ -145,35 +173,6 @@
                     font-weight: 900;
                 }
             }
-        }
-
-        &-links {
-            display: flex;
-            // gap: 20px;
-
-            a {
-                padding: 20px 10px;
-                color: $misc-font-color;
-                text-transform: uppercase;
-                font-size: 14px;
-
-                &:hover {
-                    color: $primary-color;
-                }
-            }
-        }
-
-        &.sticky {
-            width: 100%;
-
-            @media (min-width:750px) {
-                position: fixed;
-                top: 0;
-    
-                transition: all .35s cubic-bezier(.33,.59,.14,1);
-                background-color: $accent-color;
-                border-bottom: 5px solid $secondary-color;            
-            }        
         }
     }
 }
@@ -229,13 +228,20 @@
     .offcanvas__universe {
         display: grid;
         grid-template-columns: 1fr 1fr;
-
-        // .active-link {
-        //     font-weight: 700;
-        //     color: $primary-font-color;
-        //     &:hover {
-        //         color: $secondary-color;
-        //     }
-        // }
     }
+
+    .offcanvas-submenu-container {
+        .offcanvas-submenu-link {
+            color: $secondary-font-color;
+    
+            &.active-link {
+                font-weight: 700;
+                color: $third-font-color;
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+    
 }
