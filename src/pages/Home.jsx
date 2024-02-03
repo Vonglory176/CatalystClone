@@ -153,7 +153,7 @@ export default function Home() {
                             {/* <img className="collection-button" src={saleButton} alt="" /> */}
                         </Link>
 
-                        <Link to={"/"}>                            
+                        <Link to={"/collections/all?categories=new-arrivals"}>                            
                             <ProgressiveImage src={newArrivalsButton}>
                                 {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
                             </ProgressiveImage>
