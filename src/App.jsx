@@ -139,7 +139,7 @@ TODO
 -------------------
 Right now!
 ------
-Searchbar creation
+FINISH SEARCHBAR
 MODIFY COLLECTIONS PAGE TO ACCEPT "search-results" CODE (Just use search in place of collection?)
 
 Later!
@@ -166,39 +166,25 @@ Add a share on social media div?
 CHECKOUT/CART ---
 Look into Shopify redirects
 Write code for changeItemQuantity/Input
+Fix Universe display/styling in name
 
 Needs more steps/checks to verify quantity/price changes?
 
 COLLECTION-BLOCK ---
-Grab X newest products for New-Arrivals
-Grab X featured products for Featured-Products
-
-Write logic for determining Featured/NewArrival-Section? (Still uncertain of manual or auto load)
-Load products into Featured-Containers? (Just use ID's for the moment)
+Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
+Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 COLLECTIONS ---
+BUG: Sorting causes lag
 BUG: Scrollbar pop in/out bug when selecting filters?
 BUG: Lag with selectors (Maybe in products too?)
 BUG: Clicking the same header-nav (or category-filter) link while already on the page adds to history
 
-Make mobile filters / component out of "category-links"
-Make filters for sale, new arrival and free
-Fix header button wrapping
-Change banners/collection-blocks based on the collection
-Set fixed sizes to image/info
-Finish styling (Make sure prod img/info are standardized)
+Fix header button/text wrapping ("Results for" has issues somewhat)
+Finish mobile filter styling
 
 Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
-
-Continue to look into cleaning/breaking up code (Also remember Pagination/Filters components)
-(REMEMBER DISCORD SCREENSHOT/in coding)
-
-HOME ---
-ADD LINKS TO COLLECTION BUTTONS
-
-Add btn class to homepage-mailform?
-Add images to slideshow?
 
 ACCOUNT ---
 Add actual login/auth mechanics
@@ -216,11 +202,10 @@ Figure out some kind of way to update/alert to product/cart changes on cart/chec
 (Cart page has an "Update Cart" button)
 
 GENERAL ---
-Finish and convert all product-image stuff to "getPrimaryProductImage" hook?
+Don't allow Nav/Link spam to add to history (Header & Collections // USE SMART LINK WRAP THING (in discord))
 Figure out how to rotate properly in mobile
 Make scrollbar hidden in MOBILE view, not just small views
 Implement lazyloading & react-progressive-image
-Learn how to preload images? Especially in places like products (GZIP)
 Make small placeholder versions of all images
 Add better image placeholders
 Add sizes to images
@@ -230,6 +215,11 @@ Add Titles to anchors
 Add FavIcon !!!!!!
 
 OPTIONAL & LESS-IMPORTANT ------------------------------------
+
+HOME ---
+Set standard size to colection-buttons (Still small issue being short height when none have loaded)
+Add btn class to homepage-mailform?
+Add images to slideshow?
 
 FEATURED PRODUCT BANNER ---
 Add link stuff
@@ -244,16 +234,14 @@ Finish styling
 Add clear filter button?
 
 DATABASE ---
+Look into registration of Redux stuff
 Add hasVariants?
 Add more products to ProductList ?
 Add stock numbers to products ?
 
 HEADER ---
-Fix sidebar links (ADD ACTIVE LINK TRAITS TO OFFCANVAS UNIVERSE)
+Maybe tweak sidebar styling?
 Make Universe button a link when focused
-Add link highlighting when on affiliated page
-
-Fix weird mobile-tablet snapping issue? (Use transition delay maybe, worked for search)
 Make + rotate when universe cat opened?
 
 CONTACT ---
