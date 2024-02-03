@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 // import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
 import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-battletech-new-arrivals.svg"
@@ -11,27 +11,31 @@ import CollectionBlock from "../components/CollectionBlock"
 import { Offcanvas } from "react-bootstrap"
 import FeaturedProductBanner from "../components/FeaturedProductBanner"
 import loadingSpinner from "../assets/loader-large.gif"
+import Pagination from "../components/Pagination"
+import ProductFilters from "../components/ProductFilters"
+// import { getSortedProducts } from "../hooks/getSortedProducts"
 
 export default function Collections() {
 
     //For content determination
     const {id} = useParams()
     const [searchParams, setSearchParams] = useSearchParams({
-        sort_by:"name",
-        page: 1,
+        // sort_by:"name",
+        // page: 1,
         // sort_order:"",
         // universe: id,
         // types:[],
         // tags:[],
     })
 
-    const [currentCategory, setCurrentCategory] = useState("all-products")
-
+    //Redux Product-List from Firebase
     const productList = useSelector(state => state.products.productList)
     // const status = useSelector(state => state.products.status)
+    
+    //Filters & Filtered Product-List
     const [localProductList, setLocalProductList] = useState()
-    const [typeList, setTypeList] = useState()
-    const [tagList, setTagList] = useState()
+    const [currentCategory, setCurrentCategory] = useState("all-products")
+    const [filterInstanceList, setFilterInstanceList] = useState()
 
     //For overwriting the w/filter history as opposed to adding to it
     const navigate = useNavigate()
@@ -50,37 +54,11 @@ export default function Collections() {
     };
     
     //Pagination
-    const [currentPage, setCurrentPage] = useState()
-    const [pageResults, setPageResults] = useState()
-    const [pageCount, setPageCount] = useState()
+    const [pageResults, setPageResults] = useState() //Set by the Pagination component callback
     const resultsPerPage = 4
-
-
-    const handlePageChange = (direction) => {
-        const newPage = currentPage + direction
-    
-        if (newPage >= 1 && newPage <= pageCount) {
-            setCurrentPage(newPage)
-
-            setSearchParams(prevSearch => {
-                prevSearch.set('page', newPage)
-                return prevSearch;
-            })
-        }
-    }
 
     //Counting filters
     const [filterNumber, setFilterNumber] = useState(0)
-
-    useEffect(() => {
-        if (localProductList) {
-            const page = searchParams.get('page')
-            const currentPageItems = localProductList.slice((page - 1) * resultsPerPage, page * resultsPerPage)
-
-            setCurrentPage(parseInt(searchParams.get('page')))
-            setPageResults(currentPageItems)
-        }
-    },[localProductList, searchParams.get('page')]) //searchParams.get('page')
 
     //PAGE INITIALIZATION
     useEffect(() => {
@@ -100,7 +78,8 @@ export default function Collections() {
                 categorySearchParams === "all-products" || 
                 (categorySearchParams === "on-sale" && p.isOnSale) ||
                 (categorySearchParams === "getting-started" && p.isGettingStarted) ||
-                (categorySearchParams === "free-downloads" && p.isFree)
+                (categorySearchParams === "free-downloads" && p.isFree) ||
+                (categorySearchParams === "new-arrivals" && p.isNewArrival)
             ) {
                 if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
                     if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
@@ -115,25 +94,6 @@ export default function Collections() {
                 }        
                 typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
             }
-        }
-
-        //Filter setup
-        const createFilterList = (instanceList, filterType) => {
-            const sortedInstanceList = Object.entries(instanceList).sort()
-
-            return sortedInstanceList.map(([name, count]) => (
-                <li className="search-results__filter-li" key={name}>
-                    <input 
-                        type="checkbox"
-                        onChange={() => handleFilterChange(filterType, name)}
-                        id={`${name}-checkbox`}
-                        name={`${name}-checkbox`}
-                        value={name}
-                        checked={searchParams.get(filterType)?.includes(name) || false}
-                    />
-                    <label htmlFor={`${name}-checkbox`}>{`${name} (${count})`}</label>
-                </li>
-            ))
         }
 
         //Getting and printing page-contents
@@ -151,66 +111,23 @@ export default function Collections() {
             //SOMETHING BLEW UP
             else console.log("There was an error loading categories from productList!")
 
-            //Pagination setup
-            const totalPages = Math.ceil(tempProductList.length / resultsPerPage)
-            setPageCount(totalPages)
-
             //Filter setup
-            setTypeList(createFilterList(typeInstanceList, 'types'))
-            setTagList(createFilterList(tagInstanceList, 'tags'))
-
+            setFilterInstanceList({
+                types: typeInstanceList, 
+                tags: tagInstanceList
+            })
             //Filter count for mobile indicator
-            const tags = searchParams.get('tags') ? JSON.parse(searchParams.get('tags')) : []
-            const types = searchParams.get('types') ? JSON.parse(searchParams.get('types')) : []
-            setFilterNumber(tags.length + types.length)
+            setFilterNumber(typeSearchParams.length + tagSearchParams.length)
 
             //Result sorting/printing
             const sortBy = searchParams.get('sort_by')
-            handleSortResults({ target: {value: sortBy}}, tempProductList) //List is sorted & printed here
+            handleSortResults({target: {value: sortBy}}, tempProductList) //List is sorted & printed here
             // setLocalProductList(tempProductList)
         }
     }, [id, productList, searchParams]) //searchParams.get("tags"), searchParams.get("types")
 
-    
-    //Filter Use
-    const handleFilterChange = (filterType, filterName) => {
-        // Get the current search parameters for the filter type
-        let currentSearchParams = searchParams.get(filterType)
-        console.log(currentSearchParams)
-        
-        if (currentSearchParams) currentSearchParams = JSON.parse(currentSearchParams) 
-        else currentSearchParams = []
-    
-        // If filterName is already in the list, remove it. Otherwise, add it.
-        const index = currentSearchParams.indexOf(filterName);
-        if (index !== -1) {
-            currentSearchParams.splice(index, 1)
-        } else {
-            currentSearchParams.push(filterName)
-            currentSearchParams.sort()
-        }
-    
-        // Update the search parameters  
-        if (currentSearchParams.length > 0) {
-            setCurrentPage(1) //Page reset
-
-            setSearchParams(prevSearch => {
-                prevSearch.set('page', 1)
-                prevSearch.set(filterType, JSON.stringify(currentSearchParams))
-                if (filterType === 'types') prevSearch.delete('tags') // Reset the tag filter whenever the type filter changes
-                return prevSearch
-            })
-        } else {
-            setSearchParams(prevSearch => {
-                prevSearch.delete(filterType)
-                return prevSearch
-            })
-        }
-    }  
-    
-    
     //Sorting Use
-    const handleSortResults = (e, listToSort) => {
+    const handleSortResults = useCallback((e, listToSort) => {
         console.log("IN SORTING!")
         const sortBy = e.target.value
         const [method, order] = sortBy? sortBy.split(' ') : ["name", ""] // "name desc" becomes ["name", "desc"]
@@ -240,7 +157,7 @@ export default function Collections() {
             } else { // Assume "asc" if not "desc"
                 return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
             }
-        })        
+        })
         
         //Printing to HTML
         setLocalProductList(tempProductList) 
@@ -257,7 +174,7 @@ export default function Collections() {
         // Update the search parameters
         replaceSearchParams(newParams);
         console.log("DONE SORTING!")
-    }
+    })
 
     //For changing the table view
     const [resultMode, setResultMode] = useState("grid-mode")
@@ -365,49 +282,15 @@ export default function Collections() {
                     <div className="search-results__main-sidebar">
                         {/* <ul className="universe-list"></ul> */}
                         <h1>Product Filters</h1>
-                        <div className="search-results__main-sidebar__filter-wrapper">
-                            {/* <span>Product Category</span> */}
-                            <div className="category-links">
-                                <NavLink 
-                                to={{pathname:`/collections/${id}`, search: "?categories=all-products"}} 
-                                className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
-                                >
-                                    All Products
-                                </NavLink>
-
-                                <NavLink
-                                to={{pathname:`/collections/${id}`, search: "?categories=getting-started"}}
-                                className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
-                                >
-                                    Getting Started
-                                </NavLink>
-
-                                <NavLink
-                                to={{pathname:`/collections/${id}`, search: "?categories=on-sale"}}
-                                className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
-                                >
-                                    On Sale
-                                </NavLink>
-
-                                <NavLink
-                                to={{pathname:`/collections/${id}`, search: "?categories=free-downloads"}}
-                                className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
-                                >
-                                    Free Downloads
-                                </NavLink>
-                            </div>
-                            {typeList && typeList.length > 0 && <span>Product Type</span>}
-                            {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
-                            {tagList && tagList.length > 0 && <span>Product Tags</span>}
-                            {tagList && tagList.length > 0 &&  <ul className="tag-list">{tagList}</ul>}
-                        </div>
+                        <ProductFilters 
+                        currentCategory={currentCategory} 
+                        filterInstanceList={filterInstanceList}
+                        // className={"filter-list-sidebar"}
+                        />
                     </div>
                 </div>
-                <div className="search-results-pagination">
-                    <button className="search-results-pagination__previous-button" onClick={() => handlePageChange(-1)}>o-- Previous</button>
-                    <span className="search-results-pagination__page-count">{currentPage} of {pageCount}</span>
-                    <button className="search-results-pagination__next-button" onClick={() => handlePageChange(+1)}>Next --o</button>
-                </div>
+
+                <Pagination resultsPerPage={resultsPerPage} localProductList={localProductList} paginationCallback={setPageResults}/>
 
                 {/* FOR MOBILE FILTERS */}
                 <Offcanvas className="offcanvas-filters" show={showSidebar} onHide={handleClose} backdrop={true} scroll={true}> {/*scroll={true}*/}
@@ -418,40 +301,11 @@ export default function Collections() {
 
                     <Offcanvas.Body>
                         <div className="search-results__mobile-sidebar">
-                            {/* <ul className="universe-list"></ul> */}
-                            <div className="category-links">
-                                <NavLink 
-                                to={{pathname:`/collections/${id}`, search: "?categories=all-products"}} 
-                                className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
-                                >
-                                    All Products
-                                </NavLink>
-
-                                <NavLink
-                                to={{pathname:`/collections/${id}`, search: "?categories=getting-started"}}
-                                className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
-                                >
-                                    Getting Started
-                                </NavLink>
-
-                                <NavLink
-                                to={{pathname:`/collections/${id}`, search: "?categories=on-sale"}}
-                                className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
-                                >
-                                    On Sale
-                                </NavLink>
-
-                                <NavLink
-                                to={{pathname:`/collections/${id}`, search: "?categories=free-downloads"}}
-                                className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
-                                >
-                                    Free Downloads
-                                </NavLink>
-                            </div>
-                            {typeList && typeList.length > 0 && <span>Product Type</span>}
-                            {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
-                            {tagList && tagList.length > 0 && <span>Product Tags</span>}
-                            {tagList && tagList.length > 0 && <ul className="tag-list">{tagList}</ul>}
+                            <ProductFilters 
+                            currentCategory={currentCategory} 
+                            filterInstanceList={filterInstanceList}
+                            // className={"filter-list-mobile"}
+                            />
                         </div>
                     </Offcanvas.Body>
                 </Offcanvas>
