@@ -179,6 +179,7 @@ BUG: Sorting causes lag
 BUG: Scrollbar pop in/out bug when selecting filters?
 BUG: Lag with selectors (Maybe in products too?)
 BUG: Clicking the same header-nav (or category-filter) link while already on the page adds to history
+BUG: ProductResult name overflows
 
 Fix header button/text wrapping ("Results for" has issues somewhat)
 Finish mobile filter styling
