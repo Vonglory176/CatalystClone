@@ -139,14 +139,13 @@ TODO
 -------------------
 Right now!
 ------
-FINISH SEARCHBAR
-MODIFY COLLECTIONS PAGE TO ACCEPT "search-results" CODE (Just use search in place of collection?)
 
 Later!
 ------
 Add some reducer extension things to disable quantity buttons/input while updating
 
 SEARCH ---
+Add a key to productSearchResult
 Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
 Add Aria capability
 
@@ -177,13 +176,16 @@ Load products into Featured-Containers in home? (Just use ID's for the moment)
 COLLECTIONS ---
 BUG: Sorting causes lag
 BUG: Scrollbar pop in/out bug when selecting filters?
-BUG: Lag with selectors (Maybe in products too?)
-BUG: Clicking the same header-nav (or category-filter) link while already on the page adds to history
+BUG: Lag with selector (Maybe in products too?)
+BUG: Clicking the same header-nav (or category-filter) link while already on the page adds to history (Make links a button that replace searchParams?)
 BUG: ProductResult name overflows
+BUG: Unchecking a type filter does not reset tag filters
 
+Cut down on renders (it's bad)
 Fix header button/text wrapping ("Results for" has issues somewhat)
 Finish mobile filter styling
 
+Disable category buttons if none to display?
 Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
 
