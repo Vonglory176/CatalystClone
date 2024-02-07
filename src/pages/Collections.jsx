@@ -13,6 +13,8 @@ import FeaturedProductBanner from "../components/FeaturedProductBanner"
 import loadingSpinner from "../assets/loader-large.gif"
 import Pagination from "../components/Pagination"
 import ProductFilters from "../components/ProductFilters"
+import Fuse from 'fuse.js'
+
 // import { getSortedProducts } from "../hooks/getSortedProducts"
 
 export default function Collections() {
@@ -59,6 +61,25 @@ export default function Collections() {
 
     //Counting filters
     const [filterNumber, setFilterNumber] = useState(0)
+    const [fuse, setFuse] = useState(null)
+    
+    useEffect(() => {
+        if (productList && searchParams.get('q')) { //If there's a url search-query
+
+            const searchQueryOptions = {
+                keys: ['name','universe','description'],
+                includeScore: true,
+                threshold: 0.3
+            }
+
+            let tempProductList = []        
+            Object.keys(productList).forEach(universe => { //For each Product Universe
+                Object.values(productList[universe]).forEach(product => tempProductList.push(product))//For each Product in that Universe
+            })
+
+            setFuse(new Fuse(tempProductList, searchQueryOptions))
+        }
+    }, [productList])
 
     //PAGE INITIALIZATION
     useEffect(() => {
@@ -97,19 +118,34 @@ export default function Collections() {
         }
 
         //Getting and printing page-contents
-        if (productList) {
-            //ALL UNIVERSE
-            if (id === "all") {
-                Object.keys(productList).forEach(universe => { //For each Product Universe
-                    Object.values(productList[universe]).forEach(processProduct)//For each Product in that Universe
-                })
+        const searchQuery = searchParams.get('q')
+        console.log(searchQuery)
+
+        if (productList && (!searchQuery || (searchQuery && fuse))) { //Second half is search specific
+            console.log(test)
+            console.log(id)
+
+            //Loading products via query
+            if (searchQuery && fuse) { 
+                const searchResults = searchQuery? fuse.search(searchQuery) : ''
+                console.log(searchResults)
+                searchResults.forEach(i => processProduct(i.item))
             }
-            //SINGLE UNIVERSE
-            else if (Object.keys(productList).includes(id)) {
-                Object.values(productList[id]).forEach(processProduct) //For each Product in the ID Universe
+            //Loading products normally
+            else { 
+                //ALL UNIVERSE
+                if (id === "all") {
+                    Object.keys(productList).forEach(universe => { //For each Product Universe
+                        Object.values(productList[universe]).forEach(processProduct)//For each Product in that Universe
+                    })
+                }
+                //SINGLE UNIVERSE
+                else if (Object.keys(productList).includes(id)) {
+                    Object.values(productList[id]).forEach(processProduct) //For each Product in the ID Universe
+                }
+                //SOMETHING BLEW UP
+                else console.log("There was an error loading categories from productList!")
             }
-            //SOMETHING BLEW UP
-            else console.log("There was an error loading categories from productList!")
 
             //Filter setup
             setFilterInstanceList({
@@ -124,40 +160,42 @@ export default function Collections() {
             handleSortResults({target: {value: sortBy}}, tempProductList) //List is sorted & printed here
             // setLocalProductList(tempProductList)
         }
-    }, [id, productList, searchParams]) //searchParams.get("tags"), searchParams.get("types")
+    }, [id, productList, searchParams, fuse]) //searchParams.get("tags"), searchParams.get("types")
 
     //Sorting Use
     const handleSortResults = useCallback((e, listToSort) => {
         console.log("IN SORTING!")
-        const sortBy = e.target.value
-        const [method, order] = sortBy? sortBy.split(' ') : ["name", ""] // "name desc" becomes ["name", "desc"]
+        const sortBy = e.target.value? e.target.value : (searchParams.get("q") ? searchParams.get("q") : "name")
+        const [method, order] = sortBy.split(' ') //sortBy? sortBy.split(' ') : ["name", ""] // "name desc" becomes ["name", "desc"]
     
         let tempProductList = listToSort? [...listToSort] : [...localProductList]
         console.log(tempProductList)
-    
-        tempProductList.sort((a, b) => {
-            let aValue, bValue
-    
-            // Determine the path to get the value
-            if (method === "price") {
-                aValue = a.props.product.variants['variant1'].price
-                bValue = b.props.product.variants['variant1'].price
-            } else { // Assume "name" if not "price"
-                aValue = a.props.product[method]
-                bValue = b.props.product[method]
-            }
-    
-            // Convert to lowercase if the values are strings for case-insensitive sorting
-            if (typeof aValue === 'string') aValue = aValue.toLowerCase()
-            if (typeof bValue === 'string') bValue = bValue.toLowerCase()
-    
-            // Determine the order of sorting
-            if (order === "desc") {
-                return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
-            } else { // Assume "asc" if not "desc"
-                return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
-            }
-        })
+
+        if (method !== "relevance") {
+            tempProductList.sort((a, b) => {
+                let aValue, bValue
+        
+                // Determine the path to get the value
+                if (method === "price") {
+                    aValue = a.props.product.variants['variant1'].price
+                    bValue = b.props.product.variants['variant1'].price
+                } else { // Assume "name" if not "price"
+                    aValue = a.props.product[method]
+                    bValue = b.props.product[method]
+                }
+        
+                // Convert to lowercase if the values are strings for case-insensitive sorting
+                if (typeof aValue === 'string') aValue = aValue.toLowerCase()
+                if (typeof bValue === 'string') bValue = bValue.toLowerCase()
+        
+                // Determine the order of sorting
+                if (order === "desc") {
+                    return aValue > bValue ? -1 : aValue < bValue ? 1 : 0
+                } else { // Assume "asc" if not "desc"
+                    return aValue < bValue ? -1 : aValue > bValue ? 1 : 0
+                }
+            })
+        }
         
         //Printing to HTML
         setLocalProductList(tempProductList) 
@@ -224,7 +262,7 @@ export default function Collections() {
             <div className="search-results">
 
                 <div className="search-results__header">
-                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results for "{`${id !== "all"? id + " " : ""}${currentCategory}`}"</div>
+                    <div className="search-results__header-found">Showing {localProductList && localProductList.length} results {`${id !== "all"? `for ${id} ` : (searchParams.get('q')?  `for "${searchParams.get('q')}" ` : "")}in ${currentCategory}`}</div>
 
                     <div className="search-results__header-buttons">
                         <div className="search-results__header-sort">
@@ -238,6 +276,7 @@ export default function Collections() {
                             onChange={handleSortResults}
                             value={searchParams.get('sort_by') || 'default'}
                             >
+                                {searchParams.get('q') && <option value="relevance">Relevance</option>}
                                 <option value="name">Title: A-Z</option>
                                 <option value="name desc">Title: Z-A</option>
                                 <option value="price">Price: Low to High</option>
