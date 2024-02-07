@@ -122,7 +122,6 @@ export default function Collections() {
         console.log(searchQuery)
 
         if (productList && (!searchQuery || (searchQuery && fuse))) { //Second half is search specific
-            console.log(test)
             console.log(id)
 
             //Loading products via query
