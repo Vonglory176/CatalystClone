@@ -152,6 +152,7 @@ Add Aria capability
 Include categories / pages as well as products in search? (Would need database changes)
 
 PRODUCT PAGE ---
+Add a height limit to main image
 Equalize Image & Desc when no thumbnail gallery
 Maybe add default size to pictures (General picture style changes)
 Finish styling (Image container min/max + popin on orientation change)
