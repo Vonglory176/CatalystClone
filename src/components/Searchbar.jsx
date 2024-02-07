@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import Fuse from 'fuse.js'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ProductSearchbarResult from "./ProductSearchbarResult"
 
 export default function Searchbar() {
@@ -10,6 +10,8 @@ export default function Searchbar() {
     const [searchResults, setSearchResults] = useState('')
     const [searchResultsHtml, setSearchResultsHtml] = useState('')
     const [fuse, setFuse] = useState(null)
+
+    const navigate = useNavigate()
 
     //Area of search (All products have been combined into a single array as seen below)
     const options = {
@@ -26,8 +28,8 @@ export default function Searchbar() {
     useEffect(() => {
         if (productList) {
             let tempProductList = []        
-            Object.keys(productList).forEach(category => { //For each Product Category
-                Object.values(productList[category]).forEach(product => tempProductList.push(product))//For each Product in that Category
+            Object.keys(productList).forEach(universe => { //For each Product Universe
+                Object.values(productList[universe]).forEach(product => tempProductList.push(product))//For each Product in that Universe
             })
 
             setFuse(new Fuse(tempProductList, options))
@@ -45,7 +47,7 @@ export default function Searchbar() {
 
         // console.log(query)
         // console.log(fuse)
-        console.log(results)
+        // console.log(results)
     }
 
     //Printing search-result HTML
@@ -62,8 +64,12 @@ export default function Searchbar() {
                     const product = searchResults[i].item
                     tempSearchResultsHtml.push(ProductSearchbarResult(product))
                 }
+                tempSearchResultsHtml.push(
+                <Link to={`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`} className="searchbar-results-link">View all {searchResults.length} items</Link>
+                )
+
                 //Adding the "Products" header if products were found
-                if (tempSearchResultsHtml.length > 0) tempSearchResultsHtml.unshift(
+                if (tempSearchResultsHtml.length > 1) tempSearchResultsHtml.unshift(
                 <div className="searchbar-results-header">Products</div>
                 )
             }
@@ -78,8 +84,9 @@ export default function Searchbar() {
     //Sending results/routing to Search Page (AFTER SUBMIT)
     const handleSearch = (event) => {
         event.preventDefault()
-        onSearch(searchTerm)
-        console.log(results)
+        navigate(`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`)
+        
+        // onSearch(searchTerm)
     }
 
     return (
@@ -87,7 +94,7 @@ export default function Searchbar() {
             <div className="searchbar-input-container">
                 <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => handleSearchInputChange(e)}
                 />
