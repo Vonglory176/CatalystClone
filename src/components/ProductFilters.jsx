@@ -71,41 +71,47 @@ export default function Filters({ currentCategory, filterInstanceList }) {
       setTagList(createFilterList(filterInstanceList.tags, 'tags'))
     }
   }, [filterInstanceList])
+
+  // const [searchTerm, setSearchTerm] = useState("")
+  // useEffect(() => {
+  //   const tempSearchTerm = searchParams.get('q')
+  //   setSearchTerm(tempSearchTerm ? `q=${tempSearchTerm}` : "")
+  // }, searchParams.get('q'))
   
   return (
     <div className="filter-list-wrapper">
       {/* <span>Product Category</span> */}
       <div className="category-links">
           <NavLink 
-          to={{pathname:`/collections/${id}`, search: "?categories=all-products"}} 
+          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=all-products`}} 
           className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
           >
               All Products
           </NavLink>
 
           <NavLink
-          to={{pathname:`/collections/${id}`, search: "?categories=getting-started"}}
+          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=getting-started`}}
           className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
           >
               Getting Started
           </NavLink>
-          
+
           <NavLink
-          to={{pathname:`/collections/${id}`, search: "?categories=new-arrivals"}}
+          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=new-arrivals`}}
           className={`btn ${currentCategory === "new-arrivals"? "active-link" : ""}`}
           >
               New Arrivals
           </NavLink>
 
           <NavLink
-          to={{pathname:`/collections/${id}`, search: "?categories=on-sale"}}
+          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=on-sale`}}
           className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
           >
               On Sale
           </NavLink>
 
           <NavLink
-          to={{pathname:`/collections/${id}`, search: "?categories=free-downloads"}}
+          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=free-downloads`}}
           className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
           >
               Free Downloads
