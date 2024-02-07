@@ -74,7 +74,7 @@ export default function CollectionBlock(
             }
 
             <div className="grid collection">
-                <Link to={collectionLink} className={"collection-link"}></Link>
+                <Link to={collectionLink} className={"collection-link"} style={{pointerEvents: collectionLink? "normal" : "none"}}></Link>
 
                 {collectionCoverTitle && //If no Title, this is excluded           
                 <div className="grid__item collection__cover">
