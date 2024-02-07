@@ -157,4 +157,15 @@
             }
         }
     }
+
+    .searchbar-results-link {
+        display: block;
+        padding: 5px 10px;
+        text-align: center;
+        color: $secondary-color;
+
+        &:hover {
+            background-color: #e6e2e2b2;
+        }
+    }
 }
