@@ -139,16 +139,19 @@ TODO
 -------------------
 Right now!
 ------
+Look into Shopify redirects for checkout
 
 Later!
 ------
 Add some reducer extension things to disable quantity buttons/input while updating
 
 SEARCH ---
-Add a key to productSearchResult
-Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
-Add Aria capability
+ERROR: Add a key to productSearchResult
+ERROR: Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
 
+Make magnifying-icon a search submit button
+
+Add Aria capability?
 Include categories / pages as well as products in search? (Would need database changes)
 
 PRODUCT PAGE ---
@@ -167,12 +170,9 @@ CHECKOUT/CART ---
 Look into Shopify redirects
 Write code for changeItemQuantity/Input
 Fix Universe display/styling in name
+Create standard size for product images
 
 Needs more steps/checks to verify quantity/price changes?
-
-COLLECTION-BLOCK ---
-Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
-Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 COLLECTIONS ---
 BUG: Sorting causes lag
@@ -192,8 +192,9 @@ Make page buttons set view to page top?
 
 ACCOUNT ---
 Add actual login/auth mechanics
-Get Captcha for Login/Register?
 Populate account details (Especially purchase history!!)
+
+Get Captcha for Login/Register?
 
 NOTIFICATIONS/ERROR HANDLING ---
 Add errors to store/products/card/result if not found?
@@ -220,6 +221,10 @@ Add FavIcon !!!!!!
 
 OPTIONAL & LESS-IMPORTANT ------------------------------------
 
+COLLECTION-BLOCK ---
+Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
+Load products into Featured-Containers in home? (Just use ID's for the moment)
+
 HOME ---
 Set standard size to colection-buttons (Still small issue being short height when none have loaded)
 Add btn class to homepage-mailform?
@@ -244,11 +249,15 @@ Add more products to ProductList ?
 Add stock numbers to products ?
 
 HEADER ---
-Maybe tweak sidebar styling?
+BUG: Sticky header buttons pop-in/out when changing pages 
+
 Make Universe button a link when focused
+
 Make + rotate when universe cat opened?
+Maybe tweak sidebar styling?
 
 CONTACT ---
+For practice reasons, make the form an "Uncontrolled Component"
 Add form functionality?
 Finish Styling
 
