@@ -1553,6 +1553,15 @@
   font-size: 14px;
   color: #666;
 }
+.searchbar-results-container .searchbar-results-link {
+  display: block;
+  padding: 5px 10px;
+  text-align: center;
+  color: #c2cb20;
+}
+.searchbar-results-container .searchbar-results-link:hover {
+  background-color: rgba(230, 226, 226, 0.6980392157);
+}
 
 .header {
   border-bottom: 5px solid #c2cb20;
