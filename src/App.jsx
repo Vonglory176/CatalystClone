@@ -139,7 +139,9 @@ TODO
 -------------------
 Right now!
 ------
-Look into Shopify redirects for checkout
+Figure out Netlify's "Serverless Functions" (And if they're even actually needed)
+Determine what needs to happen in the database/product makeup in relation to Stripe use
+Record Success/Cancellation of purchases somehow?
 
 Later!
 ------
