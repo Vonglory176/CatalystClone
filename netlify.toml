@@ -1,3 +1,5 @@
+[build]
+    functions = "fetch"
 [[redirects]]
 from = "/*"
 to = "/"
