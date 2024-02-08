@@ -31,6 +31,7 @@ const cartSlice = createSlice({
             state.cartItemList.push ({
                 productId: newItem.productId,
                 variantId: newItem.variantId,
+                stripeId: newItem.stripeId,
                 quantity: newItem.quantity,
                 // productName: newItem.productname,
                 // variantName: newItem.variantname,

@@ -126,10 +126,11 @@ export default function Products() {
     const handleAddToCart = (event) => {
         event.preventDefault()
         console.log("CLICK")
-
+        
         const productToAdd = {
             productId: currentProduct.id,
             variantId: selectedVariant.id,
+            stripeId: selectedVariant.stripeId,
             quantity: productQuantity
             // productName: currentProduct.name,
             // variantName: selectedVariant.name,
