@@ -33,6 +33,7 @@
 
                 "variants": {
                     "variant1": {
+                        "stripeId": "price_1OhJrKGPwfdOja8u6dwTgMr6",
                         "id": "unlimited",
                         "name": "Unlimited",
                         "price": 49.99,
@@ -123,6 +124,7 @@
 
                 "variants": {
                     "variant1": {
+                        "stripeId": "price_1OhJu2GPwfdOja8uR5V98KZQ",
                         "id": "standard",
                         "name": "Standard",
                         "price": 39.99,
