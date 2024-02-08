@@ -26,6 +26,29 @@ export default function Cart() {
         dispatch(cartActions.removeFromCart(productToChange))
     }
 
+    const handleCheckout = async (event) => {
+        event.preventDefault();
+    
+        const response = await fetch('/.netlify/functions-serve/checkout', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({items: cartItemList})
+        });
+    
+        if (!response.ok) {
+            // Handle error response
+            console.error("Error response:", response);
+            return;
+        }
+    
+        const data = await response.json();
+        if(data.url) {
+            window.location.assign(data.url); //Redirection to Stripe payment
+        }
+    };
+
     useEffect(() => {
         if(status === "success" && cartItemList) {
 
@@ -62,7 +85,7 @@ export default function Cart() {
                 // setTotalPrice(prevTotalPrice => {return Number((prevTotalPrice + quantityPrice).toFixed(2))})
                 
                 tempCartItemsHtml.push(
-                    <div className="cart-product">
+                    <div className="cart-product" key={productIdPair}>
                         <div className="cart-product__image-wrapper">
                             <Link to={productLink}>
                                 <ProgressiveImage src={image} placeholder={placeholderImage}>
@@ -72,7 +95,7 @@ export default function Cart() {
                                     // alt={imageAlt}
                                     className={loading? "imgLoading":"imgLoaded"}
                                     />
-                                }                            
+                                }
                                 </ProgressiveImage>
                             </Link>
                         </div>
@@ -99,13 +122,15 @@ export default function Cart() {
             setCartItemsHtml(tempCartItemsHtml)
             setTotalPrice((tempTotalPrice).toFixed(2))
         }
+
+        console.log(cartItemList)
     },[status, cartItemList]) //Might be firing too soon?
 
     return (
         <div id="Cart-Container">
             {cartItemList.length !== 0?
 
-            <form className="cart"> {/* onsubmit action method nonvalidate */}
+            <form className="cart" onSubmit={handleCheckout}> {/* onsubmit action method nonvalidate */}
                 {/* Country alert for purchasing from multiple */}
                 <div className="cart-products-container">
                     {cartItemsHtml}
@@ -143,3 +168,26 @@ export default function Cart() {
         </div>
     )
 }
+
+/*
+OLD SERVER CODE
+KEEP FOR LEARNING PURPOSES!!!
+
+const handleCheckout = async (event) => {
+        event.preventDefault()
+
+        await fetch('http://localhost:4000/checkout', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({items: cartItemList})
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            if(response.url) {
+                window.location.assign(response.url) //Redirection to Stripe payment
+            }
+        })
+    }
+*/
