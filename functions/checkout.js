@@ -1,9 +1,13 @@
 //VIDEO --> https://youtu.be/_8M-YVY76O8
 
-import Stripe from 'stripe';
-const stripe = Stripe(import.meta.env.STRIPE_SECRET_KEY);
+// import Stripe from 'stripe';
+// const stripe = Stripe(import.meta.env.STRIPE_SECRET_KEY);
 
-exports.handler = async (event, context) => {
+const stripe = require('stripe')(`${process.env.VITE_STRIPE_SECRET_KEY}`)
+
+// export async function handler(event, context) {
+
+exports.handler = async function (event, context) {
     //Only allowing POST for CheckOut
     if (event.httpMethod !== "POST") {
         return {
@@ -46,8 +50,8 @@ exports.handler = async (event, context) => {
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
             mode: 'payment',
-            success_url: "http://localhost:3000/success",
-            cancel_url: "http://localhost:3000/cancel"
+            success_url: "http://localhost:8888/success",
+            cancel_url: "http://localhost:8888/cancel"
         })
 
         //Sending created session URL to frontend for checkout
@@ -57,7 +61,7 @@ exports.handler = async (event, context) => {
         }
     }
     catch(error) {
-        console.log(error)
+        // console.log(error)
         return {
             statusCode: 500,
             body: JSON.stringify({message: error.message})
