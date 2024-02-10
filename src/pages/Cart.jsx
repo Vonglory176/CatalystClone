@@ -29,7 +29,7 @@ export default function Cart() {
     const handleCheckout = async (event) => {
         event.preventDefault();
     
-        const response = await fetch('/.netlify/functions-serve/checkout', {
+        const response = await fetch('/.netlify/functions/checkout', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
