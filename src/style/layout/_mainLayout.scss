@@ -3,6 +3,7 @@
     .main-content {
         background: $primary-background-color;
         padding: 60px 0 80px 0;
+        min-height: 503px;
         
         &.battletech-page, &.shadowrun-page, &.other-page, &.all-page {
             background-color: $accent-lighter-color;
