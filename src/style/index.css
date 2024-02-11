@@ -1728,6 +1728,7 @@
 .header__lower .universe-dropdown .active-link {
   font-weight: 700;
   color: #222;
+  pointer-events: none;
 }
 .header__lower .universe-dropdown .active-link:hover {
   color: #c2cb20;
@@ -1788,6 +1789,7 @@
 .offcanvas-nav .offcanvas-submenu-container .offcanvas-submenu-link.active-link {
   font-weight: 700;
   color: #666;
+  pointer-events: none;
 }
 .offcanvas-nav .offcanvas-submenu-container .offcanvas-submenu-link.active-link:hover {
   color: #c2cb20;
@@ -2178,6 +2180,7 @@
 .filter-list-wrapper .category-links a.active-link {
   background-color: #989e19;
   color: #fff;
+  pointer-events: none;
 }
 .filter-list-wrapper .category-links a.active-link:hover {
   color: rgba(255, 255, 255, 0.6);
