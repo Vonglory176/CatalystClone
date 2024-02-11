@@ -141,6 +141,9 @@ Right now!
 ------
 Implement Account features (LOGIN FIRST, Create, Recover, etc)
 Also need to add sub-pages for Downloadables, Membership, Addresses(?) & Order-Details
+MOVE SERVERLESS FUNCTION CALLS INTO REDUX
+Change password styling
+Hash password
 
 Later!
 ------
@@ -234,6 +237,7 @@ Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 HOME ---
 Set standard size to colection-buttons (Still small issue being short height when none have loaded)
+Fix collection button width (It's using VW)
 Add btn class to homepage-mailform?
 Add images to slideshow?
 
