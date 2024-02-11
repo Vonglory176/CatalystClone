@@ -21,7 +21,7 @@ const cartSlice = createSlice({
 
         //Checking if item is already in cart
         const existingItem = state.cartItemList.find(item => item.productId === newItem.productId && item.variantId === newItem.variantId)
-        console.log(existingItem)
+        // console.log(existingItem)
 
         if (existingItem) {
             existingItem.quantity += newItem.quantity
