@@ -27,27 +27,27 @@ export default function Cart() {
     }
 
     const handleCheckout = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
     
-        const response = await fetch('/.netlify/functions/checkout', {
+        const response = await fetch('/.netlify/functions/checkoutCart', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({items: cartItemList})
-        });
+        })
     
         if (!response.ok) {
             // Handle error response
-            console.error("Error response:", response);
-            return;
+            console.error("Error response:", response)
+            return
         }
     
-        const data = await response.json();
+        const data = await response.json()
         if(data.url) {
-            window.location.assign(data.url); //Redirection to Stripe payment
+            window.location.assign(data.url) //Redirection to Stripe payment
         }
-    };
+    }
 
     useEffect(() => {
         if(status === "success" && cartItemList) {
