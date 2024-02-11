@@ -33,9 +33,9 @@
 
                 "variants": {
                     "variant1": {
-                        "stripeId": "price_1OhJrKGPwfdOja8u6dwTgMr6",
                         "id": "unlimited",
                         "name": "Unlimited",
+                        "stripeId": "price_1OhJrKGPwfdOja8u6dwTgMr6",
                         "price": 49.99,
                         "discountedPrice": "",
                         "images": {
@@ -52,6 +52,7 @@
                     "variant2": {
                         "id": "kickstarter",
                         "name": "Kickstarter",
+                        "stripeId": "price_1OiNdpGPwfdOja8uZi0Hx5MI",
                         "price": 49.99,
                         "discountedPrice": "",
                         "images": {
@@ -163,6 +164,7 @@
                     "variant1": {
                         "id": "lunar-base-sand-drift",
                         "name": "Lunar Base / Sand Drift",
+                        "stripeId": "price_1OiNjsGPwfdOja8uyzUtzERu",
                         "price": 39.99,
                         "discountedPrice": "",
                         "images": {                            
@@ -185,6 +187,7 @@
                     "variant2": {
                         "id": "fungal-crevasse-washout",
                         "name": "Fungal Crevasse / Washout",
+                        "stripeId": "price_1OiNmgGPwfdOja8uoYnBfuKt",
                         "price": 39.99,
                         "discountedPrice": "",
                         "images": {                            
@@ -207,6 +210,7 @@
                     "variant3": {
                         "id": "caustic-valley-mines",
                         "name": "Caustic Valley / Mines",
+                        "stripeId": "price_1OiNohGPwfdOja8uAXcfk0tK",
                         "price": 39.99,
                         "discountedPrice": "",
                         "images": {                            
@@ -229,6 +233,7 @@
                     "variant4": {
                         "id": "crystalline-canyon-badlands",
                         "name": "Crystalline Canyon / Badlands",
+                        "stripeId": "price_1OiNrEGPwfdOja8uwrlbovml",
                         "price": 39.99,
                         "discountedPrice": "",
                         "images": {                            
@@ -284,6 +289,7 @@
                     "variant1": {
                         "id": "standard",
                         "name": "Standard",
+                        "stripeId": "price_1OiNvkGPwfdOja8uixUFVOSW",
                         "price": 4.99,
                         "discountedPrice": "",
                         "images": {},
@@ -326,6 +332,7 @@
                     "variant1": {
                         "id": "standard",
                         "name": "Standard",
+                        "stripeId": "price_1OiNyJGPwfdOja8u8eR096Uu",
                         "price": 0,
                         "discountedPrice": "",
                         "images": {},
@@ -369,7 +376,8 @@
                     "variant1": {
                         "id": "standard",
                         "name": "Standard",
-                        "price": 4.99,
+                        "stripeId": "price_1OiO1VGPwfdOja8uc6xCcyvd",
+                        "price": 39.99,
                         "discountedPrice": "",
                         "images": {},
                         "isPrimaryVariant": true,
@@ -412,6 +420,7 @@
                     "variant1": {
                         "id": "standard",
                         "name": "Standard",
+                        "stripeId": "price_1OiO3fGPwfdOja8uEjvl0Axk",
                         "price": 14.99,
                         "discountedPrice": "",
                         "images": {},
@@ -458,6 +467,7 @@
                     "variant1": {
                         "id": "book-pdf",
                         "name": "Book (+PDF)",
+                        "stripeId": "price_1OiODVGPwfdOja8umaGHkFDy",
                         "price": 49.99,
                         "discountedPrice": "",
                         "images": {},
@@ -467,6 +477,7 @@
                     "variant2": {
                         "id": "pdf",
                         "name": "PDF",
+                        "stripeId": "price_1OiOPhGPwfdOja8uEfZXbd2i",
                         "price": 19.99,
                         "discountedPrice": "",
                         "images": {},
@@ -512,6 +523,7 @@
                     "variant1": {
                         "id": "standard",
                         "name": "Standard",
+                        "stripeId": "price_1OiOSdGPwfdOja8uhyZWcary",
                         "price": 11.99,
                         "discountedPrice": "",
                         "images": {},
@@ -525,6 +537,38 @@
                 "isNewArrival": false,
                 "isFeaturedProduct": false,
                 "isGettingStarted": false
+            }
+        }
+    },
+    "accounts": {
+        "account1": {
+            "id": "12345",
+            "email": "123Hello@gmail.com",
+            "emailIsConfirmed": false,
+            "password": "password",
+
+            "firstName": "TestFirstName",
+            "lastName": "TestLastName",
+
+            "addresses": {
+                "address1": {
+                    "street": "123 SW 100St",
+                    "city": "Cityville",
+                    "state": "WA",
+                    "zipcode": "98007",
+                    "country": "United States"
+                }
+            },
+
+            "orders": {
+                "order1": {
+                    "id": "order1",
+                    "product1": {
+                        "id": "productId goes here",
+                        "name": "ProductName goes here",
+                        "price": 0.00
+                    }
+                }
             }
         }
     }
