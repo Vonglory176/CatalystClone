@@ -2,11 +2,9 @@
 
 // import Stripe from 'stripe';
 // const stripe = Stripe(import.meta.env.STRIPE_SECRET_KEY);
-
 const stripe = require('stripe')(`${process.env.VITE_STRIPE_SECRET_KEY}`)
 
 // export async function handler(event, context) {
-
 exports.handler = async function (event, context) {
     //Only allowing POST for CheckOut
     if (event.httpMethod !== "POST") {
@@ -50,8 +48,8 @@ exports.handler = async function (event, context) {
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
             mode: 'payment',
-            success_url: "http://localhost:8888/success",
-            cancel_url: "http://localhost:8888/cancel"
+            success_url: `${process.env.VITE_RETURN_DOMAIN}/success`,
+            cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cancel`
         })
 
         //Sending created session URL to frontend for checkout
@@ -61,7 +59,7 @@ exports.handler = async function (event, context) {
         }
     }
     catch(error) {
-        // console.log(error)
+        console.log(error)
         return {
             statusCode: 500,
             body: JSON.stringify({message: error.message})
@@ -78,31 +76,15 @@ exports.handler = async function (event, context) {
 
 // ------------------------------------------------------------------
 
-// Stripe - Secret Key
-// sk_test_51OhJeJGPwfdOja8uC9GHavCmXBG0HKEbxsZCHpAbezCDrqUWUvmZSw8I2RrdVZV6WhzGwdvCEYtv8gK4J0vTzLCO00jaVYF0Ah
-
-//Clan Invasion: price_1OhJrKGPwfdOja8u6dwTgMr6
-//Reinforcements Clan Invasion: price_1OhJu2GPwfdOja8uR5V98KZQ
-
-// const express = require('express')
-// var cors = require('cors')
-// const stripe = require('stripe')('sk_test_51OhJeJGPwfdOja8uC9GHavCmXBG0HKEbxsZCHpAbezCDrqUWUvmZSw8I2RrdVZV6WhzGwdvCEYtv8gK4J0vTzLCO00jaVYF0Ah')
-
 // import Stripe from 'stripe';
 // import express from 'express';
 // import cors from 'cors';
-
-//VIDEO --> https://youtu.be/_8M-YVY76O8
 
 // // const express = require('express')
 // // var cors = require('cors')
-// // const stripe = require('stripe')('sk_test_51OhJeJGPwfdOja8uC9GHavCmXBG0HKEbxsZCHpAbezCDrqUWUvmZSw8I2RrdVZV6WhzGwdvCEYtv8gK4J0vTzLCO00jaVYF0Ah')
+// // const stripe = require('stripe')('STRIPE SECRET KEY GOES HERE !!!')
 
 // //VIDEO --> https://youtu.be/_8M-YVY76O8
-
-// import express from 'express';
-// import cors from 'cors';
-// import Stripe from 'stripe';
 
 // const stripe = Stripe(STRIPE_SECRET_KEY GOES HERE);
 
