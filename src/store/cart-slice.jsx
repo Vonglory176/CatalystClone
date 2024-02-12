@@ -21,7 +21,7 @@ const cartSlice = createSlice({
 
         //Checking if item is already in cart
         const existingItem = state.cartItemList.find(item => item.productId === newItem.productId && item.variantId === newItem.variantId)
-        console.log(existingItem)
+        // console.log(existingItem)
 
         if (existingItem) {
             existingItem.quantity += newItem.quantity
@@ -31,6 +31,7 @@ const cartSlice = createSlice({
             state.cartItemList.push ({
                 productId: newItem.productId,
                 variantId: newItem.variantId,
+                stripeId: newItem.stripeId,
                 quantity: newItem.quantity,
                 // productName: newItem.productname,
                 // variantName: newItem.variantname,

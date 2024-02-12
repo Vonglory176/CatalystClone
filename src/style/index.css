@@ -1728,6 +1728,7 @@
 .header__lower .universe-dropdown .active-link {
   font-weight: 700;
   color: #222;
+  pointer-events: none;
 }
 .header__lower .universe-dropdown .active-link:hover {
   color: #c2cb20;
@@ -1788,6 +1789,7 @@
 .offcanvas-nav .offcanvas-submenu-container .offcanvas-submenu-link.active-link {
   font-weight: 700;
   color: #666;
+  pointer-events: none;
 }
 .offcanvas-nav .offcanvas-submenu-container .offcanvas-submenu-link.active-link:hover {
   color: #c2cb20;
@@ -2178,6 +2180,7 @@
 .filter-list-wrapper .category-links a.active-link {
   background-color: #989e19;
   color: #fff;
+  pointer-events: none;
 }
 .filter-list-wrapper .category-links a.active-link:hover {
   color: rgba(255, 255, 255, 0.6);
@@ -2412,17 +2415,30 @@
 #Cart-Container .cart-product__image-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  border: 1px solid #222;
 }
-#Cart-Container .cart-product__image-wrapper img {
+@media (min-width: 750px) {
+  #Cart-Container .cart-product__image-wrapper {
+    min-height: 180px;
+  }
+}
+#Cart-Container .cart-product__image-wrapper a {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  margin: 0 5px;
+}
+#Cart-Container .cart-product__image-wrapper a img {
   width: auto;
   height: auto;
   max-width: 120px;
   max-height: 120px;
 }
 @media (min-width: 750px) {
-  #Cart-Container .cart-product__image-wrapper img {
+  #Cart-Container .cart-product__image-wrapper a img {
     max-height: 180px;
-    margin: 10px auto;
   }
 }
 #Cart-Container .cart-product__name-wrapper {
@@ -2438,7 +2454,7 @@
   margin: 0;
   font-size: 20px;
   font-weight: 700;
-  text-transform: none;
+  text-transform: capitalize;
   letter-spacing: normal;
 }
 #Cart-Container .cart-product__name-wrapper h4:hover {
@@ -2472,11 +2488,13 @@
 }
 #Cart-Container .cart-inputs textarea {
   border: 1px solid #222;
+  max-width: 100%;
+  min-width: 100%;
 }
 @media (min-width: 750px) {
   #Cart-Container .cart-inputs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 65% 1fr;
     gap: 20px;
   }
 }
@@ -2968,6 +2986,7 @@
 .mainLayout .main-content {
   background: #f3f3f3;
   padding: 60px 0 80px 0;
+  min-height: 503px;
 }
 .mainLayout .main-content.battletech-page, .mainLayout .main-content.shadowrun-page, .mainLayout .main-content.other-page, .mainLayout .main-content.all-page {
   background-color: #363636;

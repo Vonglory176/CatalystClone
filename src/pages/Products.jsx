@@ -126,10 +126,11 @@ export default function Products() {
     const handleAddToCart = (event) => {
         event.preventDefault()
         console.log("CLICK")
-
+        
         const productToAdd = {
             productId: currentProduct.id,
             variantId: selectedVariant.id,
+            stripeId: selectedVariant.stripeId,
             quantity: productQuantity
             // productName: currentProduct.name,
             // variantName: selectedVariant.name,
@@ -158,7 +159,7 @@ export default function Products() {
 
     return (
         <div id="Products-Container">
-            {productImages && <ReactImageGallery 
+            {productImages && <ReactImageGallery
             items={productImages} 
             showPlayButton={false}
             showNav={productImages.length > 1? true : false}
@@ -179,8 +180,8 @@ export default function Products() {
                 {/* Check for sale / free */}
                 {selectedVariant && <div className="products-main__price-container">
                     {currentProduct.isOnSale && <div className="product-tag">Sale</div> }
-                    <span className="products-main__price">{selectedVariant.price !== 0? `$${selectedVariant.price}` : "FREE"}</span>
-                    {currentProduct.isOnSale && <span className="products-main__price-container__sale-price">${selectedVariant.discountedPrice}</span>}
+                    <span className="products-main__price">{selectedVariant.price !== 0? `$${currentProduct.isOnSale? selectedVariant.discountedPrice : selectedVariant.price}` : "FREE"}</span>
+                    {currentProduct.isOnSale && <span className="products-main__price-container__sale-price">${selectedVariant.price}</span>}
                 </div>}
 
                 <hr />

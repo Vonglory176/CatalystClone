@@ -139,7 +139,11 @@ TODO
 -------------------
 Right now!
 ------
-Look into Shopify redirects for checkout
+Implement Account features (LOGIN FIRST, Create, Recover, etc)
+Also need to add sub-pages for Downloadables, Membership, Addresses(?) & Order-Details
+MOVE SERVERLESS FUNCTION CALLS INTO REDUX
+Change password styling
+Hash password
 
 Later!
 ------
@@ -155,8 +159,9 @@ Add Aria capability?
 Include categories / pages as well as products in search? (Would need database changes)
 
 PRODUCT PAGE ---
-Add a height limit to main image
-Equalize Image & Desc when no thumbnail gallery
+BUG: Equalize Image & Desc when no thumbnail gallery (Display block + margins seemed to work)
+BUG: Add a height limit to main image
+
 Maybe add default size to pictures (General picture style changes)
 Finish styling (Image container min/max + popin on orientation change)
 
@@ -167,11 +172,16 @@ Make a category page at "/products"?
 Add a share on social media div?
 
 CHECKOUT/CART ---
-Look into Shopify redirects
 Write code for changeItemQuantity/Input
-Fix Universe display/styling in name
-Create standard size for product images
 
+STRIPE WEBHOOK TRIGGERS + S-FUNCTION 
+AFTER PURCHASE - Redirect to (Account/Cart?) - Create outcome notif via https://stripe.com/docs/payments/after-the-payment
+AFTER PURCHASE - If successful, clear the cart
+Figure out a way to get electronic products bound to an account, especially if purchased as guest
+Also figure out how to record address jazz (If at all?)
+When checkout is clicked, create local redux list of cart items to keep record in case of removal during checkout
+
+Add a warning to the purchase of an already owned electronic item?
 Needs more steps/checks to verify quantity/price changes?
 
 COLLECTIONS ---
@@ -227,6 +237,7 @@ Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 HOME ---
 Set standard size to colection-buttons (Still small issue being short height when none have loaded)
+Fix collection button width (It's using VW)
 Add btn class to homepage-mailform?
 Add images to slideshow?
 

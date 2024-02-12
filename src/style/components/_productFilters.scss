@@ -18,6 +18,7 @@
             &.active-link {
                 background-color: $secondary-hover-color;
                 color: $secondary-font-color;
+                pointer-events:none;
                 
                 &:hover {
                     color: $misc-font-color;

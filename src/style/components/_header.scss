@@ -157,8 +157,11 @@
             .active-link {
                 font-weight: 700;
                 color: $primary-font-color;
+                pointer-events:none;
+
                 &:hover {
                     color: $secondary-color;
+                    // cursor: pointer;
                 }
             }
 
@@ -237,6 +240,8 @@
             &.active-link {
                 font-weight: 700;
                 color: $third-font-color;
+                pointer-events:none;
+
                 &:hover {
                     color: $secondary-color;
                 }
