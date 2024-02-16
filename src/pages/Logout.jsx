@@ -8,15 +8,15 @@ export default function Logout() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    // Logging out w/Firebase-Auth
     const auth = getAuth()
+    signOut(auth)
 
-    useEffect(() => {
+    // Logging out with Redux
+    dispatch(authActions.logout())
+    navigate("/", {replace: true})
 
-        signOut(auth)
-
-        dispatch(authActions.logout())
-        navigate("/", {replace: true})
-    })
+    // useEffect(() => {}, [])
 
     return (
         <div id="Logout-Container">
