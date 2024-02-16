@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import db from '../firebase';
+// import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { ref, set, get, child, update, remove } from "firebase/database"
+import { getDatabase } from 'firebase/database';
+// import db from '../firebase';
 
 //ACTIONS (Payloads of information that send data from your application to your store. They are the only source of information for the store.)
 
@@ -8,9 +10,9 @@ import db from '../firebase';
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async ( _, thunkAPI) => {
-    const productsRef = ref(db, 'products')
+    const productsRef = ref(getDatabase(), 'products')
     const snapshot = await get(productsRef) //Getting ProductList from Firebase
-    console.log(snapshot)
+    // console.log(snapshot)
     if (snapshot.exists()) return snapshot.val()
 
     else throw new Error("No products avalible")
@@ -36,7 +38,7 @@ const productsSlice = createSlice({
 
         state.productList = action.payload;
 
-        console.log(state.productList)
+        // console.log(state.productList)
         state.status = 'success'
       })
 
