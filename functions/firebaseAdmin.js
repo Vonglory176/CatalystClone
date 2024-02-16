@@ -10,10 +10,12 @@ Project Settings > Service accounts > Generate new private key. */
 
 import admin from 'firebase-admin'
 const serviceAccount = JSON.parse(process.env.VITE_FIREBASE_ADMIN)
+// const serviceAccount = JSON.parse(process.env.VITE_FIREBASE_ADMIN.replace(/\\n/g, '\n'));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://catalystclonedb-default-rtdb.firebaseio.com"
 })
 
-export default db = admin.database()
+export default admin
+// export default db = admin.database()
