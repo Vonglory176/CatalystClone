@@ -2344,7 +2344,17 @@
 #Home-Container .collection-buttons-container .collection-buttons-wrapper {
   display: grid;
   grid-template-columns: 1fr 31% 1fr;
-  margin: 0 40px;
+  margin: 0 10px;
+}
+@media (max-width: 330px) {
+  #Home-Container .collection-buttons-container .collection-buttons-wrapper {
+    display: none;
+  }
+}
+@media (min-width: 390px) {
+  #Home-Container .collection-buttons-container .collection-buttons-wrapper {
+    margin: 0 40px;
+  }
 }
 @media (min-width: 503px) {
   #Home-Container .collection-buttons-container .collection-buttons-wrapper {
@@ -2364,11 +2374,13 @@
 #Home-Container .collection-buttons-container .collection-buttons-wrapper .collection-button {
   min-width: 100px;
   min-height: 105px;
+  max-width: 560px;
   max-height: 428px;
   height: 100%;
 }
 #Home-Container .collection-buttons-container .collection-buttons-wrapper a:nth-of-type(2) {
   margin: 0 -7vw;
+  min-width: 135px;
 }
 #Home-Container .collection-buttons-container .collection-buttons-wrapper img:hover {
   filter: drop-shadow(0px 0px 20px #c2cb20) brightness(1.5);
@@ -2964,8 +2976,6 @@
   padding: 0;
 }
 .homeLayout .main-content-container {
-  width: -moz-fit-content;
-  width: fit-content;
   margin: auto;
 }
 .homeLayout .main-content-wrapper {
