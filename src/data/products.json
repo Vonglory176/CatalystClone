@@ -541,7 +541,7 @@
         }
     },
     "accounts": {
-        "account1": {
+        "5b43226e-90b1-4d7c-a878-472ba648de03": {
             "id": "5b43226e-90b1-4d7c-a878-472ba648de03",
             "email": "123Hello@gmail.com",
             "emailIsConfirmed": false,
@@ -549,6 +549,36 @@
 
             "firstName": "TestFirstName",
             "lastName": "TestLastName",
+
+            "addresses": {
+                "address1": {
+                    "street": "123 SW 100St",
+                    "city": "Cityville",
+                    "state": "WA",
+                    "zipcode": "98007",
+                    "country": "United States"
+                }
+            },
+
+            "orders": {
+                "order1": {
+                    "id": "order1",
+                    "product1": {
+                        "id": "productId goes here",
+                        "name": "ProductName goes here",
+                        "price": 0.00
+                    }
+                }
+            }
+        },
+        "5b43226e-90b1-4d7c-a878-472ba648de04": {
+            "id": "5b43226e-90b1-4d7c-a878-472ba648de04",
+            "email": "1234Hello@gmail.com",
+            "emailIsConfirmed": false,
+            "password": "passwordd",
+
+            "firstName": "TestFirstName2",
+            "lastName": "TestLastName2",
 
             "addresses": {
                 "address1": {

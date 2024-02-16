@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import db from '../firebase';
+// import db from '../firebase';
 
 //(Reducers specify how the application's state changes in response to actions sent to the store.)
 const cartSlice = createSlice({
