@@ -19,11 +19,13 @@ export default function Login() {
             // Use Firebase Authentication to sign in
             const auth = getAuth()
 
+            // Checking for account with matching credentials
             const response = await signInWithEmailAndPassword(auth, email, password)
             console.log('Login successful!', response)
 
-            dispatch(authActions.login()) // Dispatch action as needed
-            navigate("/account") // Navigate to the account page
+            // Setting login status in Redux and routing to Account page
+            dispatch(authActions.login())
+            navigate("/account")
         } 
         catch (error) { 
             console.error('Login failed:', error.code, error.message)
