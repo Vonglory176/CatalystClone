@@ -1,4 +1,3 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Account from './pages/Account'
@@ -11,9 +10,13 @@ import MainLayout from './layout/MainLayout'
 import SlideShowLayout from './layout/HomeLayout'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
+import Addresses from './pages/Addresses'
+
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
+
 
 function App() {
 
@@ -30,7 +33,7 @@ function App() {
             dispatch(fetchProducts())
         // }
         // console.log(status)
-    }, [dispatch, pathname]) //location //status
+    }, [pathname]) //dispatch //location //status
 
   return ( 
     <>
@@ -51,6 +54,7 @@ function App() {
             <Route path="login" element={<Login/>}/>
             <Route path="logout" element={<Logout/>}/>
             <Route path="register" element={<Register/>}/>
+            <Route path="addresses" element={<Addresses/>}/>
           </Route>
 
           <Route path="/collections/:id" element={<Collections/>}/>
@@ -139,6 +143,9 @@ TODO
 -------------------
 Right now!
 ------
+Move registration code calls to Redux auth?
+Finish Addresses page
+Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
 USE currentUser TO PERSIST DATA? Just get Account page populated
 Implement Account features (LOGIN FIRST, Create, Recover, etc)
 Also need to add sub-pages for Downloadables, Membership, Addresses(?) & Order-Details
@@ -174,6 +181,7 @@ Add a share on social media div?
 
 CHECKOUT/CART ---
 Write code for changeItemQuantity/Input
+WRITE CODE FOR ADDRESS DETAIL USE
 
 STRIPE WEBHOOK TRIGGERS + S-FUNCTION 
 AFTER PURCHASE - Redirect to (Account/Cart?) - Create outcome notif via https://stripe.com/docs/payments/after-the-payment
@@ -238,8 +246,10 @@ Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 HOME ---
 Set standard size to colection-buttons (Still small issue being short height when none have loaded)
+Collection button margin issue on larger views
 Add btn class to homepage-mailform?
 Add images to slideshow?
+Slideshow image load in clips bottom border
 
 FEATURED PRODUCT BANNER ---
 Add link stuff
@@ -264,6 +274,7 @@ BUG: Sticky header buttons pop-in/out when changing pages
 
 Make Universe button a link when focused
 
+Add a drop down notification banner for general use?
 Make + rotate when universe cat opened?
 Maybe tweak sidebar styling?
 
