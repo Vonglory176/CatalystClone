@@ -7,7 +7,7 @@ import cartSlice from "./cart-slice"
 
 const persistConfig = {
     key: "root",
-    storage,
+    storage: storage,
     whitelist: ['auth', 'cart']
 }
 
@@ -20,7 +20,10 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
-    reducer: persistedReducer
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false //{ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]},
+    })
 })
 
 export const persistor = persistStore(store)
