@@ -6,6 +6,7 @@ import "./style/index.css"
 import { Provider } from 'react-redux'
 import store, { persistor } from './store/index.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
+import { getAuth } from "firebase/auth"
 
 import { initializeApp } from "firebase/app"
 // import { getDatabase } from 'firebase/database'
@@ -23,6 +24,7 @@ const firebaseConfig = {
 
 // INITIALIZE FIREBASE
 const app = initializeApp(firebaseConfig)
+const auth = getAuth()
 // const analytics = getAnalytics(app)
 // const db = getDatabase()
 
