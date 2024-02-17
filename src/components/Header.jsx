@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { Offcanvas } from 'react-bootstrap';
-
-import { useSelector } from "react-redux";
-
+import { useEffect, useState } from 'react'
+import { Offcanvas } from 'react-bootstrap'
+import { useSelector } from "react-redux"
+import { Link, NavLink } from 'react-router-dom'
+import { useInView } from 'react-intersection-observer'
+import Searchbar from './Searchbar'
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
-import { Link, NavLink } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
-import Searchbar from './Searchbar';
-// import auth from "../store/auth-slice";
 
 export default function Header() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
