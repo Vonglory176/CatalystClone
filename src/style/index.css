@@ -2231,6 +2231,21 @@
   padding: 16px 0 0 0;
 }
 
+@media (min-width: 750px) {
+  .address-form__input-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+.address-form__input-checkbox {
+  display: flex;
+  gap: 5px;
+}
+.address-form__input-checkbox input {
+  width: auto;
+}
+
 .footer {
   background-color: #030303;
   color: rgba(255, 255, 255, 0.6);
@@ -2548,6 +2563,13 @@
 #Cart-Container .cart-empty {
   padding: 120px 0;
   text-align: center;
+}
+
+#Account-Container .addresses-link {
+  color: #c2cb20;
+}
+#Account-Container .addresses-link:hover {
+  color: #989e19;
 }
 
 #Login-Container .content-block {
@@ -2976,6 +2998,8 @@
   padding: 0;
 }
 .homeLayout .main-content-container {
+  width: -moz-fit-content;
+  width: fit-content;
   margin: auto;
 }
 .homeLayout .main-content-wrapper {
