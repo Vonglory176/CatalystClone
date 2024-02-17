@@ -12,9 +12,9 @@ export const fetchProducts = createAsyncThunk(
   async ( _, thunkAPI) => {
     const productsRef = ref(getDatabase(), 'products')
     const snapshot = await get(productsRef) //Getting ProductList from Firebase
+    
     // console.log(snapshot)
     if (snapshot.exists()) return snapshot.val()
-
     else throw new Error("No products avalible")
   }
 )
@@ -32,12 +32,10 @@ const productsSlice = createSlice({
     builder
       .addCase(fetchProducts.pending, (state, action) => { // INTERESTING !!!!! // handle the state change when fetchProducts is pending
           state.status = 'loading'
-        })
+      })
 
       .addCase(fetchProducts.fulfilled, (state, action) => { // handle the state change when fetchProducts is fulfilled
-
         state.productList = action.payload;
-
         // console.log(state.productList)
         state.status = 'success'
       })
@@ -49,21 +47,8 @@ const productsSlice = createSlice({
         console.log(state.error)
         state.status = 'failed'
       })
-
-      // .addCase(insertData.fulfilled, (state, action) => {
-      //   // handle the state change when insertData is fulfilled
-      // })
-      // .addCase(selectData.fulfilled, (state, action) => {
-      //   // handle the state change when selectData is fulfilled
-      // })
-      // .addCase(updateData.fulfilled, (state, action) => {
-      //   // handle the state change when updateData is fulfilled
-      // })
-      // .addCase(deleteData.fulfilled, (state, action) => {
-      //   // handle the state change when deleteData is fulfilled
-      // })
   },
-});
+})
 
 
 export const productsActions = productsSlice.actions //For reducer use
