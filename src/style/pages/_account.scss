@@ -1,0 +1,9 @@
+#Account-Container {
+    .addresses-link {
+        color: $secondary-color;
+        &:hover {
+            color: $secondary-hover-color;
+        }
+    }
+}
+
