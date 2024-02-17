@@ -7,16 +7,12 @@ import { getAuth, signOut } from "firebase/auth"
 export default function Logout() {    
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    // Logging out w/Firebase-Auth
-    const auth = getAuth()
-    signOut(auth)
-
-    // Logging out with Redux
-    dispatch(authActions.logout())
-    navigate("/", {replace: true})
-
-    // useEffect(() => {}, [])
+    
+    useEffect(() => {
+        // Logging out w/Redux & redirecting Home
+        dispatch(authActions.logout())
+        navigate("/", {replace: true})
+    }, [])
 
     return (
         <div id="Logout-Container">
