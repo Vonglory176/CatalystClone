@@ -1,47 +1,69 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import { useDispatch } from "react-redux"
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { authActions } from "../store/auth-slice"
+import { loginWithUserDetails } from "../store/auth-slice"
 import { ref, set, getDatabase } from "firebase/database"
-
+import { useEffect } from 'react'
+import { fetchUserCountry } from "../hooks/getUserCountry"
 
 export default function Register() {
+    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    //Routing to Account page if user is logged in
+    useEffect(() => {
+        if (isLoggedIn) navigate("/account", {replace:true})
+    }, [isLoggedIn])
 
     const handleCreateAccountSubmit = async (e) => {
         e.preventDefault()
-
-        const firstName = e.target.elements['register[firstName]'].value
-        const lastName = e.target.elements['register[lastName]'].value
-        const password = e.target.elements['register[password]'].value
-        const email = e.target.elements['register[email]'].value
+        
+        const elements = e.target.elements
+        const firstName = elements['register[firstName]'].value
+        const lastName = elements['register[lastName]'].value
+        const password = elements['register[password]'].value
+        const email = elements['register[email]'].value
 
         const auth = getAuth()
         const db = getDatabase()
         
         try {
-            console.log(auth.currentUser)
+            // console.log(auth.currentUser)
             const response = await createUserWithEmailAndPassword(auth, email, password) //Unsecure?
             
             console.log('Registration successful!', response)
-            console.log(auth.currentUser)
+            // console.log(auth.currentUser)
 
             const userID = auth.currentUser.uid
             const reference = ref(db, 'accounts/' + userID)
+
+            const userCountry = await fetchUserCountry()
             
             //Creating entry w/basic information in database
             await set(reference, { //Using the UID for indexing
-                firstName: firstName? firstName : null,
-                lastName: lastName? lastName: null,
                 emailVerified: false,
-                addresses: {},
-                orders: {},
+                addresses: [
+                    {
+                        isDefaultAddress: true,
+                        firstName: firstName? firstName : false,
+                        lastName: lastName? lastName: false,
+                        company: false,
+                        address1: false,
+                        address2: false,
+                        city: false,
+                        country: userCountry? userCountry : "United States",
+                        province: false,
+                        postalCode: false,
+                        phone: false,
+                    }
+                ],
+                orders: false,
             }) 
 
-            dispatch(authActions.login()) // Dispatch action as needed
-            navigate("/account") // Navigate to the account page
+            // Getting user-details and setting login status in Redux
+            // Auto routes to Account page w/useEffect above
+            dispatch(loginWithUserDetails({email, password}))
         }
         catch (error) {
             console.error('Registration failed:', error.code, error.message)
