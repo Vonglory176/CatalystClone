@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { createNewUserAddress } from "../store/auth-slice"
+import { createNewUserAddress, removeUserAddress, updateUserAddress } from "../store/auth-slice"
 
 import AddressForm from "../components/AddressForm"
 
@@ -16,9 +16,9 @@ export default function Addresses() {
     }, [isLoggedIn])
 
     const {addresses} = useSelector(state => state.auth.user)
-
+    const [currentAddresses, setCurrentAddresses] = useState()
     const [addAddress, setAddAddress] = useState(false)
-
+    
     const printAddresses = () => {
         // No Addresses
         if (!addresses || addresses.length === 0) return <p><strong>No addresses found</strong></p>
@@ -29,7 +29,7 @@ export default function Addresses() {
             const address = addresses[index]
 
             addressListHtml.push(
-            <div className="address-container" key={index}>
+                <div className="address-container" key={index}>
                 {address.isDefaultAddress && <p><strong>Default</strong></p>}
                 <p>
                     {address.firstName} {address.lastName} {(address.firstName || address.lastName) && <br/>}
@@ -39,26 +39,42 @@ export default function Addresses() {
                     {address.address2} {address.address2 && <br/>}
                     {address.city} {address.province} {address.postalCode} {(address.city || address.province || address.postalCode) && <br/>}
                 </p>
+                <input type="button" value="Edit" className="address-container__button"/>
+                <input type="button" value="Delete" onClick={() => dispatch(removeUserAddress(address))} className="address-container__button"/>
             </div>
             )
+
+            if (Number(index) !== addresses.length -1) addressListHtml.push(<hr key={index + "hr"}/>)
         }
         return addressListHtml
     }
 
+    // Address Printing
+    useEffect(() => {
+        setCurrentAddresses(printAddresses())
+    }, [addresses])
+
+    // Callback to send new address to Redux
     const newAddressCallback = (address) => {
+        console.log(address)
         dispatch(createNewUserAddress(address))
+    }
+    // Callback to send new address to Redux
+    const updateAddressCallback = (address) => {
+        console.log(address)
+        dispatch(updateUserAddress(address))
     }
 
     return (
         <div id="Account-Container">
             <h1>My Account</h1>
 
-            {addAddress && <AddressForm formTitle="Add a New Address" submissionCallback={() => newAddressCallback()} cancelCallback={() => setAddAddress(false)}></AddressForm>}
+            {addAddress && <AddressForm formTitle="Add a New Address" submissionCallback={newAddressCallback} cancelCallback={() => setAddAddress(false)}></AddressForm>}
 
             <div className="content-block">
                 <h2>Your Addresses</h2>
                 <div className="addresses">
-                    {printAddresses()}
+                    {currentAddresses}
                 </div>
                 
             </div>
