@@ -16,24 +16,21 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
+import { fetchUserDetails } from './store/auth-slice'
 
 
 function App() {
-
   const dispatch = useDispatch()
-    // const productList = useSelector(state => state.products.productList)
-    const status = useSelector(state => state.products.status)
-    // const error = useSelector(state => state.products.error)
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
-    // const location = useLocation()
-    const { pathname } = useLocation() //So refresh only occurs on path change, not changes like query
+  //So refresh only occurs on path change, not changes like query
+  const { pathname } = useLocation() 
+  // const location = useLocation()
 
-    useEffect(() => {
-        // if(status === 'idle') {
-            dispatch(fetchProducts())
-        // }
-        // console.log(status)
-    }, [pathname]) //dispatch //location //status
+  useEffect(() => {
+    dispatch(fetchProducts())
+    if (isLoggedIn) dispatch(fetchUserDetails())
+  }, [pathname]) //dispatch //location //status
 
   return ( 
     <>
@@ -143,6 +140,14 @@ TODO
 -------------------
 Right now!
 ------
+Default address on top?
+Address "isDefaultAddress" counts as difference
+Create automatic method of setting default when creating first address
+Account deletion and page refresh on addresses does not reroute
+Async hiccups after creating account. Watch console/redirects
+Finish password recovery
+If account is not found, auto logout? (Maybe on page change in this file)
+Make address form required
 Move registration code calls to Redux auth?
 Finish Addresses page
 Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
