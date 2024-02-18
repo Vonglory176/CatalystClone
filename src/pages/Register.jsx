@@ -5,6 +5,7 @@ import { loginWithUserDetails } from "../store/auth-slice"
 import { ref, set, getDatabase } from "firebase/database"
 import { useEffect } from 'react'
 import { fetchUserCountry } from "../hooks/getUserCountry"
+import { createNewAccount } from "../store/auth-slice"
 
 export default function Register() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
@@ -25,49 +26,7 @@ export default function Register() {
         const password = elements['register[password]'].value
         const email = elements['register[email]'].value
 
-        const auth = getAuth()
-        const db = getDatabase()
-        
-        try {
-            // console.log(auth.currentUser)
-            const response = await createUserWithEmailAndPassword(auth, email, password) //Unsecure?
-            
-            console.log('Registration successful!', response)
-            // console.log(auth.currentUser)
-
-            const userID = auth.currentUser.uid
-            const reference = ref(db, 'accounts/' + userID)
-
-            const userCountry = await fetchUserCountry()
-            
-            //Creating entry w/basic information in database
-            await set(reference, { //Using the UID for indexing
-                emailVerified: false,
-                addresses: [
-                    {
-                        isDefaultAddress: true,
-                        firstName: firstName? firstName : false,
-                        lastName: lastName? lastName: false,
-                        company: false,
-                        address1: false,
-                        address2: false,
-                        city: false,
-                        country: userCountry? userCountry : "United States",
-                        province: false,
-                        postalCode: false,
-                        phone: false,
-                    }
-                ],
-                orders: false,
-            }) 
-
-            // Getting user-details and setting login status in Redux
-            // Auto routes to Account page w/useEffect above
-            dispatch(loginWithUserDetails({email, password}))
-        }
-        catch (error) {
-            console.error('Registration failed:', error.code, error.message)
-        }
+        dispatch(createNewAccount({email, password, firstName, lastName}))
     }
 
     return (
