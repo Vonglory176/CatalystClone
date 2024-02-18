@@ -2,20 +2,20 @@ export default function AddressForm({formTitle, submissionCallback, cancelCallba
 
     const handleAddressFormSubmit = (e) => {
         e.preventDefault()
-        
-        const elements = e.target.elements
+
+        // console.log(e.target.elements)
         submissionCallback({
-            firstName: elements['address[firstName]'].value,
-            lastName: elements['address[lastName]'].value,
-            company: elements['address[company]'].value,
-            address1: elements['address[address1]'].value,
-            address2: elements['address[address2]'].value,
-            city: elements['address[city]'].value,
-            country: elements['address[country]'].value,
-            province: elements['address[province]'].value,
-            postalCode: elements['address[postalCode]'].value,
-            phone: elements['address[phone]'].value,
-            setDefault: elements['address[setDefault]'].value
+            firstName: e.target.elements['address[firstName]'].value,
+            lastName: e.target.elements['address[lastName]'].value,
+            company: e.target.elements['address[company]'].value,
+            address1: e.target.elements['address[address1]'].value,
+            address2: e.target.elements['address[address2]'].value,
+            city: e.target.elements['address[city]'].value,
+            country: e.target.elements['address[country]'].value,
+            province: e.target.elements['address[province]'].value,
+            postalCode: e.target.elements['address[postalCode]'].value,
+            phone: e.target.elements['address[phone]'].value,
+            isDefaultAddress: e.target.elements['address[setDefault]'].checked
         })
     }
 
@@ -62,7 +62,7 @@ export default function AddressForm({formTitle, submissionCallback, cancelCallba
                 <div className="address-form__input">
                     <label htmlFor="address[country]">Country</label>
                     <select name="address[country]" id={`Address-Form__Country`}> {/* FIND LIST TO USE */}
-                        <option value="US">United States</option>
+                        <option value="United States">United States</option>
                     </select>
                 </div>
             </div> 
