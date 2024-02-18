@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { loginWithUserDetails } from "../store/auth-slice.jsx"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export default function Login() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
@@ -17,28 +15,14 @@ export default function Login() {
         }
     }, [isLoggedIn])
 
-    const handleLoginSubmit = async (e) => {
+    //Login trigger
+    const handleAccountLoginSubmit = async (e) => {
         e.preventDefault() //Prevents refresh/data-sending
       
         const email = e.target.elements['customer[email]'].value
         const password = e.target.elements['customer[password]'].value
         
-        // try {
-            // Use Firebase Authentication to sign in
-            // const auth = getAuth()
-
-            // Checking for account with matching credentials
-            // await signInWithEmailAndPassword(auth, email, password)
-            //const response = await signInWithEmailAndPassword(auth, email, password)
-            //console.log('Login successful!', response)
-
-            // Getting user-details and setting login status in Redux
-            // Auto routes to Account page w/useEffect above
-            dispatch(loginWithUserDetails({email, password}))
-        // } 
-        // catch (error) { 
-        //     console.error('Login failed:', error.code, error.message)
-        // }
+        dispatch(loginWithUserDetails({email, password}))
     }
 
     const [passwordRecovery, setPasswordRecovery] = useState(false)
@@ -46,7 +30,7 @@ export default function Login() {
 
 
     let loginDiv = (
-        <form method="post" action="/account" id="Customer-Login" className="customerForm" onSubmit={handleLoginSubmit}>
+        <form method="post" action="/account" id="Customer-Login" className="customerForm" onSubmit={handleAccountLoginSubmit}>
             <h1>Login</h1>
             <input type="email" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
             <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
