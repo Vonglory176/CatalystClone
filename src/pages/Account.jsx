@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -13,8 +13,12 @@ export default function Account() {
     }, [isLoggedIn])
 
     const user = useSelector(state => state.auth.user)
-    // const {orders, addresses} = useSelector(state => state.auth.user)
-    const address = user? user.addresses.find(address => address.isDefaultAddress) : {}
+
+    const [address, setAddress] = useState(false)
+
+    useEffect(() => {
+        setAddress(user && user.addresses? user.addresses.find(address => address.isDefaultAddress) : false)
+    }, [user])
 
     return (
         <div id="Addresses-Container">
@@ -23,9 +27,9 @@ export default function Account() {
                 <p className="account__continue">
                     <Link to={"/"} className={"btn"}>My Downloadable Files</Link> {/* Note "All" */}
                 </p>
-                <p className="account__continue">
-                    <Link to={"/"} className={"btn"}>Manage My Membership</Link> {/* Note "All" */}
-                </p>
+                {/* <p className="account__continue">
+                    <Link to={"/"} className={"btn"}>Manage My Membership</Link>
+                </p> */}
 
                 <h2>Order History</h2>
                 {user && user.orders?
@@ -36,7 +40,7 @@ export default function Account() {
 
             <div className="content-block">
                 <h3>Account Details</h3>
-                {(user && user.addresses.length > 0) && 
+                {address && 
                 <div className="address-container">
                     <p>
                         {address.firstName} {address.lastName} {(address.firstName || address.lastName) && <br/>}
@@ -54,7 +58,7 @@ export default function Account() {
                 </div>
                 
                 }
-                <Link to={"addresses"} className="addresses-link">View Addreses ({user? user.addresses.length : 0})</Link>
+                <Link to={"addresses"} className="addresses-link">View Addreses ({address? user.addresses.length : 0})</Link>
             </div>
         </div>
     )
