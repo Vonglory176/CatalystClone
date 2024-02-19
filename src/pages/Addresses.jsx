@@ -18,6 +18,7 @@ export default function Addresses() {
     const {addresses} = useSelector(state => state.auth.user)
     const [currentAddresses, setCurrentAddresses] = useState()
     const [addAddress, setAddAddress] = useState(false)
+    const [updateAddress, setUpdateAddress] = useState({}) //This become an object array via useEffect
     
     const printAddresses = () => {
         // No Addresses
@@ -29,7 +30,7 @@ export default function Addresses() {
             const address = addresses[index]
 
             addressListHtml.push(
-                <div className="address-container" key={index}>
+            <div className="address-container" key={index}>
                 {address.isDefaultAddress && <p><strong>Default</strong></p>}
                 <p>
                     {address.firstName} {address.lastName} {(address.firstName || address.lastName) && <br/>}
@@ -37,10 +38,14 @@ export default function Addresses() {
                     {address.country} {address.country && <br/>}
                     {address.address1} {address.address1 && <br/>}
                     {address.address2} {address.address2 && <br/>}
+                    {/* Add phone? */}
                     {address.city} {address.province} {address.postalCode} {(address.city || address.province || address.postalCode) && <br/>}
                 </p>
-                <input type="button" value="Edit" className="address-container__button"/>
-                <input type="button" value="Delete" onClick={() => dispatch(removeUserAddress(address))} className="address-container__button"/>
+                <div className="address-container__button-group">
+                    <input type="button" value="Edit" onClick={() => handleUpdateAddressOnClick(index)} className="address-container__button"/>
+                    <input type="button" value="Delete" onClick={() => dispatch(removeUserAddress(address))} className="address-container__button"/>
+                </div>
+                {updateAddress[index] && <AddressForm formTitle="Edit Address" prevAddress={address} submissionCallback={updateAddressCallback} cancelCallback={() => handleUpdateAddressOnClick(index)}></AddressForm>}
             </div>
             )
 
@@ -49,21 +54,38 @@ export default function Addresses() {
         return addressListHtml
     }
 
-    // Address Printing
-    useEffect(() => {
-        setCurrentAddresses(printAddresses())
+    // Address Initialization
+    useEffect(() => {        
+        let updateAddressList = []
+        for (let address in addresses.length) updateAddressList.push(false)
+
+        setUpdateAddress(updateAddressList)
     }, [addresses])
 
-    // Callback to send new address to Redux
-    const newAddressCallback = (address) => {
-        console.log(address)
-        dispatch(createNewUserAddress(address))
+    // Address Printing/Updating (Could combine with above but has indexing issue with Remove function)
+    useEffect(() => {
+        setCurrentAddresses(printAddresses())
+        console.log(updateAddress)
+    }, [updateAddress]) //addresses, 
+
+    // Opening/Closing the Edit forms
+    const handleUpdateAddressOnClick = (index) => {
+        setUpdateAddress({...updateAddress, [index]:!updateAddress[index]})
+        // setUpdateAddress(prev => prev.map((value, i) => i === Number(index) ? !value : value))
     }
-    // Callback to send new address to Redux
-    const updateAddressCallback = (address) => {
-        console.log(address)
-        dispatch(updateUserAddress(address))
+
+    // Callbacks to send new address to Redux
+    const newAddressCallback = (newAddress) => {
+        console.log(newAddress)
+        dispatch(createNewUserAddress(newAddress))
+        setAddAddress(false)
     }
+
+    const updateAddressCallback = (updatedAddress, prevAddress) => {
+        dispatch(updateUserAddress({updatedAddress, prevAddress}))
+        console.log(updatedAddress)
+    }
+
 
     return (
         <div id="Account-Container">
