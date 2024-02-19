@@ -558,48 +558,56 @@
                     "zipcode": "98007",
                     "country": "United States"
                 }
-            },
-
-            "orders": {
-                "order1": {
-                    "id": "order1",
-                    "product1": {
-                        "id": "productId goes here",
-                        "name": "ProductName goes here",
-                        "price": 0.00
-                    }
-                }
             }
-        },
-        "5b43226e-90b1-4d7c-a878-472ba648de04": {
-            "id": "5b43226e-90b1-4d7c-a878-472ba648de04",
-            "email": "1234Hello@gmail.com",
-            "emailIsConfirmed": false,
-            "password": "passwordd",
-
-            "firstName": "TestFirstName2",
-            "lastName": "TestLastName2",
-
-            "addresses": {
-                "address1": {
-                    "street": "123 SW 100St",
-                    "city": "Cityville",
-                    "state": "WA",
-                    "zipcode": "98007",
-                    "country": "United States"
-                }
-            },
-
-            "orders": {
-                "order1": {
-                    "id": "order1",
-                    "product1": {
-                        "id": "productId goes here",
-                        "name": "ProductName goes here",
-                        "price": 0.00
-                    }
+        }
+    },
+    "orders": {
+        "order1": {
+            "userId": "5b43226e-90b1-4d7c-a878-472ba648de03",
+            "completedAt": "2023-09-21T12:00:00Z",
+            "products": {                
+                "battletech-clan-invasion": {
+                    "id": "battletech-clan-invasion",
+                    "name": "Clan Invasion",
+                    "universe":"battletech",
+                    "totalPrice": 49.99,
+    
+                    "variants": {
+                        "variant1": {
+                            "id": "unlimited",
+                            "name": "Unlimited",
+                            "price": 49.99,
+                            "quantity": 1
+                        }
+                    }                    
                 }
             }
         }
-    }
+    },
+    "sessions": {
+        "session1": {
+          "userId": "5b43226e-90b1-4d7c-a878-472ba648de03",
+          "createdAt": "2023-09-21T12:00:00Z",
+          "expiresAt": "2023-09-22T12:00:00Z",
+          "completed": false,
+
+          "products": {                
+                "battletech-clan-invasion": {
+                    "id": "battletech-clan-invasion",
+                    "name": "Clan Invasion",
+                    "universe":"battletech",
+                    "totalPrice": 49.99,
+    
+                    "variants": {
+                        "variant1": {
+                            "id": "unlimited",
+                            "name": "Unlimited",
+                            "price": 49.99,
+                            "quantity": 1
+                        }
+                    }                    
+                }
+            }
+        }
+      }
 }
