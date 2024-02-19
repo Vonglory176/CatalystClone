@@ -17,7 +17,12 @@ export default function Account() {
     const [address, setAddress] = useState(false)
 
     useEffect(() => {
-        setAddress(user && user.addresses? user.addresses.find(address => address.isDefaultAddress) : false)
+        if (user && user.addresses) { //Always using default, and if no default, use first
+            const defaultAddress = user.addresses.find(address => address.isDefaultAddress)
+            setAddress(defaultAddress? defaultAddress : user.addresses[0])
+        } else {
+            setAddress(false)
+        }
     }, [user])
 
     return (
