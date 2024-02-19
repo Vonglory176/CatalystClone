@@ -138,29 +138,39 @@ export default App
 
 TODO
 -------------------
+Prime Features!
+------
+Order details
+Shipping info in Checkout
+Notifications
+"Back to" banners
+Captcha?
+
 Right now!
 ------
-Default address on top?
-Address "isDefaultAddress" counts as difference
-Create automatic method of setting default when creating first address
-Account deletion and page refresh on addresses does not reroute
-Async hiccups after creating account. Watch console/redirects
-Finish password recovery
-If account is not found, auto logout? (Maybe on page change in this file)
-Make address form required
-Move registration code calls to Redux auth?
-Finish Addresses page
-Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
-USE currentUser TO PERSIST DATA? Just get Account page populated
-Implement Account features (LOGIN FIRST, Create, Recover, etc)
-Also need to add sub-pages for Downloadables, Membership, Addresses(?) & Order-Details
-Change password styling?
+Meta data for stripe checkout
+Create server method to clean up expired sessions (Look in discord)
+Include Tax / Shipping in checkout
 
 BUG: Sale/Standard price swap bug from before is still present (At least on home page)
 
 Later!
 ------
-Add some reducer extension things to disable quantity buttons/input while updating
+ACCOUNT ---
+BUG: Account deletion and page refresh on addresses does not reroute
+BUG: Async hiccups after creating account. Watch console/redirects
+MINOR: Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
+
+Also need to add sub-pages for Downloadables, Order-Details & Membership(?) 
+Implement password recovery
+Finish styling
+
+Change password styling?
+
+ADDRESSES ---
+BUG: Address "isDefaultAddress" counts as difference
+Default address on top?
+Make address form required
 
 SEARCH ---
 ERROR: Add a key to productSearchResult
@@ -175,6 +185,7 @@ PRODUCT PAGE ---
 BUG: Equalize Image & Desc when no thumbnail gallery (Display block + margins seemed to work)
 BUG: Add a height limit to main image
 
+Add some reducer extension things to disable quantity buttons/input while updating
 Maybe add default size to pictures (General picture style changes)
 Finish styling (Image container min/max + popin on orientation change)
 
@@ -186,6 +197,7 @@ Add a share on social media div?
 
 CHECKOUT/CART ---
 Write code for changeItemQuantity/Input
+Add some reducer extension things to disable quantity buttons/input while updating
 WRITE CODE FOR ADDRESS DETAIL USE
 
 STRIPE WEBHOOK TRIGGERS + S-FUNCTION 
@@ -215,9 +227,7 @@ Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
 
 ACCOUNT ---
-Add actual login/auth mechanics
 Populate account details (Especially purchase history!!)
-
 Get Captcha for Login/Register?
 
 NOTIFICATIONS/ERROR HANDLING ---
