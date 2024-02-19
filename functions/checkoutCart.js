@@ -3,6 +3,9 @@
 // import Stripe from 'stripe';
 // const stripe = Stripe(import.meta.env.STRIPE_SECRET_KEY);
 const stripe = require('stripe')(`${process.env.VITE_STRIPE_SECRET_KEY}`)
+const { v4: uuidv4 } = require('uuid')
+const firebaseAuth = require('firebase/auth')
+const firebaseDb = require('firebase/database')
 
 // export async function handler(event, context) {
 exports.handler = async function (event, context) {
@@ -31,11 +34,22 @@ exports.handler = async function (event, context) {
             }
         ]
     */}
-
+    
     try {
+        // Generating a session UUID
+        const sessionId = uuidv4()
+        console.log(sessionId)
+
         //Getting the posted user data
-        const { items } = JSON.parse(event.body)
-        console.log(items)
+        const { items, user } = JSON.parse(event.body)
+        // console.log(user)
+
+        //Setting default address to be sent to Stripe
+        // let defaultAddress = {} 
+        // if (user && user.address && user.address.length > 0) {
+        //     defaultAddress = user.address.find(address => { return address.isDefaultAddress })
+        //     defaultAddress === -1? user.address[0] : defaultAddress
+        // }
 
         //Formatting data to adhere to Stripe standards
         let lineItems = items.map(item => ({ //"lineItems" is the Stripe term for items/products
@@ -47,10 +61,66 @@ exports.handler = async function (event, context) {
         //Creating session with newly formatted lineItems
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
+            // customer: userID, //Remove?
             mode: 'payment',
-            success_url: `${process.env.VITE_RETURN_DOMAIN}/success`,
-            cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cancel`
+            success_url: `${process.env.VITE_RETURN_DOMAIN}/success?session_id=${sessionId}`,
+            cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cancel?session_id=${sessionId}`,
+            automatic_tax: {
+                enabled: true
+            },
+            tax_id_collection: {
+                enabled: true
+            },
+            shipping_address_collection: {
+                allowed_countries: ['US', 'CA']
+            },
+            invoice_creation: { // TEST!!
+                enabled: true
+            },
+            metadata: {
+                sessionId: sessionId
+            }
         })
+
+        //Saving a session copy, generating UUID and sending both to Firebase
+        // const db = firebaseDb.getDatabase()
+        // const ref = firebaseDb.ref(db, `sessions/${sessionId}`)
+
+        // const newSessionRef = await firebaseDb.set(ref, {
+        //     stripeSessionId: session,
+        //     userId: user.userId
+        // })
+        // const newSessionKey = newSessionRef.key
+
+        // console.log(newSessionKey)
+        // console.log(session)
+
+        // const calculation = await stripe.tax.calculations.create({
+        //     currency: 'usd',
+        //     customer_details: {
+        //       address: {
+        //         line1: '920 5th Ave',
+        //         city: 'Seattle',
+        //         state: 'WA',
+        //         postal_code: '98104',
+        //         country: 'US',
+        //       },
+        //       address_source: 'shipping',
+        //     },
+        //     line_items: [
+        //       {
+        //         amount: 4999,
+        //         tax_code: 'txcd_10000000',
+        //         reference: 'Music Streaming Coupon',
+        //       },
+        //     ],
+        //     shipping_cost: {
+        //       amount: 700,
+        //     },
+        //     expand: ['line_items'],
+        //   })
+        //   console.log(calculation)
+
 
         //Sending created session URL to frontend for checkout
         return {
