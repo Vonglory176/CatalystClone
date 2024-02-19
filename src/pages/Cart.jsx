@@ -9,6 +9,7 @@ import ProgressiveImage from "react-progressive-image"
 
 export default function Cart() {
     const [cartItemsHtml, setCartItemsHtml] = useState()
+    const user = useSelector(state => state.auth.user) //Use Firebase-Auth instead?
     const productList = useSelector(state => state.products.productList)
     const cartItemList = useSelector(state => state.cart.cartItemList)
     const status = useSelector (state => state.products.status)
@@ -34,7 +35,7 @@ export default function Cart() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({items: cartItemList})
+            body: JSON.stringify({items: cartItemList, user: user})
         })
     
         if (!response.ok) {
