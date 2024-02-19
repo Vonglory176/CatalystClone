@@ -149,7 +149,7 @@ export const createNewUserAddress = createAsyncThunk(
                     }
                     addressList.push(newAddress)
                 }
-                else {
+                else { //If first/only entry, auto set to default
                     addressList = [{...newAddress, isDefaultAddress: true}]
                 }
                 
@@ -173,9 +173,11 @@ export const createNewUserAddress = createAsyncThunk(
 // ADDRESS UPDATE
 export const updateUserAddress = createAsyncThunk(
     'auth/updateUserAddress',
-    async ( updatedAddress, thunkAPI ) => {
+    async ( {updatedAddress, prevAddress}, thunkAPI ) => {
         const auth = getAuth()
         const userID = auth.currentUser.uid
+        console.log(updatedAddress)
+        console.log(prevAddress)
 
         try {
             //Getting updated address list
@@ -184,15 +186,19 @@ export const updateUserAddress = createAsyncThunk(
             
             //Verifying that the list exists before appending the new address
             if (snapshot.exists()) {
-                const response = snapshot.val()
-                let addressList = response.addresses ? response.addresses : []
+                const response = snapshot.val()                
+                const addressList = response.addresses ? response.addresses : []
+                console.log(addressList)
 
                 //Checking if the new address already exists
                 const isAddressEqual = (address1, address2) => {
                     return Object.keys(address1).every(key => address1[key] === address2[key])
                 }
-                const addressIndex = addressList.findIndex(address => isAddressEqual(address, updatedAddress))
+                const addressIndex = addressList.findIndex(address => isAddressEqual(address, prevAddress))
                 console.log(addressIndex)
+
+                //THROWS ERROR IF NO MATCH FOUND (Nothing to edit)
+                if (addressIndex === -1) throw new Error("Address to edit could not be found")
 
                 //Updating address list for user in Redux
                 addressList[addressIndex] = updatedAddress
@@ -377,13 +383,13 @@ const authSlice = createSlice({
         .addCase(removeUserAddress.fulfilled, (state, action) => {
             state.user.addresses = action.payload
 
-            state.status = 'Address creation successful'
+            state.status = 'Address removal successful'
             console.log(state.status)
         })
         //Address Removal Failure
         .addCase(removeUserAddress.rejected, (state, action) => {
             state.error = action.error.message
-            state.status = 'Address creation failed'
+            state.status = 'Address removal failed'
             console.error(state.error)
         })
     },
