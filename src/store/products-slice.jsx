@@ -12,8 +12,8 @@ export const fetchProducts = createAsyncThunk(
   async ( _, thunkAPI) => {
     const productsRef = ref(getDatabase(), 'products')
     const snapshot = await get(productsRef) //Getting ProductList from Firebase
-    
-    // console.log(snapshot)
+
+    // console.log(snapshot.val())
     if (snapshot.exists()) return snapshot.val()
     else throw new Error("No products avalible")
   }
