@@ -4,8 +4,6 @@
 // const stripe = Stripe(import.meta.env.STRIPE_SECRET_KEY);
 const stripe = require('stripe')(`${process.env.VITE_STRIPE_SECRET_KEY}`)
 const { v4: uuidv4 } = require('uuid')
-const firebaseAuth = require('firebase/auth')
-const firebaseDb = require('firebase/database')
 
 // export async function handler(event, context) {
 exports.handler = async function (event, context) {
@@ -63,8 +61,8 @@ exports.handler = async function (event, context) {
             line_items: lineItems,
             // customer: userID, //Remove?
             mode: 'payment',
-            success_url: `${process.env.VITE_RETURN_DOMAIN}/success?session_id=${sessionId}`,
-            cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cancel?session_id=${sessionId}`,
+            success_url: `${process.env.VITE_RETURN_DOMAIN}/cart/success?session_id=${sessionId}`,
+            cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cart`, //cancel?session_id=${sessionId}
             automatic_tax: {
                 enabled: true
             },
@@ -74,11 +72,74 @@ exports.handler = async function (event, context) {
             shipping_address_collection: {
                 allowed_countries: ['US', 'CA']
             },
-            invoice_creation: { // TEST!!
-                enabled: true
+            shipping_options: [ //Figure out how to exclude Digital-items
+                {
+                  shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: {
+                      amount: 0,
+                      currency: 'usd',
+                    },
+                    display_name: 'Free shipping',
+                    delivery_estimate: {
+                      minimum: {
+                        unit: 'business_day',
+                        value: 1,
+                      },
+                      maximum: {
+                        unit: 'business_day',
+                        value: 2,
+                      },
+                    },
+                  },
+                },
+                {
+                  shipping_rate_data: {
+                    type: 'fixed_amount',
+                    fixed_amount: {
+                        amount: 700,
+                        currency: 'usd',
+                    },
+                    display_name: 'Ground Shipping',
+                    delivery_estimate: {
+                      minimum: {
+                        unit: 'business_day',
+                        value: 5,
+                      },
+                      maximum: {
+                        unit: 'business_day',
+                        value: 7,
+                      },
+                    },
+                },
             },
+            {
+              shipping_rate_data: {
+                type: 'fixed_amount',
+                fixed_amount: {
+                  amount: 1500,
+                  currency: 'usd',
+                },
+                display_name: 'Next day air',
+                delivery_estimate: {
+                  minimum: {
+                    unit: 'business_day',
+                    value: 1,
+                  },
+                  maximum: {
+                    unit: 'business_day',
+                    value: 1,
+                  },
+                },
+              },
+            },
+        ],
+        // invoice_creation: { // TEST!!
+        //         enabled: true
+        //     },
             metadata: {
-                sessionId: sessionId
+                sessionId: sessionId,
+                userId: user && user.userId? user.userId : null
             }
         })
 
@@ -93,7 +154,7 @@ exports.handler = async function (event, context) {
         // const newSessionKey = newSessionRef.key
 
         // console.log(newSessionKey)
-        // console.log(session)
+        console.log(session)
 
         // const calculation = await stripe.tax.calculations.create({
         //     currency: 'usd',
