@@ -35,7 +35,7 @@
                     "variant1": {
                         "id": "unlimited",
                         "name": "Unlimited",
-                        "stripeId": "price_1OhJrKGPwfdOja8u6dwTgMr6",
+                        "stripeId": "price_1OlLLAGPwfdOja8uKRlBt9v4",
                         "price": 49.99,
                         "discountedPrice": "",
                         "images": {
@@ -125,7 +125,7 @@
 
                 "variants": {
                     "variant1": {
-                        "stripeId": "price_1OhJu2GPwfdOja8uR5V98KZQ",
+                        "stripeId": "price_1OlLMxGPwfdOja8uRA2AM9SE",
                         "id": "standard",
                         "name": "Standard",
                         "price": 39.99,
@@ -467,7 +467,7 @@
                     "variant1": {
                         "id": "book-pdf",
                         "name": "Book (+PDF)",
-                        "stripeId": "price_1OiODVGPwfdOja8umaGHkFDy",
+                        "stripeId": "price_1OlLQ1GPwfdOja8uDblJ5lrF",
                         "price": 49.99,
                         "discountedPrice": "",
                         "images": {},
