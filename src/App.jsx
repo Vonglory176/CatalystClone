@@ -2,6 +2,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Account from './pages/Account'
 import Cart from './pages/Cart'
+import CheckoutSuccess from './pages/CheckoutSuccess'
 import Collections from './pages/Collections'
 import Contact from './pages/Contact'
 import Products from './pages/Products'
@@ -18,13 +19,12 @@ import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
 import { fetchUserDetails } from './store/auth-slice'
 
-
 function App() {
   const dispatch = useDispatch()
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
   //So refresh only occurs on path change, not changes like query
-  const { pathname } = useLocation() 
+  const { pathname } = useLocation()
   // const location = useLocation()
 
   useEffect(() => {
@@ -45,6 +45,7 @@ function App() {
 
         <Route element={<MainLayout/>}>
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/cart/success" element={<CheckoutSuccess/>}/>
 
           <Route path="/account">
             <Route index element={<Account/>}/>
@@ -148,6 +149,13 @@ Captcha?
 
 Right now!
 ------
+Create notification for checkout failure (Like card is declined)
+SKU for Stock
+Empty the cart on checkout?
+Figure out what to do for guest checkout? (Especially for digital items)
+Figure out shipping price additions in checkout (EXCLUDE DIGITAL ITEMS!!)
+Adding products between tabs and refreshing doesn't add the others
+ADD DATABSE RULES FOR Sessions/Orders !!!!
 Meta data for stripe checkout
 Create server method to clean up expired sessions (Look in discord)
 Include Tax / Shipping in checkout
