@@ -6,25 +6,28 @@ import "./style/index.css"
 import { Provider } from 'react-redux'
 import store, { persistor } from './store/index.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
-import { getAuth } from "firebase/auth"
+// import { getAuth } from "firebase/auth"
 
-import { initializeApp } from "firebase/app"
+import firebaseApp from '../functions/firebaseConfig'
+
+
+// import { initializeApp } from "firebase/app"
 // import { getDatabase } from 'firebase/database'
 // import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js"
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
-}
+// const firebaseConfig = {
+//   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+//   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+//   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+//   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+//   appId: import.meta.env.VITE_FIREBASE_APP_ID,
+//   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+// }
 
-// INITIALIZE FIREBASE
-const app = initializeApp(firebaseConfig)
-const auth = getAuth()
+// // INITIALIZE FIREBASE
+// const app = initializeApp(firebaseConfig)
+// const auth = getAuth()
 // const analytics = getAnalytics(app)
 // const db = getDatabase()
 
