@@ -9,7 +9,7 @@ export default function CheckoutSuccess() {
         const sessionId = searchParams.get('sessionId')
         console.log(sessionId)
 
-        const orderRed = ref(getDatabase(),)        
+        // const orderRed = ref(getDatabase(),)        
     }, [searchParams])
 
     return (
