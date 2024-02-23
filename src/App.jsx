@@ -13,7 +13,7 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Addresses from './pages/Addresses'
 
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation, Navigate, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
@@ -25,7 +25,6 @@ function App() {
 
   //So refresh only occurs on path change, not changes like query
   const { pathname } = useLocation()
-  // const location = useLocation()
 
   useEffect(() => {
     dispatch(fetchProducts())
@@ -47,13 +46,27 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/cart/success" element={<CheckoutSuccess/>}/>
 
-          <Route path="/account">
+          {/* Auto redirect to Login if not logged in */}
+          <Route path="/account" element={isLoggedIn ? <Outlet /> : <Navigate to="/account/login" replace />}>
+            <Route index element={<Account/>}/>
+            <Route path="logout" element={<Logout/>}/>
+            <Route path="addresses" element={<Addresses/>}/>
+          </Route>
+
+          {/* Auto redirect to Account if logged in */}
+           <Route path="/account" element={!isLoggedIn ? <Outlet /> : <Navigate to="/account" replace />}> 
+            {/* <Route index element={<Account/>}/> */}
+            <Route path="login" element={<Login/>}/>
+            <Route path="register" element={<Register/>}/>
+          </Route>
+
+          {/* <Route path="/account">
             <Route index element={<Account/>}/>
             <Route path="login" element={<Login/>}/>
             <Route path="logout" element={<Logout/>}/>
             <Route path="register" element={<Register/>}/>
             <Route path="addresses" element={<Addresses/>}/>
-          </Route>
+          </Route> */}
 
           <Route path="/collections/:id" element={<Collections/>}/>
           <Route path="/collections/:id/products/:id" element={<Products/>}/>
@@ -142,31 +155,45 @@ TODO
 Prime Features!
 ------
 Order details
-Shipping info in Checkout
 Notifications
 "Back to" banners
 Captcha?
 
-Right now!
+Do Right now!
 ------
-Create notification for checkout failure (Like card is declined)
-SKU for Stock
-Empty the cart on checkout?
-Figure out what to do for guest checkout? (Especially for digital items)
+USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
+
+Create a "You must be logged in to view this page" screen
+Only get fresh account details when needed given the new setup?
+
+Potential security concern in Checkout Success. Anyone could make a request with the link(?)...
+...and so long as there's a legit UserID + SessionID order details can be gotten (Check discord)
+
 Figure out shipping price additions in checkout (EXCLUDE DIGITAL ITEMS!!)
-Adding products between tabs and refreshing doesn't add the others
-ADD DATABSE RULES FOR Sessions/Orders !!!!
-Meta data for stripe checkout
-Create server method to clean up expired sessions (Look in discord)
-Include Tax / Shipping in checkout
+Figure out what to do for guest checkout? (Especially for digital items)
+Create notification for checkout failure (Like card is declined)
+Empty the cart on checkout?
+
+Implement SKU to products, even if not for stock-count (Research Stripe for this first)
+MINOR: Adding products between tabs and refreshing doesn't add the others
+Look more into shipping fees?
 
 BUG: Sale/Standard price swap bug from before is still present (At least on home page)
 
-Later!
+Do Later!
 ------
-ACCOUNT ---
-BUG: Account deletion and page refresh on addresses does not reroute
-BUG: Async hiccups after creating account. Watch console/redirects
+CHECKOUT SUCCESS / ORDERS ------------------------------------
+Create logic to only be able to view the order details if the user is logged in (With same UID)
+Create logic to "timeout" the order details after X time (24hrs?) (Maybe just for guests?)
+Implement product printing in table
+Add styling
+
+Create a guest token for viewing guest orders?
+If no order found, set timeout and try again?
+Get billing AND shipping addresses?
+
+ACCOUNT ------------------------------------
+BUG: Async hiccups after creating account. Watch console/redirects (Redirection also has some momentary confusion)
 MINOR: Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
 
 Also need to add sub-pages for Downloadables, Order-Details & Membership(?) 
@@ -175,12 +202,25 @@ Finish styling
 
 Change password styling?
 
-ADDRESSES ---
+CHECKOUT/CART ------------------------------------
+Write code for changeItemQuantity/Input
+Add some reducer extension things to disable quantity buttons/input while updating
+WRITE CODE FOR ADDRESS DETAIL USE
+
+AFTER PURCHASE - Create outcome notif via https://stripe.com/docs/payments/after-the-payment
+AFTER PURCHASE - If successful, clear the cart (Totally / Specifically what was purchased?)
+Figure out a way to get electronic products bound to an account, especially if purchased as guest (Add to account in firebase?)
+Also figure out how to record address jazz (If at all?)
+
+Prevent/Add a warning to the purchase of an already owned electronic item?
+More steps/checks to verify quantity/price changes?
+
+ADDRESSES ------------------------------------
 BUG: Address "isDefaultAddress" counts as difference
 Default address on top?
 Make address form required
 
-SEARCH ---
+SEARCH ------------------------------------
 ERROR: Add a key to productSearchResult
 ERROR: Weird null issue in products after multiple sequential search-product-result clicks (SPECIFIC TO VARIANTS "selectedVariant")
 
@@ -189,7 +229,7 @@ Make magnifying-icon a search submit button
 Add Aria capability?
 Include categories / pages as well as products in search? (Would need database changes)
 
-PRODUCT PAGE ---
+PRODUCT PAGE ------------------------------------
 BUG: Equalize Image & Desc when no thumbnail gallery (Display block + margins seemed to work)
 BUG: Add a height limit to main image
 
@@ -203,22 +243,7 @@ Add code to make product page search database faster? (Like only look in battlet
 Make a category page at "/products"?
 Add a share on social media div?
 
-CHECKOUT/CART ---
-Write code for changeItemQuantity/Input
-Add some reducer extension things to disable quantity buttons/input while updating
-WRITE CODE FOR ADDRESS DETAIL USE
-
-STRIPE WEBHOOK TRIGGERS + S-FUNCTION 
-AFTER PURCHASE - Redirect to (Account/Cart?) - Create outcome notif via https://stripe.com/docs/payments/after-the-payment
-AFTER PURCHASE - If successful, clear the cart
-Figure out a way to get electronic products bound to an account, especially if purchased as guest
-Also figure out how to record address jazz (If at all?)
-When checkout is clicked, create local redux list of cart items to keep record in case of removal during checkout
-
-Add a warning to the purchase of an already owned electronic item?
-Needs more steps/checks to verify quantity/price changes?
-
-COLLECTIONS ---
+COLLECTIONS ------------------------------------
 BUG: Sorting causes lag
 BUG: Scrollbar pop in/out bug when selecting filters?
 BUG: Lag with selector (Maybe in products too?)
@@ -234,11 +259,11 @@ Disable category buttons if none to display?
 Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
 
-ACCOUNT ---
+ACCOUNT ------------------------------------
 Populate account details (Especially purchase history!!)
 Get Captcha for Login/Register?
 
-NOTIFICATIONS/ERROR HANDLING ---
+NOTIFICATIONS/ERROR HANDLING ------------------------------------
 Add errors to store/products/card/result if not found?
 Add general notification stuff (Added to cart, signed-in/out etc)
 Create alert for product/price changes (Would need to be monitored in state)
@@ -248,7 +273,7 @@ Figure out some kind of way to update/alert to product/cart changes on cart/chec
 (Always alerts initially in regard to things like stock/quantity, both on product/cart page)
 (Cart page has an "Update Cart" button)
 
-GENERAL ---
+GENERAL ------------------------------------
 Don't allow Nav/Link spam to add to history (Header & Collections // USE SMART LINK WRAP THING (in discord))
 Figure out how to rotate properly in mobile
 Make scrollbar hidden in MOBILE view, not just small views
@@ -261,38 +286,38 @@ HTML Cleanup
 Add Titles to anchors
 Add FavIcon !!!!!!
 
-OPTIONAL & LESS-IMPORTANT ------------------------------------
+OPTIONAL & LESS-IMPORTANT ------------------------------------ |||||||||||||||||||||||||||||||
 
-COLLECTION-BLOCK ---
+COLLECTION-BLOCK ------------------------------------
 Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
 Load products into Featured-Containers in home? (Just use ID's for the moment)
 
-HOME ---
+HOME ------------------------------------
 Set standard size to colection-buttons (Still small issue being short height when none have loaded)
 Collection button margin issue on larger views
 Add btn class to homepage-mailform?
 Add images to slideshow?
 Slideshow image load in clips bottom border
 
-FEATURED PRODUCT BANNER ---
+FEATURED PRODUCT BANNER ------------------------------------
 Add link stuff
 
-PRODUCT CARD ---
+PRODUCT CARD ------------------------------------
 Issue with text overflow
 Add sale signifier
 Finish styling
 
-FILTERS / SORT / PAGINATION ---
+FILTERS / SORT / PAGINATION ------------------------------------
 Finish styling
 Add clear filter button?
 
-DATABASE ---
+DATABASE ------------------------------------
 Look into registration of Redux stuff
 Add hasVariants?
 Add more products to ProductList ?
 Add stock numbers to products ?
 
-HEADER ---
+HEADER ------------------------------------
 BUG: Sticky header buttons pop-in/out when changing pages 
 
 Make Universe button a link when focused
@@ -301,12 +326,12 @@ Add a drop down notification banner for general use?
 Make + rotate when universe cat opened?
 Maybe tweak sidebar styling?
 
-CONTACT ---
+CONTACT ------------------------------------
 For practice reasons, make the form an "Uncontrolled Component"
 Add form functionality?
 Finish Styling
 
-FOOTER ---
+FOOTER ------------------------------------
 Fix icon link spacing?
 Add classes to footer links?
 -------------------
