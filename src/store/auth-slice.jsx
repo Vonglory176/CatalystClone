@@ -3,14 +3,16 @@ import { ref, get, set, update, remove, getDatabase } from "firebase/database"
 import { getAuth, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
 import { fetchUserCountry } from "../hooks/getUserCountry"
 
+import firebaseApp from '/functions/firebaseConfig'
+const auth = getAuth()
+
 // ACCOUNT RETRIEVAL
 export const fetchUserDetails = createAsyncThunk(
     'auth/fetchUserDetails',
     async ( _, thunkAPI ) => {
-        console.log("HERE")
-        try {            
+        console.log("Fetching Account Details")
+        try {
             //Get current state and check login status (w/Local UID)
-            // const auth = getAuth()
             const state = thunkAPI.getState()
             console.log(state)
             if (!state.auth.isLoggedIn || !state.auth.user.userId ) return null
@@ -44,7 +46,6 @@ export const loginWithUserDetails = createAsyncThunk(
             if (!email || !password) throw new Error("Both an Email and Password are required")
             
             //Authenticating login details
-            const auth = getAuth()
             await signInWithEmailAndPassword(auth, email, password)
             console.log('Account found in Database')
 
@@ -72,7 +73,6 @@ export const createNewAccount = createAsyncThunk(
             if (!email || !password) throw new Error("Both an Email and Password are required")
             
             //Creating account in Firebase-Auth
-            const auth = getAuth()
             const response = await createUserWithEmailAndPassword(auth, email, password) //Unsecure?
             console.log('Account created in Database', response)
             
@@ -118,7 +118,6 @@ export const createNewAccount = createAsyncThunk(
 export const createNewUserAddress = createAsyncThunk(
     'auth/createNewUserAddress',
     async ( newAddress, thunkAPI ) => {
-        const auth = getAuth()
         const userID = auth.currentUser.uid
 
         try {
@@ -174,7 +173,6 @@ export const createNewUserAddress = createAsyncThunk(
 export const updateUserAddress = createAsyncThunk(
     'auth/updateUserAddress',
     async ( {updatedAddress, prevAddress}, thunkAPI ) => {
-        const auth = getAuth()
         const userID = auth.currentUser.uid
         console.log(updatedAddress)
         console.log(prevAddress)
@@ -223,7 +221,6 @@ export const updateUserAddress = createAsyncThunk(
 export const removeUserAddress = createAsyncThunk(
     'auth/removeUserAddress',
     async ( removalAddress, thunkAPI ) => {
-        const auth = getAuth()
         const userID = auth.currentUser.uid
 
         try {
@@ -277,7 +274,6 @@ const authSlice = createSlice({
                 state.user = null
 
                 // Logging out w/Firebase-Auth
-                const auth = getAuth()
                 signOut(auth)
                 
                 console.log("Logout successful")
