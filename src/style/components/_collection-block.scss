@@ -26,7 +26,7 @@
             .featured-character {
                 @include hover-highlight-shadow
             }
-        }
+        }        
         
         @media (min-width:750px) {
             height: 42vw;//390px;
@@ -91,7 +91,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         position: relative;
-
+        
         align-items: center;
         
         width: 90%;
@@ -104,8 +104,13 @@
             // height: 100%;
             background-color: $primary-color;
         }
-
+        
         @media (max-width:749px) {
+            grid-template-rows: 1fr 1fr;
+            min-height: 640px;
+            
+            background-color: $primary-color;
+
             .grid__item:nth-child(n+6) {
                 display: none;
             }
