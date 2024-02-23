@@ -46,7 +46,7 @@ export default function CollectionBlock(
                 >
                     {(src, loading) =>
                     <img
-                    className={"featured-product-frame " + (loading? "imgLoading":"imgLoaded")}
+                    className={"featured-product-frame " } //+ (loading? "imgLoading":"imgLoaded")
                     src={src}
                     alt={""}
                     /> 
