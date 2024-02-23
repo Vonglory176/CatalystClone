@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { loginWithUserDetails } from "../store/auth-slice.jsx"
 
 export default function Login() {
-    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    // const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     //Routing to Account page if user is logged in
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate("/account", {replace:true})
-        }
-    }, [isLoggedIn])
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         navigate("/account", {replace:true})
+    //     }
+    // }, [isLoggedIn])
 
     //Login trigger
     const handleAccountLoginSubmit = async (e) => {

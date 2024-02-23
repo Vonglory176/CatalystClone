@@ -8,14 +8,14 @@ import { fetchUserCountry } from "../hooks/getUserCountry"
 import { createNewAccount } from "../store/auth-slice"
 
 export default function Register() {
-    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    // const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     //Routing to Account page if user is logged in
-    useEffect(() => {
-        if (isLoggedIn) navigate("/account", {replace:true})
-    }, [isLoggedIn])
+    // useEffect(() => {
+    //     if (isLoggedIn) navigate("/account", {replace:true})
+    // }, [isLoggedIn])
 
     const handleCreateAccountSubmit = async (e) => {
         e.preventDefault()

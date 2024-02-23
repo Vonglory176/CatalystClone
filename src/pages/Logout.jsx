@@ -6,12 +6,12 @@ import { getAuth, signOut } from "firebase/auth"
 
 export default function Logout() {    
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     
     useEffect(() => {
         // Logging out w/Redux & redirecting Home
         dispatch(authActions.logout())
-        navigate("/", {replace: true})
+        // navigate("/", {replace: true})
     }, [])
 
     return (

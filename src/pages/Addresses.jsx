@@ -7,13 +7,13 @@ import AddressForm from "../components/AddressForm"
 
 export default function Addresses() {
     //If not logged in, redirect to Login page ("replace" so back button works)
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-    const navigate = useNavigate()
+    // const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    // const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (!isLoggedIn) navigate("/account/login", {replace:true})
-    }, [isLoggedIn])
+    // useEffect(() => {
+    //     if (!isLoggedIn) navigate("/account/login", {replace:true})
+    // }, [isLoggedIn])
 
     const {addresses} = useSelector(state => state.auth.user)
     const [currentAddresses, setCurrentAddresses] = useState()

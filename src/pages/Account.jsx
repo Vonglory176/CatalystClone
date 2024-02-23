@@ -4,13 +4,13 @@ import { Link, useNavigate } from "react-router-dom"
 
 export default function Account() {
     //If not logged in, redirect to Login page ("replace" so back button works)
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-    const navigate = useNavigate()
+    // const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    // const navigate = useNavigate()
     // if (!isLoggedIn) return <Navigate to="login" replace/>
 
-    useEffect(() => {
-        if (!isLoggedIn) navigate("login", {replace:true})
-    }, [isLoggedIn])
+    // useEffect(() => {
+    //     if (!isLoggedIn) navigate("login", {replace:true})
+    // }, [isLoggedIn])
 
     const user = useSelector(state => state.auth.user)
 
