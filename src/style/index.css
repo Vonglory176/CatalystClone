@@ -1914,6 +1914,11 @@
   background-color: #fff;
 }
 @media (max-width: 749px) {
+  .grid.collection {
+    grid-template-rows: 1fr 1fr;
+    min-height: 640px;
+    background-color: #fff;
+  }
   .grid.collection .grid__item:nth-child(n+6) {
     display: none;
   }
@@ -2396,6 +2401,11 @@
 #Home-Container .collection-buttons-container .collection-buttons-wrapper a:nth-of-type(2) {
   margin: 0 -7vw;
   min-width: 135px;
+}
+@media (min-width: 1200px) {
+  #Home-Container .collection-buttons-container .collection-buttons-wrapper a:nth-of-type(2) {
+    margin: 0 -84px;
+  }
 }
 #Home-Container .collection-buttons-container .collection-buttons-wrapper img:hover {
   filter: drop-shadow(0px 0px 20px #c2cb20) brightness(1.5);
