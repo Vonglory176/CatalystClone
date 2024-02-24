@@ -52,9 +52,16 @@ $badge-color: #d2354f;
     transition: all .3s linear;
 }
 
-@mixin base-color-hover-color ($basecolor, $hovercolor) {
-    
+@mixin link-coloring {
+    color: $secondary-color;
+    &:hover {
+        color: $secondary-hover-color;
+    }
 }
+
+// @mixin base-color-hover-color ($basecolor, $hovercolor) {
+    
+// }
 
 @function set-text-color($color) {
     @if (lightness($color) > 40%) { //If a light color is passed through, return a dark color (and vice versa)
