@@ -18,10 +18,3 @@ export const getProductById = (productList, id) => {
         return null
     }
 }
-
-// import { useSelector } from 'react-redux';
-
-// export const getProductById = (id) => {
-//   const productList = useSelector(state => state.firebase.productList);
-//   return productList ? productList[id] : null;
-// };
