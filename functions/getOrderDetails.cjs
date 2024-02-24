@@ -1,11 +1,11 @@
 const admin = require('firebase-admin')
-
 const serviceAccount = JSON.parse(process.env.VITE_FIREBASE_ADMIN)
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://catalystclonedb-default-rtdb.firebaseio.com"
 })
+const db = admin.database()
 
 exports.handler = async function(event, context) {
     //Verifying that the request is of the correct type
@@ -31,26 +31,19 @@ exports.handler = async function(event, context) {
     const localSessionId = event.queryStringParameters.session_id //sessionId
     if (!localSessionId) return { statusCode: 400, body: 'Missing sessionId query parameter' }
 
-    // const userId = event.queryStringParameters.userId //userId
-    // if (!userId) return { statusCode: 400, body: 'Missing userId query parameter' }
-
     //Searching for matching order
     try {
-        const db = admin.database()
         const ordersRef = db.ref('orders')
         const snapshot = await ordersRef.once('value')
         let orderDetails = null
-
-        console.log(orderDetails)
+        // console.log(localSessionId)
+        // console.log(userId)
 
         snapshot.forEach(childSnapshot => {
             const order = childSnapshot.val()
-            // console.log ("SNAPSHOT", order)
 
-            // console.log(orderData)
-            // console.log(orderData.metadata)
-
-            if (order.metadata.sessionId === localSessionId && order.metadata.userId === userId) {
+            console.log(order)
+            if (order.metadata.sessionId === localSessionId && order.metadata.userId === userId) {                
                 orderDetails = order
             }
         })
