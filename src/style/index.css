@@ -2581,6 +2581,16 @@
 #Account-Container .addresses-link:hover {
   color: #989e19;
 }
+@media (min-width: 750px) {
+  #Account-Container .content-wrapper {
+    display: flex;
+  }
+}
+@media (min-width: 750px) {
+  #Account-Container__Secondary-Container {
+    padding-left: 20px;
+  }
+}
 
 #Login-Container .content-block {
   background: #363636;
@@ -3134,6 +3144,24 @@ hr {
   border-color: #222;
   border-style: solid;
   border-width: 1px 0 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table th, table td {
+  padding: 10px;
+  border: 1px solid #222;
+  text-align: left;
+  text-transform: capitalize;
+}
+table th a, table td a {
+  color: #c2cb20;
+}
+table th a:hover, table td a:hover {
+  color: #989e19;
 }
 
 label {
