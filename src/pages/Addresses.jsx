@@ -88,7 +88,7 @@ export default function Addresses() {
 
 
     return (
-        <div id="Account-Container">
+        <div id="Addresses-Container">
             <h1>My Account</h1>
 
             {addAddress && <AddressForm formTitle="Add a New Address" submissionCallback={newAddressCallback} cancelCallback={() => setAddAddress(false)}></AddressForm>}
