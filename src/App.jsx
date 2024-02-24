@@ -2,7 +2,6 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Account from './pages/Account'
 import Cart from './pages/Cart'
-import CheckoutSuccess from './pages/CheckoutSuccess'
 import Collections from './pages/Collections'
 import Contact from './pages/Contact'
 import Products from './pages/Products'
@@ -12,12 +11,15 @@ import SlideShowLayout from './layout/HomeLayout'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Addresses from './pages/Addresses'
+import AccountOrderLayout from './layout/AccountOrderLayout'
+import CheckoutOrderLayout from './layout/CheckoutOrderLayout'
 
 import { Route, Routes, useLocation, Navigate, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
 import { fetchUserDetails } from './store/auth-slice'
+import OrderDetails from './components/OrderDetails'
 
 function App() {
   const dispatch = useDispatch()
@@ -43,14 +45,21 @@ function App() {
         </Route>
 
         <Route element={<MainLayout/>}>
+
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/cart/success" element={<CheckoutSuccess/>}/>
+          <Route element={<CheckoutOrderLayout/>}>
+            <Route path="/cart/success" element={<OrderDetails/>}/>
+          </Route>
 
           {/* Auto redirect to Login if not logged in */}
           <Route path="/account" element={isLoggedIn ? <Outlet /> : <Navigate to="/account/login" replace />}>
             <Route index element={<Account/>}/>
             <Route path="logout" element={<Logout/>}/>
             <Route path="addresses" element={<Addresses/>}/>
+
+            <Route element={<AccountOrderLayout/>}>
+              <Route path="/account/order" element={<OrderDetails/>}/>
+            </Route>
           </Route>
 
           {/* Auto redirect to Account if logged in */}
@@ -162,6 +171,8 @@ Captcha?
 Do Right now!
 ------
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
+Add load animation to things like order screen that fetch data?
+Method of getting product-link in orderHistory is scuffed, maybe fix?
 
 Create a "You must be logged in to view this page" screen
 Only get fresh account details when needed given the new setup?
@@ -198,7 +209,7 @@ MINOR: Account Login/Create info shows in the network console. Not big concern, 
 
 Also need to add sub-pages for Downloadables, Order-Details & Membership(?) 
 Implement password recovery
-Finish styling
+Finish styling (MOBILE VIEW FOR ORDER TABLE)
 
 Change password styling?
 
@@ -214,6 +225,7 @@ Also figure out how to record address jazz (If at all?)
 
 Prevent/Add a warning to the purchase of an already owned electronic item?
 More steps/checks to verify quantity/price changes?
+Finish styling (MAKE MOBILE VIEW FOR ORDER TABLE)
 
 ADDRESSES ------------------------------------
 BUG: Address "isDefaultAddress" counts as difference
