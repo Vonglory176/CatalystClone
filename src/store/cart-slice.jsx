@@ -14,7 +14,6 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state,action) {
         state.cartChanged = true //For later cart/account use
-        console.log("HERE!")
         
         const newItem = action.payload
         console.log(newItem)
@@ -32,6 +31,8 @@ const cartSlice = createSlice({
                 productId: newItem.productId,
                 variantId: newItem.variantId,
                 stripeId: newItem.stripeId,
+                isDigital: newItem.isDigital,
+                isPhysical: newItem.isPhysical,
                 quantity: newItem.quantity,
                 // productName: newItem.productname,
                 // variantName: newItem.variantname,
@@ -64,12 +65,16 @@ const cartSlice = createSlice({
         // console.log("REMOVED!")
         console.log(state.cartItemList.map(item => ({ ...item })));
     },
-    changeCartItemQuantity(state,action) { //For checkout page changes
-
-    },
-    replaceData(state,action) { //For checkout page changes
-
+    clearCartItems(state,action) {
+        state.cartItemList = []
+        console.log('Cart items cleared!')
     }
+    // changeCartItemQuantity(state,action) { //For checkout page changes
+
+    // },
+    // replaceData(state,action) { //For checkout page changes
+
+    // }
   },
 });
 
