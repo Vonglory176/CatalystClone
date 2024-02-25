@@ -39,15 +39,22 @@ exports.handler = async function (event, context) {
         console.log(sessionId)
 
         //Getting the posted user data
-        const { items, user } = JSON.parse(event.body)
-        // console.log(user)
+        const { items, user, customerInstructions } = JSON.parse(event.body)
+        console.log(items)
 
-        //Setting default address to be sent to Stripe
-        // let defaultAddress = {} 
-        // if (user && user.address && user.address.length > 0) {
-        //     defaultAddress = user.address.find(address => { return address.isDefaultAddress })
-        //     defaultAddress === -1? user.address[0] : defaultAddress
-        // }
+        //Determining shipping info
+        const isPhysical = Object.values(items).find(item => item.isPhysical)
+
+        //Keeping track of digital goods
+        const digitalItems = JSON.stringify(Object.values(items).map(item => {
+          if (item.isDigital) {
+            return {
+              productId: item.productId, 
+              variantId: item.variantId
+            }
+          }
+        }))
+        
 
         //Formatting data to adhere to Stripe standards
         let lineItems = items.map(item => ({ //"lineItems" is the Stripe term for items/products
@@ -58,60 +65,65 @@ exports.handler = async function (event, context) {
 
         //Creating session with newly formatted lineItems
         const session = await stripe.checkout.sessions.create({
-            line_items: lineItems,
-            // customer: userID, //Remove?
-            mode: 'payment',
-            success_url: `${process.env.VITE_RETURN_DOMAIN}/cart/success?session_id=${sessionId}`,
-            cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cart`, //cancel?session_id=${sessionId}
-            automatic_tax: {
-                enabled: true
-            },
-            tax_id_collection: {
-                enabled: true
-            },
-            shipping_address_collection: {
-                allowed_countries: ['US', 'CA']
-            },
-            shipping_options: [ //Figure out how to exclude Digital-items
-                {
-                  shipping_rate_data: {
-                    type: 'fixed_amount',
-                    fixed_amount: {
-                      amount: 0,
-                      currency: 'usd',
+          line_items: lineItems,
+          // customer: userID, //Remove?
+          mode: 'payment',
+          success_url: `${process.env.VITE_RETURN_DOMAIN}/cart/success?session_id=${sessionId}`,
+          cancel_url: `${process.env.VITE_RETURN_DOMAIN}/cart`, //cancel?session_id=${sessionId}
+          automatic_tax: {
+              enabled: true
+          },
+          tax_id_collection: {
+              enabled: true
+          },
+          billing_address_collection: 'auto',
+
+          shipping_address_collection: !isPhysical? 
+            {} : //No shipping if all digital items
+            {allowed_countries: ['US'] }, //, 'CA'
+
+          shipping_options: !isPhysical? 
+            [] : //No shipping if all digital items
+            [
+              {
+                shipping_rate_data: {
+                  type: 'fixed_amount',
+                  fixed_amount: {
+                    amount: 0,
+                    currency: 'usd',
+                  },
+                  display_name: 'Free shipping',
+                  delivery_estimate: {
+                    minimum: {
+                      unit: 'business_day',
+                      value: 1,
                     },
-                    display_name: 'Free shipping',
-                    delivery_estimate: {
-                      minimum: {
-                        unit: 'business_day',
-                        value: 1,
-                      },
-                      maximum: {
-                        unit: 'business_day',
-                        value: 2,
-                      },
+                    maximum: {
+                      unit: 'business_day',
+                      value: 2,
                     },
                   },
                 },
-                {
-                  shipping_rate_data: {
-                    type: 'fixed_amount',
-                    fixed_amount: {
-                        amount: 700,
-                        currency: 'usd',
+              },
+              {
+                shipping_rate_data: {
+                  type: 'fixed_amount',
+                  fixed_amount: {
+                      amount: 700,
+                      currency: 'usd',
+                  },
+                  display_name: 'Ground Shipping',
+                  delivery_estimate: {
+                    minimum: {
+                      unit: 'business_day',
+                      value: 5,
                     },
-                    display_name: 'Ground Shipping',
-                    delivery_estimate: {
-                      minimum: {
-                        unit: 'business_day',
-                        value: 5,
-                      },
-                      maximum: {
-                        unit: 'business_day',
-                        value: 7,
-                      },
+                    maximum: {
+                      unit: 'business_day',
+                      value: 7,
                     },
-                },
+                  },
+              },
             },
             {
               shipping_rate_data: {
@@ -133,54 +145,17 @@ exports.handler = async function (event, context) {
                 },
               },
             },
-        ],
-        // invoice_creation: { // TEST!!
-        //         enabled: true
-        //     },
-            metadata: {
-                sessionId: sessionId,
-                userId: user && user.userId? user.userId : null
-            }
+          ],
+          // invoice_creation: { // TEST!!
+          //         enabled: true
+          //     },
+          metadata: {
+              sessionId: sessionId,
+              userId: user && user.userId? user.userId : null,
+              customerInstructions: customerInstructions,
+              digitalItems: digitalItems
+          }
         })
-
-        //Saving a session copy, generating UUID and sending both to Firebase
-        // const db = firebaseDb.getDatabase()
-        // const ref = firebaseDb.ref(db, `sessions/${sessionId}`)
-
-        // const newSessionRef = await firebaseDb.set(ref, {
-        //     stripeSessionId: session,
-        //     userId: user.userId
-        // })
-        // const newSessionKey = newSessionRef.key
-
-        // console.log(newSessionKey)
-        console.log(session)
-
-        // const calculation = await stripe.tax.calculations.create({
-        //     currency: 'usd',
-        //     customer_details: {
-        //       address: {
-        //         line1: '920 5th Ave',
-        //         city: 'Seattle',
-        //         state: 'WA',
-        //         postal_code: '98104',
-        //         country: 'US',
-        //       },
-        //       address_source: 'shipping',
-        //     },
-        //     line_items: [
-        //       {
-        //         amount: 4999,
-        //         tax_code: 'txcd_10000000',
-        //         reference: 'Music Streaming Coupon',
-        //       },
-        //     ],
-        //     shipping_cost: {
-        //       amount: 700,
-        //     },
-        //     expand: ['line_items'],
-        //   })
-        //   console.log(calculation)
 
 
         //Sending created session URL to frontend for checkout
