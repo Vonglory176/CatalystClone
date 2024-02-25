@@ -45,11 +45,28 @@ exports.handler = async function (event, context) {
             //Creating data to be entered in database
             let orderDetails = {...data.data.object}
             orderDetails.metadata.orderId = orderNumber //Including OrderID w/SessionID & UserID
+            orderDetails.metadata.completionTime = Math.floor(Date.now() / 1000)
             orderDetails.lineItems = lineItems.data
+            orderDetails.digitalItems = JSON.parse(data.data.object.metadata.digitalItems)
 
             //Saving the primary order details in Firebase
-            const usersRef = db.ref(`orders`)
-            await usersRef.child(`${orderNumber}`).set(orderDetails)
+            const orderRef = db.ref(`orders`)
+            await orderRef.child(`${orderNumber}`).set(orderDetails)
+
+            //Saving digital goods to user account in Firebase
+            if (orderDetails.digitalItems) {
+                const userRef = db.ref(`accounts/${orderDetails.metadata.userId}`)
+                const snapshot = await userRef.once('value')
+                console.log(snapshot.val())
+
+                if (snapshot.val()) { //Verifying correct user
+                    const user = snapshot.val()
+
+                    const newDigitalItems = {...user.ownedDigitalItems, ...orderDetails.digitalItems}
+                    await userRef.child('ownedDigitalItems').set(newDigitalItems)
+                }
+                else throw new Error("User could not be found!")
+            }
 
         // Handle the event
         console.log("HERE 5")
