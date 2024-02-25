@@ -29,13 +29,14 @@ export default function Cart() {
 
     const handleCheckout = async (event) => {
         event.preventDefault()
+        const customerInstructions = event.target["special-instructions"].value
     
         const response = await fetch('/.netlify/functions/checkoutCart', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({items: cartItemList, user: user})
+            body: JSON.stringify({items: cartItemList, user: user, customerInstructions: customerInstructions})
         })
     
         if (!response.ok) {
@@ -102,9 +103,9 @@ export default function Cart() {
                         </div>
 
                         <div className="cart-product__name-wrapper">
-                            <Link to={productLink}><h4>{productUniverse}: {product.name}</h4></Link>
+                            <Link to={productLink} title="View product details"><h4>{productUniverse}: {product.name}</h4></Link>
                             {variant.name !== "standard" && <p>{variant.name}</p>}
-                            <Link to={""} onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: "all"})}>Remove</Link>
+                            <Link to={""} title="Remove product from cart" onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: "all"})}>Remove</Link>
                         </div>
                         
                         <div className="quantity-selector">
@@ -128,7 +129,8 @@ export default function Cart() {
     },[status, cartItemList]) //Might be firing too soon?
 
     return (
-        <div id="Cart-Container">
+        <div id="Cart-Container">            
+            
             {cartItemList.length !== 0?
 
             <form className="cart" onSubmit={handleCheckout}> {/* onsubmit action method nonvalidate */}
@@ -148,7 +150,7 @@ export default function Cart() {
                         {/* wcp-cart-total */}
                         {/* additional-notes */}
                         {/* cart__taxes */}
-                        <button type="submit" name="update" className="btn">Update Cart</button>
+                        {/* <button type="submit" name="update" className="btn">Update Cart</button> */}
                         <button type="submit" name="checkout" className="btn">Check Out</button>
                     </div>
                 </div>
@@ -162,7 +164,7 @@ export default function Cart() {
                 <p className="cart-empty__message">Your cart is currently empty</p>
                 <hr />
                 <p className="cart-empty__continue">
-                    <Link to={"/collections/all"} className={"btn"}>Continue browsing</Link> {/* Note "All" */}
+                    <Link to={"/collections/all"} className={"btn"} title="View all products">Continue browsing</Link> {/* Note "All" */}
                 </p>
             </div>
             }
