@@ -13,13 +13,14 @@ import Logout from './pages/Logout'
 import Addresses from './pages/Addresses'
 import AccountOrderLayout from './layout/AccountOrderLayout'
 import CheckoutOrderLayout from './layout/CheckoutOrderLayout'
+import Downloads from './pages/Downloads'
+import OrderDetails from './components/OrderDetails'
 
 import { Route, Routes, useLocation, Navigate, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
 import { fetchUserDetails } from './store/auth-slice'
-import OrderDetails from './components/OrderDetails'
 
 function App() {
   const dispatch = useDispatch()
@@ -48,7 +49,7 @@ function App() {
 
           <Route path="/cart" element={<Cart/>}/>
           <Route element={<CheckoutOrderLayout/>}>
-            <Route path="/cart/success" element={<OrderDetails/>}/>
+            <Route path="/cart/success" element={<OrderDetails/>}/> {/* Need extra measures to keep secure */}
           </Route>
 
           {/* Auto redirect to Login if not logged in */}
@@ -56,6 +57,7 @@ function App() {
             <Route index element={<Account/>}/>
             <Route path="logout" element={<Logout/>}/>
             <Route path="addresses" element={<Addresses/>}/>
+            <Route path="downloads" element={<Downloads/>}/>
 
             <Route element={<AccountOrderLayout/>}>
               <Route path="/account/order" element={<OrderDetails/>}/>
@@ -163,7 +165,6 @@ TODO
 -------------------
 Prime Features!
 ------
-Order details
 Notifications
 "Back to" banners
 Captcha?
@@ -171,66 +172,73 @@ Captcha?
 Do Right now!
 ------
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
-Add load animation to things like order screen that fetch data?
-Method of getting product-link in orderHistory is scuffed, maybe fix?
+
+
 
 Create a "You must be logged in to view this page" screen
+
 Only get fresh account details when needed given the new setup?
-
-Potential security concern in Checkout Success. Anyone could make a request with the link(?)...
-...and so long as there's a legit UserID + SessionID order details can be gotten (Check discord)
-
-Figure out shipping price additions in checkout (EXCLUDE DIGITAL ITEMS!!)
-Figure out what to do for guest checkout? (Especially for digital items)
-Create notification for checkout failure (Like card is declined)
-Empty the cart on checkout?
-
-Implement SKU to products, even if not for stock-count (Research Stripe for this first)
-MINOR: Adding products between tabs and refreshing doesn't add the others
-Look more into shipping fees?
+Find other places to use load screen?
 
 BUG: Sale/Standard price swap bug from before is still present (At least on home page)
 
 Do Later!
 ------
 CHECKOUT SUCCESS / ORDERS ------------------------------------
+There are two way to view orders (account/order && cart/success). Account requires login and success will need...
+... Tailoring to make things more loose but secure, especially for guests (Timeout idea?)
+
 Create logic to only be able to view the order details if the user is logged in (With same UID)
 Create logic to "timeout" the order details after X time (24hrs?) (Maybe just for guests?)
-Implement product printing in table
-Add styling
-
 Create a guest token for viewing guest orders?
+Implement or remove SKU
+Add styling (MOBILE VIEW ESPECIALLY)
+
 If no order found, set timeout and try again?
-Get billing AND shipping addresses?
 
 ACCOUNT ------------------------------------
 BUG: Async hiccups after creating account. Watch console/redirects (Redirection also has some momentary confusion)
 MINOR: Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
 
-Also need to add sub-pages for Downloadables, Order-Details & Membership(?) 
+Method of getting product-link in orderHistory is scuffed, maybe fix? (USE STRIPE METADATA)
+Standardize styling by expanding on layout stuff?
 Implement password recovery
 Finish styling (MOBILE VIEW FOR ORDER TABLE)
 
+Membership page?
 Change password styling?
 
+DOWNLOADS ------------------------------------
+Add mock download, like just the product picture?
+Add styling to downloads page (Size images properly, similar to cart)
+ADD PROPER FILE TYPE TO DOWNLOADS
+
+ORDERS/HISTORY ------------------------------------
+MINOR: If an order (Not the most recent) is deleted from the database, creating a new one overwrites the most recent
+Add max-height and scrollbar to order details/history?
+
 CHECKOUT/CART ------------------------------------
+Potential security concern in Checkout Success. Anyone could make a request with the link(?)...
+...and so long as there's a legit UserID + SessionID order details can be gotten (Check discord)
+
+Implement SKU to products, even if not for stock-count (Research Stripe for this first)
+
+Change cart checkout item removal to only those in the order
+Add copy of redux-cart (Prod/VarIDs' into Stripe metadata)
 Write code for changeItemQuantity/Input
 Add some reducer extension things to disable quantity buttons/input while updating
-WRITE CODE FOR ADDRESS DETAIL USE
 
 AFTER PURCHASE - Create outcome notif via https://stripe.com/docs/payments/after-the-payment
-AFTER PURCHASE - If successful, clear the cart (Totally / Specifically what was purchased?)
-Figure out a way to get electronic products bound to an account, especially if purchased as guest (Add to account in firebase?)
-Also figure out how to record address jazz (If at all?)
 
+MINOR: Type issue with saving digital items to order metadata ("checkoutCart.cjs")
+
+Addresses have no use (Maybe remove?)
+Look more into shipping fees?
+Figure out what to do for guest checkout? (Especially for digital items)
+Create notification for checkout failure? (Like card is declined)
 Prevent/Add a warning to the purchase of an already owned electronic item?
 More steps/checks to verify quantity/price changes?
 Finish styling (MAKE MOBILE VIEW FOR ORDER TABLE)
-
-ADDRESSES ------------------------------------
-BUG: Address "isDefaultAddress" counts as difference
-Default address on top?
-Make address form required
 
 SEARCH ------------------------------------
 ERROR: Add a key to productSearchResult
@@ -272,7 +280,7 @@ Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
 
 ACCOUNT ------------------------------------
-Populate account details (Especially purchase history!!)
+Figure out what more to do with "Account Details"
 Get Captcha for Login/Register?
 
 NOTIFICATIONS/ERROR HANDLING ------------------------------------
@@ -289,7 +297,7 @@ GENERAL ------------------------------------
 Don't allow Nav/Link spam to add to history (Header & Collections // USE SMART LINK WRAP THING (in discord))
 Figure out how to rotate properly in mobile
 Make scrollbar hidden in MOBILE view, not just small views
-Implement lazyloading & react-progressive-image
+Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
 Make small placeholder versions of all images
 Add better image placeholders
 Add sizes to images
@@ -300,13 +308,18 @@ Add FavIcon !!!!!!
 
 OPTIONAL & LESS-IMPORTANT ------------------------------------ |||||||||||||||||||||||||||||||
 
+ADDRESSES ------------------------------------
+BUG: Address "isDefaultAddress" counts as difference
+Make address form required
+Default address on top?
+Maybe remove?
+
 COLLECTION-BLOCK ------------------------------------
 Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
 Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 HOME ------------------------------------
 Set standard size to colection-buttons (Still small issue being short height when none have loaded)
-Collection button margin issue on larger views
 Add btn class to homepage-mailform?
 Add images to slideshow?
 Slideshow image load in clips bottom border
