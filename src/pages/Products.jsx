@@ -131,6 +131,8 @@ export default function Products() {
             productId: currentProduct.id,
             variantId: selectedVariant.id,
             stripeId: selectedVariant.stripeId,
+            isDigital: selectedVariant.isDigital,
+            isPhysical: selectedVariant.isPhysical,
             quantity: productQuantity
             // productName: currentProduct.name,
             // variantName: selectedVariant.name,
