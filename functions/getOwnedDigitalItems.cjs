@@ -33,13 +33,13 @@ exports.handler = async function(event, context) {
         let ownedDigitalItems = snapshot.val()
 
         // Digital-Items were found
-        if (ownedDigitalItems.length > 0) return { statusCode: 200, body: JSON.stringify(ownedDigitalItems) }
+        if (ownedDigitalItems && ownedDigitalItems.length > 0) return { statusCode: 200, body: JSON.stringify(ownedDigitalItems) }
 
         // No Digital-Items were found
         else return { statusCode: 404, body: 'No owned digital items found' }
 
     } catch (error) {
         console.error('Error querying order:', error)
-        return { statusCode: 500, body: 'Internal Server Error' }
+        return { statusCode: 500, body: `Internal Server Error: ${error}` }
     }
 }
