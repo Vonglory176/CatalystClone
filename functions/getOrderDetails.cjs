@@ -43,7 +43,7 @@ exports.handler = async function(event, context) {
             const order = childSnapshot.val()
 
             console.log(order)
-            if (order.metadata.sessionId === localSessionId && order.metadata.userId === userId) {                
+            if (order.metadata && order.metadata.sessionId === localSessionId && order.metadata.userId === userId) {                
                 orderDetails = order
             }
         })
