@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import OrderHistory from "../components/OrderHistory"
+import LoadingScreen from "../components/LoadingScreen"
 
 export default function Account() {
     const user = useSelector(state => state.auth.user)
+    const [doneLoading, setDoneLoading] = useState(false)
     const [address, setAddress] = useState(false)
 
     useEffect(() => {
@@ -16,21 +18,33 @@ export default function Account() {
         }
     }, [user])
 
+    const doneLoadingCallback = () => {
+        console.log("HERE")
+        setDoneLoading(true)
+    }
+
+    useEffect(() => {
+        console.log(doneLoading)
+    }, [doneLoading])
+    // <img src={loaderGif} className="loading-gif" alt="Loading..." />
+
     return (
         <div id="Account-Container">
             <h1 className="page-title">My Account</h1>
 
+            {!doneLoading && <LoadingScreen/>}
+            
             <div className="content-wrapper">
 
                 <div id="Account-Details__Main-container" className="content-block">
                     <p className="account__continue">
-                        <Link to={"/"} className={"btn"}>My Downloadable Files</Link> {/* Note "All" */}
+                        <Link to={"/account/downloads"} className={"btn"} title="View your downloadable files">My Downloadable Files</Link> {/* Note "All" */}
                     </p>
                     {/* <p className="account__continue">
                         <Link to={"/"} className={"btn"}>Manage My Membership</Link>
                     </p> */}
 
-                    <OrderHistory/>
+                    <OrderHistory doneLoadingCallback={doneLoadingCallback}/>
                 </div>
 
                 <div id="Account-Details__Secondary-Container" className="content-block">
@@ -55,7 +69,6 @@ export default function Account() {
                     }
                     <Link to={"addresses"} className="addresses-link">View Addreses ({address? user.addresses.length : 0})</Link>
                 </div>
-                
             </div>
         </div>
     )
