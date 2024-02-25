@@ -35,7 +35,7 @@ exports.handler = async function(event, context) {
         //Adding each order with a matching userId
         snapshot.forEach(childSnapshot => {
             const order = childSnapshot.val()
-            if (order.metadata.userId === authUserId) orderHistory.push(order)
+            if (order.metadata && order.metadata.userId === authUserId) orderHistory.push(order)
         })
 
         // Orders were found
