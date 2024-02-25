@@ -6,7 +6,7 @@ import fetchOrderHistory from "../fetch/fetchOrderHistroy"
 import translatePrice from "../hooks/translatePrice"
 import { displayDate } from "../hooks/getDateTime"
 
-export default function OrderHistory() {
+export default function OrderHistory({doneLoadingCallback}) {
   const [orderHistory, setOrderHistory] = useState()
   const user = useSelector(state => state.auth.user) //Use Firebase-Auth instead?
   const auth = getAuth()
@@ -17,15 +17,16 @@ export default function OrderHistory() {
           console.log('Token:', authToken)
 
           setOrderHistory(await fetchOrderHistory())
-      }
-      if (user && auth.currentUser) getOrders()
-  }, [auth.currentUser])
+          doneLoadingCallback(true)
+        }
+        if (user && auth.currentUser) getOrders()
+      }, [auth.currentUser])
 
   const printOrderRows = () => {
     if (orderHistory) {
       return orderHistory.map(item => {
           return (
-            <tr>
+            <tr key={item.id}>
               <td data-label="Order"><Link to={`order?session_id=${item.metadata.sessionId}`} title={`View the details of ${item.metadata.orderId}`}>{item.metadata.orderId}</Link></td>
               <td data-label="Date">{displayDate(item.created)}</td>
               <td data-label="Payment Status">{item.payment_status}</td>
