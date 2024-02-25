@@ -47,6 +47,8 @@
                             }
                         },
                         "isPrimaryVariant": true,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     },
                     "variant2": {
@@ -64,6 +66,8 @@
                             }
                         },
                         "isPrimaryVariant": false,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     }
                 },
@@ -131,7 +135,10 @@
                         "price": 39.99,
                         "discountedPrice": 24.99,
                         "images": {},
+
                         "isPrimaryVariant": true,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     }
                 },
@@ -181,7 +188,10 @@
                                 "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_LUN-DRI_1024x1024.webp?alt=media&token=ea14ce44-f5d7-45eb-b58d-e5982c8fcc3c"
                             }
                         },
+                        
                         "isPrimaryVariant": false,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": true
                     },                    
                     "variant2": {
@@ -204,7 +214,10 @@
                                 "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_FUN-WAS_1024x1024.webp?alt=media&token=09c57792-f4a8-47d1-b916-346d920a9b57"
                             }
                         },
+
                         "isPrimaryVariant": true,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     },                    
                     "variant3": {
@@ -227,7 +240,10 @@
                                 "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_CAU-MIN_1024x1024.webp?alt=media&token=155d1c0d-c1a4-481a-a35a-7ebee9166b53"
                             }
                         },
+
                         "isPrimaryVariant": false,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     },                    
                     "variant4": {
@@ -250,7 +266,10 @@
                                 "link": "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/products%2Fbattletech%2Fbattlemat-alien-worlds%2Fbaw_box_CRY-BAD_1024x1024.webp?alt=media&token=7a80e6b2-b404-4d5a-a50b-94421124837e"
                             }
                         },
+
                         "isPrimaryVariant": false,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     }             
                 },
@@ -293,7 +312,10 @@
                         "price": 4.99,
                         "discountedPrice": "",
                         "images": {},
+
                         "isPrimaryVariant": true,
+                        "isDigital": true,
+                        "isPhysical": false,
                         "isSoldOut": false
                     }
                 },
@@ -336,7 +358,10 @@
                         "price": 0,
                         "discountedPrice": "",
                         "images": {},
+
                         "isPrimaryVariant": true,
+                        "isDigital": true,
+                        "isPhysical": false,
                         "isSoldOut": false
                     }
                 },
@@ -380,8 +405,11 @@
                         "price": 39.99,
                         "discountedPrice": "",
                         "images": {},
+
                         "isPrimaryVariant": true,
-                        "isSoldOut": true
+                        "isDigital": false,
+                        "isPhysical": true,
+                        "isSoldOut": false
                     }
                 },
                 "isFree": false,
@@ -424,7 +452,10 @@
                         "price": 14.99,
                         "discountedPrice": "",
                         "images": {},
+
                         "isPrimaryVariant": true,
+                        "isDigital": false,
+                        "isPhysical": true,
                         "isSoldOut": false
                     }
                 },
@@ -471,7 +502,10 @@
                         "price": 49.99,
                         "discountedPrice": "",
                         "images": {},
-                        "isPrimaryVariant": true,
+
+                        "isPrimaryVariant": true,                        
+                        "isDigital": true,
+                        "isPhysical": true,
                         "isSoldOut": false
                     },
                     "variant2": {
@@ -481,7 +515,10 @@
                         "price": 19.99,
                         "discountedPrice": "",
                         "images": {},
+
                         "isPrimaryVariant": false,
+                        "isDigital": true,
+                        "isPhysical": false,
                         "isSoldOut": false
                     }
                 },
@@ -527,7 +564,10 @@
                         "price": 11.99,
                         "discountedPrice": "",
                         "images": {},
+
                         "isPrimaryVariant": true,
+                        "isPhysical": true,
+                        "isDigital": false,
                         "isSoldOut": false
                     }
                 },
@@ -549,6 +589,13 @@
 
             "firstName": "TestFirstName",
             "lastName": "TestLastName",
+
+            "ownedDigitalProducts": [
+                {
+                    "productId": "battletech-anthology-vol-8-legacy",
+                    "variantId": "standard"
+                }
+            ],
 
             "addresses": {
                 "address1": {
