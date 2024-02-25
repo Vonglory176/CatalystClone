@@ -12,9 +12,9 @@ const admin = require('firebase-admin')
 
 const serviceAccount = JSON.parse(process.env.VITE_FIREBASE_ADMIN)
 
-admin.initializeApp({
-credential: admin.credential.cert(serviceAccount),
-databaseURL: "https://catalystclonedb-default-rtdb.firebaseio.com"
+if (admin.apps.length === 0) admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://catalystclonedb-default-rtdb.firebaseio.com"
 })
 
 exports.handler = async function (event, context) {
