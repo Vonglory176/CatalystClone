@@ -20,6 +20,8 @@
 @import "./pages/contact";
 @import "./pages/cart";
 @import "./pages/account";
+@import "./pages/order";
+@import "./pages/downloads";
 @import "./pages/addresses";
 @import "./pages/login";
 @import "./pages/logout";
@@ -56,6 +58,15 @@ body {
 .page-width {
     max-width: 1180px;
     margin: auto;
+    padding: 0 10px;
+    
+    @media (min-width: 750px) {
+        padding: 0 20px;        
+    }
+    // @media (min-width: 1300px) {
+    //     max-width: 1300px;
+    //     padding: 0 80px;      
+    // }
 }
 
 .header, footer {
@@ -74,18 +85,6 @@ body {
     margin: auto;
 
     // .content-wrapper {}
-}
-
-.page-width {
-    padding: 0 10px;
-    
-    @media (min-width: 750px) {
-        padding: 0 20px;        
-    }
-    // @media (min-width: 1300px) {
-    //     max-width: 1300px;
-    //     padding: 0 80px;      
-    // }
 }
 
 img {
@@ -129,7 +128,26 @@ hr {
     border-width: 1px 0 0;
 }
 
-table{
+.loading-screen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: $primary-background-color;
+
+    .loading-gif {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* This centers the image */
+        z-index: 11;
+        width: auto;
+    }
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
