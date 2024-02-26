@@ -1,29 +1,26 @@
-import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useNavigate, useLocation, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { loginWithUserDetails } from "../store/auth-slice.jsx"
+import { getAuth} from "firebase/auth"
+const auth = getAuth()
 
 export default function Login() {
-    // const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
-    // const navigate = useNavigate()
-
-    //Routing to Account page if user is logged in
-    // useEffect(() => {
-    //     if (isLoggedIn) {
-    //         navigate("/account", {replace:true})
-    //     }
-    // }, [isLoggedIn])
-
+    const navigate = useNavigate()
+    const location = useLocation()
+    
     //Login trigger
     const handleAccountLoginSubmit = async (e) => {
         e.preventDefault() //Prevents refresh/data-sending
-      
+        
         const email = e.target.elements['customer[email]'].value
         const password = e.target.elements['customer[password]'].value
         
         dispatch(loginWithUserDetails({email, password}))
     }
+    console.log(location)
 
     const [passwordRecovery, setPasswordRecovery] = useState(false)
     const togglePasswordRecovery = () => setPasswordRecovery((r) => !r)
@@ -31,14 +28,15 @@ export default function Login() {
 
     let loginDiv = (
         <form method="post" action="/account" id="Customer-Login" className="customerForm" onSubmit={handleAccountLoginSubmit}>
-            <h1>Login</h1>
+            <h1>{location.state?.message || "Login"}</h1>
             <input type="email" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
             <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
         
             <p><input type="submit" className="btn" value={"Sign In"}/></p>
 
             <a onClick={togglePasswordRecovery}>Forgot your password?</a>
-            <Link to={"/account/register"}>Create account</Link>
+            <NavLink to={"/account/register"} title="Create an account" state={{...location.state}} replace>Create account</NavLink>
+            {/* <Link to={"/account/register"}>Create account</Link> */}
         </form>            
 
         // <div id="CustomerLoginForm" className="loginForm loginForm__loginInfo">
@@ -70,3 +68,10 @@ export default function Login() {
         </div>            
     )
 }
+
+//Routing to Account page if user is logged in
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         navigate("/account", {replace:true})
+    //     }
+    // }, [isLoggedIn])
