@@ -4,7 +4,6 @@ const auth = getAuth()
 export default async function fetchOrderHistory() {
     console.log("Getting order history")
     const authToken = await auth.currentUser.getIdToken()
-    console.log('Token:', authToken)
 
     try {
         //Firing serverless function to get the order history

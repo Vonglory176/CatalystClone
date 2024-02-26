@@ -4,7 +4,6 @@ const auth = getAuth()
 export default async function fetchOrderDetails(sessionId) {
     console.log("Getting order details")
     const authToken = await auth.currentUser.getIdToken()
-    console.log('Token:', authToken)
 
     try {
         //Firing serverless function to get the order details
