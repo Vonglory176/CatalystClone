@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import { getProductById } from "../hooks/getProductById"
 import { cartActions } from "../store/cart-slice"
+import fetchCartCheckout from "../fetch/fetchCartCheckout"
 
 import placeholderImage from "../assets/placeholder.png"
 import ProgressiveImage from "react-progressive-image"
@@ -10,10 +11,13 @@ import ProgressiveImage from "react-progressive-image"
 export default function Cart() {
     const [cartItemsHtml, setCartItemsHtml] = useState()
     const user = useSelector(state => state.auth.user) //Use Firebase-Auth instead?
+    const isLoggedIn = useSelector(state => state.auth.user)
     const productList = useSelector(state => state.products.productList)
     const cartItemList = useSelector(state => state.cart.cartItemList)
     const status = useSelector (state => state.products.status)
+    const location = useLocation()
     const dispatch = useDispatch ()
+    const navigate = useNavigate()
 
     const [totalPrice, setTotalPrice] = useState(0)
 
@@ -27,28 +31,24 @@ export default function Cart() {
         dispatch(cartActions.removeFromCart(productToChange))
     }
 
+    //Check URL, auto checkout if "cart/checkout" (This would be after redirect to/from login page)
+    useEffect(() => {
+        console.log(location)
+        if(location.pathname === "/cart/checkout" && cartItemList?.length > 0) handleCheckout()
+        else if (location.pathname === "/cart/checkout") navigate("/cart", {replace:true})
+    }, [])
+    
+    //Checkout if logged in and if not, redirect to login page (Needs work for guest checkout)
     const handleCheckout = async (event) => {
-        event.preventDefault()
-        const customerInstructions = event.target["special-instructions"].value
-    
-        const response = await fetch('/.netlify/functions/checkoutCart', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({items: cartItemList, user: user, customerInstructions: customerInstructions})
-        })
-    
-        if (!response.ok) {
-            // Handle error response
-            console.error("Error response:", response)
-            return
+        event?.preventDefault()
+        
+        const customerInstructions = event?.target["special-instructions"].value || location.state?.customerInstructions || ""
+        if (isLoggedIn) {//console.log(await fetchCartCheckout(cartItemList, user, customerInstructions))
+        
+            const response = await fetchCartCheckout(cartItemList, user, customerInstructions)
+            if (response) console.error(response) //The only return is an error (If present)
         }
-    
-        const data = await response.json()
-        if(data.url) {
-            window.location.assign(data.url) //Redirection to Stripe payment
-        }
+        else navigate("/cart/checkout", {replace:true, state:{customerInstructions: customerInstructions}})
     }
 
     useEffect(() => {
