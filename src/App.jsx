@@ -11,10 +11,8 @@ import SlideShowLayout from './layout/HomeLayout'
 import Register from './pages/Register'
 import Logout from './pages/Logout'
 import Addresses from './pages/Addresses'
-import AccountOrderLayout from './layout/AccountOrderLayout'
-import CheckoutOrderLayout from './layout/CheckoutOrderLayout'
 import Downloads from './pages/Downloads'
-import OrderDetails from './components/OrderDetails'
+import Order from './pages/Order'
 
 import { Route, Routes, useLocation, Navigate, Outlet } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,12 +25,13 @@ function App() {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
   //So refresh only occurs on path change, not changes like query
-  const { pathname } = useLocation()
+  // const { pathname, search, state } = useLocation()
+  const location = useLocation()
 
   useEffect(() => {
     dispatch(fetchProducts())
     if (isLoggedIn) dispatch(fetchUserDetails())
-  }, [pathname]) //dispatch //location //status
+  }, [location.pathname]) //dispatch //location //status
 
   return ( 
     <>
@@ -41,51 +40,47 @@ function App() {
       {/* Use similar to /products/:id for details page*/}
 
       <Routes>
+        {/* Home Page */}
         <Route element={<SlideShowLayout/>}>
           <Route path="/" element={<Home/>}/>
         </Route>
 
         <Route element={<MainLayout/>}>
-
+          {/* Cart & Checkout */}
           <Route path="/cart" element={<Cart/>}/>
-          <Route element={<CheckoutOrderLayout/>}>
-            <Route path="/cart/success" element={<OrderDetails/>}/> {/* Need extra measures to keep secure */}
-          </Route>
+              
+          {/* Account */}
+          <Route path="/account" element={isLoggedIn ? <Account /> : <Navigate to="/account/login" replace state={{ from: location.pathname + location.search}} />}/>
 
-          {/* Auto redirect to Login if not logged in */}
-          <Route path="/account" element={isLoggedIn ? <Outlet /> : <Navigate to="/account/login" replace />}>
-            <Route index element={<Account/>}/>
-            <Route path="logout" element={<Logout/>}/>
-            <Route path="addresses" element={<Addresses/>}/>
-            <Route path="downloads" element={<Downloads/>}/>
-
-            <Route element={<AccountOrderLayout/>}>
-              <Route path="/account/order" element={<OrderDetails/>}/>
-            </Route>
-          </Route>
-
-          {/* Auto redirect to Account if logged in */}
-           <Route path="/account" element={!isLoggedIn ? <Outlet /> : <Navigate to="/account" replace />}> 
+          {/* Account Required Pages "Login to continue" */}
+          <Route path="/" element={isLoggedIn ? <Outlet /> : <Navigate to="/account/login" replace state={{ ...location.state, from: location.pathname + location.search, message: "Login to continue" }} />}>
             {/* <Route index element={<Account/>}/> */}
+            <Route path="account/addresses" element={<Addresses/>}/>
+            <Route path="account/downloads" element={<Downloads/>}/>
+            <Route path={"account/order"} element={<Order/>}/>
+            <Route path={"cart/success"} element={<Order/>}/> {/* Need extra measures to keep secure */}
+            
+            <Route path="cart/checkout" element={<Cart/>}/> {/* REMOVE TO USE GUEST CHECKOUT - ONLY LOGGED IN USERS CAN CHECKOUT*/}
+          </Route>
+
+          {/* Login handler */}
+           <Route path="/account" element={!isLoggedIn ? <Outlet /> : <Navigate to={location.state?.from || '/account'} state={{...location.state}} replace />}> {/* element={!isLoggedIn ? <Outlet /> : <Navigate to="/account" replace />} */}
             <Route path="login" element={<Login/>}/>
             <Route path="register" element={<Register/>}/>
           </Route>
-
-          {/* <Route path="/account">
-            <Route index element={<Account/>}/>
-            <Route path="login" element={<Login/>}/>
-            <Route path="logout" element={<Logout/>}/>
-            <Route path="register" element={<Register/>}/>
-            <Route path="addresses" element={<Addresses/>}/>
-          </Route> */}
-
+          
+          {/* Logout handler */}
+          <Route path="/account/logout" element={isLoggedIn ? <Logout/> : <Navigate to={location.state?.from || '/'} replace state={{ from: location.state?.from || '/'}} />} />
+          
+          {/* Product Pages */}
           <Route path="/collections/:id" element={<Collections/>}/>
           <Route path="/collections/:id/products/:id" element={<Products/>}/>
 
           <Route path="/contact" element={<Contact/>}/>
           {/* <Route path="/products" element={<Products/>}/> Make this a category page? */}
           <Route path="/products/:id" element={<Products/>}/>
-
+          
+          {/* 404 Page */}
           <Route path="*" element={<NotFound/>}/>
         </Route>
       </Routes>
@@ -168,29 +163,32 @@ Prime Features!
 Notifications
 "Back to" banners
 Captcha?
+Guest Checkout
 
 Do Right now!
 ------
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
+Auto-Checkout/Checkout is insane and needs cleanup
 
-
-
-Create a "You must be logged in to view this page" screen
-
+MINOR: Login page routing screws with history due to inital Account page routing
 Only get fresh account details when needed given the new setup?
 Find other places to use load screen?
+Move Fetch calls into Redux
 
-BUG: Sale/Standard price swap bug from before is still present (At least on home page)
+Logout page has bad styling
 
 Do Later!
 ------
-CHECKOUT SUCCESS / ORDERS ------------------------------------
+GUEST CHECKOUT ------------------------------------
 There are two way to view orders (account/order && cart/success). Account requires login and success will need...
 ... Tailoring to make things more loose but secure, especially for guests (Timeout idea?)
 
-Create logic to only be able to view the order details if the user is logged in (With same UID)
 Create logic to "timeout" the order details after X time (24hrs?) (Maybe just for guests?)
 Create a guest token for viewing guest orders?
+Figure out what to do for guest checkout? (Especially for digital items)
+
+CHECKOUT SUCCESS / ORDERS ------------------------------------
+Create logic to only be able to view the order details if the user is logged in (With same UID)
 Implement or remove SKU
 Add styling (MOBILE VIEW ESPECIALLY)
 
@@ -205,21 +203,21 @@ Standardize styling by expanding on layout stuff?
 Implement password recovery
 Finish styling (MOBILE VIEW FOR ORDER TABLE)
 
-Membership page?
 Change password styling?
+Membership page? (Very likely not)
 
 DOWNLOADS ------------------------------------
 Add mock download, like just the product picture?
 Add styling to downloads page (Size images properly, similar to cart)
-ADD PROPER FILE TYPE TO DOWNLOADS
+ADD PROPER FILE TYPE TO DOWNLOAD
 
 ORDERS/HISTORY ------------------------------------
+BUG: Reverse load order to be list most recent orders first (Maybe allow sorting?)
 MINOR: If an order (Not the most recent) is deleted from the database, creating a new one overwrites the most recent
-Add max-height and scrollbar to order details/history?
+Add max-height and scrollbar to order details/history
+Display Customer-Instructions?
 
 CHECKOUT/CART ------------------------------------
-Potential security concern in Checkout Success. Anyone could make a request with the link(?)...
-...and so long as there's a legit UserID + SessionID order details can be gotten (Check discord)
 
 Implement SKU to products, even if not for stock-count (Research Stripe for this first)
 
@@ -234,11 +232,11 @@ MINOR: Type issue with saving digital items to order metadata ("checkoutCart.cjs
 
 Addresses have no use (Maybe remove?)
 Look more into shipping fees?
-Figure out what to do for guest checkout? (Especially for digital items)
 Create notification for checkout failure? (Like card is declined)
-Prevent/Add a warning to the purchase of an already owned electronic item?
-More steps/checks to verify quantity/price changes?
 Finish styling (MAKE MOBILE VIEW FOR ORDER TABLE)
+
+More steps/checks to verify quantity/price changes? (Update prices via Stripe maybe?)
+Prevent/Add a warning to the purchase of an already owned electronic item?
 
 SEARCH ------------------------------------
 ERROR: Add a key to productSearchResult
@@ -294,7 +292,10 @@ Figure out some kind of way to update/alert to product/cart changes on cart/chec
 (Cart page has an "Update Cart" button)
 
 GENERAL ------------------------------------
-Don't allow Nav/Link spam to add to history (Header & Collections // USE SMART LINK WRAP THING (in discord))
+BUG: Sale/Standard price swap bug from before is still present (At least on home page)
+BUG: Don't allow Nav/Link spam to add to history (Header & Collections // USE SMART LINK WRAP THING (in discord))
+MINOR: Change site background to black for when "Main-Layout" pages are too short for screen
+
 Figure out how to rotate properly in mobile
 Make scrollbar hidden in MOBILE view, not just small views
 Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
@@ -360,4 +361,17 @@ FOOTER ------------------------------------
 Fix icon link spacing?
 Add classes to footer links?
 -------------------
+
+
+
+
+PLATFORM TESTING ------------------
+Chrome
+Opera
+Firefox
+Edge
+Safari
+
+iOS
+Android (Use Emulator)
 */
