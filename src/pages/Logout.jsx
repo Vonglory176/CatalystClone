@@ -1,17 +1,13 @@
 import { useDispatch } from "react-redux"
 import { authActions } from "../store/auth-slice.jsx"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useEffect } from "react"
-import { getAuth, signOut } from "firebase/auth"
 
 export default function Logout() {    
     const dispatch = useDispatch()
-    // const navigate = useNavigate()
-    
     useEffect(() => {
-        // Logging out w/Redux & redirecting Home
+        // Logging out w/Redux
         dispatch(authActions.logout())
-        // navigate("/", {replace: true})
     }, [])
 
     return (
