@@ -1,24 +1,28 @@
 import {useEffect, useState} from 'react'
-import {Link, useSearchParams} from 'react-router-dom'
+import {Link, useSearchParams, useLocation} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { getAuth } from "firebase/auth"
 import fetchOrderDetails from '../fetch/fetchOrderDetails'
 import translatePrice from '../hooks/translatePrice'
 import getProductLinkWithNameAndVariant from '../hooks/getProductLinkByNameAndVariant'
 import { displayDateTime } from '../hooks/getDateTime'
-import LoadingScreen from "../components/LoadingScreen"
+import LoadingScreen from "/src/components/LoadingScreen"
 import { cartActions } from "../store/cart-slice"
 
-//http://localhost:8888/cart/success?session_id=13e8fbc1-54d3-4a15-b0a3-e5902c500a0e
+//http://localhost:8888/cart/success?session_id=3da29ea2-e60a-4a5c-9f88-719914152ff7
 
 export default function OrderDetails() {
     const [searchParams, setSearchParams] = useSearchParams()
     const [orderDetails, setOrderDetails] = useState()
+    
     const user = useSelector(state => state.auth.user) //Use Firebase-Auth instead?
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
     const products = useSelector(state => state.products.productList)
     const dispatch = useDispatch()
+    const location = useLocation()
     const auth = getAuth()
 
+    // SESSION SEARCH
     useEffect(() => {
         const getDetails = async () => {
             // Get the sessionId parameter from the URL
@@ -31,6 +35,7 @@ export default function OrderDetails() {
         if (user && auth.currentUser) getDetails()
     }, [searchParams, auth.currentUser])
 
+    // CART CLEARING
     useEffect(() => {
         //If order was completed within the last 10 seconds, clear the users cart
         if (orderDetails) {
@@ -72,7 +77,7 @@ export default function OrderDetails() {
 
     return (
         <div id='OrderDetails-Container'>
-            <div>
+            <h1>{location.pathname === "/cart/success"? "Thank you for your purchase!" : "My Account"}</h1>
             {orderDetails? 
                 <div className='order-details'>
 
@@ -150,7 +155,6 @@ export default function OrderDetails() {
                     <LoadingScreen/> // <p>Loading your order...</p>
                 )                
             }
-            </div>
         </div>
     )
 }
