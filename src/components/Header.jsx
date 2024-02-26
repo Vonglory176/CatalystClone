@@ -5,9 +5,11 @@ import { Link, NavLink } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
 import Searchbar from './Searchbar'
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
+import { useLocation } from "react-router-dom"
 
 export default function Header() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    const location = useLocation()
 
     //Offcanvas/Sidebar
     const [showSidebar, setShowSidebar] = useState(false)
@@ -26,7 +28,7 @@ export default function Header() {
 
     // Update isWideViewport when the window is resized
     useEffect(() => {
-        const handleResize = () => setIsWideViewport(window.innerWidth >= 750)
+        const handleResize = () => setIsWideViewport(window.innerWidth >= 0) // 750
 
         window.addEventListener('resize', handleResize)
         
@@ -73,41 +75,52 @@ export default function Header() {
                     {cart}
                 </div>
 
-            </div>
-
+            </div>            
             {/* Header lower */}
             <div className="header__lower-wrapper" ref={ref}>
+                {/* Sticky Nav */}
                 <div className={`header__lower ${inView || !isSticky ? '' : 'isSticky'}`}>
-                    <div className="universe-dropdown dropdown">
-                        {/* <Link to={"/collections/battletech"} reloadDocument>
-                            <button className="header__sticky-dropdown-button btn">Universe</button>
-                        </Link> */}
 
-                        <button className="universe-dropdown__button dropdown-button">Universe<i className="fa-solid fa-caret-down"></i></button>
-                        {/* {isFocused && ( */}
-                            <div className="universe-dropdown__content dropdown-content">
-                                <NavLink to={"/collections/all"}><h1>UNIVERSE</h1></NavLink>
-                                <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}}>Battletech</NavLink>
-                                <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}}>Shadowrun</NavLink>
-                                <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}}>Other</NavLink>
-                            </div>
-                        {/* )} */}
+                    {/* Notification Banner */}
+                    <div id="notification-banner" className="header__notification header__notification-success isActive">
+                        <div className="header__notification__inner">
+                        <Link to="/cart" className="header__notification__link">
+                            <span className="header__notification__message">THIS IS A NOTIFICATION !!</span>
+                        </Link>
+                        </div>
                     </div>
 
-                    {inView? //Determining what buttons to have
+                    <nav className="header__lower-nav">
+                        <div className="universe-dropdown dropdown">
+                            {/* <Link to={"/collections/battletech"} reloadDocument>
+                                <button className="header__sticky-dropdown-button btn">Universe</button>
+                            </Link> */}
 
-                    <div className="header__lower-links">
-                        <Link to={"/account"} className={"account-link"}>Account</Link>
-                        {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>}
-                    </div>
+                            <button className="universe-dropdown__button dropdown-button">Universe<i className="fa-solid fa-caret-down"></i></button>
+                            {/* {isFocused && ( */}
+                                <div className="universe-dropdown__content dropdown-content">
+                                    <NavLink to={"/collections/all"}><h1>UNIVERSE</h1></NavLink>
+                                    <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}}>Battletech</NavLink>
+                                    <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}}>Shadowrun</NavLink>
+                                    <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}}>Other</NavLink>
+                                </div>
+                            {/* )} */}
+                        </div>
 
-                    : 
-                    
-                    <div className="store-btns">
-                        {searchbar}
-                        {cart}
-                    </div>}
+                        {inView? //Determining what buttons to have
 
+                        <div className="header__lower-nav-links">
+                            <NavLink to={"/account"} className={"account-link"} title={isLoggedIn? "View your account" : "Log into or create an account"} replace>Account</NavLink>
+                            {isLoggedIn && <NavLink to={"/account/logout"} state={{ from: location.pathname + location.search }} title="Logout the current User" className={"logout-link"}>Log Out</NavLink>}
+                        </div>
+
+                        : 
+                        
+                        <div className="store-btns">
+                            {searchbar}
+                            {cart}
+                        </div>}
+                    </nav>
                 </div>
             </div>
 
@@ -138,7 +151,8 @@ export default function Header() {
                         </div>
                     </div>
                     
-                    <Link to={"/account"} className={"offcanvas-link"}>Account</Link>
+                    {/* <Link to={"/account"} className={"offcanvas-link"}>Account</Link> */}
+                    <NavLink to={"/account"} className={"offcanvas-link"} title={isLoggedIn? "View your account" : "Log into or create an account"} replace>Account</NavLink>
                     {isLoggedIn && <Link to={"/account/logout"} className={"offcanvas-link"}>Log Out</Link>}
 
                 </Offcanvas.Body>

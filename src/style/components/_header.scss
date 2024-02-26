@@ -83,10 +83,77 @@
     //Sticky Header (Bottom)
     &__lower-wrapper {
         height: 59.25px;
-        @include hide-before-750;
+    }
+    
+    &__lower {
+        &.isSticky {
+            position: fixed;
+            width: 100%; 
+            transition: all .35s cubic-bezier(.33,.59,.14,1);
+
+            @media (max-width:749px) {
+                top: 0;
+            }
+            @media (min-width:750px) {   
+                top: 0;    
+                background-color: $accent-color;
+                border-bottom: 5px solid $secondary-color;            
+            }
+        }
     }
 
-    &__lower {
+    &__notification {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        left: 0;
+        right: 0;
+        bottom: 0;
+        
+        transition: all .35s cubic-bezier(.33,.59,.14,1);
+        
+        &-success {
+            background-color: $secondary-color;
+            &:hover {background-color: $secondary-hover-color;}
+        }
+        &-failure {
+            background-color: $sold-out-color;
+            &:hover {background-color: $badge-color;}
+        }
+        
+        &__inner {
+            height: 0;
+            transition: all .35s cubic-bezier(.33,.59,.14,1);
+            color: $secondary-font-color;
+            
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                color: $secondary-font-color;
+            }
+
+        }
+        
+        &.isActive {
+            bottom: -59.25px;
+
+            .header__notification__inner {
+                height: 59.25px !important;
+            }
+        }
+    }
+    
+    &__lower-nav {
+        @include hide-before-750;
+
         display: flex;
         justify-content: space-between;
         padding-right: 20px;
@@ -107,19 +174,7 @@
                     color: $primary-color;
                 }
             }
-        }
-    
-        &.isSticky {
-            @media (min-width:750px) {   
-                position: fixed;
-                top: 0;
-                width: 100%; 
-    
-                transition: all .35s cubic-bezier(.33,.59,.14,1);
-                background-color: $accent-color;
-                border-bottom: 5px solid $secondary-color;            
-            }
-        }        
+        }    
 
         // transition: transform 0.3s ease-in-out;
 
