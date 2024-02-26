@@ -1,14 +1,12 @@
 import { useState } from "react"
-import { useNavigate, useLocation, NavLink } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useLocation, NavLink } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { loginWithUserDetails } from "../store/auth-slice.jsx"
 import { getAuth} from "firebase/auth"
 const auth = getAuth()
 
 export default function Login() {
-    const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const location = useLocation()
     
     //Login trigger
