@@ -6,28 +6,21 @@ import { createNewUserAddress, removeUserAddress, updateUserAddress } from "../s
 import AddressForm from "../components/AddressForm"
 
 export default function Addresses() {
-    //If not logged in, redirect to Login page ("replace" so back button works)
-    // const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
-    // const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     if (!isLoggedIn) navigate("/account/login", {replace:true})
-    // }, [isLoggedIn])
-
-    const {addresses} = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.auth.user)
     const [currentAddresses, setCurrentAddresses] = useState()
     const [addAddress, setAddAddress] = useState(false)
-    const [updateAddress, setUpdateAddress] = useState({}) //This become an object array via useEffect
+    const [updateAddress, setUpdateAddress] = useState({}) //This becomes an object array via useEffect
     
     const printAddresses = () => {
         // No Addresses
-        if (!addresses || addresses.length === 0) return <p><strong>No addresses found</strong></p>
+        if (user.addresses.length === 0) return <p><strong>No addresses found</strong></p>
 
         // Addresses found
         let addressListHtml = []
-        for (let index in addresses) {
-            const address = addresses[index]
+        for (let index in user.addresses) {
+            const address = user.addresses[index]
 
             addressListHtml.push(
             <div className="address-container" key={index}>
@@ -49,24 +42,28 @@ export default function Addresses() {
             </div>
             )
 
-            if (Number(index) !== addresses.length -1) addressListHtml.push(<hr key={index + "hr"}/>)
+            if (Number(index) !== user.addresses.length -1) addressListHtml.push(<hr key={index + "hr"}/>)
         }
         return addressListHtml
     }
 
     // Address Initialization
-    useEffect(() => {        
-        let updateAddressList = []
-        for (let address in addresses.length) updateAddressList.push(false)
-
-        setUpdateAddress(updateAddressList)
-    }, [addresses])
+    useEffect(() => {
+        if (user?.addresses)  {
+            let updateAddressList = []
+            for (let address in user.addresses.length) updateAddressList.push(false)
+    
+            setUpdateAddress(updateAddressList)
+        }
+    }, [user])
 
     // Address Printing/Updating (Could combine with above but has indexing issue with Remove function)
     useEffect(() => {
-        setCurrentAddresses(printAddresses())
-        console.log(updateAddress)
-    }, [updateAddress]) //addresses, 
+        if (user?.addresses) {
+            setCurrentAddresses(printAddresses())
+            console.log(updateAddress)
+        }
+    }, [user, updateAddress]) //addresses, 
 
     // Opening/Closing the Edit forms
     const handleUpdateAddressOnClick = (index) => {
