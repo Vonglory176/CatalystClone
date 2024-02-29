@@ -1680,15 +1680,18 @@
 @media (min-width: 750px) {
   .header__lower.isSticky {
     top: 0;
+  }
+  .header__lower.isSticky .header__lower-nav {
+    position: relative;
     background-color: #030303;
     border-bottom: 5px solid #c2cb20;
   }
 }
 .header__notification {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -1700,18 +1703,19 @@
 .header__notification-success:hover {
   background-color: #989e19;
 }
-.header__notification-failure {
+.header__notification-error {
   background-color: #ec523e;
 }
-.header__notification-failure:hover {
+.header__notification-error:hover {
   background-color: #d2354f;
 }
 .header__notification__inner {
+  opacity: 0;
   height: 0;
   transition: all 0.35s cubic-bezier(0.33, 0.59, 0.14, 1);
   color: #fff;
 }
-.header__notification__inner a {
+.header__notification__inner > a, .header__notification__inner > p {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1720,12 +1724,19 @@
   bottom: 0;
   left: 0;
   right: 0;
+  margin: 0;
+  padding: 0px 5px;
+  font-weight: 700;
   color: #fff;
+}
+.header__notification__inner > a .header__notification__message-link, .header__notification__inner > p .header__notification__message-link {
+  text-decoration: underline;
 }
 .header__notification.isActive {
   bottom: -59.25px;
 }
 .header__notification.isActive .header__notification__inner {
+  opacity: 1;
   height: 59.25px !important;
 }
 .header__lower-nav {
@@ -2628,21 +2639,71 @@
   text-align: center;
 }
 
-#Account-Container .addresses-link {
+#Account-Details h2, #Account-Details h3 {
+  color: #222;
+}
+#Account-Details .addresses-link {
   color: #c2cb20;
 }
-#Account-Container .addresses-link:hover {
+#Account-Details .addresses-link:hover {
   color: #989e19;
 }
-@media (min-width: 750px) {
-  #Account-Container .content-wrapper {
-    display: flex;
-  }
+#Account-Details__Wrapper {
+  display: grid;
 }
 @media (min-width: 750px) {
-  #Account-Container__Secondary-Container {
-    padding-left: 20px;
+  #Account-Details__Wrapper {
+    grid-template-columns: 1fr 260px;
   }
+}
+#Account-Details__Main-Container .account__continue {
+  margin-bottom: 20px;
+}
+#Account-Details__Secondary-Container {
+  margin-top: 20px;
+}
+@media (min-width: 750px) {
+  #Account-Details__Secondary-Container {
+    padding-left: 20px;
+    margin: 0 0 0 20px;
+  }
+}
+
+#Order-Details-Container .order-details h1 {
+  margin-bottom: 20px;
+}
+#Order-Details-Container .order-details h2 {
+  color: #222;
+}
+#Order-Details-Container .order-details__wrapper {
+  display: grid;
+}
+@media (min-width: 750px) {
+  #Order-Details-Container .order-details__wrapper {
+    grid-template-columns: 1fr 260px;
+  }
+}
+#Order-Details-Container .order-details__main-container .button-link {
+  margin: 0px 20px 20px 0;
+}
+@media (max-width: 749px) {
+  #Order-Details-Container .order-details__main-container table tfoot tr:nth-last-child(2) {
+    margin: 0;
+    border-bottom: none;
+  }
+}
+#Order-Details-Container .order-details__address-container {
+  margin-top: 20px;
+}
+@media (min-width: 750px) {
+  #Order-Details-Container .order-details__address-container {
+    padding-left: 20px;
+    margin: 0 0 0 20px;
+  }
+}
+#Order-Details-Container .order-notFound {
+  padding: 120px 0;
+  text-align: center;
 }
 
 #Downloads-Container .downloadable-item {
@@ -3258,10 +3319,43 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+@media only screen and (max-width: 749px) {
+  table thead {
+    display: none;
+  }
+  table tr {
+    display: block;
+    border-top: none;
+    border-bottom: 1px solid #222;
+    margin-bottom: 20px;
+  }
+  table th, table td {
+    display: block;
+    text-align: right;
+    padding: 10px;
+    margin: 0;
+  }
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    text-align: center;
+    font-size: 14px;
+    padding-right: 10px;
+  }
+}
+@media only screen and (max-width: 749px) and (max-width: 749px) {
+  table .small--hide {
+    display: none;
+  }
+}
+@media (min-width: 750px) {
+  table th, table td {
+    text-align: left;
+  }
+}
 table th, table td {
   padding: 10px;
   border: 1px solid #222;
-  text-align: left;
   text-transform: capitalize;
 }
 table th a, table td a {
