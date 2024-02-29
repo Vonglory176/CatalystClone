@@ -152,10 +152,47 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 
+    @media only screen and (max-width: 749px) {
+
+        thead {display: none; }
+
+        tr {
+            display: block;
+            border-top: none;
+            border-bottom: 1px solid $primary-font-color;
+            margin-bottom: 20px;
+        }
+
+        th,td {
+            display: block;
+            text-align: right;
+            padding: 10px;
+            margin: 0; 
+        }
+
+        td:before {
+            content: attr(data-label);
+            float: left;
+            text-align: center;
+            font-size: 14px;
+            padding-right: 10px; 
+        }
+
+        .small--hide {
+            @include hide-before-750
+        }
+    }
+    //   .responsive-table__row {
+
+    @media (min-width: 750px) {
+        th, td {
+            text-align: left;
+        }
+    }
+
     th, td {
         padding: 10px;
         border: 1px solid $primary-font-color;
-        text-align: left;
         text-transform: capitalize;
 
         a {
