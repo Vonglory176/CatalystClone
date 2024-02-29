@@ -160,16 +160,18 @@ TODO
 -------------------
 Prime Features!
 ------
-Notifications
-"Back to" banners
-Captcha?
+Captcha
 Guest Checkout
+"Back to" banners ?
 
 Do Right now!
 ------
+useMemo()?
+
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
 Auto-Checkout/Checkout is insane and needs cleanup
 
+BUG: Notification occasionally does not stick to top in mobile?
 MINOR: Login page routing screws with history due to inital Account page routing
 Only get fresh account details when needed given the new setup?
 Find other places to use load screen?
@@ -198,10 +200,13 @@ ACCOUNT ------------------------------------
 BUG: Async hiccups after creating account. Watch console/redirects (Redirection also has some momentary confusion)
 MINOR: Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
 
+Standardize and cleanup html/scss naming w/Orders (MESSY)
+Figure out what more to do with "Account Details"
+Get Captcha for Login/Register?
 Method of getting product-link in orderHistory is scuffed, maybe fix? (USE STRIPE METADATA)
 Standardize styling by expanding on layout stuff?
 Implement password recovery
-Finish styling (MOBILE VIEW FOR ORDER TABLE)
+Finish styling
 
 Change password styling?
 Membership page? (Very likely not)
@@ -214,6 +219,8 @@ ADD PROPER FILE TYPE TO DOWNLOAD
 ORDERS/HISTORY ------------------------------------
 BUG: Reverse load order to be list most recent orders first (Maybe allow sorting?)
 MINOR: If an order (Not the most recent) is deleted from the database, creating a new one overwrites the most recent
+
+Standardize and cleanup html/scss naming w/Orders
 Add max-height and scrollbar to order details/history
 Display Customer-Instructions?
 
@@ -277,17 +284,10 @@ Disable category buttons if none to display?
 Have a Universe filter on "collection/all" page?
 Make page buttons set view to page top?
 
-ACCOUNT ------------------------------------
-Figure out what more to do with "Account Details"
-Get Captcha for Login/Register?
-
 NOTIFICATIONS/ERROR HANDLING ------------------------------------
 Add errors to store/products/card/result if not found?
-Add general notification stuff (Added to cart, signed-in/out etc)
-Create alert for product/price changes (Would need to be monitored in state)
-Alert for Product Filter Tags resetting after Filter Type change?
 
-Figure out some kind of way to update/alert to product/cart changes on cart/checkout page
+Figure out some kind of way to update/alert to product/cart changes on cart/checkout page ?
 (Always alerts initially in regard to things like stock/quantity, both on product/cart page)
 (Cart page has an "Update Cart" button)
 
@@ -320,8 +320,7 @@ Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
 Load products into Featured-Containers in home? (Just use ID's for the moment)
 
 HOME ------------------------------------
-Set standard size to colection-buttons (Still small issue being short height when none have loaded)
-Add btn class to homepage-mailform?
+Set standard size to collection-buttons (Still small issue being short height when none have loaded)
 Add images to slideshow?
 Slideshow image load in clips bottom border
 
@@ -344,8 +343,9 @@ Add more products to ProductList ?
 Add stock numbers to products ?
 
 HEADER ------------------------------------
-BUG: Sticky header buttons pop-in/out when changing pages 
+BUG: Sticky header pops in on first render
 
+Create close button for notification
 Make Universe button a link when focused
 
 Add a drop down notification banner for general use?
@@ -361,8 +361,6 @@ FOOTER ------------------------------------
 Fix icon link spacing?
 Add classes to footer links?
 -------------------
-
-
 
 
 PLATFORM TESTING ------------------
