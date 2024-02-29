@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, useSearchParams } from "react-router-dom"
-import { cartActions } from "../store/cart-slice"
+import { addToCartAsync } from "../store/cart-slice"
 import ReactImageGallery from "react-image-gallery"
 
 import placeholderImage from "../assets/placeholder.png"
@@ -141,7 +141,7 @@ export default function Products() {
             //     selectedVariant.discountedPrice),
         }
 
-        dispatch(cartActions.addToCart(productToAdd))
+        dispatch(addToCartAsync(productToAdd)) //addToCart
     }
 
     const handleInputChange = (event) => {
