@@ -1,13 +1,23 @@
-import { useState } from "react"
+import { useState, createRef } from "react"
 import { useLocation, NavLink } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { loginWithUserDetails } from "../store/auth-slice.jsx"
+import ReCAPTCHA from "react-google-recaptcha"
 import { getAuth} from "firebase/auth"
 const auth = getAuth()
 
 export default function Login() {
     const dispatch = useDispatch()
     const location = useLocation()
+    
+    // const [captchaDisplay, setCaptchaDisplay] = useState(false)
+    // const recaptchaRef = createRef()
+
+    //Verify w/ Captcha
+    // const handleCaptchaVerify = () => {
+    //     e.preventDefault()
+    //     setCaptchaDisplay(true)
+    // }
     
     //Login trigger
     const handleAccountLoginSubmit = async (e) => {
@@ -23,7 +33,6 @@ export default function Login() {
     const [passwordRecovery, setPasswordRecovery] = useState(false)
     const togglePasswordRecovery = () => setPasswordRecovery((r) => !r)
 
-
     let loginDiv = (
         <form method="post" action="/account" id="Customer-Login" className="customerForm" onSubmit={handleAccountLoginSubmit}>
             <h1>{location.state?.message || "Login"}</h1>
@@ -31,6 +40,7 @@ export default function Login() {
             <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
         
             <p><input type="submit" className="btn" value={"Sign In"}/></p>
+            {/* <p><input type="button" className="btn" value={"Sign In"}/></p> */}
 
             <a onClick={togglePasswordRecovery}>Forgot your password?</a>
             <NavLink to={"/account/register"} title="Create an account" state={{...location.state}} replace>Create account</NavLink>
