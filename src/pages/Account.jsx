@@ -29,16 +29,16 @@ export default function Account() {
     // <img src={loaderGif} className="loading-gif" alt="Loading..." />
 
     return (
-        <div id="Account-Container">
+        <div id="Account-Details">
             <h1 className="page-title">My Account</h1>
 
             {!doneLoading && <LoadingScreen/>}
             
-            <div className="content-wrapper">
+            <div id="Account-Details__Wrapper">
 
-                <div id="Account-Details__Main-container" className="content-block">
+                <div id="Account-Details__Main-Container" className="content-block">
                     <p className="account__continue">
-                        <Link to={"/account/downloads"} className={"btn"} title="View your downloadable files">My Downloadable Files</Link> {/* Note "All" */}
+                        <Link to={"/account/downloads"} className={"btn button-link"} title="View your downloadable files">My Downloadable Files</Link> {/* Note "All" */}
                     </p>
                     {/* <p className="account__continue">
                         <Link to={"/"} className={"btn"}>Manage My Membership</Link>
