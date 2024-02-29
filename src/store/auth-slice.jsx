@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { ref, get, set, update, remove, getDatabase } from "firebase/database"
 import { getAuth, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import { showAndHideNotification } from './ui-slice' //uiActions
 import { fetchUserCountry } from "../hooks/getUserCountry"
 
 import firebaseApp from '/functions/firebaseConfig'
@@ -59,6 +60,13 @@ export const loginWithUserDetails = createAsyncThunk(
         }
         catch (error) {
             console.error('Login failed:', error.message) //error.code
+
+            // Create an outcome notification
+            thunkAPI.dispatch(showAndHideNotification({
+                message: 'Incorrect email or password.',
+                type: 'error'
+            }))
+
             return thunkAPI.rejectWithValue(error.message)
         }
     }
@@ -109,6 +117,13 @@ export const createNewAccount = createAsyncThunk(
         }
         catch (error) {
             console.error('Registration failed:', error.code, error.message) //error.code
+
+            // Create an outcome notification
+            thunkAPI.dispatch(showAndHideNotification({
+                message: 'This email address is already associated with an account.',
+                type: 'error'
+            }))
+
             return thunkAPI.rejectWithValue(error.message)
         }
     }
