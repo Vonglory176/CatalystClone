@@ -1,6 +1,41 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { ref, set, get, child, update, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+import { showAndHideNotification } from './ui-slice' //uiActions
 // import db from '../firebase';
+
+export const addToCartAsync = createAsyncThunk(
+    'cart/addToCartAsync',
+    async (item, thunkAPI) => {
+        
+        try {
+            // Add item to Cart
+            thunkAPI.dispatch(cartActions.addToCart(item))
+
+            // Create an outcome notification
+            thunkAPI.dispatch(showAndHideNotification({
+                message: 'Item added to cart!',
+                linkMessage: 'View your cart and checkout',
+                link: '/cart',
+                type: 'success'
+            }))
+        } catch (error) {
+            // Handle any errors that occur during the add to cart process
+            console.error('Failed to add item to cart:', error)
+
+            // Dispatch a failure notification
+            thunkAPI.dispatch(showAndHideNotification({
+                message: 'Failed to add item to cart. Please try again.',
+                type: 'error'
+            }))
+
+            // Optionally, you can return a rejected action with a custom error message or object
+            // return thunkAPI.rejectWithValue('Failed to add item to cart')
+        }
+  
+        // Optionally return something to handle in extraReducers
+        return item
+    }
+  )
 
 //(Reducers specify how the application's state changes in response to actions sent to the store.)
 const cartSlice = createSlice({
@@ -12,9 +47,7 @@ const cartSlice = createSlice({
     // cartTotalPrice: 0
   },
   reducers: {
-    addToCart(state,action) {
-        state.cartChanged = true //For later cart/account use
-        
+    addToCart(state,action) {        
         const newItem = action.payload
         console.log(newItem)
 
@@ -22,29 +55,34 @@ const cartSlice = createSlice({
         const existingItem = state.cartItemList.find(item => item.productId === newItem.productId && item.variantId === newItem.variantId)
         // console.log(existingItem)
 
-        if (existingItem) {
-            existingItem.quantity += newItem.quantity
-            // existingItem.totalPrice += newItem.price
+        //Update item if already in cart
+        try {
+            if (existingItem) {
+                existingItem.quantity += newItem.quantity
+                // existingItem.totalPrice += newItem.price
+            }
+            else {
+                //Push new item if not already in cart
+                state.cartItemList.push ({
+                    productId: newItem.productId,
+                    variantId: newItem.variantId,
+                    stripeId: newItem.stripeId,
+                    isDigital: newItem.isDigital,
+                    isPhysical: newItem.isPhysical,
+                    quantity: newItem.quantity,
+                    // productName: newItem.productname,
+                    // variantName: newItem.variantname,
+                    // price: newItem.price,
+                    // totalPrice: newItem.price,
+                })
+            }
+            // return true
+
+        } catch (error) {
+            console.error(error)
+            // return false
         }
-        else {
-            state.cartItemList.push ({
-                productId: newItem.productId,
-                variantId: newItem.variantId,
-                stripeId: newItem.stripeId,
-                isDigital: newItem.isDigital,
-                isPhysical: newItem.isPhysical,
-                quantity: newItem.quantity,
-                // productName: newItem.productname,
-                // variantName: newItem.variantname,
-                // price: newItem.price,
-                // totalPrice: newItem.price,
-            })
-        }
-        // state.totalQuantity += newItem.quantity
-        
-        /*To fully read and log the data of an array within a Redux state that is managed by Redux Toolkit (and thus potentially wrapped in a Proxy due to Immer), you should convert the Proxies to plain JavaScript objects or arrays. This can be done by mapping over the array and copying each item. Here's the best method to do this:*/
-        console.log(state.cartItemList.map(item => ({ ...item })));
-        // console.log(state.totalQuantity)
+        // console.log(state.cartItemList.map(item => ({ ...item })))
     },
     removeFromCart(state,action) {
         state.cartChanged = true //For later cart/account use
@@ -76,6 +114,27 @@ const cartSlice = createSlice({
 
     // }
   },
+
+//   extraReducers: (builder) => { //For post action changes
+//     builder       
+
+// //// ACCOUNT RETRIEVAL //////////////////////////////////////////////////////////////////////////////
+
+//     //Retrieval Success
+//     .addCase(addToCart.fulfilled, (state, action) => {
+//         console.log(action.payload)
+//         if (action.payload !== null) {
+            
+//         }
+//     })
+//     //Retrieval Failure
+//     .addCase(addToCart.rejected, (state, action) => {
+//         state.error = action.error.message
+//         state.status = 'Account fetch failed'
+//         console.error(state.error)
+//     })
+
+//     },
 });
 
 
