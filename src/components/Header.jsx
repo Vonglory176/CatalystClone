@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom"
 
 export default function Header() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
+    const notification = useSelector(state => state.ui.notification)
     const location = useLocation()
 
     //Offcanvas/Sidebar
@@ -22,9 +23,16 @@ export default function Header() {
     const cartItems = useSelector(state => state.cart.cartItemList)
 
     //Sticky-Header 
-    const [ref, inView] = useInView({threshold: 0}) //Observer
+    const [ref, inView, entry] = useInView({threshold: 0}) //Observer
     const [isWideViewport, setIsWideViewport] = useState(window.innerWidth >= 750)
     const [isSticky, setIsSticky] = useState(false)
+    const [isInViewInitialized, setIsInViewInitialized] = useState(false)
+
+    useEffect(() => {
+        if (entry) { // Once the entry is available, it means useInView has an initial value
+            setIsInViewInitialized(true)
+        }
+    }, [entry]) // Depend on entry to set the flag
 
     // Update isWideViewport when the window is resized
     useEffect(() => {
@@ -79,14 +87,23 @@ export default function Header() {
             {/* Header lower */}
             <div className="header__lower-wrapper" ref={ref}>
                 {/* Sticky Nav */}
-                <div className={`header__lower ${inView || !isSticky ? '' : 'isSticky'}`}>
+                <div className={`header__lower ${inView || !isSticky ? '' : 'isSticky'}`} style={{borderBottom: notification.open ? "none" : ""}}>
 
                     {/* Notification Banner */}
-                    <div id="notification-banner" className="header__notification header__notification-success isActive">
+                    <div id="notification-banner" className={`header__notification header__notification-${notification?.type === "success"? "success" : "error"} ${notification.open? "isActive" : ""}`}> {/* ${notification? "isActive" : ""} */}
                         <div className="header__notification__inner">
-                        <Link to="/cart" className="header__notification__link">
-                            <span className="header__notification__message">THIS IS A NOTIFICATION !!</span>
-                        </Link>
+
+                            {notification.link? <Link to={notification.link} className="header__notification__link">
+                                    <span className="header__notification__message">
+                                        {notification.message} &nbsp; 
+                                        <span className="header__notification__message-link">{notification.linkMessage}</span>
+                                    </span>
+                                </Link>
+
+                                :
+
+                                <p className="header__notification__message">{notification.message}</p>
+                            }
                         </div>
                     </div>
 
@@ -107,19 +124,20 @@ export default function Header() {
                             {/* )} */}
                         </div>
 
-                        {inView? //Determining what buttons to have
+                        {isInViewInitialized && (inView? //Determining what buttons to have
 
                         <div className="header__lower-nav-links">
                             <NavLink to={"/account"} className={"account-link"} title={isLoggedIn? "View your account" : "Log into or create an account"} replace>Account</NavLink>
                             {isLoggedIn && <NavLink to={"/account/logout"} state={{ from: location.pathname + location.search }} title="Logout the current User" className={"logout-link"}>Log Out</NavLink>}
                         </div>
 
-                        : 
-                        
+                        :
+
                         <div className="store-btns">
                             {searchbar}
                             {cart}
-                        </div>}
+                        </div>
+                        )}
                     </nav>
                 </div>
             </div>

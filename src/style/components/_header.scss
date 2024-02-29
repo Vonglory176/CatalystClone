@@ -92,24 +92,28 @@
             position: fixed;
             width: 100%; 
             transition: all .35s cubic-bezier(.33,.59,.14,1);
-
+            
             @media (max-width:749px) {
                 top: 0;
             }
             @media (min-width:750px) {   
-                top: 0;    
-                background-color: $accent-color;
-                border-bottom: 5px solid $secondary-color;            
+                top: 0;
+
+                .header__lower-nav {
+                    position: relative;
+                    background-color: $accent-color;
+                    border-bottom: 5px solid $secondary-color;      
+                }      
             }
         }
     }
 
     &__notification {
-        position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
+        position: absolute;
         left: 0;
         right: 0;
         bottom: 0;
@@ -120,26 +124,36 @@
             background-color: $secondary-color;
             &:hover {background-color: $secondary-hover-color;}
         }
-        &-failure {
+        &-error {
             background-color: $sold-out-color;
             &:hover {background-color: $badge-color;}
         }
         
         &__inner {
+            opacity: 0;
             height: 0;
             transition: all .35s cubic-bezier(.33,.59,.14,1);
             color: $secondary-font-color;
             
-            a {
+            & > a, & > p {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                
                 position: absolute;
                 top: 0;
                 bottom: 0;
                 left: 0;
                 right: 0;
+                margin: 0;
+                padding: 0px 5px;
+
+                font-weight: 700;
                 color: $secondary-font-color;
+
+                .header__notification__message-link {
+                    text-decoration: underline;
+                }
             }
 
         }
@@ -148,6 +162,7 @@
             bottom: -59.25px;
 
             .header__notification__inner {
+                opacity: 1;
                 height: 59.25px !important;
             }
         }
