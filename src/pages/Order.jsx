@@ -68,7 +68,7 @@ export default function OrderDetails() {
                         <td data-label="SKU">{item.id}</td>
                         <td data-label="Price">{translatePrice(item.amount_subtotal)}</td>
                         <td data-label="Quantity">{item.quantity}</td>
-                        <td data-label="Total">{translatePrice(item.amount_total)}</td>
+                        <td data-label="Total" >{translatePrice(item.amount_total)}</td>
                     </tr>
                 )
             })
@@ -76,84 +76,99 @@ export default function OrderDetails() {
     }
 
     return (
-        <div id='OrderDetails-Container'>
-            <h1>{location.pathname === "/cart/success"? "Thank you for your purchase!" : "My Account"}</h1>
+        <div id='Order-Details-Container'>
             {orderDetails? 
                 <div className='order-details'>
+                    <h1>{location.pathname === "/cart/success"? "Thank you for your purchase!" : "My Account"}</h1>
 
-                    <div className="order-details__main-container">
-                        {/* 'IF DOWNLOADABLE FILES' CODE HERE */}
-                        {orderDetails.metadata.digitalItems && <Link to={"/account/downloads"} className={"btn"} title="View your downloadable files">My Downloadable Files</Link>} {/* Note "All" */}
+                    <div className='order-details__wrapper'>
 
-                        <h2 className="order-details__number">{orderDetails.metadata.orderId}</h2>
-                        <p className='order-details__time'>{displayDateTime(orderDetails.created)}</p>
+                        <div className="order-details__main-container">
+                            {/* 'IF DOWNLOADABLE FILES' CODE HERE */}
+                            {orderDetails.metadata.digitalItems && <Link to={"/account/downloads"} className={"button-link btn"} title="View your downloadable files">My Downloadable Files</Link>} {/* Note "All" */}
 
-                        <table className="order-details__table">
-                            <thead>
-                                <tr>
-                                <th>Product</th>
-                                <th>SKU</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                </tr>
-                            </thead>
+                            <h2 className="order-details__number">{orderDetails.metadata.orderId}</h2>
+                            <p className='order-details__time'>{displayDateTime(orderDetails.created)}</p>
 
-                            <tbody>
-                                {printProductRows()}
-                            </tbody>
+                            <table className="order-details__table">
+                                <thead>
+                                    <tr>
+                                    <th>Product</th>
+                                    <th>SKU</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    </tr>
+                                </thead>
 
-                            <tfoot>
-                                <tr className="responsive-table__row">
-                                <td colSpan="4" className="small--hide">Subtotal</td>
-                                <td data-label="Subtotal">{translatePrice(orderDetails.amount_subtotal)}</td>
-                                </tr>
+                                <tbody>
+                                    {printProductRows()}
+                                </tbody>
 
-                                <tr>
-                                <td colSpan="4" className="small--hide"><strong>Total</strong></td>
-                                <td data-label="Total"><strong>{translatePrice(orderDetails.amount_total)} USD</strong></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+                                <tfoot>
+                                    <tr className="responsive-table__row">
+                                    <td colSpan="4" className="small--hide">Subtotal</td>
+                                    <td data-label="Subtotal">{translatePrice(orderDetails.amount_subtotal)}</td>
+                                    </tr>
 
-                    <div className="order-details__address-container">
-                        {/* BILLING */}
-                        <h2>Billing Address</h2>
-                        <p><strong>Payment Status:</strong> {orderDetails.payment_status}</p>
+                                    <tr>
+                                    <td colSpan="4" className="small--hide"><strong>Total</strong></td>
+                                    <td data-label="Total"><strong>{translatePrice(orderDetails.amount_total)} USD</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
 
-                        <p>
-                            {orderDetails.customer_details.name} {orderDetails.customer_details.name && <br/>}
-                            {/* {orderDetails.customer_details.address.company} <br/> */}
-                            {orderDetails.customer_details.address.line1} {orderDetails.customer_details.address.line1 && <br/>} 
-                            {/* {orderDetails.customer_details.address.line2} <br/> */}
-                            {orderDetails.customer_details.address.city} {orderDetails.customer_details.address.state} {orderDetails.customer_details.address.postal_code} <br/>
-                            {orderDetails.customer_details.address.country} {orderDetails.customer_details.address.country && <br/>}
-                        </p>
+                        <div className="order-details__address-container">
+                            {/* BILLING */}
+                            <h2>Billing Address</h2>
+                            <p><strong>Payment Status:</strong> {orderDetails.payment_status}</p>
 
-                        {/* SHIPPING */}
-                        <h2>Shipping Address</h2>
-                        <p><strong>Fufillment Status:</strong> {orderDetails.status}</p>
-
-                        {orderDetails.shipping_details && //If shipping details exist
                             <p>
-                                {orderDetails.shipping_details.name} <br/>
-                                {/* {orderDetails.shipping_details.address.company} <br/> */}
-                                {orderDetails.shipping_details.address.line1} <br/>
-                                {/* {orderDetails.shipping_details.address.line2} <br/> */}
-                                {orderDetails.shipping_details.address.city} {orderDetails.shipping_details.address.state} {orderDetails.shipping_details.address.postal_code} <br/>
-                                {orderDetails.shipping_details.address.country} <br/>
+                                {orderDetails.customer_details.name} {orderDetails.customer_details.name && <br/>}
+                                {/* {orderDetails.customer_details.address.company} <br/> */}
+                                {orderDetails.customer_details.address.line1} {orderDetails.customer_details.address.line1 && <br/>} 
+                                {/* {orderDetails.customer_details.address.line2} <br/> */}
+                                {orderDetails.customer_details.address.city} {orderDetails.customer_details.address.state} {orderDetails.customer_details.address.postal_code} <br/>
+                                {orderDetails.customer_details.address.country} {orderDetails.customer_details.address.country && <br/>}
                             </p>
-                        }
 
+                            {/* SHIPPING */}
+                            <h2>Shipping Address</h2>
+                            <p><strong>Fufillment Status:</strong> {orderDetails.status}</p>
+
+                            {orderDetails.shipping_details && //If shipping details exist
+                                <p>
+                                    {orderDetails.shipping_details.name} <br/>
+                                    {/* {orderDetails.shipping_details.address.company} <br/> */}
+                                    {orderDetails.shipping_details.address.line1} <br/>
+                                    {/* {orderDetails.shipping_details.address.line2} <br/> */}
+                                    {orderDetails.shipping_details.address.city} {orderDetails.shipping_details.address.state} {orderDetails.shipping_details.address.postal_code} <br/>
+                                    {orderDetails.shipping_details.address.country} <br/>
+                                </p>
+                            }
+
+                        </div>
                     </div>
                 </div>
                 :
                 (orderDetails === null? 
-                    <p><strong>Error 404:</strong> Order could not be found</p> 
+                    <div className="order-notFound"> {/* THIS NEEDS TO TURN INTO A CONDITIONAL */}
+                        <h1>Order not found</h1>
+                        <p className="cart-notFound__message">The order you are looking for could not be found. Please check the URL and try again.</p>
+                        <hr />
+                        <p className="cart-notFound__continue">
+                            {isLoggedIn? 
+                                <Link to={"/account"} className={"btn"} title="View your Account">View Account</Link>
+                                :
+                                <Link to={"/"} className={"btn"} title="Return home">Return home</Link>
+                            }
+                        </p>
+                    </div>
+                    // <p><strong>Error 404:</strong> Order could not be found</p> 
                     :                     
                     <LoadingScreen/> // <p>Loading your order...</p>
-                )                
+                )
             }
         </div>
     )
