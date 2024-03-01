@@ -21,18 +21,10 @@ export default function Collections() {
 
     //For content determination
     const {id} = useParams()
-    const [searchParams, setSearchParams] = useSearchParams({
-        // sort_by:"name",
-        // page: 1,
-        // sort_order:"",
-        // universe: id,
-        // types:[],
-        // tags:[],
-    })
+    const [searchParams, setSearchParams] = useSearchParams()
 
     //Redux Product-List from Firebase
     const productList = useSelector(state => state.products.productList)
-    // const status = useSelector(state => state.products.status)
     
     //Filters & Filtered Product-List
     const [localProductList, setLocalProductList] = useState()
@@ -45,7 +37,6 @@ export default function Collections() {
     
     const replaceSearchParams = (newParams) => {
         // console.log(Array.from(searchParams.entries()));
-        console.log(newParams);
         const newSearch = new URLSearchParams({
             ...Object.fromEntries(searchParams),
             ...newParams,
@@ -64,7 +55,7 @@ export default function Collections() {
     const [fuse, setFuse] = useState(null)
     
     useEffect(() => {
-        if (productList && searchParams.get('q')) { //If there's a url search-query
+        if (productList) { //If there's a url search-query
 
             const searchQueryOptions = {
                 keys: ['name','universe','description'],
@@ -83,51 +74,49 @@ export default function Collections() {
 
     //PAGE INITIALIZATION
     useEffect(() => {
-        let tempProductList = []
-        let typeInstanceList = {}
-        let tagInstanceList = {}
-        
-        const categorySearchParams = searchParams.get('categories')? searchParams.get('categories'): "all-products"
-        setCurrentCategory(categorySearchParams)
+        if (productList) {
 
-        const typeSearchParams = searchParams.get('types')? JSON.parse(searchParams.get('types')): []
-        const tagSearchParams = searchParams.get('tags')? JSON.parse(searchParams.get('tags')): []
-
-        //Product Setup
-        const processProduct = (p) => {
-            if (
-                categorySearchParams === "all-products" || 
-                (categorySearchParams === "on-sale" && p.isOnSale) ||
-                (categorySearchParams === "getting-started" && p.isGettingStarted) ||
-                (categorySearchParams === "free-downloads" && p.isFree) ||
-                (categorySearchParams === "new-arrivals" && p.isNewArrival)
-            ) {
-                if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
-                    if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
-                        tempProductList.push(<ProductResult key={p.id} product={p}/>)
-                    }
+            let tempProductList = []
+            let typeInstanceList = {}
+            let tagInstanceList = {}
             
-                    if (Array.isArray(p.tags)) {
-                        for (let tag of p.tags) {
-                            tagInstanceList[tag] = (tagInstanceList[tag] || 0) + 1
+            const categorySearchParams = searchParams.get('categories')? searchParams.get('categories'): "all-products"
+            setCurrentCategory(categorySearchParams)
+
+            const typeSearchParams = searchParams.get('types')? JSON.parse(searchParams.get('types')): []
+            const tagSearchParams = searchParams.get('tags')? JSON.parse(searchParams.get('tags')): []
+
+            //Product Setup
+            const processProduct = (p) => {
+                if (
+                    categorySearchParams === "all-products" || 
+                    (categorySearchParams === "on-sale" && p.isOnSale) ||
+                    (categorySearchParams === "getting-started" && p.isGettingStarted) ||
+                    (categorySearchParams === "free-downloads" && p.isFree) ||
+                    (categorySearchParams === "new-arrivals" && p.isNewArrival)
+                ) {
+                    if (typeSearchParams.length === 0 || typeSearchParams.includes(p.type)) {
+                        if (tagSearchParams.length === 0 || (p.tags && tagSearchParams.some(tag => p.tags.includes(tag)))) {
+                            tempProductList.push(<ProductResult key={p.id} product={p}/>)
                         }
-                    }
-                }        
-                typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
+                
+                        if (Array.isArray(p.tags)) {
+                            for (let tag of p.tags) {
+                                tagInstanceList[tag] = (tagInstanceList[tag] || 0) + 1
+                            }
+                        }
+                    }        
+                    typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
+                }
             }
-        }
 
-        //Getting and printing page-contents
-        const searchQuery = searchParams.get('q')
-        console.log(searchQuery)
-
-        if (productList && (!searchQuery || (searchQuery && fuse))) { //Second half is search specific
-            console.log(id)
+            //Getting and printing page-contents
+            const searchQuery = searchParams.get('q')
 
             //Loading products via query
             if (searchQuery && fuse) { 
                 const searchResults = searchQuery? fuse.search(searchQuery) : ''
-                console.log(searchResults)
+                // console.log(searchResults)
                 searchResults.forEach(i => processProduct(i.item))
             }
             //Loading products normally
@@ -159,7 +148,7 @@ export default function Collections() {
             handleSortResults({target: {value: sortBy}}, tempProductList) //List is sorted & printed here
             // setLocalProductList(tempProductList)
         }
-    }, [id, productList, searchParams, fuse]) //searchParams.get("tags"), searchParams.get("types")
+    }, [id, productList, searchParams]) //searchParams.get("tags"), searchParams.get("types")
 
     //Sorting Use
     const handleSortResults = useCallback((e, listToSort) => {
@@ -168,7 +157,7 @@ export default function Collections() {
         const [method, order] = sortBy.split(' ') //sortBy? sortBy.split(' ') : ["name", ""] // "name desc" becomes ["name", "desc"]
     
         let tempProductList = listToSort? [...listToSort] : [...localProductList]
-        console.log(tempProductList)
+        // console.log(tempProductList)
 
         if (method !== "relevance") {
             tempProductList.sort((a, b) => {
