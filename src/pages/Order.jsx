@@ -65,7 +65,7 @@ export default function OrderDetails() {
                             {/* <div className="note">Fulfilled February 22, 2024<div><div></div></div></div> */}
                         
                         </td>
-                        <td data-label="SKU">{item.id}</td>
+                        {/* <td data-label="SKU">{item.id}</td> */}
                         <td data-label="Price">{translatePrice(item.amount_subtotal)}</td>
                         <td data-label="Quantity">{item.quantity}</td>
                         <td data-label="Total" >{translatePrice(item.amount_total)}</td>
@@ -94,7 +94,7 @@ export default function OrderDetails() {
                                 <thead>
                                     <tr>
                                     <th>Product</th>
-                                    <th>SKU</th>
+                                    {/* <th>SKU</th> */}
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
@@ -107,16 +107,17 @@ export default function OrderDetails() {
 
                                 <tfoot>
                                     <tr className="responsive-table__row">
-                                    <td colSpan="4" className="small--hide">Subtotal</td>
+                                    <td colSpan="3" className="small--hide">Subtotal</td>
                                     <td data-label="Subtotal">{translatePrice(orderDetails.amount_subtotal)}</td>
                                     </tr>
 
                                     <tr>
-                                    <td colSpan="4" className="small--hide"><strong>Total</strong></td>
+                                    <td colSpan="3" className="small--hide"><strong>Total</strong></td>
                                     <td data-label="Total"><strong>{translatePrice(orderDetails.amount_total)} USD</strong></td>
                                     </tr>
                                 </tfoot>
                             </table>
+                            {orderDetails.metadata.customerInstructions && <p className='order-details__special-instructions'><strong>Special Instructions: </strong>{orderDetails.metadata.customerInstructions}</p>}
                         </div>
 
                         <div className="order-details__address-container">
@@ -144,7 +145,7 @@ export default function OrderDetails() {
                                     {orderDetails.shipping_details.address.line1} <br/>
                                     {/* {orderDetails.shipping_details.address.line2} <br/> */}
                                     {orderDetails.shipping_details.address.city} {orderDetails.shipping_details.address.state} {orderDetails.shipping_details.address.postal_code} <br/>
-                                    {orderDetails.shipping_details.address.country} <br/>
+                                    {orderDetails.shipping_details.address.country} <br/><br/>
                                 </p>
                             }
 
