@@ -38,5 +38,19 @@
                 }
             }
         }
+
+        &__detail-wrapper {
+            a {
+                color: $secondary-color;
+                &:hover {
+                    color: $secondary-hover-color;
+                }
+            }
+        }
+    }
+
+    .downloads-notFound {
+        padding: 120px 0;
+        text-align: center;
     }
 }
