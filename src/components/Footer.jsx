@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Footer() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
@@ -16,7 +16,7 @@ export default function Footer() {
                                     <Link to={"/cart"} className={""}>Cart</Link>
                                 </li>
                                 <li className="footer__list-item">
-                                    <Link to={"/account"} className={""}>My Account</Link>
+                                    <NavLink to={isLoggedIn? "/account" : "/account/login"} className={"account-link"} title={isLoggedIn? "View your account" : "Log into or create an account"}>My Account</NavLink>
                                 </li>
                                 <li className="footer__list-item">
                                     {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>}
