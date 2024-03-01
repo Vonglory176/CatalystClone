@@ -109,25 +109,23 @@ export default function Header() {
 
                     <nav className="header__lower-nav">
                         <div className="universe-dropdown dropdown">
-                            {/* <Link to={"/collections/battletech"} reloadDocument>
-                                <button className="header__sticky-dropdown-button btn">Universe</button>
-                            </Link> */}
-
-                            <button className="universe-dropdown__button dropdown-button">Universe<i className="fa-solid fa-caret-down"></i></button>
-                            {/* {isFocused && ( */}
-                                <div className="universe-dropdown__content dropdown-content">
-                                    <NavLink to={"/collections/all"}><h1>UNIVERSE</h1></NavLink>
-                                    <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}}>Battletech</NavLink>
-                                    <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}}>Shadowrun</NavLink>
-                                    <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}}>Other</NavLink>
-                                </div>
-                            {/* )} */}
+                            <button className="universe-dropdown__button dropdown-button">
+                                Universe<i className="fa-solid fa-caret-down"></i>
+                                <NavLink to={"/collections/all"} className={`universe-dropdown__button-link ${({isActive}) => {return isActive? "active-link" : ""}}`}/>
+                            </button>
+                            
+                            <div className="universe-dropdown__content dropdown-content">
+                                <h1>UNIVERSE</h1>
+                                <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}}>Battletech</NavLink>
+                                <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}}>Shadowrun</NavLink>
+                                <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}}>Other</NavLink>
+                            </div>
                         </div>
 
                         {isInViewInitialized && (inView? //Determining what buttons to have
 
                         <div className="header__lower-nav-links">
-                            <NavLink to={"/account"} className={"account-link"} title={isLoggedIn? "View your account" : "Log into or create an account"} replace>Account</NavLink>
+                            <NavLink to={isLoggedIn? "/account" : "/account/login"} className={"account-link"} title={isLoggedIn? "View your account" : "Log into or create an account"}>Account</NavLink>
                             {isLoggedIn && <NavLink to={"/account/logout"} state={{ from: location.pathname + location.search }} title="Logout the current User" className={"logout-link"}>Log Out</NavLink>}
                         </div>
 
@@ -155,7 +153,7 @@ export default function Header() {
                     <div className="offcanvas__universe">
                         <Link to={"/collections/all"} className={"offcanvas-link"}>Universe</Link>
                         <button className="offcanvas__universe-button" onClick={toggleUniverseSubMenu}>
-                            <i className="fa-solid fa-plus fa-2x"></i>
+                            <i className={`fa-solid fa-plus fa-2x ${!showUniverseSubMenu? "rotateIcon" : ""}`}></i>
                         </button>
                     </div>
 
@@ -170,7 +168,7 @@ export default function Header() {
                     </div>
                     
                     {/* <Link to={"/account"} className={"offcanvas-link"}>Account</Link> */}
-                    <NavLink to={"/account"} className={"offcanvas-link"} title={isLoggedIn? "View your account" : "Log into or create an account"} replace>Account</NavLink>
+                    <NavLink to={isLoggedIn? "/account" : "/account/login"} className={"offcanvas-link"} title={isLoggedIn? "View your account" : "Log into or create an account"}>Account</NavLink>
                     {isLoggedIn && <Link to={"/account/logout"} className={"offcanvas-link"}>Log Out</Link>}
 
                 </Offcanvas.Body>
