@@ -17,9 +17,70 @@
             //     padding-left: 20px;
             // }
 
-            .account__continue {
-                margin-bottom: 20px;
+        @media (min-width: 750px) {
+            .order-history {
+                display: flex; // Ensures that overflow applies to tbody
+                flex-direction: column;
+                overflow: hidden; // Prevents the table from overflowing its container
+    
+                thead {
+                    display: table;
+                    width: calc(100% - 1em); // Adjust based on scrollbar width to prevent layout shift
+                    position: sticky;
+                    top: 0; // Adjust if you have a specific offset
+                    z-index: 2; // Ensures thead stays on top of tbody content
+                    
+                    tr {
+                        border-top: 1px solid black;
+                        border-bottom: 1px solid black;
+                    }
+                }
+                
+                tbody {
+                    display: block;
+                    max-height: 300px; // Adjust this value to fit your design
+                    overflow-y: scroll;
+                    width: 100%;
+
+                    tr {                        
+                        border-top: none;
+                        &:not(:last-of-type) {border-bottom: 1px solid black;}
+                    }
+
+                }
+                
+                table {
+                    position: relative;
+                    width: 100%; // Ensures table fills its container
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        right: 17px;
+                        border-bottom: 1px solid black;
+                    }
+                }
+
+                tr {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+                    
+                    td, th {
+                        border-top: none;
+                        border-bottom: none;
+                        border-right: 1px solid black;
+                        &:not(:first-of-type) {border-left: none;}
+                    }
+                }
+    
+                tr, td, th {
+                    width: 100%;
+                }
             }
+        }
     }
 
     &__Secondary-Container {
@@ -27,7 +88,7 @@
 
         @media (min-width:750px) {
             padding-left: 20px;
-            margin: 0 0 0 20px;
+            // margin: 0 0 0 20px;
         }
     }
 }
