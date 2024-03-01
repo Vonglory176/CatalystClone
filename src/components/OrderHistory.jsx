@@ -24,7 +24,8 @@ export default function OrderHistory({doneLoadingCallback}) {
 
   const printOrderRows = () => {
     if (orderHistory) {
-      return orderHistory.map(item => {
+      const reversedOrderHistory = orderHistory.slice().reverse() //So orders display from new to old
+      return reversedOrderHistory.map(item => {
           return (
             <tr key={item.id}>
               <td data-label="Order"><Link to={`order?session_id=${item.metadata.sessionId}`} title={`View the details of ${item.metadata.orderId}`}>{item.metadata.orderId}</Link></td>
@@ -47,8 +48,8 @@ export default function OrderHistory({doneLoadingCallback}) {
               <tr>
                 <th>Order</th>
                 <th>Date</th>
-                <th>Payment Status</th>
-                <th>Fulfillment Status</th>
+                <th>Payment</th> {/* Payment Status */}
+                <th>Status</th> {/* Fulfillment Status */}
                 <th>Total</th>
               </tr>
             </thead>
