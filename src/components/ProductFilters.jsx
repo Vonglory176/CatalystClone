@@ -79,49 +79,52 @@ export default function Filters({ currentCategory, filterInstanceList }) {
   // }, searchParams.get('q'))
   
   return (
-    <div className="filter-list-wrapper">
-      {/* <span>Product Category</span> */}
-      <div className="category-links">
-          <NavLink 
-          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=all-products`}} 
-          className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
-          >
-              All Products
-          </NavLink>
+    <div className="filter-list-container">
 
-          <NavLink
-          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=getting-started`}}
-          className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
-          >
-              Getting Started
-          </NavLink>
+      <div className="filter-list-wrapper">
+        {/* <span>Product Category</span> */}
+        <div className="category-links">
+            <NavLink 
+            to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=all-products`}} 
+            className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
+            >
+                All Products
+            </NavLink>
 
-          <NavLink
-          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=new-arrivals`}}
-          className={`btn ${currentCategory === "new-arrivals"? "active-link" : ""}`}
-          >
-              New Arrivals
-          </NavLink>
+            <NavLink
+            to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=getting-started`}}
+            className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
+            >
+                Getting Started
+            </NavLink>
 
-          <NavLink
-          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=on-sale`}}
-          className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
-          >
-              On Sale
-          </NavLink>
+            <NavLink
+            to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=new-arrivals`}}
+            className={`btn ${currentCategory === "new-arrivals"? "active-link" : ""}`}
+            >
+                New Arrivals
+            </NavLink>
 
-          <NavLink
-          to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=free-downloads`}}
-          className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
-          >
-              Free Downloads
-          </NavLink>
+            <NavLink
+            to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=on-sale`}}
+            className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
+            >
+                On Sale
+            </NavLink>
+
+            <NavLink
+            to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=free-downloads`}}
+            className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
+            >
+                Free Downloads
+            </NavLink>
+        </div>
+        {typeList && typeList.length > 0 && <span>Product Type</span>}
+        {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
+        {tagList && tagList.length > 0 && <span>Product Tags</span>}
+        {tagList && tagList.length > 0 &&  <ul className="tag-list">{tagList}</ul>}
       </div>
-      {typeList && typeList.length > 0 && <span>Product Type</span>}
-      {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
-      {tagList && tagList.length > 0 && <span>Product Tags</span>}
-      {tagList && tagList.length > 0 &&  <ul className="tag-list">{tagList}</ul>}
-  </div>
+    </div>
     );
   }
 
