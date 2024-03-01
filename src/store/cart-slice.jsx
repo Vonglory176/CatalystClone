@@ -58,8 +58,11 @@ const cartSlice = createSlice({
         //Update item if already in cart
         try {
             if (existingItem) {
-                existingItem.quantity += newItem.quantity
-                // existingItem.totalPrice += newItem.price
+                if (existingItem.quantity <= 100) {
+                    console.log("HERE")
+                    existingItem.quantity += newItem.quantity
+                    // existingItem.totalPrice += newItem.price
+                }
             }
             else {
                 //Push new item if not already in cart
@@ -83,6 +86,22 @@ const cartSlice = createSlice({
             // return false
         }
         // console.log(state.cartItemList.map(item => ({ ...item })))
+    },
+    updateInCart(state,action) {        
+        const newItem = action.payload
+        console.log(newItem)
+
+        //Checking if item is already in cart
+        const existingItem = state.cartItemList.find(item => item.productId === newItem.productId && item.variantId === newItem.variantId)
+
+        //Update item if already in cart
+        try {
+            if (existingItem) {
+                existingItem.quantity = newItem.quantity <= 100?  newItem.quantity : 100
+            }
+        } catch (error) {
+            console.error(error)
+        }
     },
     removeFromCart(state,action) {
         state.cartChanged = true //For later cart/account use
