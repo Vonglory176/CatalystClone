@@ -21,8 +21,13 @@ export default function Cart() {
 
     const [totalPrice, setTotalPrice] = useState(0)
 
-    const handleInputChange = (event) => {
-        // setproductQuantity(Number(event.target.value))
+    const handleInputChange = (e, productToChange) => {
+        const quantity = Number(e.target.value)
+        const updatedProduct = {...productToChange, quantity: quantity}
+        console.log(updatedProduct)
+        
+        if (quantity > 0) dispatch(cartActions.updateInCart(updatedProduct))
+        else dispatch(cartActions.removeFromCart(updatedProduct))
     }
     const handleAddQuantityChange = (productToChange) => {
         dispatch(cartActions.addToCart(productToChange))
@@ -112,7 +117,7 @@ export default function Cart() {
                             <label htmlFor="Quantity">Quantity</label>
                             <div className="quantity-selector__wrapper">
                                 <button type="button" onClick={() => handleRemoveQuantityChange({productId: productId, variantId: variantId, quantity: -1})}>-</button>
-                                <input type="number" name="Quantity" onChange={handleInputChange} value={quantity}/>
+                                <input type="number" name="Quantity" onChange={(e) => handleInputChange(e, {productId: productId, variantId: variantId})} value={quantity}/>
                                 <button type="button" onClick={() => handleAddQuantityChange({productId: productId, variantId: variantId, quantity: 1})}>+</button>
                             </div>
                         </div>
