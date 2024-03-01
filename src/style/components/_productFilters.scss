@@ -1,9 +1,15 @@
-.filter-list-wrapper {
+.filter-list-container {
     overflow: auto;
+
+    @media (min-width: 750px) {
+        width: calc(100% + 1em); // Adjust based on scrollbar width to prevent layout shift
+    }
+}
+
+.filter-list-wrapper {
     flex-grow: 1;
     padding-top: 8px;
-    border-top: 1px solid $primary-font-color;
-    border-bottom: 1px solid $primary-font-color;
+
     
     .category-links {                
         // border-bottom: 1px solid $$primary-font-color;
