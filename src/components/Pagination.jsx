@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
 export default function Pagination({resultsPerPage, localProductList, paginationCallback}) {
-    console.log("IN PAGINATION")
+    // console.log("IN PAGINATION")
     const [searchParams, setSearchParams] = useSearchParams({})
 
     const initialPage = parseInt(searchParams.get('page'))
