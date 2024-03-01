@@ -33,6 +33,17 @@
             i {color: $secondary-color;}
         }
 
+        i a {
+            display: none;
+            position: absolute;
+            display: none;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
         &:focus-within, &:focus {
             
             input {
@@ -45,6 +56,7 @@
 
             i {
                 z-index: 2;
+                a {display: block;}
             }
         }
         
