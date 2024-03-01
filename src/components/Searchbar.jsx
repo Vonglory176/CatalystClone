@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import Fuse from 'fuse.js'
 import { Link, useNavigate } from "react-router-dom"
 import ProductSearchbarResult from "./ProductSearchbarResult"
+import { NavLink } from "react-router-dom"
 
 export default function Searchbar() {
     const productList = useSelector(state => state.products.productList)
@@ -65,7 +66,7 @@ export default function Searchbar() {
                     tempSearchResultsHtml.push(ProductSearchbarResult(product))
                 }
                 tempSearchResultsHtml.push(
-                <Link to={`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`} className="searchbar-results-link">View all {searchResults.length} items</Link>
+                <NavLink to={`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`} className="searchbar-results-link">View all {searchResults.length} items</NavLink>
                 )
 
                 //Adding the "Products" header if products were found
@@ -98,7 +99,9 @@ export default function Searchbar() {
                 value={searchTerm}
                 onChange={(e) => handleSearchInputChange(e)}
                 />
-                <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg"></i>
+                <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg">
+                    <NavLink to={`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`}/>
+                </i>
             </div>
 
             <div className="searchbar-results-container">
