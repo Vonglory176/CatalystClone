@@ -3,6 +3,7 @@ import { ref, get, set, update, remove, getDatabase } from "firebase/database"
 import { getAuth, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
 import { showAndHideNotification } from './ui-slice' //uiActions
 import { fetchUserCountry } from "../hooks/getUserCountry"
+import fetchCaptchaVerification from '../fetch/fetchCaptchaVerification'
 
 import firebaseApp from '/functions/firebaseConfig'
 const auth = getAuth()
@@ -42,8 +43,14 @@ export const fetchUserDetails = createAsyncThunk(
 // ACCOUNT LOGIN
 export const loginWithUserDetails = createAsyncThunk(
     'auth/loginWithUserDetails',
-    async ( {email, password}, thunkAPI ) => {
+    async ( {email, password, token}, thunkAPI ) => {
         try {
+        //Validating ReCAPTCHA
+        console.log(token)
+            const responseCode  = await fetchCaptchaVerification(token)
+            if (responseCode !== 0) throw new Error("Failed CAPTCHA verification")
+
+        // Validating Email / Password
             if (!email || !password) throw new Error("Both an Email and Password are required")
             
             //Authenticating login details
@@ -75,9 +82,14 @@ export const loginWithUserDetails = createAsyncThunk(
 // ACCOUNT CREATION
 export const createNewAccount = createAsyncThunk(
     'auth/createNewAccount',
-    async ( {email, password, firstName, lastName}, thunkAPI ) => {
+    async ( {email, password, firstName, lastName, token}, thunkAPI ) => {
         
         try {
+        //Validating ReCAPTCHA
+            const responseCode  = await fetchCaptchaVerification(token)
+            if (responseCode !== 0) throw new Error("Failed CAPTCHA verification")
+
+        // Validating Email / Password
             if (!email || !password) throw new Error("Both an Email and Password are required")
             
             //Creating account in Firebase-Auth
