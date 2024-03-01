@@ -27,7 +27,7 @@ export default function ProductResult({product}) {
     const variantDiscountPercentage = (((variantPrice - variantDiscountPrice) / variantPrice) * 100).toFixed(0)
 
     return (
-        <Link to={`products/${productId}`} className={"product-result"}>
+        <Link to={`/products/${productId}`} className={"product-result"}>
             {isOnSale && !isFree && <div className="sale-badge badge">{variantDiscountPercentage}% off</div>}
 
             <div className="product-result__image-container">
