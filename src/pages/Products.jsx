@@ -146,15 +146,14 @@ export default function Products() {
 
     const handleInputChange = (event) => {
         const number = Number(event.target.value)
-        if (number > 0) setproductQuantity(number)
+        if (number > 100) setproductQuantity(100)
+        else if (number > 0) setproductQuantity(number)
     }
     const handleSubtractQuantity = () => {
         if (productQuantity > 1) setproductQuantity(prevQuantity => prevQuantity - 1)
-        // console.log(productQuantity)
     }
     const handleAddQuantity = () => {
-        setproductQuantity(prevQuantity => prevQuantity + 1)
-        // console.log(productQuantity)
+        if (productQuantity < 100) setproductQuantity(prevQuantity => prevQuantity + 1)
     }
 
     const viewportWidth = useViewportWidth()
