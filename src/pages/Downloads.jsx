@@ -51,9 +51,9 @@ export default function Downloads() {
                             </Link>
                         </div>
                         <div className="downloadable-item__detail-wrapper">
-                            <h3>{product.name} - PDF</h3>
+                            <Link to={productLink}><h3>{product.name} - PDF</h3></Link>
                             <p>FILE NAME HERE <br/> FILE SIZE HERE</p>
-                            <input type="button" value="Download" className='btn'/>
+                            <input type="button" value="Disabled" className='btn sold-out'/>
                         </div>
                     </div>
                 )
@@ -62,10 +62,32 @@ export default function Downloads() {
     }
 
     return (
+        // Still loading products?
+        !isDoneLoading? <LoadingScreen/> 
+        
+        :
+
+        // Are products present?
+        ownedItemDetails?
+
         <div id="Downloads-Container">
             <h1>My Account</h1>
             <h2>Your Downloads</h2>
-            {!isDoneLoading? <LoadingScreen/> : printOwnedItems()}
+            {printOwnedItems()}
+        </div>            
+        
+        :
+        
+        // No products found
+        <div id="Downloads-Container">
+            <div className="downloads-notFound">
+                <h1>No digital products found</h1>
+                <p className="downloads-notFound__message">You do not own any downloadable products.</p>
+                <hr style={{width: "100%"}}/>
+                <p className="downloads-notFound__continue">
+                        <Link to={"/account"} className={"btn"} title="View your Account">View Account</Link>
+                </p>
+            </div>
         </div>
     )
 }
