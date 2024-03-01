@@ -37,9 +37,9 @@ export default function Account() {
             <div id="Account-Details__Wrapper">
 
                 <div id="Account-Details__Main-Container" className="content-block">
-                    <p className="account__continue">
-                        <Link to={"/account/downloads"} className={"btn button-link"} title="View your downloadable files">My Downloadable Files</Link> {/* Note "All" */}
-                    </p>
+                    {/* <p className="account__continue"> */}
+                        {!user.ownedDownloadableFiles && <Link to={"/account/downloads"} className={"btn button-link"} title="View your downloadable files" style={{marginBottom: "20px"}}>My Downloadable Files</Link>} {/* Note "All" */}
+                    {/* </p> */}
                     {/* <p className="account__continue">
                         <Link to={"/"} className={"btn"}>Manage My Membership</Link>
                     </p> */}
@@ -67,7 +67,7 @@ export default function Account() {
                     </div>
                     
                     }
-                    <Link to={"addresses"} className="addresses-link">View Addreses ({address? user.addresses.length : 0})</Link>
+                    {/* <Link to={"addresses"} className="addresses-link">View Addreses ({address? user.addresses.length : 0})</Link> */}
                 </div>
             </div>
         </div>
