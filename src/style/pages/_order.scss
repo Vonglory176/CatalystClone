@@ -29,6 +29,12 @@
                 }
             }
 
+            .order-details__special-instructions {
+                margin-top: 20px;
+                max-height: 80px;
+                overflow: auto;
+            }
+
         }
 
         &__address-container {
