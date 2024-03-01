@@ -3,21 +3,13 @@ import { useLocation, NavLink } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { loginWithUserDetails } from "../store/auth-slice.jsx"
 import ReCAPTCHA from "react-google-recaptcha"
-import { getAuth} from "firebase/auth"
+import { getAuth } from "firebase/auth"
 const auth = getAuth()
 
 export default function Login() {
     const dispatch = useDispatch()
     const location = useLocation()
-    
-    // const [captchaDisplay, setCaptchaDisplay] = useState(false)
-    // const recaptchaRef = createRef()
-
-    //Verify w/ Captcha
-    // const handleCaptchaVerify = () => {
-    //     e.preventDefault()
-    //     setCaptchaDisplay(true)
-    // }
+    const recaptchaRef = createRef()
     
     //Login trigger
     const handleAccountLoginSubmit = async (e) => {
@@ -25,22 +17,26 @@ export default function Login() {
         
         const email = e.target.elements['customer[email]'].value
         const password = e.target.elements['customer[password]'].value
-        
-        dispatch(loginWithUserDetails({email, password}))
+        const token = recaptchaRef.current.getValue()
+        console.log(token)
+
+        // Token is verified in redux/server
+        dispatch(loginWithUserDetails({email, password, token}))
     }
     console.log(location)
 
     const [passwordRecovery, setPasswordRecovery] = useState(false)
     const togglePasswordRecovery = () => setPasswordRecovery((r) => !r)
-
-    let loginDiv = (
+    
+    const loginDiv = (
         <form method="post" action="/account" id="Customer-Login" className="customerForm" onSubmit={handleAccountLoginSubmit}>
             <h1>{location.state?.message || "Login"}</h1>
             <input type="email" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
             <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
+            <ReCAPTCHA ref={recaptchaRef} sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} />
         
             <p><input type="submit" className="btn" value={"Sign In"}/></p>
-            {/* <p><input type="button" className="btn" value={"Sign In"}/></p> */}
+
 
             <a onClick={togglePasswordRecovery}>Forgot your password?</a>
             <NavLink to={"/account/register"} title="Create an account" state={{...location.state}} replace>Create account</NavLink>
@@ -50,8 +46,9 @@ export default function Login() {
         // <div id="CustomerLoginForm" className="loginForm loginForm__loginInfo">
         // </div>
     )
+
     
-    let passwordRecoveryDiv = (
+    const passwordRecoveryDiv = (
         <form method="post" action="/account/login" id="Customer-Recover" className="customerForm" onSubmit={()=>{return}}>
             <h1>Reset your password</h1>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>

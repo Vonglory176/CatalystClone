@@ -1,22 +1,13 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { loginWithUserDetails } from "../store/auth-slice"
-import { ref, set, getDatabase } from "firebase/database"
-import { useEffect } from 'react'
-import { fetchUserCountry } from "../hooks/getUserCountry"
+import { useState, createRef } from 'react'
 import { createNewAccount } from "../store/auth-slice"
+import ReCAPTCHA from "react-google-recaptcha"
 
 export default function Register() {
-    // const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
     const dispatch = useDispatch()
-    // const navigate = useNavigate()
+    const recaptchaRef = createRef()
 
-    //Routing to Account page if user is logged in
-    // useEffect(() => {
-    //     if (isLoggedIn) navigate("/account", {replace:true})
-    // }, [isLoggedIn])
-
+    
     const handleCreateAccountSubmit = async (e) => {
         e.preventDefault()
         
@@ -25,8 +16,9 @@ export default function Register() {
         const lastName = elements['register[lastName]'].value
         const password = elements['register[password]'].value
         const email = elements['register[email]'].value
+        const token = recaptchaRef.current.getValue()
 
-        dispatch(createNewAccount({email, password, firstName, lastName}))
+        dispatch(createNewAccount({email, password, firstName, lastName, token}))
     }
 
     return (
@@ -40,6 +32,8 @@ export default function Register() {
             <input type="text" id="Register-Form__LastName" name="register[lastName]" placeholder="Last Name"/>
             <input required type="email" id="Register-Form__Email" name="register[email]" placeholder="Email"/>
             <input required type="password" id="Register-Form__Password" name="register[password]" placeholder="Password"/>
+            <ReCAPTCHA ref={recaptchaRef} sitekey={import.meta.env.VITE_RECAPTCHA_SITE_TEST_KEY} />
+
 
             <input type="submit" id="Register-Form__Submit" className="btn" value="Send"/>
         </form>
