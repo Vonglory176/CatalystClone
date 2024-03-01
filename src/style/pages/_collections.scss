@@ -145,14 +145,17 @@
 
             width: 207px;
             max-height: 100%;
+            border-bottom: 1px solid $primary-font-color;
             
             @media (max-width: 838px) {display: none;}
             
             h1 {
                 margin: 0 0 0px 0;
+                border-bottom: 1px solid $primary-font-color;
             }
             
             &__filter-wrapper {
+                max-width: 207px;
                 overflow: auto;
                 flex-grow: 1;
                 padding-top: 8px;
