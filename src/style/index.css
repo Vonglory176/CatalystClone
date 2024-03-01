@@ -2275,6 +2275,7 @@
 .filter-list-wrapper {
   flex-grow: 1;
   padding-top: 8px;
+  max-width: 206px;
 }
 .filter-list-wrapper .category-links {
   padding: 0 5px 8px 0;
@@ -3098,14 +3099,6 @@
 #Collections-Container .search-results__main-sidebar h1 {
   margin: 0 0 0px 0;
   border-bottom: 1px solid #222;
-}
-#Collections-Container .search-results__main-sidebar__filter-wrapper {
-  max-width: 207px;
-  overflow: auto;
-  flex-grow: 1;
-  padding-top: 8px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
 }
 
 .offcanvas-filters .offcanvas-header h1 {
