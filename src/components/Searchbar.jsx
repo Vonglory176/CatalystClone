@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import Fuse from 'fuse.js'
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate, NavLink } from "react-router-dom"
 import ProductSearchbarResult from "./ProductSearchbarResult"
-import { NavLink } from "react-router-dom"
 
 export default function Searchbar() {
     const productList = useSelector(state => state.products.productList)
@@ -100,7 +99,7 @@ export default function Searchbar() {
                 onChange={(e) => handleSearchInputChange(e)}
                 />
                 <i className="fa-solid fa-magnifying-glass store-btns__search fa-lg">
-                    <NavLink to={`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`}/>
+                    <NavLink to={`/collections/all?${searchTerm.trim()? `q=${searchTerm}&sort_by=relevance` : ""}`} title="Search for products"/>
                 </i>
             </div>
 
