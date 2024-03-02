@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
-export default function Pagination({resultsPerPage, localProductList, paginationCallback}) {
+export default function Pagination({resultsPerPage, onChange, localProductList, paginationCallback}) {
     // console.log("IN PAGINATION")
     const [searchParams, setSearchParams] = useSearchParams({})
 
@@ -15,11 +15,24 @@ export default function Pagination({resultsPerPage, localProductList, pagination
         const newPage = currentPage + direction
     
         if (newPage >= 1 && newPage <= pageCount) {
+            if (onChange) { //Scrolling to top of given element
+                const element = document.querySelector(onChange)
+                const offset = window.innerWidth > 750? 60 : 10 // Define the offset
+                const elementPosition = element.getBoundingClientRect().top + window.scrollY
+                const offsetPosition = elementPosition - offset // Subtract the offset
+    
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                })
+            }
+
+            //Setting new page
             setCurrentPage(newPage)
             setSearchParams(prevSearch => {
                 prevSearch.set('page', newPage)
                 return prevSearch;
-            })            
+            })
         }
     }
 
@@ -30,13 +43,13 @@ export default function Pagination({resultsPerPage, localProductList, pagination
             setCurrentPage(parseInt(searchParams.get('page')))
             paginationCallback(currentPageItems)
         }
-    }, [localProductList]) //searchParams
+    }, [localProductList, searchParams]) //searchParams
 
     return (
         <div className="pagination">
-            <button className="pagination__previous-button" onClick={() => handlePageChange(-1)}>o-- Previous</button>
+            <button className="pagination__previous-button" onClick={() => handlePageChange(-1)}>Previous</button>
             <span className="pagination__page-count">{currentPage} of {pageCount}</span>
-            <button className="pagination__next-button" onClick={() => handlePageChange(+1)}>Next --o</button>
+            <button className="pagination__next-button" onClick={() => handlePageChange(+1)}>Next</button>
         </div>
     )
 }
