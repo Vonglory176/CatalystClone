@@ -81,7 +81,14 @@
                 max-width: 560px;
                 max-height: 428px;
                 height: 100%;
+                
+                @media (min-width: 390px) {
+                    min-height: calc(123px + (425 - 123) * ((100vw - 400px) / (1200 - 400)));
+                }
 
+                @media (min-width: 1200px) {
+                    min-height: 425px;
+                }
             }
             
             a:nth-of-type(2) {                
