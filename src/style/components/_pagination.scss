@@ -2,8 +2,20 @@
     display: grid;
     grid-template-columns: 90px 50px 90px;
     justify-content: center;
-    gap: 16px;
+    gap: 16px;    
 
     text-align: center;
     padding: 16px 0 0 0;
+
+    button {
+        color: $primary-font-color;
+        background-color: $secondary-color;
+        &:hover {
+            background-color: $secondary-hover-color;
+            cursor: pointer;
+        }
+        &:focus {
+            background-color: $secondary-color;
+        }
+    }
 }
