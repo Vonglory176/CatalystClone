@@ -19,6 +19,26 @@
         @media (min-width: 510px) {
             padding: 16px;
         }
+
+        .filter-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            
+            width: 18px;
+            height: 18px;
+            border-radius: 100%;
+
+            background-color: $badge-color;
+            color: $secondary-font-color;
+            font-size: 10px;
+            letter-spacing: 0;
+            line-height: 0;
+        }
         
         &__header {
             
@@ -41,26 +61,6 @@
 
                 @media (min-width:839px) {
                     display: none;
-                }
-
-                .filter-indicator {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    
-                    position: absolute;
-                    top: -5px;
-                    right: -5px;
-                    
-                    width: 18px;
-                    height: 18px;
-                    border-radius: 100%;
-
-                    background-color: $badge-color;
-                    color: $secondary-font-color;
-                    font-size: 10px;
-                    letter-spacing: 0;
-                    line-height: 0;
                 }
             }
             
@@ -96,32 +96,38 @@
         
         &__main-content {
             position: relative;
-            display: grid;
             width: 100%;
-            background-color: $primary-color;
+            background-color: $border-list-color;
             border: 3px solid $accent-color;
             // @media (min-width:839px) {}
-
-            min-height: 296px; //290px;
+            
+            min-height: 192px; //296px; //290px;
+            @media (min-width: 450px) {
+                min-height: 586px; //396px;
+            }
             @media (min-width: 750px) {
-                min-height: 396px;
+                min-height: 786px; //396px;
+                // max-height: 786px; //396px;
             }
             
             &:is(.grid-mode) {
+                display: grid;
                 @include product-result-grid-mode;             
                 grid-template-columns: 1fr;
                 
-                @media (min-width: 450px) {
-                    grid-template-columns: 1fr 1fr;                    
+                @media (min-width: 470px) { //450px
+                    grid-template-columns: 1fr 1fr;
+                    // grid-template-rows: 1fr 1fr 1fr;
                 }
                 @media (min-width: 1115px) {
                     grid-template-columns: 1fr 1fr 1fr;                    
+                    // grid-template-rows: 1fr 1fr;
                 }
             }
             &:is(.list-mode) {
                 // min-height: 384px;
                 @include product-result-list-mode;
-                grid-template-columns: 1fr;
+                // grid-template-rows: repeat(6, 1fr);
             }
 
             .no-results {
@@ -153,7 +159,17 @@
                 margin: 0 0 0px 0;
                 border-bottom: 1px solid $primary-font-color;
             }
+
+            .filter-list-container {
             
+                @media (min-width: 750px) {
+                    width: calc(100% + 1em); // Adjust based on scrollbar width to prevent layout shift
+                }
+            }
+            
+            .filter-list-wrapper {
+                max-width: 206px;
+            }
             // &__filter-wrapper {
             //     max-width: 207px;
             //     overflow: auto;
@@ -178,10 +194,12 @@
     }
 
     .offcanvas-body {
-        padding: 10px;
+        padding: 0 10px;
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(15px);
     }
 
-    .search-results__mobile-sidebar {
+    .search-results__mobile-sidebar {        
         
         ul {
             // background-color: white;
