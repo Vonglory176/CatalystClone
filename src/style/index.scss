@@ -288,19 +288,6 @@ input[type='number']::-webkit-outer-spin-button {
     height: min-content;
 }
 
-.slideshow {
-    &__image {
-        width: 100%;
-        height: 100%;
-    }
-}
-
-.divider {
-    background-color: $secondary-color;
-    width: 100%;
-    height: 20px;
-}
-
 .btn {
     display: inline-block;
     width: auto;
