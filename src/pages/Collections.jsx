@@ -5,7 +5,7 @@ import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/coll
 import shadowrunNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun-new-arrivals.svg"
 import ProductResult from "../components/ProductResult"
 
-import { Link, NavLink, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import CollectionBlock from "../components/CollectionBlock"
 import { Offcanvas } from "react-bootstrap"
@@ -48,7 +48,7 @@ export default function Collections() {
     
     //Pagination
     const [pageResults, setPageResults] = useState() //Set by the Pagination component callback
-    const resultsPerPage = 4
+    const resultsPerPage = 6
 
     //Counting filters
     const [filterNumber, setFilterNumber] = useState(0)
@@ -224,23 +224,28 @@ export default function Collections() {
                 collectionFrameSrc={id === "battletech"? battletechNewArrivalsFrame : shadowrunNewArrivalsFrame}
                 collectionCoverSrc={""}
                 collectionCoverTitle={""}
-                productIdArray={id === "battletech"? 
-                [
-                    "battletech-clan-invasion",
-                    "battletech-reinforcements-clan-invasion",
-                    "battletech-battlemat-alien-worlds",
-                    "battletech-activity-book-vol-2",
-                    "battletech-miniature-pack-game-of-armored-combat",
-                ] :
+                
+                productInformation={{
+                    universe: id === "battletech"? "battletech" : "shadowrun",
+                    category: "new-arrivals"
+                }}
+                // productIdArray={id === "battletech"? 
+                // [
+                //     "battletech-clan-invasion",
+                //     "battletech-reinforcements-clan-invasion",
+                //     "battletech-battlemat-alien-worlds",
+                //     "battletech-activity-book-vol-2",
+                //     "battletech-miniature-pack-game-of-armored-combat",
+                // ] :
 
-                [
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                ]
-            }
+                // [
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                // ]
+                // }
                 characterImageSrcArray={""}
                 />
             </div>
@@ -308,7 +313,7 @@ export default function Collections() {
                     </div>
                     <div className="search-results__main-sidebar">
                         {/* <ul className="universe-list"></ul> */}
-                        <h1>Product Filters</h1>
+                        <h1>Product Filters <span className={`filter-indicator ${filterNumber > 0? "" :"display-none"}`} style={{right: "-13px", top: "-3px"}}>{filterNumber}</span></h1>
                         <ProductFilters 
                         currentCategory={currentCategory} 
                         filterInstanceList={filterInstanceList}
@@ -317,7 +322,7 @@ export default function Collections() {
                     </div>
                 </div>
 
-                <Pagination resultsPerPage={resultsPerPage} localProductList={localProductList} paginationCallback={setPageResults}/>
+                <Pagination resultsPerPage={resultsPerPage} localProductList={localProductList} onChange={".search-results"} paginationCallback={setPageResults}/>
 
                 {/* FOR MOBILE FILTERS */}
                 <Offcanvas className="offcanvas-filters" show={showSidebar} onHide={handleClose} backdrop={true} scroll={true}> {/*scroll={true}*/}
