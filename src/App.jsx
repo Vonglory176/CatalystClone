@@ -161,9 +161,6 @@ useMemo()?
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
 Create proper styling (Maybe screen swap too) for Captchas
 
-USE REAL KEY WITH RECAPTCHA BEFORE COMMIT
-Auto-Checkout/Checkout is insane and needs cleanup
-
 BUG: Notification occasionally does not stick to top in mobile?
 MINOR: Logout page has bad styling
 
@@ -180,8 +177,8 @@ Create logic to "timeout" the order details after X time (24hrs?)?
 Digital items?
 
 ACCOUNT ------------------------------------
+BUG: Account Login/Create info shows in the network console. Use serverless function
 MINOR: Async hiccups after creating account. Watch console/redirects (Redirection also has some momentary confusion)
-MINOR: Account Login/Create info shows in the network console. Not big concern, but maybe go back to server auth?
 
 Method of getting product-link in orderHistory is scuffed, maybe fix? (USE STRIPE METADATA)
 Finish styling
@@ -192,6 +189,7 @@ ADD PROPER FILE TYPE TO DOWNLOAD
 
 CHECKOUT/CART ------------------------------------
 MINOR: Type issue with saving digital items to order metadata ("checkoutCart.cjs")
+Auto-Checkout/Checkout is insane and needs cleanup
 
 Add copy of redux-cart (Prod/VarIDs' into Stripe metadata)?
 Change cart checkout item removal to only those in the order?
@@ -203,56 +201,32 @@ BUG: Add a height limit to main image
 Add default size to pictures (General picture style changes)
 Finish styling (Image container min/max + popin on orientation change)
 
-Disable scrollbar on image gallery fullscreen?
-
-COLLECTIONS ------------------------------------
-MINOR: Scrollbar pop in/out bug when selecting filters?
-BUG: ProductResult name overflows
-
-Fix header button/text wrapping ("Results for" has issues somewhat)
-Finish mobile filter styling
-
-Make page buttons set view to page top?
-
 NOTIFICATIONS/ERROR HANDLING ------------------------------------
 Alter login error notif to better describe specific issues (No email/pass, Wrong email/pass, no captcha)
 
 GENERAL ------------------------------------
-BUG: Sale/Standard price swap bug from before is still present (At least on home page)
-BUG: Don't allow Nav/Link spam to add to history (Header & Collections // USE SMART LINK WRAP THING (in discord))
-
-Figure out how to rotate properly in mobile
-Make scrollbar hidden in MOBILE view, not just small views?
-
 Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
 Add better image placeholders
 Add sizes to images
-
 HTML Labels, Aria, etc
-Add Titles to anchors
 
 PRODUCT CARD ------------------------------------
-BUG: Issue with text overflow
+MINOR: Issue with text overflow
 
 COLLECTION-BLOCK ------------------------------------
-Grab X products for New-Arrivals/Featured-Products (Depends on Universe too)
-Load products into Featured-Containers in home? (Just use ID's for the moment)
-
-HOME ------------------------------------
-BUG: Set standard size to collection-buttons (Still small issue being short height when none have loaded)
-Add images to slideshow?
-Slideshow image load in clips bottom border
-
-FILTERS / SORT / PAGINATION ------------------------------------
-Add clear filter button
-Finish styling
+Clean up auto product load code
 
 HEADER ------------------------------------
+BUG: Sticky header pops in on activation
 MINOR: Sticky header pops in on first render
-Create close button for notification?
 
 CONTACT ------------------------------------
 Add form functionality?
+
+
+
+
+
 
 PLATFORM TESTING ------------------ ||||||||||||||||||||||||||||||||||||||||
 Chrome
@@ -265,6 +239,12 @@ iOS
 Android (Use Emulator)
 
 ON THE BACK BURNER --------------------- |||||||||||||||||||||||||||||||||||||||||||
+
+HEADER ------------------------------------
+Create close button for notification?
+
+HOME ------------------------------------
+Add images to slideshow?
 
 ORDERS/HISTORY ------------------------------------
 MINOR: If an order (Not the most recent) is deleted from the database, creating a new one overwrites the most recent
@@ -298,6 +278,9 @@ Add classes to footer links?
 CONTACT ------------------------------------
 For practice reasons, make the form an "Uncontrolled Component"
 Finish Styling
+
+COLLECTIONS ------------------------------------
+MINOR: Search-Results "jumps" at bottom for a moment when changing category
 
 CHECKOUT SUCCESS / ORDERS ------------------------------------
 
