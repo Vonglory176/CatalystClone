@@ -229,34 +229,3 @@ export default function Products() {
         </div>
     )
 }
-
-{/* <div className="products-images">
-                <div className="products-images__primary">
-
-                    {selectedVariant && 
-                    <ProgressiveImage
-                    src={
-                        currentProduct.variantsHaveImages? 
-                        Object.values(selectedVariant.images)[0].link :
-                        Object.values(currentProduct.images)[0].link
-                    } 
-                    placeholder={placeholderImage}>
-                        {(src, loading) =>
-                        <img 
-                        src={src} 
-                        alt={currentProduct.variantsHaveImages? 
-                            Object.values(selectedVariant.images)[0].alt :
-                            Object.values(currentProduct.images)[0].alt
-                        }
-                        onClick={() => setImageIsExpanded(prevToggle => {return prevToggle? false : true})}
-                        className={
-                            (loading? "imgLoading ":"imgLoaded ") +
-                            (imageIsExpanded? "expanded" : "")
-                        }
-                        />
-                        }                            
-                    </ProgressiveImage>}
-
-                </div>
-                <div className="products-images__scroller"></div>
-            </div> */}
