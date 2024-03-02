@@ -163,6 +163,7 @@ Create proper styling (Maybe screen swap too) for Captchas
 
 BUG: Notification occasionally does not stick to top in mobile?
 MINOR: Logout page has bad styling
+MINOR: Give min-height to getting-started button in HOME
 
 Find other places to use load screen?
 
