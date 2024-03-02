@@ -25,7 +25,7 @@ export default function ProductCard({product}) {
     const variantDiscountPercentage = (((variantPrice - variantDiscountPrice) / variantPrice) * 100).toFixed(0)
 
     return (
-        <Link to={`/products/${productLink}`} className={"product-card"}>
+        <Link to={`/products/${productLink}`} className={"product-card"} title="View product details">
             {isOnSale && !isFree && <div className="sale-badge badge">{variantDiscountPercentage}% off</div>}
 
             <div className="product-card__image-container">
@@ -52,8 +52,8 @@ export default function ProductCard({product}) {
                 <div className="product-card__price">
                     {/* {product.isOnSale && <div className="product-tag">Sale</div>} */}
                     {checkVariantsForPriceDifferences(variants)? "" : "From " /*Adds "From" if more than one option*/}
-                    {isFree? "FREE!" : `$${productPrice}`} 
-                    {product.isOnSale && <span className="products-card__price-sale">${variant.discountedPrice}</span>}
+                    {isFree? "FREE!" : product.isOnSale?  `$${variant.discountedPrice}` : `$${productPrice}`} 
+                    {product.isOnSale && <span className="products-card__price-sale">${productPrice}</span>}
                 </div>
             </div>
             <div className="product-card__overlay">
