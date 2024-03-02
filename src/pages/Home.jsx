@@ -53,7 +53,7 @@ export default function Home() {
         <div id="Home-Container">
             
             <div className="getting-started">
-                <Link to={"/collections/battletech?categories=getting-started"} className="getting-started__link">
+                <Link to={"/collections/battletech?categories=getting-started"} className="getting-started__link" title="View Battletech products recommended for newcomers">
                     {/* <img className="getting-started__button" src={gettingStartedBattletech} alt="Get started with Battletech"/> */}
                     <ProgressiveImage
                     src={gettingStartedBattletech}
@@ -71,7 +71,7 @@ export default function Home() {
                         }
                     </ProgressiveImage>
                 </Link>
-                <Link to={"/collections/shadowrun?categories=getting-started"} className="getting-started__link">
+                <Link to={"/collections/shadowrun?categories=getting-started"} className="getting-started__link" title="View Shadowrun products recommended for newcomers">
                     {/* <img className="getting-started__button" src={gettingStartedShadowrun} alt="Get started with Shadowrun"/> */}
                     <ProgressiveImage 
                     src={gettingStartedShadowrun}
@@ -103,13 +103,17 @@ export default function Home() {
                     collectionFrameSrc={featuredFrame}
                     collectionCoverSrc={featuredCover}
                     collectionCoverTitle={"Featured Products"}
-                    productIdArray={[
-                        "battletech-clan-invasion",
-                        "battletech-reinforcements-clan-invasion",
-                        "battletech-battlemat-alien-worlds",
-                        "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                        "i-would-fight-the-dragon",
-                    ]}
+                    productInformation={{
+                        universe: "all",
+                        category: "featured",
+                    }}
+                    // productIdArray={[
+                    //     "battletech-clan-invasion",
+                    //     "battletech-reinforcements-clan-invasion",
+                    //     "battletech-battlemat-alien-worlds",
+                    //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                    //     "i-would-fight-the-dragon",
+                    // ]}
                     characterImageSrcArray={""}
                     />
                 </div>
@@ -120,12 +124,16 @@ export default function Home() {
                 collectionFrameSrc={battletechFrame}
                 collectionCoverSrc={battletechCover}
                 collectionCoverTitle={"Battletech"}
-                productIdArray={[
-                    "battletech-clan-invasion",
-                    "battletech-reinforcements-clan-invasion",
-                    "battletech-battlemat-alien-worlds",
-                    "battletech-miniature-pack-game-of-armored-combat",
-                ]}
+                productInformation={{
+                    universe: "battletech",
+                    category: "featured",
+                }}
+                // productIdArray={[
+                //     "battletech-clan-invasion",
+                //     "battletech-reinforcements-clan-invasion",
+                //     "battletech-battlemat-alien-worlds",
+                //     "battletech-miniature-pack-game-of-armored-combat",
+                // ]}
                 characterImageSrc={pickRandomCharacter(battletechCharacterArray)}
                 />
 
@@ -135,32 +143,36 @@ export default function Home() {
                 collectionFrameSrc={shadowrunFrame}
                 collectionCoverSrc={shadowrunCover}
                 collectionCoverTitle={"Shadowrun"}
-                productIdArray={[
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                ]}
+                productInformation={{
+                    universe: "shadowrun",
+                    category: "featured",
+                }}
+                // productIdArray={[
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
+                // ]}
                 characterImageSrc={pickRandomCharacter(shadowrunCharacterArray)}
                 />
 
                 <section className="collection-buttons-container">
                     <div className="collection-buttons-wrapper">
-                        <Link to={"/collections/all?categories=on-sale"}>                            
+                        <Link to={"/collections/all?categories=on-sale"} title="View products that are on sale">                            
                             <ProgressiveImage src={saleButton}>
                                 {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
                             </ProgressiveImage>
                             {/* <img className="collection-button" src={saleButton} alt="" /> */}
                         </Link>
 
-                        <Link to={"/collections/all?categories=new-arrivals"}>                            
+                        <Link to={"/collections/all?categories=new-arrivals"} title="View products that have been added recently">                            
                             <ProgressiveImage src={newArrivalsButton}>
                                 {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
                             </ProgressiveImage>
                             {/* <img className="collection-button" src={newArrivalsButton} alt="" /> */}
                         </Link>
 
-                        <Link to={"/collections/all?categories=free-downloads"}>                            
+                        <Link to={"/collections/all?categories=free-downloads"} title="View products that are free to download">                            
                             <ProgressiveImage src={freeDownloadButton}>
                                 {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={""}/>}
                             </ProgressiveImage>
@@ -175,12 +187,16 @@ export default function Home() {
                 collectionFrameSrc={tabletopFrame}
                 collectionCoverSrc={tabletopCover}
                 collectionCoverTitle={"Tabletop"}
-                productIdArray={[
-                    "i-would-fight-the-dragon",
-                    "i-would-fight-the-dragon",
-                    "i-would-fight-the-dragon",
-                    "i-would-fight-the-dragon",
-                ]}
+                productInformation={{
+                    universe: "other",
+                    category: "featured",
+                }}
+                // productIdArray={[
+                //     "i-would-fight-the-dragon",
+                //     "i-would-fight-the-dragon",
+                //     "i-would-fight-the-dragon",
+                //     "i-would-fight-the-dragon",
+                // ]}
                 characterImageSrcArray={""}
                 />                
 
@@ -189,160 +205,3 @@ export default function Home() {
         </div>                        
     )
 }
-
-{/* 
-
-                <section className="section-block">
-                    <Link to={"/collections/all"} className={"collection-link"}>
-                        <img src={fpFrame1} alt="" className="featured-product-frame" />
-                    </Link>
-
-                    <div className="grid collection">
-                        <Link to={"/"} className={"collection-link"}></Link>
-
-                        <div className="grid__item collection__cover">
-                            <Link to={"/"} className={"collection-card"}>
-                                <div className="collection-card__meta">
-                                    <p className="collection-card__title h1">Featured Products</p>
-                                    <p className="collection-card__subtext">View all</p>
-                                </div>
-                            </Link>
-                        </div>
-
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        
-                    </div>
-                </section>
-
-                <section className="section-block left">
-                    <a href="!#" className="collection-link">
-                        <img src={fpFrame2} alt="" className="featured-product-frame" />
-                    </a>
-                    <div className="featured-character">
-                        <img src={featuredCharacterVictor} alt="" />
-                    </div>
-
-                    <div className="grid collection">
-                        <a href="!#" className="collection-link"></a>
-
-                        <div className="grid__item collection__cover">
-                            <a href="!#" className="collection-link"></a>
-                            <a href="!#" className="collection-card">                                                        
-                                <div className="collection-card__meta">
-                                    <p className="collection-card__title h1">Featured Products</p>
-                                    <p className="collection-card__subtext">View all</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
-                        </div> 
-                    </div>
-                </section>
-
-                <section className="section-block right"> 
-                    <a href="!#" className="collection-link">
-                        <img src={fpFrame3} alt="" className="featured-product-frame" />
-                    </a>
-                    <div className="featured-character">
-                        <img src={featuredCharacterCombatMage} alt="" />
-                    </div>                                                  
-
-                    <div className="grid collection">
-                        <a href="!#" className="collection-link"></a>
-
-                        <div className="grid__item collection__cover">
-                            <a href="!#" className="collection-link"></a>
-                            <a href="!#" className="collection-card">                                                        
-                                <div className="collection-card__meta">
-                                    <p className="collection-card__title h1">Featured Products</p>
-                                    <p className="collection-card__subtext">View all</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"shadowrun-sixth-world-core-rulebook-city-edition-berlin")}/>}
-                        </div>
-                    </div>
-                </section>
-
-                <section className="collection-buttons-container">
-                    <div className="collection-buttons-wrapper">
-                        <a href="!#">
-                            <img src={saleButton} alt="" className="collection-button" />
-                        </a>
-                        <a href="!#">
-                            <img src={newArrivalsButton} alt="" className="collection-button" />
-                        </a>
-                        <a href="!#">
-                            <img src={freeDownloadButton} alt="" className="collection-button" />
-                        </a>
-                    </div>
-                </section>
-
-                <section className="section-block left">
-                    <a href="!#" className="collection-link">
-                        <img src={fpFrame4} alt="" className="featured-product-frame" />
-                    </a>                                             
-
-                    <div className="grid collection">
-                        <a href="!#" className="collection-link"></a>
-
-                        <div className="grid__item collection__cover">
-                            <a href="!#" className="collection-link"></a>
-                            <a href="!#" className="collection-card">                                                        
-                                <div className="collection-card__meta">
-                                    <p className="collection-card__title h1">Featured Products</p>
-                                    <p className="collection-card__subtext">View all</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
-                        </div>
-                        <div className="grid__item">
-                            {status==="success" && <ProductCard product={getProductById(productList,"i-would-fight-the-dragon")}/>}
-                        </div>
-                    </div>
-                </section> */}
