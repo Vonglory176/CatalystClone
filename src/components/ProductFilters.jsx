@@ -84,7 +84,8 @@ export default function Filters({ currentCategory, filterInstanceList }) {
       <div className="filter-list-wrapper">
         {/* <span>Product Category</span> */}
         <div className="category-links">
-            <NavLink 
+            <NavLink
+            title="View all products"
             to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=all-products`}} 
             className={`btn ${currentCategory === "all-products"? "active-link" : ""}`}
             >
@@ -92,6 +93,7 @@ export default function Filters({ currentCategory, filterInstanceList }) {
             </NavLink>
 
             <NavLink
+            title="View products recommended for newcomers"
             to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=getting-started`}}
             className={`btn ${currentCategory === "getting-started"? "active-link" : ""}`}
             >
@@ -99,6 +101,7 @@ export default function Filters({ currentCategory, filterInstanceList }) {
             </NavLink>
 
             <NavLink
+            title="View products that have been added recently"
             to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=new-arrivals`}}
             className={`btn ${currentCategory === "new-arrivals"? "active-link" : ""}`}
             >
@@ -106,6 +109,7 @@ export default function Filters({ currentCategory, filterInstanceList }) {
             </NavLink>
 
             <NavLink
+            title="View products that are on sale"
             to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=on-sale`}}
             className={`btn ${currentCategory === "on-sale"? "active-link" : ""}`}
             >
@@ -113,15 +117,26 @@ export default function Filters({ currentCategory, filterInstanceList }) {
             </NavLink>
 
             <NavLink
+            title="View products that are free to download"
             to={{pathname:`/collections/${id}`, search: `?${searchParams.get('q')? `q=${searchParams.get('q')}&` : ""}categories=free-downloads`}}
             className={`btn ${currentCategory === "free-downloads"? "active-link" : ""}`}
             >
                 Free Downloads
             </NavLink>
         </div>
-        {typeList && typeList.length > 0 && <span>Product Type</span>}
+        {typeList && typeList.length > 0 && 
+        <div className="filter-title">
+          <span>Product Type</span> 
+          {searchParams.get('types') && <input type="button" value={"x"} onClick={() => setSearchParams(prevSearch => {prevSearch.delete('types'); return prevSearch})}/>}
+        </div>
+        }
         {typeList && typeList.length > 0 && <ul className="type-list">{typeList}</ul>}
-        {tagList && tagList.length > 0 && <span>Product Tags</span>}
+
+        {tagList && tagList.length > 0 && 
+        <div className="filter-title">
+          <span>Product Tags</span> 
+          {searchParams.get('tags') && <input type="button" value={"x"} onClick={() => setSearchParams(prevSearch => {prevSearch.delete('tags'); return prevSearch})}/>}
+        </div>}
         {tagList && tagList.length > 0 &&  <ul className="tag-list">{tagList}</ul>}
       </div>
     </div>
