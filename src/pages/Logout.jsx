@@ -16,7 +16,7 @@ export default function Logout() {
                 <h1>Logging Out...</h1>
                 <hr />
                 <p className="logout__continue">
-                    <Link to={"/"} className={"btn"}>Continue browsing</Link> {/* Note "All" */}
+                    <Link to={"/collections/all"} className={"btn"} title="View all products">Continue browsing</Link> {/* Note "All" */}
                 </p>
             </div>
         </div>

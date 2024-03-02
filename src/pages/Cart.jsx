@@ -94,7 +94,7 @@ export default function Cart() {
                 tempCartItemsHtml.push(
                     <div className="cart-product" key={productIdPair}>
                         <div className="cart-product__image-wrapper">
-                            <Link to={productLink}>
+                            <Link to={productLink} title="View product details">
                                 <ProgressiveImage src={image} placeholder={placeholderImage}>
                                     {(src, loading) =>
                                     <img 

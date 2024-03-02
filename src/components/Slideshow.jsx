@@ -17,7 +17,7 @@ export default function Slideshow() {
 
       {/* TEMPLAR SLIDE */}
       <Carousel.Item>
-        <Link to={"/collections/battletech"}>
+        <Link to={"/collections/battletech"} title="View all Battletech products">
           <ProgressiveImage 
           src={templarImg1}
           srcSetData={{
@@ -42,7 +42,7 @@ export default function Slideshow() {
 
       {/* URBAN-BRAWL SLIDE */}
       <Carousel.Item>
-        <Link to={"/collections/shadowrun"}>        
+        <Link to={"/collections/shadowrun"} title="View all Shadowrun products">        
           <ProgressiveImage 
           src={templarImg1}
           srcSetData={{

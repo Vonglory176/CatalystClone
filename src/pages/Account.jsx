@@ -38,7 +38,7 @@ export default function Account() {
 
                 <div id="Account-Details__Main-Container" className="content-block">
                     {/* <p className="account__continue"> */}
-                        {!user.ownedDownloadableFiles && <Link to={"/account/downloads"} className={"btn button-link"} title="View your downloadable files" style={{marginBottom: "20px"}}>My Downloadable Files</Link>} {/* Note "All" */}
+                        {!user?.ownedDownloadableFiles && <Link to={"/account/downloads"} className={"btn button-link"} title="View your downloadable files" style={{marginBottom: "20px"}}>My Downloadable Files</Link>} {/* Note "All" */}
                     {/* </p> */}
                     {/* <p className="account__continue">
                         <Link to={"/"} className={"btn"}>Manage My Membership</Link>

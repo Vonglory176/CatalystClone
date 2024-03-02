@@ -38,7 +38,7 @@ export default function Downloads() {
                 return (
                     <div key={index} className='downloadable-item'>
                         <div className="downloadable-item__image-wrapper">
-                            <Link to={productLink}>
+                            <Link to={productLink} title="View product details">
                                 <ProgressiveImage src={image} placeholder={placeholderImage}>
                                     {(src, loading) =>
                                     <img 
@@ -51,7 +51,7 @@ export default function Downloads() {
                             </Link>
                         </div>
                         <div className="downloadable-item__detail-wrapper">
-                            <Link to={productLink}><h3>{product.name} - PDF</h3></Link>
+                            <Link to={productLink} title="View product details"><h3>{product.name} - PDF</h3></Link>
                             <p>FILE NAME HERE <br/> FILE SIZE HERE</p>
                             <input type="button" value="Disabled" className='btn sold-out'/>
                         </div>

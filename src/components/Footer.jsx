@@ -13,16 +13,16 @@ export default function Footer() {
                             <h4 className="h1 footer__section-title">Navigation</h4>
                             <ul className="footer__list">
                                 <li className="footer__list-item">
-                                    <Link to={"/cart"} className={""}>Cart</Link>
+                                    <Link to={"/cart"} className={""} title="View your cart">Cart</Link>
                                 </li>
                                 <li className="footer__list-item">
                                     <NavLink to={isLoggedIn? "/account" : "/account/login"} className={"account-link"} title={isLoggedIn? "View your account" : "Log into or create an account"}>My Account</NavLink>
                                 </li>
                                 <li className="footer__list-item">
-                                    {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"}>Log Out</Link>}
+                                    {isLoggedIn && <Link to={"/account/logout"} className={"logout-link"} title="Logout the current user">Log Out</Link>}
                                 </li>
                                 <li className="footer__list-item">
-                                    <Link to={"/contact"} className={""}>Contact</Link>
+                                    <Link to={"/contact"} className={""} title="Get in contact with us">Contact</Link>
                                 </li>
                             </ul>
                         </section>

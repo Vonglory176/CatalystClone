@@ -59,7 +59,7 @@ export default function OrderDetails() {
                     <tr className="responsive-table__row" key={item.id}>
                         <td data-label="Product">
                             <div className="order-details__product-name">
-                                <Link to={`/products/${getProductLinkWithNameAndVariant(products, item.description)}`}>{item.description}</Link>
+                                <Link to={`/products/${getProductLinkWithNameAndVariant(products, item.description)}`} title={`View product details`}>{item.description}</Link>
                             </div>
                         
                             {/* <div className="note">Fulfilled February 22, 2024<div><div></div></div></div> */}
