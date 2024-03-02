@@ -28,7 +28,7 @@ export default function ProductSearchbarResult(product) {
     // const variantDiscountPercentage = (((variantPrice - variantDiscountPrice) / variantPrice) * 100).toFixed(0)
 
     return (
-        <Link to={`/products/${productLink}`} className={"searchbar-product-result"}>
+        <Link to={`/products/${productLink}`} className={"searchbar-product-result"} title="View product details">
             <div className="searchbar-product-result__image-container">
                 <ProgressiveImage
                 src={imageLink}
