@@ -32,7 +32,7 @@ export default function Register() {
             <input type="text" id="Register-Form__LastName" name="register[lastName]" placeholder="Last Name"/>
             <input required type="email" id="Register-Form__Email" name="register[email]" placeholder="Email"/>
             <input required type="password" id="Register-Form__Password" name="register[password]" placeholder="Password"/>
-            <ReCAPTCHA ref={recaptchaRef} sitekey={import.meta.env.VITE_RECAPTCHA_SITE_TEST_KEY} />
+            <ReCAPTCHA ref={recaptchaRef} sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} />
 
 
             <input type="submit" id="Register-Form__Submit" className="btn" value="Send"/>
