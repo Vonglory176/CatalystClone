@@ -24,7 +24,7 @@ export default function Header() {
 
     //Sticky-Header 
     const [ref, inView, entry] = useInView({threshold: 0}) //Observer
-    const [isWideViewport, setIsWideViewport] = useState(window.innerWidth >= 750)
+    const [isWideViewport, setIsWideViewport] = useState(window.innerWidth >= 750) // 
     const [isSticky, setIsSticky] = useState(false)
     const [isInViewInitialized, setIsInViewInitialized] = useState(false)
 
@@ -39,11 +39,12 @@ export default function Header() {
         const handleResize = () => setIsWideViewport(window.innerWidth >= 0) // 750
 
         window.addEventListener('resize', handleResize)
+        handleResize()
         
         return () => window.removeEventListener('resize', handleResize) // Clean up the event listener for unmounting
     }, [])
 
-    useEffect(() => {
+    useEffect(() => { //Prevents wonky pop-in on first render
         let timeoutId;
         if (isWideViewport) timeoutId = setTimeout(() => {setIsSticky(true);}, 500) // Delay in milliseconds
         else setIsSticky(false)
@@ -54,7 +55,7 @@ export default function Header() {
     //For easy sharing between upper/sticky/offcanvas
     const searchbar = <Searchbar/>
     const cart = (
-        <Link to={"/cart"} className={"store-btns__link store-btns__cart-link"}>
+        <Link to={"/cart"} className={"store-btns__link store-btns__cart-link"} title='View your cart'>
             <i className="fa-solid fa-cart-shopping store-btns__cart fa-lg"></i>
             {cartItems.length > 0? <i className="fa-solid fa-circle store-btns__cart-notification fa-xs" style={{color:"#c2ca20"}}></i> : ""}
         </Link>
@@ -93,11 +94,12 @@ export default function Header() {
                     <div id="notification-banner" className={`header__notification header__notification-${notification?.type === "success"? "success" : "error"} ${notification.open? "isActive" : ""}`}> {/* ${notification? "isActive" : ""} */}
                         <div className="header__notification__inner">
 
-                            {notification.link? <Link to={notification.link} className="header__notification__link">
-                                    <span className="header__notification__message">
-                                        {notification.message} &nbsp; 
+                            {notification.link? 
+                                <Link to={notification.link} className="header__notification__link">
+                                    {/* <span className="header__notification__message-wrapper" style={{display: "flex"}}> */}
+                                        <span className="header__notification__message">{notification.message}&nbsp;</span> 
                                         <span className="header__notification__message-link">{notification.linkMessage}</span>
-                                    </span>
+                                    {/* </span> */}
                                 </Link>
 
                                 :
@@ -111,17 +113,16 @@ export default function Header() {
                         <div className="universe-dropdown dropdown">
                             <button className="universe-dropdown__button dropdown-button">
                                 Universe<i className="fa-solid fa-caret-down"></i>
-                                <NavLink to={"/collections/all"} className={`universe-dropdown__button-link ${({isActive}) => {return isActive? "active-link" : ""}}`}/>
+                                <NavLink to={"/collections/all"} className={`universe-dropdown__button-link ${({isActive}) => {return isActive? "active-link" : ""}}`} title='View all products'/>
                             </button>
                             
                             <div className="universe-dropdown__content dropdown-content">
                                 <h1>UNIVERSE</h1>
-                                <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}}>Battletech</NavLink>
-                                <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}}>Shadowrun</NavLink>
-                                <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}}>Other</NavLink>
+                                <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link" : ""}} title='View products in the Battletech collection'>Battletech</NavLink>
+                                <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link" : ""}} title='View products in the Shadowrun collection'>Shadowrun</NavLink>
+                                <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link" : ""}} title="View products that aren't tied to a collection">Other</NavLink>
                             </div>
                         </div>
-
                         {isInViewInitialized && (inView? //Determining what buttons to have
 
                         <div className="header__lower-nav-links">
@@ -151,7 +152,7 @@ export default function Header() {
                 <Offcanvas.Body>
 
                     <div className="offcanvas__universe">
-                        <Link to={"/collections/all"} className={"offcanvas-link"}>Universe</Link>
+                        <Link to={"/collections/all"} className={"offcanvas-link"} title='View all products'>Universe</Link>
                         <button className="offcanvas__universe-button" onClick={toggleUniverseSubMenu}>
                             <i className={`fa-solid fa-plus fa-2x ${!showUniverseSubMenu? "rotateIcon" : ""}`}></i>
                         </button>
@@ -161,15 +162,15 @@ export default function Header() {
                         <div className="offcanvas-submenu-container">
                             {/* <Link to={"/collections/battletech"} className={"offcanvas-submenu-link"}>Battletech</Link> reloadDocument
                             <Link to={"/collections/shadowrun"} className={"offcanvas-submenu-link"}>Shadowrun</Link> */}
-                            <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link offcanvas-submenu-link" : "offcanvas-submenu-link"}}>Battletech</NavLink>
-                            <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link offcanvas-submenu-link" : "offcanvas-submenu-link"}}>Shadowrun</NavLink>
-                            <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link offcanvas-submenu-link" : "offcanvas-submenu-link"}}>Other</NavLink>
+                            <NavLink to={"/collections/battletech"} className={({isActive}) => {return isActive? "active-link offcanvas-submenu-link" : "offcanvas-submenu-link"}} title='View products in the Battletech collection'>Battletech</NavLink>
+                            <NavLink to={"/collections/shadowrun"} className={({isActive}) => {return isActive? "active-link offcanvas-submenu-link" : "offcanvas-submenu-link"}} title='View products in the Shadowrun collection'>Shadowrun</NavLink>
+                            <NavLink to={"/collections/other"} className={({isActive}) => {return isActive? "active-link offcanvas-submenu-link" : "offcanvas-submenu-link"}} title="View products that aren't tied to a collection">Other</NavLink>
                         </div>
                     </div>
                     
                     {/* <Link to={"/account"} className={"offcanvas-link"}>Account</Link> */}
                     <NavLink to={isLoggedIn? "/account" : "/account/login"} className={"offcanvas-link"} title={isLoggedIn? "View your account" : "Log into or create an account"}>Account</NavLink>
-                    {isLoggedIn && <Link to={"/account/logout"} className={"offcanvas-link"}>Log Out</Link>}
+                    {isLoggedIn && <Link to={"/account/logout"} className={"offcanvas-link"} title='Logout the current user'>Log Out</Link>}
 
                 </Offcanvas.Body>
             </Offcanvas>
