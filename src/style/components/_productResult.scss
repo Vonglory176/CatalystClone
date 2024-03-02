@@ -42,7 +42,7 @@
         
         font-size: 14px;     
         
-        @media (min-width:450px) {
+        @media (min-width:470px) { //450px
             &:nth-child(2n+1) {border-right: 1px solid $third-font-color;}
             // &:nth-last-child(-n+2) {border-bottom: none}
         }
@@ -87,7 +87,10 @@
     .product-result {
         height: 192px;
         padding: 25px 12px 25px 5px;
-        border-bottom: 1px solid $border-list-color;
+
+        // &:first-of-type {border-bottom: 1px solid $third-font-color !important;}
+        &:not(:nth-of-type(6)) {border-bottom: 1px solid $third-font-color;}
+        
         
         &__image-container {
             width: 142px;
