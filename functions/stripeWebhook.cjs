@@ -62,7 +62,17 @@ exports.handler = async function (event, context) {
                 if (snapshot.val()) { //Verifying correct user
                     const user = snapshot.val()
 
-                    const newDigitalItems = {...user.ownedDigitalItems, ...orderDetails.digitalItems}
+                    // const newDigitalItems = [...user.ownedDigitalItems, ...orderDetails.digitalItems]
+                    let newDigitalItems = user.ownedDigitalItems? [...user.ownedDigitalItems] : []
+
+                    for (let item of orderDetails.digitalItems) {
+                      if (!newDigitalItems.some(existingItem => existingItem.productId === item.productId && existingItem.variantId === item.variantId)) {
+                        newDigitalItems.push(item);
+                      }
+                    }                    
+                  
+                    console.log("OLD", user.ownedDigitalItems)
+                    console.log("NEW", newDigitalItems)
                     await userRef.child('ownedDigitalItems').set(newDigitalItems)
                 }
                 else throw new Error("User could not be found!")
