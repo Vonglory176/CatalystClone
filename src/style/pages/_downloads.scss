@@ -4,21 +4,28 @@
         gap: 16px;
         
         padding: 8px 0px;
-        &:first-of-type {
-            border-top: 1px solid $primary-font-color;
-        }
         border-bottom: 1px solid $primary-font-color;
+        
+        &:first-of-type {border-top: 1px solid $primary-font-color;}
+        @media (max-width:449px) {
+            flex-direction: column;
+        }
 
         &__image-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-    
+            
             min-height: 120px;
+            min-width: 105px;
+
+            @media (max-width:449px) {margin: auto;}
             @media (min-width:750px) {
                 min-height: 180px;
+                min-width: 140px;
             }
-    
+
+            border: 1px solid $primary-font-color;
     
             a {
                 display: flex;
@@ -40,8 +47,9 @@
         }
 
         &__detail-wrapper {
+            @media (max-width:449px) {text-align: center;}
             a {
-                color: $secondary-color;
+                color: $primary-font-color; //$secondary-color;
                 &:hover {
                     color: $secondary-hover-color;
                 }
