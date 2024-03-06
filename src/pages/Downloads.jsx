@@ -27,7 +27,7 @@ export default function Downloads() {
 
     const printOwnedItems = () => {
         if (ownedItemDetails && ownedItemDetails.length > 0) {
-            return ownedItemDetails.map((item, index) => {
+            return ownedItemDetails.slice().reverse().map((item, index) => { //In order of purchase (new to old)
                 const product = getProductById(products, item.productId)
                 const variant = Object.values(product.variants).find(variant => variant.id === item.variantId)
 
@@ -52,7 +52,7 @@ export default function Downloads() {
                         </div>
                         <div className="downloadable-item__detail-wrapper">
                             <Link to={productLink} title="View product details"><h3>{product.name} - PDF</h3></Link>
-                            <p>FILE NAME HERE <br/> FILE SIZE HERE</p>
+                            <p>FILE NAME HERE ( 100MB )</p>
                             <input type="button" value="Disabled" className='btn sold-out'/>
                         </div>
                     </div>
