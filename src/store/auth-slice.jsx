@@ -122,7 +122,7 @@ export const createNewAccount = createAsyncThunk(
                         phone: "",
                     }
                 ],
-                orders: false,
+                ownedDigitalItems: []
             })
             //Automatically logging into the new Account after creation
             thunkAPI.dispatch(loginWithUserDetails({email, password}))
