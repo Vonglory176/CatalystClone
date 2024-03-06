@@ -150,8 +150,8 @@ TODO
 -------------------
 Prime Features!
 ------
-Guest Checkout
 Password Recovery
+Guest Checkout
 "Back to" banners ?
 
 Do Right now!
@@ -161,9 +161,7 @@ useMemo()?
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
 Create proper styling (Maybe screen swap too) for Captchas
 
-BUG: Notification occasionally does not stick to top in mobile?
 MINOR: Logout page has bad styling
-MINOR: Give min-height to getting-started button in HOME
 
 Find other places to use load screen?
 
@@ -185,7 +183,7 @@ Method of getting product-link in orderHistory is scuffed, maybe fix? (USE STRIP
 Finish styling
 
 DOWNLOADS ------------------------------------
-Add styling to downloads page (Size images properly, similar to cart)
+BUG: Need to solve issue with storing data. Can't have duplicate product entries, but also need to distinguish variants
 ADD PROPER FILE TYPE TO DOWNLOAD
 
 CHECKOUT/CART ------------------------------------
@@ -194,13 +192,6 @@ Auto-Checkout/Checkout is insane and needs cleanup
 
 Add copy of redux-cart (Prod/VarIDs' into Stripe metadata)?
 Change cart checkout item removal to only those in the order?
-
-PRODUCT PAGE ------------------------------------
-BUG: Equalize Image & Desc when no thumbnail gallery (Display block + margins seemed to work)
-BUG: Add a height limit to main image
-
-Add default size to pictures (General picture style changes)
-Finish styling (Image container min/max + popin on orientation change)
 
 NOTIFICATIONS/ERROR HANDLING ------------------------------------
 Alter login error notif to better describe specific issues (No email/pass, Wrong email/pass, no captcha)
