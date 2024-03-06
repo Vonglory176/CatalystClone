@@ -159,14 +159,15 @@ export default function Products() {
     const viewportWidth = useViewportWidth()
 
     return (
-        <div id="Products-Container">
+        <div id="Products-Container" className={productImages?.length > 1? `grid_60-40` : `grid_50-50`}>
             {productImages && <ReactImageGallery
             items={productImages} 
             showPlayButton={false}
             showNav={productImages.length > 1? true : false}
             showThumbnails={productImages.length > 1? true : false}
-            thumbnailPosition={viewportWidth < 750 ? "bottom" : "left"} //USE TO CHANGE FROM BOTTOM TO SIDE
+            thumbnailPosition={viewportWidth < 750 || productImages.length === 1? "bottom" : "left"} //USE TO CHANGE FROM BOTTOM TO SIDE
             useBrowserFullscreen={false}
+            // showFullscreenButton={false}
             //onErrorImageURL: String, default undefined
 
             // onClick={() => setImageIsExpanded(prevToggle => {return prevToggle? false : true})}
