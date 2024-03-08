@@ -1,14 +1,21 @@
 #Login-Container {
 
     .content-block {
-        background: $accent-lighter-color;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        
         max-width: 445px; //560px;
-        padding: 30px;
+        padding: 30px 2px; //30px
         margin: auto;
+        background: $accent-lighter-color;
         
         .customerForm {
             display: flex;
             flex-direction: column;
+            margin: auto;
+            // min-height: 381px;
+            // width: 300px;
 
             //Title
             h1 {
@@ -17,6 +24,11 @@
             text-align: center;
 
             //Inputs
+            // input {
+                // margin-left: 10px;
+                // margin-right: 10px;
+            // }
+
             .btn {
                 background: $primary-font-color;
                 letter-spacing: normal;
@@ -36,7 +48,6 @@
                     color: $secondary-hover-color;
                 }
             }
-
         }
 
     }
