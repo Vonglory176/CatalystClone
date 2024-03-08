@@ -14,7 +14,7 @@ export default function ProductCard({product}) {
                         
     const productLink = product.id
     const productUniverse = getProductUniverse(product)
-    const productName = product.name
+    const productName = getEllipses(`${productUniverse} ${product.name}`, 28) //product.name
     const productPrice = variant.price
 
     const isOnSale = product.isOnSale
@@ -24,8 +24,13 @@ export default function ProductCard({product}) {
     const variantDiscountPrice = !isOnSale? 0 : variant.discountedPrice
     const variantDiscountPercentage = (((variantPrice - variantDiscountPrice) / variantPrice) * 100).toFixed(0)
 
+    function getEllipses(string, maxLength) {
+        if (string.length > maxLength) return string.substring(0, maxLength) + " ..."
+        else return string
+    }
+
     return (
-        <Link to={`/products/${productLink}`} className={"product-card"} title="View product details">
+        <Link to={`/products/${productLink}`} className={"product-card"} title={`View "${productUniverse}${product.name}"`}>
             {isOnSale && !isFree && <div className="sale-badge badge">{variantDiscountPercentage}% off</div>}
 
             <div className="product-card__image-container">
@@ -47,7 +52,8 @@ export default function ProductCard({product}) {
             </div>
             <div className="product-card__info">
                 <div className="product-card__name">
-                    {`${productUniverse} ${productName}`}
+                    {/* {`${productUniverse} ${productName}`} */}
+                    {`${productName}`}
                 </div>
                 <div className="product-card__price">
                     {/* {product.isOnSale && <div className="product-tag">Sale</div>} */}
@@ -62,7 +68,6 @@ export default function ProductCard({product}) {
         </Link>
     )
 }
-
 /* TO USE THIS YOU NEED..
     -Link
     -Picture
