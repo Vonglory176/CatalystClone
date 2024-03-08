@@ -7,7 +7,7 @@ import "./style/index.css"
 import store, { persistor } from './store/index.jsx'
 import { PersistGate } from 'redux-persist/integration/react'
 import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { fetchUserDetails, authActions } from './store/auth-slice.jsx'
+import { fetchUserDetails } from './store/auth-slice.jsx'
 import { Provider, useDispatch } from 'react-redux'
 
 import firebaseApp from '../functions/firebaseConfig'
@@ -17,24 +17,17 @@ const auth = getAuth()
 const AppWrapper = () => {
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+  useEffect(() => {    
+    const maintainLoginStatus = onAuthStateChanged(auth, async (user) => {
+      // User is signed in
       if (user) {
-        // User is signed in
-        console.log('User is signed in:', user);
-        // Dispatch an action to fetch user details from the database
-        dispatch(fetchUserDetails());
-      } else {
-        // User is signed out
-        console.log('User is signed out');
-        // Dispatch an action to update the store on sign-out
-        dispatch(authActions.logout());
+        dispatch(fetchUserDetails())
       }
-    });
+    })
 
-    // Cleanup subscription on unmount
-    return () => unsubscribe()
-  }, [dispatch]); // Add dispatch to the dependency array
+    // Cleanup on unmount
+    return () => maintainLoginStatus()
+  }, []) //dispatch
 
   return <App/>
 }
