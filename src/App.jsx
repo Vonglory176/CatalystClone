@@ -19,8 +19,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchProducts } from './store/products-slice'
 import { fetchUserDetails } from './store/auth-slice'
+import { getAuth } from 'firebase/auth'
 
 function App() {
+  const auth = getAuth()
   const dispatch = useDispatch()
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
@@ -51,10 +53,10 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
               
           {/* Account */}
-          <Route path="/account" element={isLoggedIn ? <Account /> : <Navigate to="/account/login" replace state={{ from: location.pathname + location.search}} />}/>
+          <Route path="/account" element={auth.currentUser ? <Account /> : <Navigate to="/account/login" replace state={{ from: location.pathname + location.search}} />}/>
 
           {/* Account Required Pages "Login to continue" */}
-          <Route path="/" element={isLoggedIn ? <Outlet /> : <Navigate to="/account/login" replace state={{ ...location.state, from: location.pathname + location.search, message: "Login to continue" }} />}>
+          <Route path="/" element={auth.currentUser ? <Outlet /> : <Navigate to="/account/login" replace state={{ ...location.state, from: location.pathname + location.search, message: "Login to continue" }} />}>
             {/* <Route index element={<Account/>}/> */}
             <Route path="account/addresses" element={<Addresses/>}/>
             <Route path="account/downloads" element={<Downloads/>}/>
@@ -65,7 +67,7 @@ function App() {
           </Route>
 
           {/* Login handler */}
-           <Route path="/account" element={!isLoggedIn ? <Outlet /> : <Navigate to={location.state?.from || '/account'} state={{...location.state}} replace />}> {/* element={!isLoggedIn ? <Outlet /> : <Navigate to="/account" replace />} */}
+           <Route path="/account" element={!auth.currentUser ? <Outlet /> : <Navigate to={location.state?.from || '/account'} state={{...location.state}} replace />}> {/* element={!isLoggedIn ? <Outlet /> : <Navigate to="/account" replace />} */}
             <Route path="login" element={<Login/>}/>
             <Route path="register" element={<Register/>}/>
           </Route>
@@ -159,11 +161,6 @@ Do Right now!
 useMemo()?
 
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
-Create proper styling (Maybe screen swap too) for Captchas
-
-MINOR: Logout page has bad styling
-
-Find other places to use load screen?
 
 Do Later!
 ------
@@ -176,11 +173,7 @@ Create logic to "timeout" the order details after X time (24hrs?)?
 Digital items?
 
 ACCOUNT ------------------------------------
-BUG: Account Login/Create info shows in the network console. Use serverless function
-MINOR: Async hiccups after creating account. Watch console/redirects (Redirection also has some momentary confusion)
-
-Method of getting product-link in orderHistory is scuffed, maybe fix? (USE STRIPE METADATA)
-Finish styling
+CLEANING: Method of getting product-link in orderHistory is scuffed, maybe fix? (USE STRIPE METADATA)
 
 DOWNLOADS ------------------------------------
 BUG: Need to solve issue with storing data. Can't have duplicate product entries, but also need to distinguish variants
@@ -188,32 +181,18 @@ ADD PROPER FILE TYPE TO DOWNLOAD
 
 CHECKOUT/CART ------------------------------------
 MINOR: Type issue with saving digital items to order metadata ("checkoutCart.cjs")
-Auto-Checkout/Checkout is insane and needs cleanup
-
-Add copy of redux-cart (Prod/VarIDs' into Stripe metadata)?
-Change cart checkout item removal to only those in the order?
-
-NOTIFICATIONS/ERROR HANDLING ------------------------------------
-Alter login error notif to better describe specific issues (No email/pass, Wrong email/pass, no captcha)
+CLEANING: Auto-Checkout/Checkout is insane and needs cleanup
 
 GENERAL ------------------------------------
 Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
 Add better image placeholders
-Add sizes to images
 HTML Labels, Aria, etc
 
-PRODUCT CARD ------------------------------------
-MINOR: Issue with text overflow
-
 COLLECTION-BLOCK ------------------------------------
-Clean up auto product load code
-
-HEADER ------------------------------------
-BUG: Sticky header pops in on activation
-MINOR: Sticky header pops in on first render
+CLEANING: Clean up auto product load code
 
 CONTACT ------------------------------------
-Add form functionality?
+Give form a use or disable
 
 
 
@@ -234,12 +213,26 @@ ON THE BACK BURNER --------------------- |||||||||||||||||||||||||||||||||||||||
 
 HEADER ------------------------------------
 Create close button for notification?
+MINOR: Sticky header pops out on deactivation
 
 HOME ------------------------------------
 Add images to slideshow?
 
+PRODUCT CARD ------------------------------------
+MINOR: Text overflow can still be improved
+
+NOTIFICATIONS/ERROR HANDLING ------------------------------------
+Standard/Centralize error message code
+
+LOGOUT ------------------------------------------------
+Bad styling (Not vertically centered)
+
 ORDERS/HISTORY ------------------------------------
 MINOR: If an order (Not the most recent) is deleted from the database, creating a new one overwrites the most recent
+
+CHECKOUT/CART ------------------------------------
+Add copy of redux-cart (Prod/VarIDs' into Stripe metadata)?
+Change cart checkout item removal to only those in the order?
 
 ADDRESSES ------------------------------------
 BUG: Address "isDefaultAddress" counts as difference
