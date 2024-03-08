@@ -21,10 +21,12 @@ export default function Pagination({resultsPerPage, onChange, localProductList, 
                 const elementPosition = element.getBoundingClientRect().top + window.scrollY
                 const offsetPosition = elementPosition - offset // Subtract the offset
     
-                window.scrollTo({
-                    top: offsetPosition,
+                if (window.scrollY > elementPosition) {
+                    window.scrollTo({
+                        top: offsetPosition,
                     behavior: "smooth"
                 })
+            }
             }
 
             //Setting new page
@@ -48,7 +50,7 @@ export default function Pagination({resultsPerPage, onChange, localProductList, 
     return (
         <div className="pagination">
             <button className="pagination__previous-button" onClick={() => handlePageChange(-1)}>Previous</button>
-            <span className="pagination__page-count">{currentPage} of {pageCount}</span>
+            <span className="pagination__page-count">{currentPage || 1} of {pageCount || 1}</span>
             <button className="pagination__next-button" onClick={() => handlePageChange(+1)}>Next</button>
         </div>
     )
