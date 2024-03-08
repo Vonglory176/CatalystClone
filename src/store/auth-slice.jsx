@@ -12,18 +12,12 @@ const auth = getAuth()
 export const fetchUserDetails = createAsyncThunk(
     'auth/fetchUserDetails',
     async ( _, thunkAPI ) => {
-        console.log("Fetching Account Details")
         try {
             //Get current state and check login status (w/Local UID)
             const state = thunkAPI.getState()
-            console.log(state)
-            if (!state.auth.isLoggedIn || !state.auth.user.userId ) return null
-            
-            // let userID
-            // try {
-            //     userID = auth.currentUser.uid
-            //     console.log(userID)
-            // } catch (error) {}
+            // console.log(state)
+            if (!auth.currentUser || !state.auth.isLoggedIn || !state.auth.user ) return null
+            console.log("Fetching Account Details")
 
             //Getting Account details from Firebase to use locally
             const userRef = ref(getDatabase(), `accounts/${state.auth.user.userId}`)
@@ -46,7 +40,7 @@ export const loginWithUserDetails = createAsyncThunk(
     async ( {email, password, token}, thunkAPI ) => {
         try {
         //Validating ReCAPTCHA
-        console.log(token)
+        // console.log(token)
             const responseCode  = await fetchCaptchaVerification(token)
             if (responseCode !== 0) throw new Error("Failed CAPTCHA verification")
 
@@ -68,9 +62,14 @@ export const loginWithUserDetails = createAsyncThunk(
         catch (error) {
             console.error('Login failed:', error.message) //error.code
 
+            let notificationMessage = "Something went wrong!"
+            if (error.message === "Failed CAPTCHA verification") notificationMessage = "Failed CAPTCHA verification."
+            else if (error.message === "Firebase: Error (auth/invalid-credential).") notificationMessage = "Incorrect email or password."
+            else if (error.message === "Both an Email and Password are required") notificationMessage = "Both an Email and Password are required."
+
             // Create an outcome notification
             thunkAPI.dispatch(showAndHideNotification({
-                message: 'Incorrect email or password.',
+                message: notificationMessage,
                 type: 'error'
             }))
 
@@ -128,11 +127,16 @@ export const createNewAccount = createAsyncThunk(
             thunkAPI.dispatch(loginWithUserDetails({email, password}))
         }
         catch (error) {
-            console.error('Registration failed:', error.code, error.message) //error.code
+            console.error('Registration failed:', error.message) //error.message
+
+            let notificationMessage = "Something went wrong!"
+            if (error.message === "Failed CAPTCHA verification") notificationMessage = "Failed CAPTCHA verification."
+            if (error.message === "auth/email-already-in-use") notificationMessage = "This email address is already associated with an account."
+            if (error.message === "Both an Email and Password are required") notificationMessage = "Both an Email and Password are required."
 
             // Create an outcome notification
             thunkAPI.dispatch(showAndHideNotification({
-                message: 'This email address is already associated with an account.',
+                message: notificationMessage,
                 type: 'error'
             }))
 
@@ -301,9 +305,11 @@ const authSlice = createSlice({
                 state.user = null
 
                 // Logging out w/Firebase-Auth
-                signOut(auth)
+                // if (auth.currentUser) {
+                    signOut(auth)
+                    console.log("Logout successful")
+                // }
                 
-                console.log("Logout successful")
             }
             catch (error) {
                 console.error("Logout failure: " + error)
@@ -321,14 +327,14 @@ const authSlice = createSlice({
                 state.user = action.payload
                 state.status = 'Account fetch successful'
                 console.log(state.status)
-                console.log(state.user)
+                // console.log(state.user)
             }
         })
         //Retrieval Failure
         .addCase(fetchUserDetails.rejected, (state, action) => {
             state.error = action.error.message
             state.status = 'Account fetch failed'
-            console.error(state.error)
+            // console.error(state.error)
         })
 
     //// ACCOUNT LOGIN //////////////////////////////////////////////////////////////////////////////
@@ -346,7 +352,7 @@ const authSlice = createSlice({
         .addCase(loginWithUserDetails.rejected, (state, action) => {
             state.error = action.error.message
             state.status = 'Login failed'
-            console.error(state.error)
+            // console.error(state.error)
         })
 
     //// ACCOUNT REGISTER //////////////////////////////////////////////////////////////////////////////
@@ -364,7 +370,7 @@ const authSlice = createSlice({
         .addCase(createNewAccount.rejected, (state, action) => {
             state.error = action.error.message
             state.status = 'Registration failed'
-            console.error(state.error)
+            // console.error(state.error)
         })
 
     //// ADDRESS CREATION //////////////////////////////////////////////////////////////////////////////
@@ -381,7 +387,7 @@ const authSlice = createSlice({
         .addCase(createNewUserAddress.rejected, (state, action) => {
             state.error = action.error.message
             state.status = 'Address creation failed'
-            console.error(state.error)
+            // console.error(state.error)
         })
 
     //// ADDRESS UPDATE //////////////////////////////////////////////////////////////////////////////
@@ -391,13 +397,13 @@ const authSlice = createSlice({
             state.user.addresses = action.payload
 
             state.status = 'Address update successful'
-            console.log(state.status)
+            // console.log(state.status)
         })
         //Address Update Failure
         .addCase(updateUserAddress.rejected, (state, action) => {
             state.error = action.error.message
             state.status = 'Address update failed'
-            console.error(state.error)
+            // console.error(state.error)
         })
 
     //// ADDRESS REMOVAL //////////////////////////////////////////////////////////////////////////////
@@ -407,13 +413,13 @@ const authSlice = createSlice({
             state.user.addresses = action.payload
 
             state.status = 'Address removal successful'
-            console.log(state.status)
+            // console.log(state.status)
         })
         //Address Removal Failure
         .addCase(removeUserAddress.rejected, (state, action) => {
             state.error = action.error.message
             state.status = 'Address removal failed'
-            console.error(state.error)
+            // console.error(state.error)
         })
     },
 })
