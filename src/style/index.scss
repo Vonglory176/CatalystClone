@@ -219,9 +219,13 @@ input, textarea, select, input[type=submit] {
     padding: 13px 15px;
     margin-bottom: 10px;
     border: 0;
-
+    outline: transparent;
     font-family: 'Karla', sans-serif;
     font-size: 16px;
+
+    &:not(.btn) {
+        background-color: white;
+    }
 }
 
 .quantity-selector {
@@ -330,6 +334,11 @@ input[type='number']::-webkit-outer-spin-button {
     // -webkit-appearance: none;
     // -moz-appearance: none;
     // appearance: none;
+}
+
+.recaptcha {
+    margin: auto;
+    padding-bottom: 10px;
 }
 
 .dropdown {
