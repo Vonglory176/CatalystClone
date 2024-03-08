@@ -42,7 +42,7 @@ exports.handler = async function(event, context) {
         if (orderHistory.length > 0) return { statusCode: 200, body: JSON.stringify(orderHistory) }
 
         // No orders were found
-        else return { statusCode: 404, body: 'No previous orders found' }
+        else return { statusCode: 204, body: 'No previous orders found' }
 
     } catch (error) {
         console.error('Error querying order:', error)

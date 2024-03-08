@@ -36,7 +36,7 @@ exports.handler = async function(event, context) {
         if (ownedDigitalItems && ownedDigitalItems.length > 0) return { statusCode: 200, body: JSON.stringify(ownedDigitalItems) }
 
         // No Digital-Items were found
-        else return { statusCode: 404, body: 'No owned digital items found' }
+        else return { statusCode: 204, body: 'No owned digital items found' }
 
     } catch (error) {
         console.error('Error querying order:', error)
