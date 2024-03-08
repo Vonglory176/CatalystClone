@@ -29,7 +29,7 @@ const uiSlice = createSlice({
   reducers: {
     showNotification(state, action) {
         console.log("Notification being set!")
-        console.log(action.payload)
+        // console.log(action.payload)
 
         state.notification = {
             message: action.payload.message,

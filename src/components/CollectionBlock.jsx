@@ -62,7 +62,7 @@ export default function CollectionBlock(
                     if (filteredProductList.length === 0) filteredProductList = localProductList
                     filteredProductList = shuffleArray(filteredProductList)
                     localProductList = shuffleArray(localProductList)
-                    console.log(filteredProductList)
+                    // console.log(filteredProductList)
 
                 let productCardArray = []
                 for (let i = 0; i < (characterImageSrc ? 4 : 5) ; i++) { // && i < filteredProductList.length

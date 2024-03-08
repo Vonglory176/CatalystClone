@@ -38,7 +38,7 @@ export default function Cart() {
 
     //Check URL, auto checkout if "cart/checkout" (This would be after redirect to/from login page)
     useEffect(() => {
-        console.log(location)
+        // console.log(location)
         if(location.pathname === "/cart/checkout" && cartItemList?.length > 0) handleCheckout()
         else if (location.pathname === "/cart/checkout") navigate("/cart", {replace:true})
     }, [])
@@ -64,7 +64,7 @@ export default function Cart() {
             //Use new product to create cartItem
 
             let productIdList = cartItemList.map(item => ({ ...item }))
-            console.log(productIdList);
+            // console.log(productIdList);
 
             let tempCartItemsHtml = []
             let tempTotalPrice = 0
@@ -130,7 +130,7 @@ export default function Cart() {
             setTotalPrice((tempTotalPrice).toFixed(2))
         }
 
-        console.log(cartItemList)
+        // console.log(cartItemList)
     },[status, cartItemList]) //Might be firing too soon?
 
     return (

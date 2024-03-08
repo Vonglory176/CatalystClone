@@ -19,13 +19,9 @@ export default function Account() {
     }, [user])
 
     const doneLoadingCallback = () => {
-        console.log("HERE")
         setDoneLoading(true)
     }
 
-    useEffect(() => {
-        console.log(doneLoading)
-    }, [doneLoading])
     // <img src={loaderGif} className="loading-gif" alt="Loading..." />
 
     return (
