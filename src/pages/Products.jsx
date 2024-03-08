@@ -7,6 +7,7 @@ import ReactImageGallery from "react-image-gallery"
 import placeholderImage from "../assets/placeholder.png"
 import ProgressiveImage from "react-progressive-image"
 import useViewportWidth from "../hooks/useViewportWidth"
+import LoadingScreen from "../components/LoadingScreen"
 
 export default function Products() {
     const productList = useSelector(state => state.products.productList)
@@ -41,7 +42,7 @@ export default function Products() {
                 if (!product) console.log("ERROR: Could not find product information!")
                 return product
             })
-            console.log(currentProduct)
+            // console.log(currentProduct)
         }
     },[id, productList])
 
@@ -68,7 +69,7 @@ export default function Products() {
                 <option 
                 key={variant} 
                 value={variantId}
-                selected={searchParamVariantId === variantId? true : false} //...searchParamVariantId
+                // selected={searchParamVariantId === variantId? true : false} //...searchParamVariantId
                 >
                     {variantArrayList[variant].name}
                 </option>
@@ -104,13 +105,10 @@ export default function Products() {
                         thumbnailAlt:image.alt,
                     }
                 })
-            }
-
-            console.log("HERE")
-            
+            }            
 
             let tempCombinedProductImages = [...tempVariantImages, ...tempProductImages]
-            console.log(tempCombinedProductImages)
+            // console.log(tempCombinedProductImages)
             setProductImages(tempCombinedProductImages)
         }
     }, [currentProduct, searchParams])
@@ -160,6 +158,8 @@ export default function Products() {
 
     return (
         <div id="Products-Container" className={productImages?.length > 1? `grid_60-40` : `grid_50-50`}>
+            {!currentProduct && <LoadingScreen/>}
+
             {productImages && <ReactImageGallery
             items={productImages} 
             showPlayButton={false}
@@ -195,7 +195,7 @@ export default function Products() {
                         {currentProduct && currentProduct.variantType &&
                         <div className="products-form__variant-selector-wrapper">
                             <label htmlFor="Variant-Selector">{currentProduct.variantType}</label>
-                            <select name="Variant-Selector" id="Products-Form__Variant-Selector" onChange={handleSelectVariantChange}>
+                            <select name="Variant-Selector" id="Products-Form__Variant-Selector" value={searchParamVariantId || undefined} onChange={handleSelectVariantChange}>
                                 {variantLists.variantListHtml}
                             </select>
                         </div>
