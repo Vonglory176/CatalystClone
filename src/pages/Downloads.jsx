@@ -21,9 +21,9 @@ export default function Downloads() {
             // Fetch matching order details
             setOwnedItemDetails(await fetchOwnedDigitalItems())
             setIsDoneLoading(true)
-        }        
+        }
         if (user && auth.currentUser) getDetails()
-    }, [user, auth.currentUser])
+    }, [auth.currentUser]) //user,
 
     const printOwnedItems = () => {
         if (ownedItemDetails && ownedItemDetails.length > 0) {
