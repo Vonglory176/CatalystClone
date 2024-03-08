@@ -10,6 +10,7 @@
     button {
         color: $primary-font-color;
         background-color: $secondary-color;
+        border: none;
         &:hover {
             background-color: $secondary-hover-color;
             cursor: pointer;
