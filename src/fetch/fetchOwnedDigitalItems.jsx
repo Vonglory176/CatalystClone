@@ -19,12 +19,20 @@ export default async function fetchOwnedDigitalItems() {
         
         // If owned digital items found, save and display
         if (response.ok) {
-            const data = await response.json()
-            console.log(data)
+            // Digital-Items found
+            if (response.status === 200) {
+                const data = await response.json()
+                console.log(data)
+                return data
+            }
 
-            return data
+            // No Digital-Items present
+            else if (response.status === 204) {
+                console.log("No digital items found")
+                return null
+            }
         }
-        else throw new Error('No owned digital items found')
+        else throw new Error(`${response.status} - ${response.statusText}`)
         
     } catch (error) {
         console.error("Error fetching owned digital items:", error)

@@ -19,12 +19,21 @@ export default async function fetchOrderHistory() {
         
         // If history found, save and display
         if (response.ok) {
-            const data = await response.json()
-            console.log(data)
 
-            return data
+            // Orders found
+            if (response.status === 200) {
+                const data = await response.json()
+                console.log(data)
+                return data
+            }
+
+            // No orders present
+            else if (response.status === 204) {
+                console.log("No order history found")
+                return null
+            }
         }
-        else throw new Error('No order history found')
+        else throw new Error(`${response.status} - ${response.statusText}`)
         
     } catch (error) {
         console.error("Error fetching order history:", error)
