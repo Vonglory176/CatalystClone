@@ -86,18 +86,28 @@
             height: 59.25px;
         }
     }
+
+    @keyframes slideDown {
+        from {
+            top: -100%; // Start from above the viewport
+        }
+        to {
+            top: 0; // End at its intended sticky position
+        }
+    }
     
     &__lower {
         &.isSticky {
             position: fixed;
-            width: 100%; 
+            width: 100%;
             transition: all .35s cubic-bezier(.33,.59,.14,1);
+            animation: slideDown .35s cubic-bezier(.33,.59,.14,1) both;
             
-            @media (max-width:749px) {
-                top: 0;
-            }
+            // @media (max-width:749px) {
+            //     top: 0;
+            // }
             @media (min-width:750px) {   
-                top: 0;
+                // top: 0;
 
                 .header__lower-nav {
                     position: relative;
