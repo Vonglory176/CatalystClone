@@ -18,12 +18,12 @@ export default function Login() {
         const email = e.target.elements['customer[email]'].value
         const password = e.target.elements['customer[password]'].value
         const token = recaptchaRef.current.getValue()
-        console.log(token)
+        // console.log(token)
 
         // Token is verified in redux/server
         dispatch(loginWithUserDetails({email, password, token}))
     }
-    console.log(location)
+    // console.log(location)
 
     const [passwordRecovery, setPasswordRecovery] = useState(false)
     const togglePasswordRecovery = () => setPasswordRecovery((r) => !r)
@@ -33,9 +33,9 @@ export default function Login() {
             <h1>{location.state?.message || "Login"}</h1>
             <input type="email" name="customer[email]" id="CustomerEmail" placeholder="Email"/>
             <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Password"/>
-            <ReCAPTCHA ref={recaptchaRef} sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} />
         
-            <p><input type="submit" className="btn" value={"Sign In"}/></p>
+            <input type="submit" className="btn" value={"Sign In"}/>
+            <ReCAPTCHA className="recaptcha" ref={recaptchaRef} sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} />
 
 
             <a onClick={togglePasswordRecovery}>Forgot your password?</a>
@@ -49,10 +49,11 @@ export default function Login() {
 
     
     const passwordRecoveryDiv = (
-        <form method="post" action="/account/login" id="Customer-Recover" className="customerForm" onSubmit={()=>{return}}>
+        <form method="post" action="/" id="Customer-Recover" className="customerForm" onSubmit={()=>{return}}>
             <h1>Reset your password</h1>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-            <input type="text" name="customer[email]" id="RecoverEmail" placeholder="Email"/>
+            <input type="text" name="blank" style={{display: "none"}}/> {/* To stop auto-completion */}
+            <input required type="email" name="customer[email]" id="CustomerEmailRecover" placeholder="Email"/>
         
             <p><input type="submit" className="btn" value={"Submit"}/></p>
 
