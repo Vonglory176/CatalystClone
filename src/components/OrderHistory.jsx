@@ -14,7 +14,7 @@ export default function OrderHistory({doneLoadingCallback}) {
   useEffect(() => {
       const getOrders = async () => {
           const authToken = await auth.currentUser.getIdToken()
-          console.log('Token:', authToken)
+          // console.log('Token:', authToken)
 
           setOrderHistory(await fetchOrderHistory())
           doneLoadingCallback(true)
@@ -43,24 +43,23 @@ export default function OrderHistory({doneLoadingCallback}) {
     <div className="order-history">
         <h2>Order History</h2>
         {orderHistory?
+        <div className="order-history__table-wrapper">
           <table className="responsive-table">
             <thead>
               <tr>
                 <th>Order</th>
                 <th>Date</th>
-                <th>Payment</th> {/* Payment Status */}
-                <th>Status</th> {/* Fulfillment Status */}
+                <th>Payment</th>
+                <th>Status</th>
                 <th>Total</th>
               </tr>
             </thead>
-
             <tbody>
               {printOrderRows()}              
             </tbody>
           </table>
-
+        </div>
           :
-
           (orderHistory === null? 
             <p>You haven't placed any orders yet</p> : 
             <p>Loading your order...</p>
