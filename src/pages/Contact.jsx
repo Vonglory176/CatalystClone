@@ -1,7 +1,9 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { useState } from "react"
 
 export default function Contact() {
+    const [reason, setReason] = useState('default')
     return (
     <div id="Contact-Container">
         <h1 className="h1">Contact</h1>
@@ -17,25 +19,25 @@ export default function Contact() {
             </p>
         </div>
         <div className="content-block">
-            <form action="!#" className="contact-form">
+            <form action="/" className="contact-form">
                 <div className="contact-form__input-group">
-                    <input required type="text" id="ContactFormName" name="contact[name]" placeholder="Name"/>
-                    <input required type="text" id="ContactFormEmail" name="contact[email]" placeholder="Email"/>
+                    <input required type="name" id="ContactFormName" name="contact[name]" placeholder="Name"/>
+                    <input required type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email"/>
                 </div>
 
-                <input required type="text" id="ContactFormNumber" name="contact[number]" placeholder="Store order number"/>
+                <input type="text" id="ContactFormNumber" name="contact[number]" placeholder="Store order number"/>
 
                 <label htmlFor="ContactFormReason">Reason for contacting</label>
-                <select required id="ContactFormReason" name="contact[reason]" onchange="">
-                    <option disabled selected value>Select a Reason</option>
-                    <option>General Inquiry</option>
-                    <option>Game Design Submissions</option>
-                    <option>Art Portfolio Submissions</option>
-                    <option>Damaged or Missing Pieces</option>
-                    <option>Missing PDF</option>
-                    <option>Store Order Issues</option>
-                    <option>Kickstarter Issues</option>
-                    <option>Canon Character</option>
+                <select required id="ContactFormReason" name="contact[reason]" value={reason} onChange={(e) => setReason(e.target.value)}>
+                    <option disabled value="default">Select a Reason</option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Game Design Submissions">Game Design Submissions</option>
+                    <option value="Art Portfolio Submissions">Art Portfolio Submissions</option>
+                    <option value="Damaged or Missing Pieces">Damaged or Missing Pieces</option>
+                    <option value="Missing PDF">Missing PDF</option>
+                    <option value="Store Order Issues">Store Order Issues</option>
+                    <option value="Kickstarter Issues">Kickstarter Issues</option>
+                    <option value="Canon Character">Canon Character</option>
                     <option value="Other">Other</option>
                 </select>
                 <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="Message"></textarea>
