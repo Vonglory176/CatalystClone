@@ -22,18 +22,22 @@
         @media (max-width: 749px) {
             height: 235px;       
         }
-        @media (min-width: 750px) and (max-width: 877px) {
-            height: 110px;
+        @media (min-width: 750px) {
+            height: calc(110px + (200 - 110) * ((100vw - 750px) / (1079 - 750)));
+            max-height: 200px;
         }
-        @media (min-width: 878px) and (max-width: 963px) {
-            height: 140px;
-        }
-        @media (min-width: 964px) and (max-width: 1078px) {
-            height: 170px;
-        }
-        @media (min-width: 1079px) {
-            height: 200px;
-        }
+        // @media (min-width: 750px) and (max-width: 877px) {
+        //     height: 110px;
+        // }
+        // @media (min-width: 878px) and (max-width: 963px) {
+        //     height: 140px;
+        // }
+        // @media (min-width: 964px) and (max-width: 1078px) {
+        //     height: 170px;
+        // }
+        // @media (min-width: 1079px) {
+        //     height: 200px;
+        // }
     }
 
     &__image {
