@@ -1603,7 +1603,7 @@
 .header__upper .company-logo__image {
   width: 140px;
   max-width: 140px;
-  height: 71.86px;
+  min-height: 71.86px;
 }
 .header .store-btns {
   display: flex;
@@ -1873,6 +1873,7 @@
 }
 .offcanvas-nav .offcanvas-body button i {
   transition: transform 0.3s ease-in-out;
+  color: #222;
 }
 .offcanvas-nav .offcanvas-body button i:is(.rotateIcon) {
   transform: rotate(45deg);
@@ -2077,6 +2078,7 @@
 .mailListSignUp {
   background-color: #fff;
   max-width: 700px;
+  margin: auto;
 }
 @media (min-width: 750px) {
   .mailListSignUp {
@@ -2450,7 +2452,7 @@
 }
 #Home-Container .getting-started__button {
   width: 95%;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
   height: calc(90px + 113 * (100vw - 503px) / 648);
   max-height: 211px;
 }
@@ -3394,7 +3396,10 @@
   background-color: #222;
   margin-bottom: -6px;
 }
-.homeLayout .main-content .carousel img {
+.homeLayout .main-content .carousel .carousel-item {
+  min-height: calc(113.375px + 188.922 * (100vw - 320px) / 580);
+}
+.homeLayout .main-content .carousel .carousel-item img {
   min-height: calc(246px + 218 * (100vw - 750px) / 650);
 }
 .homeLayout .main-content .divider {
@@ -3418,7 +3423,8 @@
           backdrop-filter: blur(10px);
 }
 .homeLayout .main-content-wrapper .page-width {
-  width: 100vw;
+  width: 100%;
+  min-width: 320px;
   max-width: 1180px;
 }
 @media (min-width: 1300px) {
@@ -3858,15 +3864,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .imgLoaded {
-  filter: blur(0px);
-  transition: filter 0.5s linear;
+  transition: opacity 0.5s linear;
+  opacity: 1;
 }
 
 .imgLoading {
-  filter: blur(10px) !important;
-  -webkit-clip-path: inset(0);
-          clip-path: inset(0);
-  animation: pulse 2.5s infinite;
+  opacity: 0;
 }
 
 @keyframes pulse {
