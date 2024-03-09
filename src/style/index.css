@@ -1603,7 +1603,7 @@
 .header__upper .company-logo__image {
   width: 140px;
   max-width: 140px;
-  min-height: 100%;
+  height: 71.86px;
 }
 .header .store-btns {
   display: flex;
