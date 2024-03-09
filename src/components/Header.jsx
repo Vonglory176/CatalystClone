@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import Searchbar from './Searchbar'
 import catalystLogo from "../assets/logo-catalyst2_450x.webp"
 import { useLocation } from "react-router-dom"
+import ProgressiveImage from 'react-progressive-image'
 
 export default function Header() {
     const isLoggedIn = useSelector(state=> state.auth.isLoggedIn)
@@ -75,7 +76,10 @@ export default function Header() {
 
                 <div className="company-logo">
                     <Link to={"/"} className={"company-logo__link"}> {/* reloadDocument */}
-                        <img src={catalystLogo} className="company-logo__image" alt="Catalyst Game Labs Logo"/>
+                        <ProgressiveImage src={catalystLogo}>
+                            {(src, loading) => <img className={"company-logo__image " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={"Catalyst Game Labs Logo"}/>}
+                        </ProgressiveImage>
+                        {/* <img src={catalystLogo} className="company-logo__image" alt="Catalyst Game Labs Logo"/> */}
                     </Link>
                 </div>
 
