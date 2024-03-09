@@ -13,7 +13,7 @@
         .customerForm {
             display: flex;
             flex-direction: column;
-            margin: auto;
+            // margin: auto;
             // min-height: 381px;
             // width: 300px;
 
@@ -24,10 +24,11 @@
             text-align: center;
 
             //Inputs
-            // input {
-                // margin-left: 10px;
-                // margin-right: 10px;
-            // }
+            input {
+                max-width: calc(100% - 30px);
+                margin-left: auto;
+                margin-right: auto;
+            }
 
             .btn {
                 background: $primary-font-color;
