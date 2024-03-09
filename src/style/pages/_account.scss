@@ -11,10 +11,11 @@
             grid-template-columns: 1fr 260px;
         }
     }
-
+    
     &__Main-Container {
-        @media (min-width: 750px) {
-            .order-history {
+        .order-history {
+
+            @media (min-width: 750px) {
                 display: flex; // Ensures that overflow applies to tbody
                 flex-direction: column;
                 overflow: hidden; // Prevents the table from overflowing its container
@@ -27,8 +28,8 @@
                     z-index: 2; // Ensures thead stays on top of tbody content
                     
                     tr {
-                        border-top: 1px solid black;
-                        border-bottom: 1px solid black;
+                        border-top: 1px solid $third-font-color;
+                        border-bottom: 1px solid $third-font-color;
                     }
                 }
                 
@@ -40,7 +41,7 @@
 
                     tr {                        
                         border-top: none;
-                        &:not(:last-of-type) {border-bottom: 1px solid black;}
+                        &:not(:last-of-type) {border-bottom: 1px solid $third-font-color;}
                     }
 
                 }
@@ -55,7 +56,7 @@
                         left: 0;
                         bottom: 0;
                         right: 17px;
-                        border-bottom: 1px solid black;
+                        border-bottom: 1px solid $third-font-color;
                     }
                 }
 
@@ -67,7 +68,7 @@
                     td, th {
                         border-top: none;
                         border-bottom: none;
-                        border-right: 1px solid black;
+                        border-right: 1px solid $third-font-color;
                         &:not(:first-of-type) {border-left: none;}
                     }
                 }
@@ -80,7 +81,8 @@
 
         .order-history__table-wrapper {
             max-height: 500px;
-            overflow: auto;
+            overflow: auto;            
+            @media (max-width: 749px) {outline: 1px solid $primary-font-color;}
         }
     }
 
