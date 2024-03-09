@@ -82,7 +82,9 @@
         .order-history__table-wrapper {
             max-height: 500px;
             overflow: auto;            
-            @media (max-width: 749px) {outline: 1px solid $primary-font-color;}
+            @media (max-width: 749px) {
+                outline: 1px solid $primary-font-color;
+            }
         }
     }
 
