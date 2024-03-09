@@ -157,21 +157,21 @@ export const recoverPassword = createAsyncThunk(
     'auth/recoverPassword',
     async (email, thunkAPI) => {
         try {
-            await sendPasswordResetEmail(auth, email);
+            await sendPasswordResetEmail(auth, email)
             // Dispatch a success notification or handle success scenario
             thunkAPI.dispatch(showAndHideNotification({
                 message: "Password reset email sent. Check your inbox.",
                 type: 'success'
-            }));
-            return true;
+            }))
+            return true
         } catch (error) {
-            console.error('Password recovery failed:', error);
+            console.error('Password recovery failed:', error)
             // Dispatch an error notification or handle error scenario
             thunkAPI.dispatch(showAndHideNotification({
-                message: "Failed to send password reset email.",
+                message: "Something went wrong!",
                 type: 'error'
-            }));
-            return thunkAPI.rejectWithValue(error.message);
+            }))
+            return thunkAPI.rejectWithValue(error.message)
         }
     }
 )
