@@ -17,12 +17,17 @@
         padding: 0;
 
         .carousel {
-            img {min-height: calc(246px + (218 * (100vw - 750px) / 650));}
             background-color: $primary-font-color;
             margin-bottom: -6px;
+            
+            .carousel-item {
+                min-height: calc(113.375px + (302.297 - 113.375) * ((100vw - 320px) / (900 - 320)));
+                img {min-height: calc(246px + (218 * (100vw - 750px) / 650));}
+            }
         }
         
         .divider {
+            // margin-top: -6px;
             position: relative;
             background-color: $secondary-color;
             width: 100%;
@@ -45,9 +50,10 @@
             backdrop-filter: blur(10px);
             
             .page-width {
-                width: 100vw;
+                width: 100%;
+                min-width: 320px;
                 max-width: 1180px;
-                
+
                 @media (min-width: 1300px) {
                     max-width: 1300px;
                     padding: 0 80px;      
