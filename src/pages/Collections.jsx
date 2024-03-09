@@ -202,6 +202,23 @@ export default function Collections() {
         console.log("DONE SORTING!")
     })
 
+    //For auto-scrolling after page change
+    useEffect(() => {
+        // if (onChange) { //Scrolling to top of given element
+            const element = document.querySelector(".search-results")
+            const offset = window.innerWidth > 750? 60 : 10 // Define the offset
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY
+            const offsetPosition = elementPosition - offset // Subtract the offset
+
+            if (window.scrollY > elementPosition) {
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                })
+            }
+        // }
+    }, [localProductList]) //searchParams.get("page")
+
     //For changing the table view
     const [resultMode, setResultMode] = useState("grid-mode")
     const toggleResultMode = () => setResultMode((m) => m === "grid-mode"? "list-mode" : "grid-mode");
@@ -322,7 +339,7 @@ export default function Collections() {
                     </div>
                 </div>
 
-                <Pagination resultsPerPage={resultsPerPage} localProductList={localProductList} onChange={".search-results"} paginationCallback={setPageResults}/>
+                <Pagination resultsPerPage={resultsPerPage} localProductList={localProductList} paginationCallback={setPageResults}/>
 
                 {/* FOR MOBILE FILTERS */}
                 <Offcanvas className="offcanvas-filters" show={showSidebar} onHide={handleClose} backdrop={true} scroll={true}> {/*scroll={true}*/}
