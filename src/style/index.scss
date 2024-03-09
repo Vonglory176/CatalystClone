@@ -150,6 +150,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    background-color: $border-list-color;
 
     @media only screen and (max-width: 749px) {
 
@@ -201,6 +202,9 @@ table {
             }
         }
     }
+    tr {
+        background-color: white;
+    }
 }
 
 label {
@@ -222,6 +226,9 @@ input, textarea, select, input[type=submit] {
     outline: transparent;
     font-family: 'Karla', sans-serif;
     font-size: 16px;
+
+    -webkit-appearance: none;
+    // border-radius: 0;
 
     &:not(.btn) {
         background-color: white;
@@ -412,8 +419,8 @@ input[type='number']::-webkit-outer-spin-button {
 
         .btn-close {
             position: absolute;
-            right: -25px;
-            top: 0;
+            right: -24px;
+            top: -1px;
             height: 65px;
             margin: 0;
             border: none;
