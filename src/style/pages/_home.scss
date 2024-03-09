@@ -27,9 +27,11 @@
                 margin-bottom: 20px;
             }
             
-            &:hover {
-                @include hover-highlight-shadow;
-                transform: translateY(-5px);
+            @media (hover: hover) {
+                &:hover {
+                    @include hover-highlight-shadow;
+                    transform: translateY(-5px);
+                }
             }
         }
 
