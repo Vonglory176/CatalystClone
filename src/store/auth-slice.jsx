@@ -124,14 +124,14 @@ export const createNewAccount = createAsyncThunk(
                 ownedDigitalItems: []
             })
             //Automatically logging into the new Account after creation
-            thunkAPI.dispatch(loginWithUserDetails({email, password}))
+            thunkAPI.dispatch(loginWithUserDetails({email, password, token}))
         }
         catch (error) {
             console.error('Registration failed:', error.message) //error.message
 
             let notificationMessage = "Something went wrong!"
             if (error.message === "Failed CAPTCHA verification") notificationMessage = "Failed CAPTCHA verification."
-            if (error.message === "auth/email-already-in-use") notificationMessage = "This email address is already associated with an account."
+            if (error.message === "Firebase: Error (auth/email-already-in-use).") notificationMessage = "This email address is already associated with an account."
             if (error.message === "Both an Email and Password are required") notificationMessage = "Both an Email and Password are required."
 
             // Create an outcome notification
