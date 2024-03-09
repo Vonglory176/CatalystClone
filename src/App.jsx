@@ -167,15 +167,17 @@ PLATFORM TESTING ---
 Chrome
 Opera
 Edge
-Safari
 
 Firefox ------------
 Product pictures don't stretch in expanded view
 
-iOS -----------------
-Icon, Select, Button
-Issue with pagination scrolling (Could be due to height of result container?)
+Safari -------------
+Universe category button does not work
+Redirection to login after registration has issue "Failed Captcha Verification"
 
+iOS -----------------
+Icon is blue (Offcanvas Universe category icon)
+Select is too short (Specifically variant selector in products)
 
 Android (Use Emulator)
 
