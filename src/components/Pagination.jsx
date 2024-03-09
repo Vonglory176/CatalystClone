@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
-export default function Pagination({resultsPerPage, onChange, localProductList, paginationCallback}) {
+export default function Pagination({resultsPerPage, localProductList, paginationCallback}) {
     // console.log("IN PAGINATION")
     const [searchParams, setSearchParams] = useSearchParams({})
 
@@ -15,20 +15,6 @@ export default function Pagination({resultsPerPage, onChange, localProductList, 
         const newPage = currentPage + direction
     
         if (newPage >= 1 && newPage <= pageCount) {
-            if (onChange) { //Scrolling to top of given element
-                const element = document.querySelector(onChange)
-                const offset = window.innerWidth > 750? 60 : 10 // Define the offset
-                const elementPosition = element.getBoundingClientRect().top + window.scrollY
-                const offsetPosition = elementPosition - offset // Subtract the offset
-    
-                if (window.scrollY > elementPosition) {
-                    window.scrollTo({
-                        top: offsetPosition,
-                    behavior: "smooth"
-                })
-            }
-            }
-
             //Setting new page
             setCurrentPage(newPage)
             setSearchParams(prevSearch => {
