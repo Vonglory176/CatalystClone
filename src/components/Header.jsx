@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { Link, NavLink } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
 import Searchbar from './Searchbar'
-import catalystLogo from "../assets/logo-catalyst2_450x.webp"
+// import catalystLogo from "../assets/logo-catalyst2_450x.webp"
 import { useLocation } from "react-router-dom"
 import ProgressiveImage from 'react-progressive-image'
 
@@ -76,10 +76,9 @@ export default function Header() {
 
                 <div className="company-logo">
                     <Link to={"/"} className={"company-logo__link"}> {/* reloadDocument */}
-                        <ProgressiveImage src={catalystLogo}>
+                        <ProgressiveImage src={"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/other%2Flogo-catalyst2_450x.webp?alt=media&token=453edf2c-5772-4c80-89ab-4a5f109767ff"}>
                             {(src, loading) => <img className={"company-logo__image " + (loading? "imgLoading" : "imgLoaded")} src={src} alt={"Catalyst Game Labs Logo"}/>}
                         </ProgressiveImage>
-                        {/* <img src={catalystLogo} className="company-logo__image" alt="Catalyst Game Labs Logo"/> */}
                     </Link>
                 </div>
 
