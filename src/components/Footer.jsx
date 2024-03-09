@@ -31,21 +31,21 @@ export default function Footer() {
                         <section className="footer__section">
                             <h4 className="h1 footer__section-title">Follow Us</h4>
                             <div className="social-icons">
-                                <a href="!#">
+                                <Link to={"/"} title="Media link (Brings you to home)">
                                     <i className="fa-brands fa-facebook-f fa-lg"></i>
-                                </a>                            
+                                </Link>                            
                             
-                                <a href="!#">
+                                <Link to={"/"} title="Media link (Brings you to home)">
                                     <i className="fa-brands fa-twitter fa-lg"></i>
-                                </a>                            
+                                </Link>                            
                             
-                                <a href="!#">
+                                <Link to={"/"} title="Media link (Brings you to home)">
                                     <i className="fa-brands fa-instagram fa-lg"></i>
-                                </a>                            
+                                </Link>                            
                             
-                                <a href="!#">
+                                <Link to={"/"} title="Media link (Brings you to home)">
                                     <i className="fa-brands fa-tumblr fa-lg"></i>
-                                </a>                                
+                                </Link>                                
                             </div>
                         </section>
                     </div>
