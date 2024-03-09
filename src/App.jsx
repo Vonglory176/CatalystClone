@@ -152,9 +152,8 @@ TODO
 -------------------
 Prime Features!
 ------
-Password Recovery
 Guest Checkout
-"Back to" banners ?
+"Back to" banners?
 
 Do Right now!
 ------
@@ -163,7 +162,6 @@ USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.c
 BUG: Issue with same type/tags ("Miniatures")
 
 PLATFORM TESTING ---
-
 Chrome
 Opera
 Edge
@@ -173,7 +171,6 @@ Product pictures don't stretch in expanded view
 
 Safari -------------
 Universe category button does not work
-Redirection to login after registration has issue "Failed Captcha Verification"
 
 iOS -----------------
 Icon is blue (Offcanvas Universe category icon)
@@ -183,6 +180,8 @@ Android (Use Emulator)
 
 Do Later!
 ------
+Email verification w/FirebaseAuth
+Make sure emails match
 
 GUEST CHECKOUT ------------------------------------
 There are two ways to view orders (account/order && cart/success). Account requires login and "cart/success" will need...
