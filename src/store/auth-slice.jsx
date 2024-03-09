@@ -124,10 +124,15 @@ export const createNewAccount = createAsyncThunk(
                 ownedDigitalItems: []
             })
             //Automatically logging into the new Account after creation
-            thunkAPI.dispatch(loginWithUserDetails({email, password, token}))
+            // thunkAPI.dispatch(loginWithUserDetails({email, password, token}))
+            const snapshot = await get(userRef) 
+            
+            if (snapshot.exists()) return snapshot.val()  
+            else throw new Error("No matching User found")
         }
         catch (error) {
             console.error('Registration failed:', error.message) //error.message
+            console.error(error)
 
             let notificationMessage = "Something went wrong!"
             if (error.message === "Failed CAPTCHA verification") notificationMessage = "Failed CAPTCHA verification."
