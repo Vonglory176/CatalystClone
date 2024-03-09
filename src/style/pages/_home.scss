@@ -17,7 +17,7 @@
         }
         &__button {
             width: 95%;
-            transition: transform .2s ease-in-out;
+            transition: transform .2s ease-in-out, opacity .5s ease-in-out;
             height: calc(90px + (113 * (100vw - 503px) / 648));
             max-height: 211px;
             
