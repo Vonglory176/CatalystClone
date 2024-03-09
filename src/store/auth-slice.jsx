@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { ref, get, set, update, remove, getDatabase } from "firebase/database"
-import { getAuth, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth"
 import { showAndHideNotification } from './ui-slice' //uiActions
 import { fetchUserCountry } from "../hooks/getUserCountry"
 import fetchCaptchaVerification from '../fetch/fetchCaptchaVerification'
@@ -99,6 +99,7 @@ export const createNewAccount = createAsyncThunk(
             let userCountry = "United States"
             try {userCountry = await fetchUserCountry()} 
             catch (error) {console.log("Failure to communicate with 'ipapi.co' API")}
+            console.log(auth.currentUser)
             
             //Setting account details in Firebase Realtime DB
             const userID = auth.currentUser.uid
@@ -138,6 +139,7 @@ export const createNewAccount = createAsyncThunk(
             if (error.message === "Failed CAPTCHA verification") notificationMessage = "Failed CAPTCHA verification."
             if (error.message === "Firebase: Error (auth/email-already-in-use).") notificationMessage = "This email address is already associated with an account."
             if (error.message === "Both an Email and Password are required") notificationMessage = "Both an Email and Password are required."
+            if (error.message === "Firebase: Password should be at least 6 characters (auth/weak-password).") notificationMessage = "Password should be at least 6 characters."
 
             // Create an outcome notification
             thunkAPI.dispatch(showAndHideNotification({
@@ -146,6 +148,30 @@ export const createNewAccount = createAsyncThunk(
             }))
 
             return thunkAPI.rejectWithValue(error.message)
+        }
+    }
+)
+
+// ACCOUNT PASSWORD RECOVERY
+export const recoverPassword = createAsyncThunk(
+    'auth/recoverPassword',
+    async (email, thunkAPI) => {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            // Dispatch a success notification or handle success scenario
+            thunkAPI.dispatch(showAndHideNotification({
+                message: "Password reset email sent. Check your inbox.",
+                type: 'success'
+            }));
+            return true;
+        } catch (error) {
+            console.error('Password recovery failed:', error);
+            // Dispatch an error notification or handle error scenario
+            thunkAPI.dispatch(showAndHideNotification({
+                message: "Failed to send password reset email.",
+                type: 'error'
+            }));
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 )
