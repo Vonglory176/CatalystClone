@@ -93,9 +93,15 @@
         
         
         &__image-container {
-            width: 142px;
             border: 1px solid $accent-light-color;
             margin-right: 15px;
+            min-width: 110px;
+            max-width: 110px;
+            
+            @media (min-width: 450px) {
+                min-width: 142px;
+                max-width: 142px;
+            }
         }
         font-size: 18px;
         
