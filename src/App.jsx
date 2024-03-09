@@ -53,10 +53,10 @@ function App() {
           <Route path="/cart" element={<Cart/>}/>
               
           {/* Account */}
-          <Route path="/account" element={auth.currentUser ? <Account /> : <Navigate to="/account/login" replace state={{ from: location.pathname + location.search}} />}/>
+          <Route path="/account" element={auth.currentUser || isLoggedIn? <Account /> : <Navigate to="/account/login" replace state={{ from: location.pathname + location.search}} />}/>
 
           {/* Account Required Pages "Login to continue" */}
-          <Route path="/" element={auth.currentUser ? <Outlet /> : <Navigate to="/account/login" replace state={{ ...location.state, from: location.pathname + location.search, message: "Login to continue" }} />}>
+          <Route path="/" element={auth.currentUser || isLoggedIn? <Outlet /> : <Navigate to="/account/login" replace state={{ ...location.state, from: location.pathname + location.search, message: "Login to continue" }} />}>
             {/* <Route index element={<Account/>}/> */}
             <Route path="account/addresses" element={<Addresses/>}/>
             <Route path="account/downloads" element={<Downloads/>}/>
@@ -159,8 +159,25 @@ Guest Checkout
 Do Right now!
 ------
 useMemo()?
-
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
+
+PLATFORM TESTING ---
+BUG: Issue with same type/tags ("Miniatures")
+
+Chrome
+Opera
+Edge
+Safari
+
+Firefox ------------
+Product pictures don't stretch in expanded view
+
+iOS -----------------
+Icon, Select, Button
+Issue with pagination scrolling (Could be due to height of result container?)
+
+
+Android (Use Emulator)
 
 Do Later!
 ------
@@ -199,15 +216,8 @@ Give form a use or disable
 
 
 
-PLATFORM TESTING ------------------ ||||||||||||||||||||||||||||||||||||||||
-Chrome
-Opera
-Firefox
-Edge
-Safari
 
-iOS
-Android (Use Emulator)
+
 
 ON THE BACK BURNER --------------------- |||||||||||||||||||||||||||||||||||||||||||
 
