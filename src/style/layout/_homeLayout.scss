@@ -17,8 +17,10 @@
         padding: 0;
 
         .carousel {
+            max-height: calc(113.375px + (302.297 - 113.375) * ((100vw - 320px) / (900 - 320)));
+            overflow: hidden;
             background-color: $primary-font-color;
-            margin-bottom: -6px;
+            margin-bottom: -8px;
             
             .carousel-item {
                 min-height: calc(113.375px + (302.297 - 113.375) * ((100vw - 320px) / (900 - 320)));
@@ -51,12 +53,22 @@
             
             .page-width {
                 width: 100%;
-                min-width: 320px;
                 max-width: 1180px;
-
+                min-width: calc(100vw - 20px);
+                
+                @media (max-width: 450px) {
+                    min-width: 320px;
+                }
+                @media (min-width: 1180px) {
+                    min-width: 1160px;
+                }
                 @media (min-width: 1300px) {
+                    min-width: 1280px;
                     max-width: 1300px;
                     padding: 0 80px;      
+                }
+                @media (min-width: 1320px) {
+                    min-width: 1300px;  
                 }
             }
         }            

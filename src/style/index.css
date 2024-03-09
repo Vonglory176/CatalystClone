@@ -3393,8 +3393,10 @@
   padding: 0;
 }
 .homeLayout .main-content .carousel {
+  max-height: calc(113.375px + 188.922 * (100vw - 320px) / 580);
+  overflow: hidden;
   background-color: #222;
-  margin-bottom: -6px;
+  margin-bottom: -8px;
 }
 .homeLayout .main-content .carousel .carousel-item {
   min-height: calc(113.375px + 188.922 * (100vw - 320px) / 580);
@@ -3424,13 +3426,29 @@
 }
 .homeLayout .main-content-wrapper .page-width {
   width: 100%;
-  min-width: 320px;
   max-width: 1180px;
+  min-width: calc(100vw - 20px);
+}
+@media (max-width: 450px) {
+  .homeLayout .main-content-wrapper .page-width {
+    min-width: 320px;
+  }
+}
+@media (min-width: 1180px) {
+  .homeLayout .main-content-wrapper .page-width {
+    min-width: 1160px;
+  }
 }
 @media (min-width: 1300px) {
   .homeLayout .main-content-wrapper .page-width {
+    min-width: 1280px;
     max-width: 1300px;
     padding: 0 80px;
+  }
+}
+@media (min-width: 1320px) {
+  .homeLayout .main-content-wrapper .page-width {
+    min-width: 1300px;
   }
 }
 
