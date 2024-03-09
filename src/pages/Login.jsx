@@ -1,7 +1,7 @@
 import { useState, createRef } from "react"
 import { useLocation, NavLink } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { loginWithUserDetails } from "../store/auth-slice.jsx"
+import { loginWithUserDetails, recoverPassword } from "../store/auth-slice.jsx"
 import ReCAPTCHA from "react-google-recaptcha"
 import { getAuth } from "firebase/auth"
 const auth = getAuth()
@@ -47,11 +47,15 @@ export default function Login() {
         // </div>
     )
 
+    const handlePasswordRecoverySubmit = (e) => {
+        e.preventDefault()
+        dispatch(recoverPassword(e.target.elements['customer[email]'].value))
+    }
     
     const passwordRecoveryDiv = (
-        <form method="post" action="/" id="Customer-Recover" className="customerForm" onSubmit={()=>{return}}>
+        <form method="post" action="/" id="Customer-Recover" className="customerForm" onSubmit={handlePasswordRecoverySubmit}>
             <h1>Reset your password</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <p>We will send you an email to reset your password.</p>
             <input type="text" name="blank" style={{display: "none"}}/> {/* To stop auto-completion */}
             <input required type="email" name="customer[email]" id="CustomerEmailRecover" placeholder="Email"/>
         
