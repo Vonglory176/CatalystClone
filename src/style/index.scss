@@ -508,14 +508,17 @@ input[type='number']::-webkit-outer-spin-button {
 
 // IMAGE CHANGES
 .imgLoaded {
-    filter: blur(0px);
-    transition: filter 0.5s linear;
+    // filter: blur(0px);
+    // transition: filter 0.5s linear;
+    transition: opacity 0.5s linear;
+    opacity: 1;
 }
 
 .imgLoading {
-    filter: blur(10px) !important;
-    clip-path: inset(0);
-    animation: pulse 2.5s infinite;    
+    opacity: 0;
+    // filter: blur(10px) !important;
+    // clip-path: inset(0);
+    // animation: pulse 2.5s infinite;    
 }
 
 @keyframes pulse {
