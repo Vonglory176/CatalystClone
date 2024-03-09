@@ -27,10 +27,12 @@
                 margin-bottom: 20px;
             }
             
-            @media (hover: hover) {
-                &:hover {
+            &:hover {
+                transform: translateY(-5px);
+                filter: brightness(1.5);
+
+                @media (hover: hover) {
                     @include hover-highlight-shadow;
-                    transform: translateY(-5px);
                 }
             }
         }
