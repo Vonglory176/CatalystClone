@@ -4,6 +4,15 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: Unica One;
+  font-weight: 400;
+  src: url("/src/assets/fonts/Unica_One/UnicaOne-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: Karla;
+  src: url("/src/assets/fonts/Karla/Karla-VariableFont_wght.ttf") format("truetype");
+}
 .image-gallery-icon {
   color: #fff;
   transition: all 0.3s ease-out;
@@ -3385,12 +3394,26 @@
   background-size: cover;
 }
 .homeLayout .main-content {
-  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fhome-page-background.webp?alt=media&token=dbe42bd8-08b6-45fc-a465-0ab9da56c102");
+  position: relative;
+  padding: 0;
+  background-color: #1f1f1f;
+}
+.homeLayout .main-content, .homeLayout .main-content::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  padding: 0;
+  transition: opacity 1s ease-out;
+}
+.homeLayout .main-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: var(--background-image-opacity, 0); /* Start with the pseudo-element hidden */
+  background-image: var(--background-image-url);
 }
 .homeLayout .main-content .carousel {
   max-height: calc(113.375px + 188.922 * (100vw - 320px) / 580);
@@ -3460,22 +3483,35 @@
 }
 .mainLayout .main-content.battletech-page, .mainLayout .main-content.shadowrun-page, .mainLayout .main-content.other-page, .mainLayout .main-content.all-page {
   background-color: #363636;
+}
+.mainLayout .main-content.battletech-page, .mainLayout .main-content.battletech-page::before, .mainLayout .main-content.shadowrun-page, .mainLayout .main-content.shadowrun-page::before, .mainLayout .main-content.other-page, .mainLayout .main-content.other-page::before, .mainLayout .main-content.all-page, .mainLayout .main-content.all-page::before {
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
 }
+.mainLayout .main-content.battletech-page::before, .mainLayout .main-content.shadowrun-page::before, .mainLayout .main-content.other-page::before, .mainLayout .main-content.all-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: var(--background-image-opacity, 0); /* Start with the pseudo-element hidden */
+  background-image: var(--background-image-url);
+  transition: opacity 1s ease-out;
+}
 .mainLayout .main-content.battletech-page {
-  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fbattletech-page-background.webp?alt=media&token=de9f579b-b3da-4eed-8d2d-ec2d8d01e4f9");
+  background-color: #ad6024;
 }
 .mainLayout .main-content.shadowrun-page {
-  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fshadowrun-page-background.webp?alt=media&token=07b0b857-758f-4959-9923-4f567ed9ac6a");
+  background-color: #60463c;
 }
 .mainLayout .main-content.other-page {
-  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fother-background.webp?alt=media&token=cc00694d-6c3f-4852-9f87-462f0623679e");
+  background-color: #477373;
 }
 .mainLayout .main-content.all-page {
-  background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fall-page-background.webp?alt=media&token=eb82a935-2dac-4b9a-a360-072edfda9475");
+  background-color: #3b2342;
 }
 
 body {
@@ -3538,7 +3574,7 @@ a, i {
 
 h1, .h1 {
   font-weight: 400;
-  font-family: "Unica One", sans-serif;
+  font-family: Unica One, sans-serif;
 }
 
 h4 {
@@ -3888,6 +3924,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 .imgLoading {
   opacity: 0;
+}
+
+.imgLoaded-placeholder {
+  filter: blur(0px);
+  transition: filter 0.5s linear;
+}
+
+.imgLoading-placeholder {
+  filter: blur(5px) !important;
+  -webkit-clip-path: inset(0);
+          clip-path: inset(0);
 }
 
 @keyframes pulse {
