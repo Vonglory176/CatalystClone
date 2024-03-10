@@ -9,12 +9,31 @@
     
     
     .main-content {
-        background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fhome-page-background.webp?alt=media&token=dbe42bd8-08b6-45fc-a465-0ab9da56c102");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed; //This is interesting
+        position: relative;
         padding: 0;
+        background-color: #1f1f1f;
+        
+        &, &::before {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; //This is interesting
+            transition: opacity 1s ease-out
+        }
+        // background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fhome-page-background.webp?alt=media&token=dbe42bd8-08b6-45fc-a465-0ab9da56c102");
+
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            opacity: var(--background-image-opacity, 0); /* Start with the pseudo-element hidden */
+            background-image: var(--background-image-url);
+        }
 
         .carousel {
             max-height: calc(113.375px + (302.297 - 113.375) * ((100vw - 320px) / (900 - 320)));

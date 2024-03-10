@@ -1,5 +1,5 @@
 .mainLayout {
-
+    
     .main-content {
         position: relative;
         background: $primary-background-color;
@@ -7,24 +7,47 @@
         min-height: 503px;
         
         &.battletech-page, &.shadowrun-page, &.other-page, &.all-page {
-            background-color: $accent-lighter-color;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            background-attachment: fixed !important;
+            background-color: $accent-lighter-color;            
+            // @keyframes fadeIn {
+            //     from { opacity: 0; }
+            //     to { opacity: 1; }
+            // }
+
+            &, &::before {
+                background-size: cover !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+                background-attachment: fixed !important;
+            }
+            
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+
+                opacity: var(--background-image-opacity, 0); /* Start with the pseudo-element hidden */
+                background-image: var(--background-image-url);
+                transition: opacity 1s ease-out //, background-image 0.5s ease-in-out;
+                // animation: fadeIn 1s ease-out forwards;
+            }
         }
+        
 
         &.battletech-page {
-            background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fbattletech-page-background.webp?alt=media&token=de9f579b-b3da-4eed-8d2d-ec2d8d01e4f9");
+            background-color: #ad6024; //#2d160c #5f3b25 #ad6024 #5a4abd #c4c0f3
         }
         &.shadowrun-page {
-            background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fshadowrun-page-background.webp?alt=media&token=07b0b857-758f-4959-9923-4f567ed9ac6a");
+            background-color: #60463c; //#302118 #60463c #90735f #b89f96 #e4dce1
         }
         &.other-page {
-            background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fother-background.webp?alt=media&token=cc00694d-6c3f-4852-9f87-462f0623679e");
+            background-color: #477373; //#efedde #b7b8ac #222722 #477373 #ca5c31
         }
         &.all-page {
-            background: url("https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fall-page-background.webp?alt=media&token=eb82a935-2dac-4b9a-a360-072edfda9475");
+            background-color: #3b2342; //#dac9d0 #ba6182 #3b2342 #4eb8cc #3d5b9b
         }
     }
 }
