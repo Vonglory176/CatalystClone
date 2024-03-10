@@ -159,7 +159,10 @@ Do Right now!
 ------
 useMemo()?
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
+
 BUG: Issue with same type/tags ("Miniatures")
+
+Look into service-workers !
 
 PLATFORM TESTING ---
 Chrome
