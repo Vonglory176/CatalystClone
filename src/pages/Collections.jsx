@@ -246,23 +246,6 @@ export default function Collections() {
                     universe: id === "battletech"? "battletech" : "shadowrun",
                     category: "new-arrivals"
                 }}
-                // productIdArray={id === "battletech"? 
-                // [
-                //     "battletech-clan-invasion",
-                //     "battletech-reinforcements-clan-invasion",
-                //     "battletech-battlemat-alien-worlds",
-                //     "battletech-activity-book-vol-2",
-                //     "battletech-miniature-pack-game-of-armored-combat",
-                // ] :
-
-                // [
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                // ]
-                // }
                 characterImageSrcArray={""}
                 />
             </div>
