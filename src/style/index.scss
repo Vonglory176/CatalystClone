@@ -1,4 +1,5 @@
 @import "config";
+@import "fonts";
 
 @import "~react-image-gallery/styles/scss/image-gallery.scss";
 @import "./components/bootstrap-carousel";
@@ -97,7 +98,6 @@ a {
 a, i {
     transition: color .1s ease-in,background-color .1s ease-in;
 }
-
 .h1, h1, h4 {
     margin: 0 0 0.625em;
     text-transform: uppercase;
@@ -106,7 +106,7 @@ a, i {
 
 h1, .h1 {
     font-weight: 400;
-    font-family: 'Unica One', sans-serif;
+    font-family: Unica One, sans-serif;
 }
 
 h4 {
@@ -519,6 +519,16 @@ input[type='number']::-webkit-outer-spin-button {
     // filter: blur(10px) !important;
     // clip-path: inset(0);
     // animation: pulse 2.5s infinite;    
+}
+.imgLoaded-placeholder {
+    filter: blur(0px);
+    transition: filter 0.5s linear;
+}
+
+.imgLoading-placeholder {
+    filter: blur(5px) !important;
+    clip-path: inset(0);
+    // animation: pulse 5s infinite;
 }
 
 @keyframes pulse {
