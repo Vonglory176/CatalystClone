@@ -63,7 +63,7 @@ export default function Home() {
                             <img
                             className={
                                 "getting-started__button " +
-                                (loading? "imgLoading":"imgLoaded")
+                                (loading? "imgLoading-placeholder":"imgLoaded-placeholder")
                             }
                             src={src}
                             alt={"Get started with Battletech"}
@@ -81,7 +81,7 @@ export default function Home() {
                             <img
                             className={
                                 "getting-started__button " +
-                                (loading? "imgLoading":"imgLoaded")
+                                (loading? "imgLoading-placeholder":"imgLoaded-placeholder")
                             }
                             src={src}
                             alt={"Get started with Shadowrun"}
@@ -107,13 +107,6 @@ export default function Home() {
                         universe: "all",
                         category: "featured",
                     }}
-                    // productIdArray={[
-                    //     "battletech-clan-invasion",
-                    //     "battletech-reinforcements-clan-invasion",
-                    //     "battletech-battlemat-alien-worlds",
-                    //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                    //     "i-would-fight-the-dragon",
-                    // ]}
                     characterImageSrcArray={""}
                     />
                 </div>
@@ -128,12 +121,6 @@ export default function Home() {
                     universe: "battletech",
                     category: "featured",
                 }}
-                // productIdArray={[
-                //     "battletech-clan-invasion",
-                //     "battletech-reinforcements-clan-invasion",
-                //     "battletech-battlemat-alien-worlds",
-                //     "battletech-miniature-pack-game-of-armored-combat",
-                // ]}
                 characterImageSrc={pickRandomCharacter(battletechCharacterArray)}
                 />
 
@@ -147,12 +134,6 @@ export default function Home() {
                     universe: "shadowrun",
                     category: "featured",
                 }}
-                // productIdArray={[
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                //     "shadowrun-sixth-world-core-rulebook-city-edition-berlin",
-                // ]}
                 characterImageSrc={pickRandomCharacter(shadowrunCharacterArray)}
                 />
 
@@ -160,21 +141,21 @@ export default function Home() {
                     <div className="collection-buttons-wrapper">
                         <Link to={"/collections/all?categories=on-sale"} title="View products that are on sale">                            
                             <ProgressiveImage src={saleButton}>
-                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={loading? saleButtonLowRes : src} alt={""}/>}
+                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading-placeholder" : "imgLoaded-placeholder")} src={loading? saleButtonLowRes : src} alt={""}/>}
                             </ProgressiveImage>
                             {/* <img className="collection-button" src={saleButton} alt="" /> */}
                         </Link>
 
                         <Link to={"/collections/all?categories=new-arrivals"} title="View products that have been added recently">                            
                             <ProgressiveImage src={newArrivalsButton}>
-                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={loading? newArrivalsButtonLowRes : src} alt={""}/>}
+                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading-placeholder" : "imgLoaded-placeholder")} src={loading? newArrivalsButtonLowRes : src} alt={""}/>}
                             </ProgressiveImage>
                             {/* <img className="collection-button" src={newArrivalsButton} alt="" /> */}
                         </Link>
 
                         <Link to={"/collections/all?categories=free-downloads"} title="View products that are free to download">                            
                             <ProgressiveImage src={freeDownloadButton}>
-                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading" : "imgLoaded")} src={loading? freeDownloadButtonLowRes : src} alt={""}/>}
+                                {(src, loading) => <img className={"collection-button " + (loading? "imgLoading-placeholder" : "imgLoaded-placeholder")} src={loading? freeDownloadButtonLowRes : src} alt={""}/>}
                             </ProgressiveImage>
                             {/* <img className="collection-button" src={freeDownloadButton} alt="" /> */}
                         </Link>
@@ -191,12 +172,6 @@ export default function Home() {
                     universe: "other",
                     category: "featured",
                 }}
-                // productIdArray={[
-                //     "i-would-fight-the-dragon",
-                //     "i-would-fight-the-dragon",
-                //     "i-would-fight-the-dragon",
-                //     "i-would-fight-the-dragon",
-                // ]}
                 characterImageSrcArray={""}
                 />                
 
