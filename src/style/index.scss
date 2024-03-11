@@ -22,7 +22,6 @@
 @import "./pages/account";
 @import "./pages/order";
 @import "./pages/downloads";
-@import "./pages/addresses";
 @import "./pages/login";
 @import "./pages/logout";
 @import "./pages/register";
@@ -150,9 +149,9 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    background-color: $border-list-color;
-
+    
     @media only screen and (max-width: 749px) {
+        background-color: $border-list-color;
 
         thead {display: none; }
 
@@ -204,6 +203,10 @@ table {
     }
     tr {
         background-color: white;
+        &:last-of-type{
+            margin-bottom: 0;
+            border-bottom: none;
+        }
     }
 }
 
