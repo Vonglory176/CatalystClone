@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { getAuth } from "firebase/auth"
@@ -39,13 +39,31 @@ export default function OrderHistory({doneLoadingCallback}) {
     }
   }
 
+  const tbodyRef = useRef(null)
+  const [isOverflowing, setIsOverflowing] = useState(false)
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (tbodyRef.current && tbodyRef.current.offsetHeight === 300 && window.innerWidth >= 750) {
+        setIsOverflowing(true)
+      } else {
+        setIsOverflowing(false)
+      }
+    }
+
+    checkOverflow()
+    // Optionally, listen to window resize if the table's overflow status might change on resize
+    window.addEventListener('resize', checkOverflow)
+    return () => window.removeEventListener('resize', checkOverflow)
+  }, [orderHistory]) // Re-check when orderHistory changes
+
   return (
     <div className="order-history">
         <h2>Order History</h2>
         {orderHistory?
         <div className="order-history__table-wrapper">
           <table className="responsive-table">
-            <thead>
+            <thead className={isOverflowing? "overflowing" : ""}>
               <tr>
                 <th>Order</th>
                 <th>Date</th>
@@ -54,7 +72,7 @@ export default function OrderHistory({doneLoadingCallback}) {
                 <th>Total</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody ref={tbodyRef} className={isOverflowing? "overflowing" : ""}>
               {printOrderRows()}              
             </tbody>
           </table>

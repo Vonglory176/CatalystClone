@@ -22,10 +22,12 @@
     
                 thead {
                     display: table;
-                    width: calc(100% - 1em); // Adjust based on scrollbar width to prevent layout shift
+                    width: calc(100% - 15px); // Adjust based on scrollbar width to prevent layout shift
                     position: sticky;
                     top: 0; // Adjust if you have a specific offset
                     z-index: 2; // Ensures thead stays on top of tbody content
+
+                    &.overflowing {padding-right: 5px;}
                     
                     tr {
                         border-top: 1px solid $third-font-color;
@@ -36,10 +38,12 @@
                 tbody {
                     display: block;
                     max-height: 300px; // Adjust this value to fit your design
-                    overflow-y: scroll;
+                    overflow-y: auto;
                     width: 100%;
 
-                    tr {                        
+                    &:not(.overflowing) {padding-right: 15px;}
+
+                    tr {
                         border-top: none;
                         &:not(:last-of-type) {border-bottom: 1px solid $third-font-color;}
                     }
