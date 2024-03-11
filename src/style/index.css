@@ -2749,10 +2749,13 @@
   }
   #Account-Details__Main-Container .order-history thead {
     display: table;
-    width: calc(100% - 1em);
+    width: calc(100% - 15px);
     position: sticky;
     top: 0;
     z-index: 2;
+  }
+  #Account-Details__Main-Container .order-history thead.overflowing {
+    padding-right: 5px;
   }
   #Account-Details__Main-Container .order-history thead tr {
     border-top: 1px solid #666;
@@ -2761,8 +2764,11 @@
   #Account-Details__Main-Container .order-history tbody {
     display: block;
     max-height: 300px;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 100%;
+  }
+  #Account-Details__Main-Container .order-history tbody:not(.overflowing) {
+    padding-right: 15px;
   }
   #Account-Details__Main-Container .order-history tbody tr {
     border-top: none;
@@ -3617,9 +3623,11 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  background-color: #eee;
 }
 @media only screen and (max-width: 749px) {
+  table {
+    background-color: #eee;
+  }
   table thead {
     display: none;
   }
@@ -3666,6 +3674,10 @@ table th a:hover, table td a:hover {
 }
 table tr {
   background-color: white;
+}
+table tr:last-of-type {
+  margin-bottom: 0;
+  border-bottom: none;
 }
 
 label {
