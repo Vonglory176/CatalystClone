@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProductById } from "../hooks/getProductById";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState, useRef } from "react";
 
-import ProductCard from "./ProductCard";
-// const ProductCard = lazy(() => import('./ProductCard'))
+// import ProductCard from "./ProductCard";
+const ProductCard = lazy(() => import('./ProductCard'))
 import loadingSpinner from "../assets/loader-large.gif"
 import ProgressiveImage from "react-progressive-image";
 
@@ -83,10 +83,10 @@ export default function CollectionBlock(
                 for (let i = 0; i < (characterImageSrc ? 4 : 5) ; i++) { // && i < filteredProductList.length
                     productCardArray.push(
                         <div className="grid__item" key={i}>
-                            {/* <Suspense fallback={<img src={loadingSpinner}></img>}> */}
+                            <Suspense fallback={<img src={loadingSpinner}></img>}>
                                 {/* Lazy Loaded */}
                                 <ProductCard product={filteredProductList[i]? filteredProductList[i] : filteredProductList[0]}/> 
-                            {/* </Suspense> */}
+                            </Suspense>
                         </div>
                     );
                 }
@@ -99,7 +99,26 @@ export default function CollectionBlock(
         }
     },[productList]) //Might be firing too soon?
 
-    //Could add code where not having a collection-cover ALSO hides component in small views?
+    const [isVisible, setIsVisible] = useState(false);
+    const collectionRef = useRef();
+    
+    // Only loading/displaying product-cards when collection is in view
+    useEffect(() => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true)
+                    observer.unobserve(entry.target)
+                }
+            })
+        })
+    
+        if (collectionRef.current) observer.observe(collectionRef.current)
+    
+        return () => {
+            if (collectionRef.current) observer.unobserve(collectionRef.current)
+        }
+    }, [])
 
     return (
         <section className={`collection-block section-block ${collectionClasses}`}>
@@ -127,10 +146,10 @@ export default function CollectionBlock(
             </Link>
             }
 
-            <div className="grid collection">
+            <div className="grid collection" ref={collectionRef}>
                 <Link to={collectionLink} className={"collection-link"} style={{pointerEvents: collectionLink? "normal" : "none"}} title="View all products in the collection"></Link>
 
-                {collectionCoverTitle && //If no Title, this is excluded           
+                {collectionCoverTitle && //If no Title, this is excluded
                 <div className="grid__item collection__cover">
                     {/* <Link to={"/"} className={"collection-link"}></Link> */}
                     <Link 
@@ -146,7 +165,7 @@ export default function CollectionBlock(
                 </div>
                 }
 
-                {productList && collectionProducts}
+                {productList && isVisible && collectionProducts}
                 
                 {/* <div className="grid__item">
                     {status==="success" && <ProductCard product={getProductById(productList,"battletech-clan-invasion")}/>}
