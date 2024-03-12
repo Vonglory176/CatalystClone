@@ -10,18 +10,18 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { fetchUserDetails } from './store/auth-slice.jsx'
 import { Provider, useDispatch } from 'react-redux'
 
-import firebaseApp from '../functions/firebaseConfig'
+import firebaseApp from '../functions/firebaseConfig' //Import initializes the database
 
 const auth = getAuth()
 
 const AppWrapper = () => {
   const dispatch = useDispatch()
 
-  useEffect(() => {    
+  useEffect(() => {
     const maintainLoginStatus = onAuthStateChanged(auth, async (user) => {
-      // User is signed in
-      if (user) {
-        dispatch(fetchUserDetails())
+      
+      if (user) { // When user is signed in
+        dispatch(fetchUserDetails()) //Keep details up to date
       }
     })
 
