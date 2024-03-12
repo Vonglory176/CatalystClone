@@ -13,20 +13,28 @@ export default function CollectionBlock(
     const productList = useSelector(state => state.products.productList)
     const [collectionProducts, setCollectionProducts] = useState()
 
-    useEffect(() => { //Making sure the frame loads first
-        if (collectionFrameSrc) {
-          const link = document.createElement("link")
-          link.rel = "preload"
-          link.as = "image"
-          link.href = collectionFrameSrc
-          document.head.appendChild(link)
+    // useEffect(() => { //Making sure the frame loads first
+    //     if (collectionFrameSrc) {
+    //       const link = document.createElement("link")
+    //       link.rel = "preload"
+    //       link.as = "image"
+    //       link.href = collectionFrameSrc
+    //       document.head.appendChild(link)
     
-          // Clean up
-          return () => {
-            document.head.removeChild(link)
-          };
+    //       // Clean up
+    //       return () => {
+    //         document.head.removeChild(link)
+    //       };
+    //     }
+    //   }, [collectionFrameSrc])
+
+    //Preloading frame
+    useEffect(() => {
+        if (collectionFrameSrc) {
+            const frame = new Image()
+            frame.src = collectionFrameSrc
         }
-      }, [collectionFrameSrc])
+    }, [])
     
     useEffect(() => {
         if(productList) {
