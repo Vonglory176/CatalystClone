@@ -10,14 +10,14 @@ import gettingStartedBattletechLowRes from "/src/assets/getting-started/getting-
 import gettingStartedShadowrun from "/src/assets/getting-started/getting-started-shadowrun.webp"
 import gettingStartedShadowrunLowRes from "/src/assets/getting-started/getting-started-shadowrun-low-res.webp"
 //Collection frames/covers
-import featuredFrame from "/src/assets/block-collection/frames/collection-frame-featured.svg"
+// import featuredFrame from "/src/assets/block-collection/frames/collection-frame-featured.svg"
 import featuredCover from "/src/assets/block-collection/covers/cicada-picture.webp"
-import battletechFrame from "/src/assets/block-collection/frames/collection-frame-battletech.svg"
+// import battletechFrame from "/src/assets/block-collection/frames/collection-frame-battletech.svg"
 import battletechCover from "/src/assets/block-collection/covers/marauder_480x480.webp"
-import shadowrunFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun.svg"
+// import shadowrunFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun.svg"
 import shadowrunCover from "/src/assets/block-collection/covers/shadowrun_480x480.webp"
 // import tabletopFramePlaceholder from "/src/assets/block-collection/frames/collection-frame-tabletop-low-res.webp"
-import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-tabletop.webp"
+// import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-tabletop.webp"
 import tabletopCover from "/src/assets/block-collection/covers/IWFTD_480x480.webp"
 //Collection Buttons
 import saleButton from "../assets/button-collection/collection-buttons-01.webp"
@@ -99,7 +99,7 @@ export default function Home() {
                     <CollectionBlock //FEATURED COLLECTION
                     collectionClasses={""}
                     collectionLink={"/collections/all"} //CHANGE TO HAVE FEATURED FILTER
-                    collectionFrameSrc={featuredFrame}
+                    collectionFrameSrc={"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-featured.svg?alt=media&token=3b9a843a-b4eb-435d-8931-276f0df403f8"}
                     collectionCoverSrc={featuredCover}
                     collectionCoverTitle={"Featured Products"}
                     productInformation={{
@@ -113,7 +113,7 @@ export default function Home() {
                 <CollectionBlock //BATTLETECH COLLECTION
                 collectionClasses={"left"}
                 collectionLink={"/collections/battletech"}
-                collectionFrameSrc={battletechFrame}
+                collectionFrameSrc={"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-battletech.svg?alt=media&token=f52f545f-8b0f-4974-8b0e-5e638378d372"}
                 collectionCoverSrc={battletechCover}
                 collectionCoverTitle={"Battletech"}
                 productInformation={{
@@ -126,7 +126,7 @@ export default function Home() {
                 <CollectionBlock //SHADOWRUN COLLECTION
                 collectionClasses={"right"}
                 collectionLink={"/collections/shadowrun"}
-                collectionFrameSrc={shadowrunFrame}
+                collectionFrameSrc={"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-shadowrun.svg?alt=media&token=d0dcb630-d444-45c8-9958-3f7a74459922"}
                 collectionCoverSrc={shadowrunCover}
                 collectionCoverTitle={"Shadowrun"}
                 productInformation={{
@@ -164,7 +164,7 @@ export default function Home() {
                 <CollectionBlock //OTHER COLLECTION
                 collectionClasses={"left"}
                 collectionLink={"/collections/other"}
-                collectionFrameSrc={tabletopFrame}
+                collectionFrameSrc={"https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-tabletop.webp?alt=media&token=45bff922-7982-4736-a086-d85fce18b734"}
                 collectionCoverSrc={tabletopCover}
                 collectionCoverTitle={"Tabletop"}
                 productInformation={{

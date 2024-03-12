@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 
 // import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
-import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-battletech-new-arrivals.svg"
-import shadowrunNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun-new-arrivals.svg"
+// import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-battletech-new-arrivals.svg"
+// import shadowrunNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun-new-arrivals.svg"
 import ProductResult from "../components/ProductResult"
 
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom"
@@ -238,7 +238,13 @@ export default function Collections() {
                 <CollectionBlock //NEW ARRIVALS COLLECTION
                 collectionClasses={""}
                 collectionLink={""} //CHANGE TO HAVE FILTER
-                collectionFrameSrc={id === "battletech"? battletechNewArrivalsFrame : shadowrunNewArrivalsFrame}
+                collectionFrameSrc={id === "battletech"?
+                //Battletech
+                "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-battletech-new-arrivals.svg?alt=media&token=a2549fe5-a9e3-4423-a2a1-7c72d9164967"
+                : 
+                //Shadowrun
+                "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-shadowrun-new-arrivals.svg?alt=media&token=374058a6-b77b-480a-92fe-9efec965890a"
+                }
                 collectionCoverSrc={""}
                 collectionCoverTitle={""}
                 
