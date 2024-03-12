@@ -8,6 +8,14 @@ const urlsToCache = [
   // '/index.html',
   // '/styles/main.css',
   // '/scripts/main.js',
+
+  //Collection frames
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-battletech-new-arrivals.svg?alt=media&token=a2549fe5-a9e3-4423-a2a1-7c72d9164967',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-battletech.svg?alt=media&token=f52f545f-8b0f-4974-8b0e-5e638378d372',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-featured.svg?alt=media&token=3b9a843a-b4eb-435d-8931-276f0df403f8',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-shadowrun-new-arrivals.svg?alt=media&token=374058a6-b77b-480a-92fe-9efec965890a',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-shadowrun.svg?alt=media&token=d0dcb630-d444-45c8-9958-3f7a74459922',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-tabletop.webp?alt=media&token=45bff922-7982-4736-a086-d85fce18b734',
 ]
 
 self.addEventListener('install', event => {
@@ -58,24 +66,24 @@ self.addEventListener('fetch', event => {
   }
 
   // FIREBASE STORAGE SPECIFIC
-  if (url.origin === 'https://firebasestorage.googleapis.com') {
-    event.respondWith(
-      caches.open('firebase-images').then(cache => {
-        return cache.match(event.request).then(response => {
-          if (response) {
-            // Return the cached response if available
-            return response
-          }
-          // Otherwise, fetch from the network, cache the response, and return it
-          return fetch(event.request).then(networkResponse => {
-            cache.put(event.request, networkResponse.clone())
-            return networkResponse
-          })
-        })
-      })
-    )
-  }
-  else {
+  // if (url.origin === 'https://firebasestorage.googleapis.com') {
+  //   event.respondWith(
+  //     caches.open('firebase-images').then(cache => {
+  //       return cache.match(event.request).then(response => {
+  //         if (response) {
+  //           // Return the cached response if available
+  //           return response
+  //         }
+  //         // Otherwise, fetch from the network, cache the response, and return it
+  //         return fetch(event.request).then(networkResponse => {
+  //           cache.put(event.request, networkResponse.clone())
+  //           return networkResponse
+  //         })
+  //       })
+  //     })
+  //   )
+  // }
+  // else {
     // Cache-first strategy for other GET requests
     event.respondWith(
       caches.match(event.request)
@@ -94,7 +102,7 @@ self.addEventListener('fetch', event => {
           })
         })
     )
-  }
+  // }
 
 })
 
