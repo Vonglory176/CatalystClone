@@ -42,8 +42,8 @@ export default function MainLayout() {
             Object.keys(backgrounds).forEach(key => {
                 const low = new Image();
                 low.src = backgrounds[key].low
-                const high = new Image();
-                high.src = backgrounds[key].low
+                // const high = new Image();
+                // high.src = backgrounds[key].low
             })
         }
         else {
