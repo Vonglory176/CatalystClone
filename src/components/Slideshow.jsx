@@ -8,7 +8,7 @@ import urbanBrawl1 from "../assets/slideshow/Rotating-Banner_UrbanBrawl_1296x.we
 import urbanBrawl2 from "../assets/slideshow/Rotating-Banner_UrbanBrawl_1512x.webp"
 
 import ProgressiveImage from "react-progressive-image";
-import placeholderImage from "../assets/slideshow/slidePlaceholder.jpg"
+// import placeholderImage from "../assets/slideshow/slidePlaceholder.jpg"
 import { Link } from "react-router-dom";
 
 export default function Slideshow() {
@@ -18,15 +18,15 @@ export default function Slideshow() {
       {/* TEMPLAR SLIDE */}
       <Carousel.Item>
         <Link to={"/collections/battletech"} title="View all Battletech products">
-          <ProgressiveImage 
+          <ProgressiveImage
           src={templarImg1}
           srcSetData={{
             srcSet:`
-            ${templarImg1} 540w, 
-            ${templarImg2} 720w, 
+            ${templarImg1} 540w,
+            ${templarImg2} 720w,
             ${templarImg3} 900w`
           }}
-          placeholder={placeholderImage}
+          // placeholder={placeholderImage}
           >
               {(src, loading, srcSetData) =>
                 <img
@@ -50,7 +50,7 @@ export default function Slideshow() {
             ${urbanBrawl1} 1296w, 
             ${urbanBrawl2} 1512w`
           }}
-          placeholder={placeholderImage}
+          // placeholder={placeholderImage}
           >
               {(src, loading, srcSetData) =>
                 <img
