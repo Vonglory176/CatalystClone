@@ -21,7 +21,7 @@ const firebaseConfig = { //import.meta.env
 // INITIALIZE FIREBASE
 const firebaseApp = initializeApp(firebaseConfig)
 const db = getDatabase(firebaseApp)
-const auth = getAuth()
+const auth = getAuth(firebaseApp)
 
 export default firebaseApp
 
