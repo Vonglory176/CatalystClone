@@ -185,6 +185,12 @@ Do Later!
 ------
 Email verification w/FirebaseAuth
 Make sure emails match
+BUG?: Login/Register seemed to freeze up after waiting a little w/ReCAPTCHA?
+
+GENERAL ------------------------------------
+Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
+Add better image placeholders
+HTML Labels, Aria, etc
 
 GUEST CHECKOUT ------------------------------------
 There are two ways to view orders (account/order && cart/success). Account requires login and "cart/success" will need...
@@ -204,10 +210,6 @@ CHECKOUT/CART ------------------------------------
 MINOR: Type issue with saving digital items to order metadata ("checkoutCart.cjs")
 CLEANING: Auto-Checkout/Checkout is insane and needs cleanup
 
-GENERAL ------------------------------------
-Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
-Add better image placeholders
-HTML Labels, Aria, etc
 
 COLLECTION-BLOCK ------------------------------------
 CLEANING: Clean up auto product load code
