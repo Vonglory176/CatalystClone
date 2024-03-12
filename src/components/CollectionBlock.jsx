@@ -13,7 +13,7 @@ export default function CollectionBlock(
     const productList = useSelector(state => state.products.productList)
     const [collectionProducts, setCollectionProducts] = useState()
 
-    useEffect(() => {
+    useEffect(() => { //Making sure the frame loads first
         if (collectionFrameSrc) {
           const link = document.createElement("link")
           link.rel = "preload"
