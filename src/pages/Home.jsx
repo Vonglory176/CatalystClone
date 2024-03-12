@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom"
+import ProgressiveImage from "react-progressive-image"
+
 //Components
 import CollectionBlock from "../components/CollectionBlock"
 import MailListSignUp from "../components/MailListSignUp"
@@ -14,14 +16,9 @@ import battletechFrame from "/src/assets/block-collection/frames/collection-fram
 import battletechCover from "/src/assets/block-collection/covers/marauder_480x480.webp"
 import shadowrunFrame from "/src/assets/block-collection/frames/collection-frame-shadowrun.svg"
 import shadowrunCover from "/src/assets/block-collection/covers/shadowrun_480x480.webp"
+// import tabletopFramePlaceholder from "/src/assets/block-collection/frames/collection-frame-tabletop-low-res.webp"
 import tabletopFrame from "/src/assets/block-collection/frames/collection-frame-tabletop.webp"
-import tabletopFramePlaceholder from "/src/assets/block-collection/frames/collection-frame-tabletop-low-res.webp"
 import tabletopCover from "/src/assets/block-collection/covers/IWFTD_480x480.webp"
-//Collection Characters
-import characterVictor from "/src/assets/block-collection/characters/character-victor.webp"
-import characterTimberWolf from "/src/assets/block-collection/characters/character-timberWolf.webp"
-import characterCombatMage from "/src/assets/block-collection/characters/character-combatMage.webp"
-import characterStreetSamurai from "/src/assets/block-collection/characters/character-streetSamurai.webp"
 //Collection Buttons
 import saleButton from "../assets/button-collection/collection-buttons-01.webp"
 import saleButtonLowRes from "../assets/button-collection/collection-buttons-01-low-res.webp"
@@ -29,20 +26,22 @@ import newArrivalsButton from "../assets/button-collection/collection-buttons-02
 import newArrivalsButtonLowRes from "../assets/button-collection/collection-buttons-02-low-res.webp"
 import freeDownloadButton from "../assets/button-collection/collection-buttons-03.webp"
 import freeDownloadButtonLowRes from "../assets/button-collection/collection-buttons-03-low-res.webp"
-import ProgressiveImage from "react-progressive-image"
-import { Suspense } from "react"
 import FeaturedProductBanner from "../components/FeaturedProductBanner"
 
 
 export default function Home() {
     
     const battletechCharacterArray = [
-        characterVictor,
-        characterTimberWolf
+        // characterVictor,
+        "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-characters%2Fcharacter-victor-small.webp?alt=media&token=3e4239c4-f393-4b2a-b625-e0365efe35e3",
+        // characterTimberWolf
+        "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-characters%2Fcharacter-timberWolf-small.webp?alt=media&token=f9f932ae-76bf-4d65-80f2-e7d300f4730a"
     ]
     const shadowrunCharacterArray = [
-        characterCombatMage,
-        characterStreetSamurai
+        // characterCombatMage
+        "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-characters%2Fcharacter-combatMage-small.webp?alt=media&token=08978c41-0250-4cc2-af4d-b0448383184f",
+        // characterStreetSamurai
+        "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-characters%2Fcharacter-streetSamurai-small.webp?alt=media&token=2b696e12-47b7-4c85-8f10-4c2c4d16690c"
     ]
 
     const pickRandomCharacter = (array) => {
