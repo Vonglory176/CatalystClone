@@ -1,5 +1,6 @@
 import ProgressiveImage from "react-progressive-image"
 import { Link } from "react-router-dom"
+// import { useState, useEffect, useRef } from "react"
 
 import placeholderImage from "../assets/placeholder.png"
 import getPrimaryProductImage from "../hooks/getPrimaryProductImage"
@@ -29,15 +30,36 @@ export default function ProductCard({product}) {
         else return string
     }
 
+    // const [isVisible, setIsVisible] = useState(false);
+    // const imgRef = useRef();
+    
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(entries => {
+    //         entries.forEach(entry => {
+    //             if (entry.isIntersecting) {
+    //                 setIsVisible(true)
+    //                 observer.unobserve(entry.target)
+    //             }
+    //         })
+    //     })
+    
+    //     if (imgRef.current) observer.observe(imgRef.current)
+    
+    //     return () => {
+    //         if (imgRef.current) observer.unobserve(imgRef.current)
+    //     }
+    // }, [])
+
     return (
         <Link to={`/products/${productLink}`} className={"product-card"} title={`View "${productUniverse}${product.name}"`}>
             {isOnSale && !isFree && <div className="sale-badge badge">{variantDiscountPercentage}% off</div>}
 
-            <div className="product-card__image-container">
+            <div className="product-card__image-container"> {/* ref={imgRef} */}
                 <div className="product-card__image-wrapper">
                     <div className="product-card__image">
                         {/* Padding top div? */}
 
+                        {/* {isVisible &&  */}
                         <ProgressiveImage src={productImage.link} placeholder={placeholderImage}>
                             {(src, loading) =>
                              <img 
@@ -47,6 +69,7 @@ export default function ProductCard({product}) {
                              />
                             }                            
                         </ProgressiveImage>
+                        {/* } */}
                     </div>
                 </div>
             </div>
