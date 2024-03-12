@@ -14,8 +14,10 @@ export default function HomeLayout() {
 
     useEffect(() => {
         // Preload low-resolution background
-        const img = new Image();
-        img.src = pageBackground.low
+        const low = new Image();
+        low.src = pageBackground.low
+        const high = new Image();
+        high.src = pageBackground.high
     }, [])
     
     useEffect(() => {

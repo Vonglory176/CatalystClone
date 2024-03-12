@@ -37,11 +37,13 @@ export default function MainLayout() {
     }
 
     useEffect(() => {
-        // Preload all low-resolution images
+        // Preload all background images
         if (pageTheme !== "") {
             Object.keys(backgrounds).forEach(key => {
-                const img = new Image();
-                img.src = backgrounds[key].low
+                const low = new Image();
+                low.src = backgrounds[key].low
+                const high = new Image();
+                high.src = backgrounds[key].low
             })
         }
         else {
