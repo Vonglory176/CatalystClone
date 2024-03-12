@@ -68,7 +68,7 @@ export default function Header() {
             {/* Header Upper */}
             <div className="header__upper">
                 <div className="nav-btn">
-                    <button onClick={toggleShowSidebar}>
+                    <button onClick={toggleShowSidebar} name='navigation-menu-button' aria-label='Navigation menu button'>
                         <i className="fa-solid fa-bars nav-btn__burger fa-lg"></i>
                         {/* <i className="fa-solid fa-xmark"></i> */}
                     </button>
@@ -114,7 +114,7 @@ export default function Header() {
 
                     <nav className="header__lower-nav">
                         <div className="universe-dropdown dropdown">
-                            <button className="universe-dropdown__button dropdown-button">
+                            <button className="universe-dropdown__button dropdown-button" name='universe-dropdown-button' aria-label='Universe dropdown button'>
                                 Universe<i className="fa-solid fa-caret-down"></i>
                                 <NavLink to={"/collections/all"} className={`universe-dropdown__button-link ${({isActive}) => {return isActive? "active-link" : ""}}`} title='View all products'/>
                             </button>
@@ -156,7 +156,7 @@ export default function Header() {
 
                     <div className="offcanvas__universe">
                         <Link to={"/collections/all"} className={"offcanvas-link"} title='View all products'>Universe</Link>
-                        <button className="offcanvas__universe-button" onClick={toggleUniverseSubMenu}>
+                        <button className="offcanvas__universe-button" onClick={toggleUniverseSubMenu} name='universe-dropdown-button' aria-label='Universe dropdown button'>
                             <i className={`fa-solid fa-plus fa-2x ${!showUniverseSubMenu? "rotateIcon" : ""}`}></i>
                         </button>
                     </div>
