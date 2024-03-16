@@ -162,7 +162,7 @@ USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.c
 
 BUG: Issue with same type/tags ("Miniatures")
 
-Look into service-workers !
+Need to optimize information iteration. Heavy Javascript is hindering load times
 
 PLATFORM TESTING ---
 Chrome
@@ -186,6 +186,7 @@ Do Later!
 Email verification w/FirebaseAuth
 Make sure emails match
 BUG?: Login/Register seemed to freeze up after waiting a little w/ReCAPTCHA?
+BUG: Need to refresh ReCaptcha on login/register failure
 
 GENERAL ------------------------------------
 Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
