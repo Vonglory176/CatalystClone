@@ -66,10 +66,10 @@ exports.handler = async function (event, context) {
                     let newDigitalItems = user.ownedDigitalItems? [...user.ownedDigitalItems] : []
 
                     for (let item of orderDetails.digitalItems) {
-                      if (!newDigitalItems.some(existingItem => existingItem.productId === item.productId && existingItem.variantId === item.variantId)) {
+                      if (item && !newDigitalItems.some(existingItem => existingItem?.productId === item?.productId && existingItem?.variantId === item?.variantId)) {
                         newDigitalItems.push(item);
                       }
-                    }                    
+                    }
                   
                     console.log("OLD", user.ownedDigitalItems)
                     console.log("NEW", newDigitalItems)
