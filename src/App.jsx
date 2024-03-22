@@ -161,6 +161,7 @@ useMemo()?
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
 
 BUG: Issue with same type/tags ("Miniatures")
+BUG: Account page does not load information if the page times out and auto reloads (Must log out and log back in to fix)
 
 Need to optimize information iteration. Heavy Javascript is hindering load times
 
@@ -176,7 +177,6 @@ Safari -------------
 Universe category button does not work
 
 iOS -----------------
-Icon is blue (Offcanvas Universe category icon)
 Select is too short (Specifically variant selector in products)
 
 Android (Use Emulator)
