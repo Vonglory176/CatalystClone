@@ -38,42 +38,88 @@ export default function MainLayout() {
 
     const [backgroundImage, setBackgroundImage] = useState({
         "--background-image-url": `url(${backgrounds[id]?.low || backgrounds.all.low})`,
-        // "--background-image-opacity": "1"
+        "--background-image-opacity": "0"
     })
 
     useLayoutEffect(() => {
-        const preloadImage = (src, callback) => {
-            const img = new Image()
-            img.onload = callback
-            img.src = src
+        if (pageTheme) {
+            const currentBackground = backgrounds[id] || backgrounds.all
+            const preloadLowRes = document.createElement("link")
+            preloadLowRes.rel = "preload"
+            preloadLowRes.as = "image"
+            preloadLowRes.href = currentBackground.low
+    
+            const preloadHighRes = document.createElement("link")
+            preloadHighRes.rel = "preload"
+            preloadHighRes.as = "image"
+            preloadHighRes.href = currentBackground.high
+    
+            document.head.appendChild(preloadLowRes)
+            document.head.appendChild(preloadHighRes)
+    
+            // Passive preloading for other backgrounds
+            Object.keys(backgrounds).forEach(key => {
+                if (key !== id) { // Skip the current background
+                    const background = backgrounds[key]
+                    // const preloadLowRes = document.createElement("link")
+                    // preloadLowRes.rel = "preload"
+                    // preloadLowRes.as = "image"
+                    // preloadLowRes.href = background.low
+                    // preloadLowRes.setAttribute("importance", "low") // Mark as low priority
+    
+                    const preloadHighRes = document.createElement("link")
+                    preloadHighRes.rel = "preload"
+                    preloadHighRes.as = "image"
+                    preloadHighRes.href = background.high
+                    preloadHighRes.setAttribute("importance", "low") // Mark as low priority
+    
+                    // document.head.appendChild(preloadLowRes)
+                    document.head.appendChild(preloadHighRes)
+                }
+            })    
         }
+
+        // Clean up
+        return () => {
+            document.head.querySelectorAll('link[rel="preload"][as="image"]').forEach(link => {
+                document.head.removeChild(link)
+            })
+        }
+    }, [])
+
+    useLayoutEffect(() => {
+        // const preloadImage = (src, callback) => {
+        //     const img = new Image()
+        //     img.onload = callback
+        //     img.src = src
+        // }
 
         const currentBackground = backgrounds[id] || backgrounds.all
         
-        // Preload low-res image first
-        preloadImage(currentBackground.low, () => {
-            // Once low-res is loaded, set it as background
-            setBackgroundImage({
-                "--background-image-url": `url(${currentBackground.low})`,
-                "--background-image-opacity": "0.8"
-            })
-            // Then preload high-res image
-            preloadImage(currentBackground.high, () => {
-                // Once high-res is loaded, update the background
+        // // Preload low-res image first
+        // preloadImage(currentBackground.low, () => {
+        //     // Once low-res is loaded, set it as background
+        //     setBackgroundImage({
+        //         "--background-image-url": `url(${currentBackground.low})`,
+        //         "--background-image-opacity": "0.8"
+        //     })
+        //     // Then preload high-res image
+        //     preloadImage(currentBackground.high, () => {
+        //         // Once high-res is loaded, update the background
                 setBackgroundImage({
                     "--background-image-url": `url(${currentBackground.high})`,
                     "--background-image-opacity": "1"
                 })
-            })
-        })
-    }, [id]) // This effect runs on mount and whenever `id` changes
+        //     })
+        // })
+    }, [id])
     
     return (
         <div className="mainLayout page">
 
             <Header/>
 
-            <main className={`main-content ${pageTheme}`} style={backgroundImage}>
+            <main className={`main-content ${pageTheme}`} style={(pageTheme && backgroundImage) || null}>
 
                 <div className="main-content-container">
 
@@ -93,58 +139,3 @@ export default function MainLayout() {
         </div>
     )
 }
-
-// const mainContentStyle = {
-//     backgroundImage: `url(${backgroundImage})`,
-//     backgroundSize: 'cover', // Example property, adjust as needed
-// }
-
-// useLayoutEffect(() => {
-//         console.log("Setting background!")
-
-//         const currentPageTheme = (
-//             id === "battletech"? "battletech-page" :
-//             id === "shadowrun"? "shadowrun-page" :
-//             id === "other"? "other-page" :
-//             id === "all"? "all-page" : ""
-//         )
-//         setPageTheme(currentPageTheme)
-
-//         const pageBackground = document.querySelector(".main-content")
-//         // pageBackground.style.setProperty("background-image", "none")
-//         pageBackground.style.setProperty("--background-image-url", "url('')")
-//         pageBackground.style.setProperty("--background-image-opacity", "0")
-
-//         console.log("id changed")
-//         const lowResImage = new Image()
-//         lowResImage.src = backgrounds[id].low || backgrounds.all.low // Fallback to 'all' if id doesn't match
-        
-//         const highResImage = new Image()
-//         highResImage.src = backgrounds[id].high || backgrounds.all.high // Fallback to 'all' if id doesn't match
-
-//         lowResImage.onload = () => {
-//             console.log("lowResImage loaded")
-            
-//             if(!highResImage.complete && currentPageTheme === pageTheme) { //!highResImage.complete
-//                 pageBackground.style.setProperty("background-image", `url(${lowResImage.src})`)
-//             }
-//         }            
-//         highResImage.onload = () => {
-//             if(currentPageTheme === pageTheme) {
-//                 pageBackground.style.setProperty("--background-image-opacity", "1")
-//                 pageBackground.style.setProperty("--background-image-url", `url(${highResImage.src})`)
-//             }
-//         }
-
-
-//         document.querySelector(`.${pageTheme}`).style.setProperty("background-image", `url(${lowResBackground})`)
-
-//         document.querySelector(`.${pageTheme}`).style.setProperty("background-image", `url(${lowResBackground})`)
-        
-
-//         // if(img.complete) {
-//         //     console.log("Image already loaded or cached, setting src now.");
-//         //     setSrc(highResBackground);
-//         // }        
-//     // }
-// }, [id])
