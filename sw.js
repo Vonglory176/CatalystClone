@@ -9,6 +9,12 @@ const urlsToCache = [
   // '/styles/main.css',
   // '/scripts/main.js',
 
+  //Page backgrounds
+  // 'url("/src/assets/page-backgrounds/home-page-background-low-res.webp")',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fbattletech-page-background.webp?alt=media&token=de9f579b-b3da-4eed-8d2d-ec2d8d01e4f9',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fshadowrun-page-background.webp?alt=media&token=07b0b857-758f-4959-9923-4f567ed9ac6a',
+  // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fother-background.webp?alt=media&token=cc00694d-6c3f-4852-9f87-462f0623679e',
+  
   //Collection frames
   // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-battletech-new-arrivals.svg?alt=media&token=a2549fe5-a9e3-4423-a2a1-7c72d9164967',
   // 'https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/collection-frames%2Fcollection-frame-battletech.svg?alt=media&token=f52f545f-8b0f-4974-8b0e-5e638378d372',
