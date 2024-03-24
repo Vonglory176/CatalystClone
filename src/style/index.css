@@ -2530,7 +2530,7 @@
 }
 @media (min-width: 750px) {
   #Home-Container .collection-buttons-container .collection-buttons-wrapper {
-    margin: 3vw 4vw;
+    margin: 3vw 0vw;
   }
 }
 @media (min-width: 830px) {
