@@ -1,4 +1,4 @@
-import ProgressiveImage from "react-progressive-image"
+// import ProgressiveImage from "react-progressive-image"
 
 export default function FeaturedProductBanner({collectionId}) {
 
