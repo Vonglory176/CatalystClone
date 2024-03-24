@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductById } from "../hooks/getProductById";
+// import { getProductById } from "../hooks/getProductById";
 import { Suspense, lazy, useEffect, useState, useRef } from "react";
 
 // import ProductCard from "./ProductCard";
