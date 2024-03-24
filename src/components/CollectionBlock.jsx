@@ -12,6 +12,7 @@ export default function CollectionBlock(
     {collectionClasses, collectionLink,collectionFrameSrc,collectionCoverSrc,collectionCoverTitle,productInformation,characterImageSrc}) {
     const productList = useSelector(state => state.products.productList)
     const [collectionProducts, setCollectionProducts] = useState()
+    const [frameLoading, setFrameLoading] = useState(true)
 
     // useEffect(() => { //Making sure the frame loads first
     //     if (collectionFrameSrc) {
@@ -32,6 +33,7 @@ export default function CollectionBlock(
     useEffect(() => {
         if (collectionFrameSrc) {
             const frame = new Image()
+            frame.onload = () => setFrameLoading(false)
             frame.src = collectionFrameSrc
         }
     }, [])
@@ -132,8 +134,12 @@ export default function CollectionBlock(
         <section className={`collection-block section-block ${collectionClasses}`}>
 
             {/* The background frame for larger views */}
-            <Link to={collectionLink} className={"collection-link"} style={{pointerEvents: collectionLink? "normal" : "none"}} title="View all products in the collection">
-                <img src={collectionFrameSrc} alt="" className="featured-product-frame" />
+            <Link 
+            to={collectionLink} 
+            className={`collection-link collection-frame-link ${frameLoading? "loading" : "loaded"}`} 
+            style={{pointerEvents: collectionLink? "normal" : "none"}} 
+            title="View all products in the collection">
+                <img src={collectionFrameSrc} alt="" className={"featured-product-frame"}/>
             </Link>
 
             {characterImageSrc && //If no charImages, this is excluded   
