@@ -68,6 +68,7 @@ self.addEventListener('fetch', event => {
       url.href.includes("google.com/recaptcha") || 
       url.href.includes("index.css") || 
       url.href.includes("https://www.gstatic.com/firebasejs")) {
+      // !url.href.includes(".svg" || ".jpg" || ".png" || ".webp" || "font" || "index.css")) {
     return // Bypass the cache for these requests
   }
 
@@ -111,49 +112,3 @@ self.addEventListener('fetch', event => {
   // }
 
 })
-
-// // CACHE INTERCEPTOR/LISTENER
-// self.addEventListener('fetch', event => {
-//   const url = new URL(event.request.url)
-
-//   // Check if the request is a navigation to a new page
-//   // if (event.request.mode === 'navigate') {
-//   //   event.respondWith(
-//   //     caches.match('/index.html').then(response => {
-//   //       return response || fetch(event.request)
-//   //     })
-//   //   )
-//   // } else {
-
-//     // Exclude specific URLs and non-GET requests from being cached
-//     if (event.request.method !== 'GET' || 
-//         url.href.includes("https://identitytoolkit.googleapis.com") || 
-//         url.href.includes(".netlify/functions/") || 
-//         url.href.includes("google.com/recaptcha") || 
-//         url.href.includes("index.css") || 
-//         url.href.includes("https://www.gstatic.com/firebasejs")) {
-//       // Bypass the cache and go directly to the network for these requests
-//       return // Note: We don't call fetch(event.request) here because we're inside a fetch event listener, not intercepting the request.
-//     }
-  
-//     // For GET requests that don't match the excluded URLs, use the cache-first strategy
-//     event.respondWith(
-//       caches.match(event.request)
-//         .then(cachedResponse => {
-//           if (cachedResponse) {
-//             return cachedResponse
-//           }
-//           return fetch(event.request).then(fetchResponse => {
-//             // Only cache GET responses
-//             if (fetchResponse.ok) { // Check if fetch was successful
-//               return caches.open(CACHE_NAME).then(cache => {
-//                 cache.put(event.request, fetchResponse.clone())
-//                 return fetchResponse
-//               })
-//             }
-//             return fetchResponse
-//           })
-//         })
-//     )
-//   // }
-// })
