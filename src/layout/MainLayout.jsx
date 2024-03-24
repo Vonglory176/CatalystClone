@@ -1,7 +1,7 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { Outlet, useParams } from "react-router-dom"
-import { useEffect } from "react"
+import React, { useLayoutEffect, useState } from 'react';
 import battletechLow from "../assets/page-backgrounds/battletech-page-background-low-res.webp"
 import shadowrunLow from "../assets/page-backgrounds/shadowrun-page-background-low-res.webp"
 import otherLow from "../assets/page-backgrounds/other-page-background-low-res.webp"
@@ -36,61 +36,44 @@ export default function MainLayout() {
         }
     }
 
-    useEffect(() => {
-        // Preload all background images
-        if (pageTheme !== "") {
-            Object.keys(backgrounds).forEach(key => {
-                const low = new Image();
-                low.src = backgrounds[key].low
+    const [backgroundImage, setBackgroundImage] = useState({
+        "--background-image-url": `url(${backgrounds[id]?.low || backgrounds.all.low})`,
+        // "--background-image-opacity": "1"
+    })
 
-                if (key === id) {
-                    const high = new Image();
-                    high.src = backgrounds[key].high
-                }
-            })
-        }
-        else {
-            const element = document.querySelector(".main-content")
-            // element.style.setProperty("background", `#f3f3f3`)
-            try {
-                
-                element.style.setProperty("background-image", "none")
-                element.style.setProperty("--background-image-url", "url('')")
-                element.style.setProperty("--background-image-opacity", "0")
-            } catch (error) {
-                console.error(error)
-            }
-        }
-    }, [pageTheme])
-    
-    useEffect(() => {
-        if (backgrounds[id]) {
-            const highResBackground = backgrounds[id].high || backgrounds.all.high // Fallback to 'all' if id doesn't match
-            const lowResBackground = backgrounds[id].low || backgrounds.all.low // Fallback to 'all' if id doesn't match
-    
-            document.querySelector(`.${pageTheme}`).style.setProperty("background-image", `url(${lowResBackground})`)
-            
+    useLayoutEffect(() => {
+        const preloadImage = (src, callback) => {
             const img = new Image()
-            img.onload = () => {
-                const element = document.querySelector(`.${pageTheme}`)
-                element.style.setProperty("--background-image-url", `url(${highResBackground})`)
-                element.style.setProperty("--background-image-opacity", "1")
-            }
-            img.src = highResBackground
-    
-            // if(img.complete) {
-            //     console.log("Image already loaded or cached, setting src now.");
-            //     setSrc(highResBackground);
-            // }        
+            img.onload = callback
+            img.src = src
         }
-    }, [id])
 
+        const currentBackground = backgrounds[id] || backgrounds.all
+        
+        // Preload low-res image first
+        preloadImage(currentBackground.low, () => {
+            // Once low-res is loaded, set it as background
+            setBackgroundImage({
+                "--background-image-url": `url(${currentBackground.low})`,
+                "--background-image-opacity": "0.8"
+            })
+            // Then preload high-res image
+            preloadImage(currentBackground.high, () => {
+                // Once high-res is loaded, update the background
+                setBackgroundImage({
+                    "--background-image-url": `url(${currentBackground.high})`,
+                    "--background-image-opacity": "1"
+                })
+            })
+        })
+    }, [id]) // This effect runs on mount and whenever `id` changes
+    
     return (
         <div className="mainLayout page">
 
             <Header/>
 
-            <main className={`main-content ${pageTheme}`}>
+            <main className={`main-content ${pageTheme}`} style={backgroundImage}>
 
                 <div className="main-content-container">
 
@@ -110,3 +93,58 @@ export default function MainLayout() {
         </div>
     )
 }
+
+// const mainContentStyle = {
+//     backgroundImage: `url(${backgroundImage})`,
+//     backgroundSize: 'cover', // Example property, adjust as needed
+// }
+
+// useLayoutEffect(() => {
+//         console.log("Setting background!")
+
+//         const currentPageTheme = (
+//             id === "battletech"? "battletech-page" :
+//             id === "shadowrun"? "shadowrun-page" :
+//             id === "other"? "other-page" :
+//             id === "all"? "all-page" : ""
+//         )
+//         setPageTheme(currentPageTheme)
+
+//         const pageBackground = document.querySelector(".main-content")
+//         // pageBackground.style.setProperty("background-image", "none")
+//         pageBackground.style.setProperty("--background-image-url", "url('')")
+//         pageBackground.style.setProperty("--background-image-opacity", "0")
+
+//         console.log("id changed")
+//         const lowResImage = new Image()
+//         lowResImage.src = backgrounds[id].low || backgrounds.all.low // Fallback to 'all' if id doesn't match
+        
+//         const highResImage = new Image()
+//         highResImage.src = backgrounds[id].high || backgrounds.all.high // Fallback to 'all' if id doesn't match
+
+//         lowResImage.onload = () => {
+//             console.log("lowResImage loaded")
+            
+//             if(!highResImage.complete && currentPageTheme === pageTheme) { //!highResImage.complete
+//                 pageBackground.style.setProperty("background-image", `url(${lowResImage.src})`)
+//             }
+//         }            
+//         highResImage.onload = () => {
+//             if(currentPageTheme === pageTheme) {
+//                 pageBackground.style.setProperty("--background-image-opacity", "1")
+//                 pageBackground.style.setProperty("--background-image-url", `url(${highResImage.src})`)
+//             }
+//         }
+
+
+//         document.querySelector(`.${pageTheme}`).style.setProperty("background-image", `url(${lowResBackground})`)
+
+//         document.querySelector(`.${pageTheme}`).style.setProperty("background-image", `url(${lowResBackground})`)
+        
+
+//         // if(img.complete) {
+//         //     console.log("Image already loaded or cached, setting src now.");
+//         //     setSrc(highResBackground);
+//         // }        
+//     // }
+// }, [id])

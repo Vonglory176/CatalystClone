@@ -3,36 +3,43 @@ import Slideshow from "../components/Slideshow"
 import Footer from "../components/Footer"
 import { Outlet } from "react-router-dom"
 import homeLow from "../assets/page-backgrounds/home-page-background-low-res.webp"
-import { useEffect } from "react"
+import { useState, useLayoutEffect } from "react"
 
 export default function HomeLayout() {
 
-    const pageBackground = {
+    const pageBackgroundUrls = {
         high: "https://firebasestorage.googleapis.com/v0/b/catalystclonedb.appspot.com/o/page-backgrounds%2Fhome-page-background.webp?alt=media&token=dbe42bd8-08b6-45fc-a465-0ab9da56c102", 
         low: homeLow
     }
 
-    useEffect(() => {
-        // Preload low-resolution background
-        const low = new Image();
-        low.src = pageBackground.low
-        const high = new Image();
-        high.src = pageBackground.high
-    }, [])
-    
-    useEffect(() => {
-        const highResBackground = pageBackground.high
-        const lowResBackground = pageBackground.low
+    const [backgroundImage, setBackgroundImage] = useState({
+        "--background-image-url": `url()`,
+        // "--background-image-opacity": "1"
+    })
 
-        document.querySelector(".main-content").style.setProperty("background-image", `url(${lowResBackground})`)
-        
-        const img = new Image()
-        img.onload = () => {
-            const element = document.querySelector(".main-content")
-            element.style.setProperty("--background-image-url", `url(${highResBackground})`)
-            element.style.setProperty("--background-image-opacity", "1")
+    useLayoutEffect(() => {
+        const preloadImage = (src, callback) => {
+            const img = new Image()
+            img.onload = callback
+            img.src = src
         }
-        img.src = highResBackground
+        
+        // Preload low-res image first
+        preloadImage(pageBackgroundUrls.low, () => {
+            // Once low-res is loaded, set it as background
+            setBackgroundImage({
+                backgroundImage: `url(${pageBackgroundUrls.low})`,
+                "--background-image-opacity": "0.8"
+            })
+            // Then preload high-res image
+            preloadImage(pageBackgroundUrls.high, () => {
+                // Once high-res is loaded, update the background
+                setBackgroundImage({
+                    "--background-image-url": `url(${pageBackgroundUrls.high})`,
+                    "--background-image-opacity": "1"
+                })
+            })
+        })
     }, [])
 
     return (
@@ -40,7 +47,7 @@ export default function HomeLayout() {
 
             <Header/>
 
-            <main className="main-content">
+            <main className="main-content" style={backgroundImage}>
 
                 <Slideshow/>
 
