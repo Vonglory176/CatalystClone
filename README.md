@@ -1,2 +1,4 @@
 # CatalystClone
-A mock recreation of CatalystGamelabs Website. It's built with Bootstrap, React and Redux 
+Built with React/Vite and deployed using Netlify, this is a mock online store that I’ve been working on over the past couple months to serve as a flagship project of mine. Much was learned on the fly, and I've made massive leaps in my understanding of these projects since starting on it.
+
+The store has many features, some of which include Account Management (Firebase Realtime Database), a fully functional checkout system (Stripe API), and proper state-management (React-Redux) for maintaining areas like login-status, cart-items and notification-display. For quick and efficient product search, visitors also have access to tools like pagination, filters and a search-bar to easily find what they’re looking for. This has all of course been built to be fully responsive, and the web-application will scale to display on screens ranging from desktop to mobile without any issues. 
