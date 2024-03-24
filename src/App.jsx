@@ -148,45 +148,55 @@ export default App
 
 /*
 
+PLATFORM TESTING ---
+Chrome -- Good
+Opera -- Good
+Edge -- Good
+
+Firefox ------------
+MINOR: Product pictures don't stretch in expanded view
+
+Safari -------------
+BUG: Universe category button does not work
+
+iOS -----------------
+BUG: Select is too short (Specifically the variant selector in products)
+
+Android -----------------
+(STILL NEEDS TESTING)
+
+
+
 TODO
 -------------------
-Prime Features!
+Prime Features to implement
 ------
 Guest Checkout
 "Back to" banners?
 
+
+
 Do Right now!
 ------
-useMemo()?
 USER AUTH TOKENS FOR ALL ACCOUNT RELATED STUFF !!! --> https://firebase.google.com/docs/auth/admin/verify-id-tokens
 
 BUG: Issue with same type/tags ("Miniatures")
 BUG: Account page does not load information if the page times out and auto reloads (Must log out and log back in to fix)
+BUG: Login/Register seemed to freeze up after waiting a little w/ReCAPTCHA?
+BUG: Need to refresh ReCaptcha on login/register failure
 
 Need to optimize information iteration. Heavy Javascript is hindering load times
 
-PLATFORM TESTING ---
-Chrome
-Opera
-Edge
+Add more products
+Add more slideshow images
+Add aria labels
 
-Firefox ------------
-Product pictures don't stretch in expanded view
 
-Safari -------------
-Universe category button does not work
-
-iOS -----------------
-Select is too short (Specifically variant selector in products)
-
-Android (Use Emulator)
 
 Do Later!
 ------
-Email verification w/FirebaseAuth
-Make sure emails match
-BUG?: Login/Register seemed to freeze up after waiting a little w/ReCAPTCHA?
-BUG: Need to refresh ReCaptcha on login/register failure
+Email verification w/FirebaseAuth?
+Double email entry for verification?
 
 GENERAL ------------------------------------
 Implement lazyloading & react-progressive-image (NOT TO EVERYTHING THOUGH... At least animation wise)
