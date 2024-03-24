@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 // import fpFrame1 from "../assets/featured-products/featured-product-frame-1.svg"
 // import battletechNewArrivalsFrame from "/src/assets/block-collection/frames/collection-frame-battletech-new-arrivals.svg"
@@ -36,15 +36,14 @@ export default function Collections() {
     const location = useLocation()
     
     const replaceSearchParams = (newParams) => {
-        // console.log(Array.from(searchParams.entries()));
+        // console.log(Array.from(searchParams.entries()))
         const newSearch = new URLSearchParams({
             ...Object.fromEntries(searchParams),
             ...newParams,
-        }).toString();
-    
-        // Use navigate to replace the current entry in the history stack
-        navigate(`${location.pathname}?${newSearch}`, { replace: true });
-    };
+        }).toString()
+        
+        navigate(`${location.pathname}?${newSearch}`, { replace: true })
+    }
     
     //Pagination
     const [pageResults, setPageResults] = useState() //Set by the Pagination component callback
@@ -53,9 +52,10 @@ export default function Collections() {
     //Counting filters
     const [filterNumber, setFilterNumber] = useState(0)
     const [fuse, setFuse] = useState(null)
-    
+
     useEffect(() => {
         if (productList) { //If there's a url search-query
+            // console.log("In initializing useEffect")
 
             const searchQueryOptions = {
                 keys: ['name','universe','description'],
@@ -75,17 +75,16 @@ export default function Collections() {
     //PAGE INITIALIZATION
     useEffect(() => {
         if (productList) {
-
             let tempProductList = []
             let typeInstanceList = {}
             let tagInstanceList = {}
             
             const categorySearchParams = searchParams.get('categories')? searchParams.get('categories'): "all-products"
             setCurrentCategory(categorySearchParams)
-
+        
             const typeSearchParams = searchParams.get('types')? JSON.parse(searchParams.get('types')): []
             const tagSearchParams = searchParams.get('tags')? JSON.parse(searchParams.get('tags')): []
-
+        
             //Product Setup
             const processProduct = (p) => {
                 if (
@@ -109,10 +108,10 @@ export default function Collections() {
                     typeInstanceList[p.type] = (typeInstanceList[p.type] || 0) + 1
                 }
             }
-
+        
             //Getting and printing page-contents
             const searchQuery = searchParams.get('q')
-
+        
             //Loading products via query
             if (searchQuery && fuse) { 
                 const searchResults = searchQuery? fuse.search(searchQuery) : ''
@@ -134,7 +133,7 @@ export default function Collections() {
                 //SOMETHING BLEW UP
                 else console.log("There was an error loading categories from productList!")
             }
-
+        
             //Filter setup
             setFilterInstanceList({
                 types: typeInstanceList, 
@@ -142,17 +141,18 @@ export default function Collections() {
             })
             //Filter count for mobile indicator
             setFilterNumber(typeSearchParams.length + tagSearchParams.length)
-
+        
             //Result sorting/printing
             const sortBy = searchParams.get('sort_by')
             handleSortResults({target: {value: sortBy}}, tempProductList) //List is sorted & printed here
             // setLocalProductList(tempProductList)
+
         }
     }, [id, productList, searchParams]) //searchParams.get("tags"), searchParams.get("types")
 
     //Sorting Use
     const handleSortResults = useCallback((e, listToSort) => {
-        console.log("IN SORTING!")
+        // console.log("IN SORTING!")
         const sortBy = e.target.value? e.target.value : (searchParams.get("q") ? searchParams.get("q") : "name")
         const [method, order] = sortBy.split(' ') //sortBy? sortBy.split(' ') : ["name", ""] // "name desc" becomes ["name", "desc"]
     
@@ -199,7 +199,7 @@ export default function Collections() {
 
         // Update the search parameters
         replaceSearchParams(newParams);
-        console.log("DONE SORTING!")
+        // console.log("DONE SORTING!")
     })
 
     //For auto-scrolling after page change
